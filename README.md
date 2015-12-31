@@ -4,7 +4,7 @@ It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an we
 
 ## Help us!
 
-We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) or to visiut our Slack channel to find tasks there. This is really a great oppurnity for learning and contriubting.  
+We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) or to visit our Gitter channel.
 
 ## Gitter
 
