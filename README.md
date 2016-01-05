@@ -6,7 +6,7 @@ It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an we
 
 ## Would you like to contribute?
 
-We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) or to visit our Gitter channel.
+We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) from [Milestone 1.0](https://github.com/postcss/postcss.com/milestones/1.0) or to visit our Gitter channel.
 
 ## Gitter
 
