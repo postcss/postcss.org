@@ -2,3 +2,4 @@ node_modules
 dist
 statinamic-static*
 .DS_Store
+npm-debug.log
