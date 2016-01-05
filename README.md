@@ -18,7 +18,7 @@ Our first project [meeting](https://github.com/postcss/postcss.com/issues/2) wil
 
 **Date**: 1/6 - Wednesday
 
-**Time**: 8pm GMT+0 / 3pm EST **→** 9pm GMT+0 / 4pm EST
+**Time**: 20:00 Greenwich Mean Time (GMT) | 15:00 Eastern Standard Time (EST) |  21:00 Central European Time (CET)
 
 ## Setup a local copy of the website
 
