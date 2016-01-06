@@ -4,9 +4,9 @@
 
 It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an website up and running. The project will be lead by [Andrey Sitnik](https://github.com/ai) and [Marcus Tisäter](https://github.com/marcustisater) with great pleasue to have [Max Stoiber](https://github.com/mxstbr) as the Lead Developer.
 
-## Would you like to contribute?
+## Contributing
 
-We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) from [Milestone 1.0](https://github.com/postcss/postcss.com/milestones/1.0) or to visit our Gitter channel.
+Please read through our [contributing guidelines](https://github.com/postcss/postcss.com/blob/master/CONTRIBUTING.md) to get started working on postcss.com. Once you are done reading the guidelines, start to take a look at the [issue tracker](https://github.com/postcss/postcss.com/issues) from [Milestone 1.0](https://github.com/postcss/postcss.com/milestones/1.0)
 
 ## Gitter
 
