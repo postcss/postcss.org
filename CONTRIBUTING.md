@@ -15,6 +15,21 @@ and [submitting pull requests](#pull-requests).
 <a name="issue-labels"></a>
 ## Issue labels
 
+* `bug` - Report any bugs regarding postcss.com, please be as specific as possible.
+* `discussion` - Open discussion for upcoming feature, question or planning.
+* `feature request` - Request for a feature or increase of improvement.
+* `help wanted` - Issues we would need help to resolve.
+* `high-priority` - High prioritized issues that needs to be resolved as soon as possible.
+* `low-priority` - Low prioritized issues that are not very important.
+* `in-progress` - Issues that are currently being worked on and assigned.
+* `needs documentation` - Request for documentation to be needed.   
+* `needs investigation` - Request for investigation to follow before moving on.
+* `needs revision/testing` - Issues that needs to be reviewed or tested.
+* `PR welcome` - Pull Requests are welcome to be suggested for resolving issue.
+* `question` - Question regarding postcss.com - not to be used as support for [PostCSS](https://github.com/postcss/postcss).
+* `duplicated` - Duplicated issues that has already been created before.
+* `invalid` - Invalid issue, wont-fix.
+
 <a name="bugs"></a>
 ## Bug reports
 
