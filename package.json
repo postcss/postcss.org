@@ -1,6 +1,6 @@
 {
   "private": true,
-  "homepage": "http://YOU.WEBSITE/",
+  "homepage": "http://postcss.com/",
   "scripts": {
     "start": "babel-node scripts/build --server --open --dev",
     "static": "NODE_ENV=production babel-node scripts/build --static --production"
