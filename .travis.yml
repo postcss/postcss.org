@@ -1,9 +1,8 @@
 language: node_js
 node_js:
-  - stable
+  - "5"
   - "4"
-  - "0.10"
-script: npm run static
+script: npm run test
 notifications:
   email:
     on_failure: change
