@@ -2,23 +2,16 @@
 
 [![Join the chat at https://gitter.im/postcss/postcss.com](https://badges.gitter.im/postcss/postcss.com.svg)](https://gitter.im/postcss/postcss.com?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an website up and running. The project will be lead by [Andrey Sitnik](https://github.com/ai) and [Marcus Tisäter](https://github.com/marcustisater) with great pleasue to have [Max Stoiber](https://github.com/mxstbr) as the Lead Developer.
+It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an website up and running. The project will be lead by [Andrey Sitnik](https://github.com/ai) and [Marcus Tisäter](https://github.com/marcustisater) with great pleasure to have [Max Stoiber](https://github.com/mxstbr) as Lead Developer and [Stephen Way](https://github.com/stephenway) as Lead Designer.
 
-## Would you like to contribute?
+## Contributing
 
-We need you're help to make this website come to life. If you would like to contribute you can do so from helping resolving some [issues](https://github.com/postcss/postcss.com/issues) from [Milestone 1.0](https://github.com/postcss/postcss.com/milestones/1.0) or to visit our Gitter channel.
+Please read through our [contributing guidelines](https://github.com/postcss/postcss.com/blob/master/CONTRIBUTING.md) to get started working on postcss.com and once you are done reading the guidelines, feel free to take a look at the [issue tracker](https://github.com/postcss/postcss.com/issues) from [Milestone 1.0](https://github.com/postcss/postcss.com/milestones/1.0)
 
 ## Gitter
 
-We use Gitter[[?]](https://gitter.im) to keep each other up-to date on what's going on with the current status of the project as well as meetings. You can join our Gitter channel [here](https://gitter.im/postcss/postcss.com)  
+We use Gitter[[?]](https://gitter.im) to keep each other up-to date on what's going on with the current status of the project as well as status meetings. You can join our Gitter channel [here](https://gitter.im/postcss/postcss.com)  
 
-## Meeting schedule
-
-Our first project [meeting](https://github.com/postcss/postcss.com/issues/2) will be held on Wednesday at the Gitter Channel **1/6 8pm GMT+0**. Everybody is welcome to join and for those who **can't** attend there will be notes and chat conversion history to go through afterwards.
-
-**Date**: 1/6 - Wednesday
-
-**Time**: 20:00 Greenwich Mean Time (GMT) | 15:00 Eastern Standard Time (EST) |  21:00 Central European Time (CET)
 
 ## Setup a local copy of the website
 
