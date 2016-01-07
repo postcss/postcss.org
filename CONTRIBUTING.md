@@ -117,6 +117,8 @@ owners to license your work under the terms of the [MIT License](LICENSE.txt).
 
 ## Code guidelines
 
+In lieu of a formal styleguide, take care to maintain the existing coding style.
+
 ## License
 
 By contributing your code, you agree to license your contribution under the [MIT License](https://github.com/postcss/postcss.com/blob/master/LICENSE).
