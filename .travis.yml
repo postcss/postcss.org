@@ -1,11 +1,10 @@
 language: node_js
 node_js:
-  - "5"
-  - "4"
+- '5'
+- '4'
 notifications:
   email:
     on_failure: change
-
 deploy:
   skip_cleanup: true
   provider: script
@@ -13,8 +12,7 @@ deploy:
   on:
     branch: master
     node: '5'
-
-env:
-  global:
-    - secure: "roYpoJOg6QAcBDP65dw33B0LvnNxzVuv+a3hmullqu9Regyo3na9lFojZ6OhfEjI9OVaRwrjsJ5vdWoRs9lDx15ROqWbNFwRtvipYOhWOPd+HXC9D9Fuaa2hf87XtPpoavMi6yp4XRUM33aun2YWr5q1tX2Z+DEKAbq1a4FJUBIDHXIRgsOPxTdTS4lxixyKZ7qqcBkM5QLy/zJpw8Btq0PwnxQVxrNmx4ufdal/3L836dbUawQkyvD5kYplxRSRpsvc+M/Q3CJBQQMVi4kFqlb9FKfJj44VWoVzwE+x7ICNGtd0NDSLA1YmfgD3TpLZFO9k0/hyNLqkcZ/zGTKS9WtEfKAU9paazfVrvStZcARID/WTmJR0PAEMpymP+5afWctdpS2+yEjO3wzwP86+55Gi4RzeLPJyCsVmGzrioWl+g0z5g5NRD7g/dgjxCRs8Qq6ccNRhQ6aBSuF21cwMLBzJHrHg93nceMqo2qCYSc20ltPmFgds9UbBlirGtGIcFoixgiqcs3CsJAM3EAwcYRsB+QXUArFBgAjn0HBVBhRuUEnhDbiaDhrC1TpOo1E9GU1mDj0OfaDSc8gSeiES0toMeCzuGcuc+NozEfO4FspQnhxAUVDawpQPY0XCYcQnRRhlJTaoCa1AWsLRjndoL8ewhFhiH5PkVcCwh+148WE="
-    - GIT_DEPLOY_REPO=https://$GITHUB_TOKEN@github.com/postcss/postcss.com
+https://github:
+  com/postcss/postcss:
+    com:
+      secure: odTrF10C/lAdRtsucF4qCSsFCxcSwJJSaOd2p+N5yPcrJ67+RrmDYiVgl4AqSdBIIDWHMUuIJ29M5OtsboGRtd8+q95ims9zy78DqQ0eTmg4aYmm+z/IUy6Z90Z2QgRjJVmwAuKC6S1Y7MzxTq0EDon4TIpktsU8rg5XWYesH5naDnhNV3PhpFWMZ9Cp9a87hQZA+rgs/QlxzgYrhDa7vt/+iC9j+2Pm3t9TV6/ruWhJOo8ZExfGKzaZtUhVmeYc2HivfYOFQfgClP3ZYO3QygHZuekcuJ+X8VpbEwoMssZzTFr50Sg8uwAbK+eWEPdeXbrzSc9MOLph4F4+GRNx8oGfBLzKDrF2jn+L3CQ+lOTXoD4W6dkBsklLdcpAGEDtc4l81pDJ5sZCrJwCtZOcXMZNOXKyJysrH+dtJOY/H11+1942AOUfu0WzJISoXi89be+YNJxvAe30ZhkCLhzgljHCuzjwp8LGw1c+Nz+bNHjzIED+V3XAizqzHibr7479Q71twFxNPkIpW7TbgCCRvaoGhT8TCVcYF0WOF6fG35Zbyr2whyI2Z8t8mWgQgGYwEQ7GalhtD6vI/hrkFKOTNsvfU6fgsxUqu0wHLe+WENu7eQx4exkUndlk7sQxHbWzVpZKFNHGJqD+a5NnK0btVCuNu3KP/ERb26DESFhmkLQ=
