@@ -2,15 +2,10 @@
   "private": true,
   "homepage": "http://postcss.com/",
   "scripts": {
-    "start": "babel-node scripts/build --server --open --dev",
-    "static": "NODE_ENV=production babel-node scripts/build --static --production",
+    "start": "babel-node scripts/build --server --dev --open",
+    "static": "babel-node scripts/build --static --production",
     "test": "npm run static",
-    "predeploy": "npm run static",
-    "deploy": "./scripts/deploy.sh",
-    "_ci-deploy": "GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/postcss/postcss.com.git ./scripts/deploy.sh",
-    "ci-deploy": "if [ \"$TRAVIS_PULL_REQUEST\" = \"false\" ] && [ \"$TRAVIS_BRANCH\" = \"master\" ]; then npm run _ci-deploy; fi;",
-    "test": "npm run ci-deploy",
-    "postbuild": "echo 'postcss.com' > dist/CNAME && touch dist/.nojekyll"
+    "posttest": "echo 'postcss.com' > dist/CNAME && touch dist/.nojekyll"
   },
   "babel": {
     "stage": 0
