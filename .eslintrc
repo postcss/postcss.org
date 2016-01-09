@@ -1,6 +1,9 @@
 {
   "parser": "babel-eslint",
-
+  "extends": [
+    "eslint-config-i-am-meticulous",
+    "eslint-config-i-am-meticulous/react"
+  ],
   "ecmaFeatures": {
     "modules": true,
     "experimentalObjectRestSpread": true,

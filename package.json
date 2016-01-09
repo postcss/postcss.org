@@ -5,7 +5,9 @@
     "start": "babel-node scripts/build --server --dev --open",
     "static": "babel-node scripts/build --static --production",
     "test": "npm run static",
-    "posttest": "echo 'postcss.com' > dist/CNAME && touch dist/.nojekyll"
+    "pretest": "npm run lint",
+    "posttest": "echo 'postcss.com' > dist/CNAME && touch dist/.nojekyll",
+    "lint": "eslint ."
   },
   "babel": {
     "stage": 0
@@ -19,6 +21,7 @@
     "babel-plugin-react-transform": "^1.1.1",
     "css-loader": "^0.17.0",
     "eslint": "^1.10.3",
+    "eslint-config-i-am-meticulous": "1.0.0",
     "eslint-loader": "^1.2.0",
     "eslint-plugin-react": "^3.14.0",
     "extract-text-webpack-plugin": "^0.8.2",
