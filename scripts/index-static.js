@@ -3,6 +3,8 @@ import statinamicStatic from "statinamic/lib/static"
 import pkg from "../package.json"
 import { RouteHandler, store } from "utils"
 
+const routes = RouteHandler;
+
 export default ({
   urls,
   pagesData,
@@ -17,7 +19,7 @@ export default ({
     pagesData,
     dest,
     baseUrl,
-    RouteHandler,
+    routes,
     store,
   })
 )
