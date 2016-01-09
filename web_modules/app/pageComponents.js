@@ -1,8 +1,8 @@
 // see web_modules folder for references
 
  // default layout
-export Page from "Page"
+export Page from "layouts/Page"
 
 // additional layouts
-export PageError from "PageError"
+export PageError from "layouts/PageError"
 // export Post from "Post"
