@@ -7,19 +7,7 @@ import createStore from "statinamic/lib/redux/createStore"
 import * as statinamicReducers from "statinamic/lib/redux/modules"
 import minifyCollection from "statinamic/lib/md-collection-loader/minify"
 
-/*
- * Page layouts
- */
-// Default layout
-import Page from "Page"
-
-// Additional layouts, to add your own import it below and add it to the "pageComponents" variable
-import PageError from "PageError"
-
-const pageComponents = {
-  Page,
-  PageError
-};
+import layouts from './layouts';
 
 /*
  * Route Handler
@@ -47,6 +35,6 @@ export const store = createStore(
         minifyCollection(require("statinamic/lib/md-collection-loader/cache")),
     },
 
-    pageComponents,
+    pageComponents: layouts,
   }
 )
