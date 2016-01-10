@@ -7,11 +7,12 @@ import "whatwg-fetch"
 import statinamicClient from "statinamic/lib/client"
 
 import pkg from "../package.json"
-import routes from "app/routes"
-import store from "app/store"
+import { RouteHandler, store } from "utils"
+
+const routes = RouteHandler
 
 statinamicClient({
-  metadata: { 
+  metadata: {
     pkg,
   },
   routes,

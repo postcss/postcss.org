@@ -1,8 +1,9 @@
 import statinamicStatic from "statinamic/lib/static"
 
 import pkg from "../package.json"
-import routes from "app/routes"
-import store from "app/store"
+import { RouteHandler, store } from "utils"
+
+const routes = RouteHandler
 
 export default ({
   urls,
@@ -11,7 +12,7 @@ export default ({
   baseUrl,
 }) => (
   statinamicStatic({
-    metadata: { 
+    metadata: {
       pkg,
     },
     urls,
