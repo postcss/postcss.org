@@ -7,12 +7,12 @@
  *
  */
 
-import Page from "Page"
-import PageError from "PageError"
+import Page from "layouts/Page"
+import PageError from "layouts/PageError"
 
 const layouts = {
   Page,
-  PageError
-};
+  PageError,
+}
 
-export default layouts;
+export default layouts

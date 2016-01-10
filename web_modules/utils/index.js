@@ -7,17 +7,17 @@ import createStore from "statinamic/lib/redux/createStore"
 import * as statinamicReducers from "statinamic/lib/redux/modules"
 import minifyCollection from "statinamic/lib/md-collection-loader/minify"
 
-import layouts from './layouts';
+import layouts from "./layouts"
 
 /*
  * Route Handler
  */
-import Layout from "Layout"
+import Wrapper from "Wrapper"
 export const RouteHandler = (
-  <Route component={ Layout }>
+  <Route component={ Wrapper }>
     <Route path="*" component={ PageContainer } />
   </Route>
-);
+)
 
 /*
  * Store

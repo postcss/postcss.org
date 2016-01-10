@@ -9,7 +9,7 @@ import statinamicClient from "statinamic/lib/client"
 import pkg from "../package.json"
 import { RouteHandler, store } from "utils"
 
-const routes = RouteHandler;
+const routes = RouteHandler
 
 statinamicClient({
   metadata: {
