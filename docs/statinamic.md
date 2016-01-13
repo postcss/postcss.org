@@ -2,7 +2,7 @@
 
 The best place to learn more about how Statinamic works is the [official documentation](http://moox.io/statinamic).
 
-If you want the some specific pointers, here is how you can get started with helping out on `postcss.com`.
+If you want the some specific pointers, here is how you can get started with helping out on `postcss.org`.
 
 ## Content
 
@@ -24,4 +24,4 @@ This will tell Statinamic that the title of the page should be "About Us", and t
 
 ## Code
 
-The entire code for the website is situated in the `web_modules` folder. In said folder, you'll find all the React components that make up `postcss.com`. (See [`react.md`](react.md) for more information about components)
+The entire code for the website is situated in the `web_modules` folder. In said folder, you'll find all the React components that make up `postcss.org`. (See [`react.md`](react.md) for more information about components)

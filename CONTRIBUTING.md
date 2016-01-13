@@ -1,6 +1,6 @@
 # Contributing
 
-Love PostCSS and want to help with postcss.com? Thanks so much, there's something to do for everybody!
+Love PostCSS and want to help with postcss.org? Thanks so much, there's something to do for everybody!
 
 Please take a moment to review this document in order to make the contribution process easy and effective for everyone involved.
 
@@ -8,7 +8,7 @@ Following these guidelines helps to communicate that you respect the time of the
 
 ## Using the issue tracker
 
-The [issue tracker](https://github.com/postcss/postcss.com/issues) is
+The [issue tracker](https://github.com/postcss/postcss.org/issues) is
 the preferred channel for [bug reports](#bugs), [features requests](#features)
 and [submitting pull requests](#pull-requests).
 
@@ -75,11 +75,11 @@ Adhering to the following process is the best way to get your work included in t
 
    ```bash
    # Clone your fork of the repo into the current directory
-   git clone https://github.com/<your-username>/postcss.com.git
+   git clone https://github.com/<your-username>/postcss.org.git
    # Navigate to the newly cloned directory
-   cd postcss.com
+   cd postcss.org
    # Assign the original repo to a remote called "upstream"
-   git remote add upstream https://github.com/postcss/postcss.com.git
+   git remote add upstream https://github.com/postcss/postcss.org.git
    ```
 
 2. If you cloned a while ago, get the latest changes from upstream:
@@ -121,4 +121,4 @@ In lieu of a formal styleguide, take care to maintain the existing coding style.
 
 ## License
 
-By contributing your code, you agree to license your contribution under the [MIT License](https://github.com/postcss/postcss.com/blob/master/LICENSE).
+By contributing your code, you agree to license your contribution under the [MIT License](https://github.com/postcss/postcss.org/blob/master/LICENSE).
