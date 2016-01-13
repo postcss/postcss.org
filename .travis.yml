@@ -22,5 +22,5 @@ env:
     # for ./scripts/deploy.sh
     # GH_TOKEN
     - secure: "roYpoJOg6QAcBDP65dw33B0LvnNxzVuv+a3hmullqu9Regyo3na9lFojZ6OhfEjI9OVaRwrjsJ5vdWoRs9lDx15ROqWbNFwRtvipYOhWOPd+HXC9D9Fuaa2hf87XtPpoavMi6yp4XRUM33aun2YWr5q1tX2Z+DEKAbq1a4FJUBIDHXIRgsOPxTdTS4lxixyKZ7qqcBkM5QLy/zJpw8Btq0PwnxQVxrNmx4ufdal/3L836dbUawQkyvD5kYplxRSRpsvc+M/Q3CJBQQMVi4kFqlb9FKfJj44VWoVzwE+x7ICNGtd0NDSLA1YmfgD3TpLZFO9k0/hyNLqkcZ/zGTKS9WtEfKAU9paazfVrvStZcARID/WTmJR0PAEMpymP+5afWctdpS2+yEjO3wzwP86+55Gi4RzeLPJyCsVmGzrioWl+g0z5g5NRD7g/dgjxCRs8Qq6ccNRhQ6aBSuF21cwMLBzJHrHg93nceMqo2qCYSc20ltPmFgds9UbBlirGtGIcFoixgiqcs3CsJAM3EAwcYRsB+QXUArFBgAjn0HBVBhRuUEnhDbiaDhrC1TpOo1E9GU1mDj0OfaDSc8gSeiES0toMeCzuGcuc+NozEfO4FspQnhxAUVDawpQPY0XCYcQnRRhlJTaoCa1AWsLRjndoL8ewhFhiH5PkVcCwh+148WE="
-    - GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/postcss/postcss.com.git
+    - GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/postcss/postcss.org.git
     - GIT_DEPLOY_DIR=dist

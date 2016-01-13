@@ -1,13 +1,13 @@
 {
   "private": true,
-  "homepage": "http://postcss.com/",
+  "homepage": "http://postcss.org/",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . && stylelint web_modules/**/*.css",
     "start": "babel-node scripts/build --server --dev --open",
     "static": "babel-node scripts/build --static --production",
     "pretest": "npm run lint",
     "test": "npm run static",
-    "posttest": "echo 'postcss.com' > dist/CNAME && touch dist/.nojekyll"
+    "posttest": "echo 'postcss.org' > dist/CNAME && touch dist/.nojekyll"
   },
   "babel": {
     "stage": 0

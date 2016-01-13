@@ -1,6 +1,6 @@
 # Getting started
 
-1. Download the files with `git clone git@github.com:postcss/postcss.com`
+1. Download the files with `git clone git@github.com:postcss/postcss.org`
 
 2. Install the dependencies with `npm install`
 
