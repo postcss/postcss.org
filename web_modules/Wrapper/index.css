@@ -1,4 +1,5 @@
 /* GLOBAL STYLES, OMG ! */
+
 :global h1,
 :global h2,
 :global h3 {
@@ -16,18 +17,18 @@
 :global .markdownIt-Anchor {
   position: absolute;
   left: -1.5rem;
-  opacity: .1;
-  transition: opacity .2s;
+  opacity: 0.1;
+  transition: opacity 0.2s;
 }
 
-  :global h1:hover .markdownIt-Anchor,
-  :global h2:hover .markdownIt-Anchor,
-  :global h3:hover .markdownIt-Anchor,
-  :global h4:hover .markdownIt-Anchor,
-  :global h5:hover .markdownIt-Anchor,
-  :global h6:hover .markdownIt-Anchor {
-    opacity: 1;
-  }
+:global h1:hover .markdownIt-Anchor,
+:global h2:hover .markdownIt-Anchor,
+:global h3:hover .markdownIt-Anchor,
+:global h4:hover .markdownIt-Anchor,
+:global h5:hover .markdownIt-Anchor,
+:global h6:hover .markdownIt-Anchor {
+  opacity: 1;
+}
 
 :global a,
 :global a:visited {
@@ -36,7 +37,7 @@
 }
 
 :global blockquote {
-  opacity: .6;
+  opacity: 0.6;
   margin: 2rem 0;
   padding-left: 1.5rem;
   border-left: 4px solid grey;
@@ -49,18 +50,18 @@
   font-weight: 400;
 
   color: color(#7340c4) l(-10%));
-  border: 1px solid #DDD;
+  border: 1px solid #ddd;
   border-radius: 0.3em;
-  background: color(#fafafa a(.6));
+  background: color(#fafafa a(0.6));
 }
 
 :global .hljs-comment {
-  opacity: .4;
+  opacity: 0.4;
 }
 
-  :global .hljs-comment:hover {
-    opacity: .6;
-  }
+:global .hljs-comment:hover {
+  opacity: 0.6;
+}
 
 :global .hljs-keyword {
   font-weight: bold;
@@ -74,7 +75,7 @@
   color: #7340c4;
 }
 
-/***/
+/* * */
 
 .wrapper {
   max-width: 50rem;
