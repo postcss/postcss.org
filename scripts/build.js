@@ -104,9 +104,8 @@ const webpackConfig = {
   },
 
   postcss: () => [
-    require("postcss-custom-properties"),
-    require("postcss-custom-media"),
-    require("autoprefixer"),
+    require("postcss-import")({ addDependencyTo: webpack }),
+    require("postcss-cssnext")(),
   ],
 
   plugins: [
