@@ -1,16 +1,18 @@
 /* GLOBAL STYLES, OMG ! */
 
+@custom-selector :--headings h1, h2, h3, h4, h5, h6;
+
+:root {
+  --purple: #7340c4;
+}
+
 :global h1,
 :global h2,
 :global h3 {
   font-weight: 400;
 }
 
-:global h1,
-:global h2,
-:global h3,
-:global h5,
-:global h6 {
+:global :--headings {
   position: relative;
 }
 
@@ -19,20 +21,15 @@
   left: -1.5rem;
   opacity: 0.1;
   transition: opacity 0.2s;
-}
 
-:global h1:hover .markdownIt-Anchor,
-:global h2:hover .markdownIt-Anchor,
-:global h3:hover .markdownIt-Anchor,
-:global h4:hover .markdownIt-Anchor,
-:global h5:hover .markdownIt-Anchor,
-:global h6:hover .markdownIt-Anchor {
-  opacity: 1;
+  @nest :--headings:hover & {
+    opacity: 1;
+  }
 }
 
 :global a,
 :global a:visited {
-  color: #7340c4;
+  color: var(--purple);
   text-decoration: none;
 }
 
@@ -49,7 +46,7 @@
 
   font-weight: 400;
 
-  color: color(#7340c4) l(-10%));
+  color: color(var(--purple) l(-10%));
   border: 1px solid #ddd;
   border-radius: 0.3em;
   background: color(#fafafa a(0.6));
@@ -57,10 +54,10 @@
 
 :global .hljs-comment {
   opacity: 0.4;
-}
 
-:global .hljs-comment:hover {
-  opacity: 0.6;
+  &:hover {
+    opacity: 0.6;
+  }
 }
 
 :global .hljs-keyword {
@@ -72,7 +69,7 @@
 :global .hljs-keyword,
 :global .hljs-pseudo,
 :global .hljs-function {
-  color: #7340c4;
+  color: var(--purple);
 }
 
 /* * */
