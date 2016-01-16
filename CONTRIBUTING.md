@@ -12,6 +12,11 @@ The [issue tracker](https://github.com/postcss/postcss.org/issues) is
 the preferred channel for [bug reports](#bugs), [features requests](#features)
 and [submitting pull requests](#pull-requests).
 
+
+## Content
+
+If you would like to contribute with some content or documentation for the website, make sure to read our [content start guide](https://github.com/postcss/postcss.org/tree/master/docs/content.md) first.  
+
 <a name="bugs"></a>
 ## Bug reports
 
