@@ -19,6 +19,13 @@ export default class Header extends Component {
           className={ styles.link }
           to="/"
         >
+          { "Get Started" }
+        </Link>
+
+        <Link
+          className={ styles.link }
+          to="/"
+        >
           { "Documentation" }
         </Link>
 
