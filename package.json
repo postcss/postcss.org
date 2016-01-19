@@ -22,7 +22,6 @@
     "extends": "stylelint-config-standard"
   },
   "devDependencies": {
-    "autoprefixer": "^6.2.3",
     "babel": "^5.8.34",
     "babel-core": "^5.8.34",
     "babel-eslint": "^4.1.6",
