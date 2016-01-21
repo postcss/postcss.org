@@ -1,2 +1,7 @@
-# open-design-boilerplate
-Quickly get into the iterative way of design on Github
+# PostCSS.org OSD
+
+Welcome to the Open Source Design part of postcss.org. Would you like contribute to it? Get started here.
+
+## Contribute
+
+## Zeplin.io
