@@ -1,0 +1,37 @@
+{
+  "name": "open-design-boilerplate",
+  "version": "1.0.0",
+  "description": "A minimal workflow for designers who like to work in the open source community.",
+  "main": "gulpfile.js",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp-sketch": "^0.1.0",
+    "gulp-svgmin": "^1.2.0",
+    "npm-which": "^2.0.0",
+    "pre-commit": "^1.1.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "clean": "rm dist/*",
+    "build": "gulp sketch",
+    "minify": "gulp minify"
+  },
+  "pre-commit": "clean, build, minify",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/stephenway/open-design-boilerplate.git"
+  },
+  "keywords": [
+    "open",
+    "design",
+    "boilerplate",
+		"gulp"
+  ],
+  "author": "Stephen Way <stephen@stephenway.net> (http://stephenway.net)",
+  "license": "Creative Commons Attribution 4.0 International License",
+  "bugs": {
+    "url": "https://github.com/stephenway/open-design-boilerplate/issues"
+  },
+  "homepage": "https://github.com/stephenway/open-design-boilerplate#readme",
+  "private": "true"
+}
