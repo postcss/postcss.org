@@ -1,4 +1,4 @@
 module.exports = {
-  rootDir: '../web_modules',
-  components: './web_modules/**/*.js'
-};
+  rootDir: "../web_modules",
+  components: "./web_modules/**/*.js",
+}
