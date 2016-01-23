@@ -8,7 +8,7 @@ export default class Hero extends Component {
     return (
       <section className={ styles.hero }>
         <img alt="PostCSS Logo" />
-        <button>{ Github }</button>
+        <button>{ "Github" }</button>
       </section>
     )
   }
