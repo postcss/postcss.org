@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 
-import Header from "Header"
+import Navbar from "Navbar"
 import Footer from "Footer"
 
 import styles from "./index.css"
@@ -30,7 +30,7 @@ export default class Wrapper extends Component {
             { name: "twitter:site", content: `@${ pkg.twitter }` },
           ] }
         />
-        <Header />
+        <Navbar />
         { this.props.children }
         <Footer />
       </div>
