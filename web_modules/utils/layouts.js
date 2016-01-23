@@ -9,10 +9,12 @@
 
 import Page from "layouts/Page"
 import PageError from "layouts/PageError"
+import HomePage from "layouts/HomePage"
 
 const layouts = {
   Page,
   PageError,
+  HomePage,
 }
 
 export default layouts
