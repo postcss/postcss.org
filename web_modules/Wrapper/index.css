@@ -1,75 +1,14 @@
-/* GLOBAL STYLES, OMG ! */
-
-@custom-selector :--headings h1, h2, h3, h4, h5, h6;
+/* Some global resets */
+:global(body),
+:global(html) {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
 
 :root {
   --purple: #7340c4;
-}
-
-:global h1,
-:global h2,
-:global h3 {
-  font-weight: 400;
-}
-
-:global :--headings {
-  position: relative;
-}
-
-:global .markdownIt-Anchor {
-  position: absolute;
-  left: -1.5rem;
-  opacity: 0.1;
-  transition: opacity 0.2s;
-
-  @nest :--headings:hover & {
-    opacity: 1;
-  }
-}
-
-:global a,
-:global a:visited {
-  color: var(--purple);
-  text-decoration: none;
-}
-
-:global blockquote {
-  opacity: 0.6;
-  margin: 2rem 0;
-  padding-left: 1.5rem;
-  border-left: 4px solid grey;
-}
-
-:global pre {
-  margin: 1rem 0;
-  padding: 1rem;
-
-  font-weight: 400;
-
-  color: color(var(--purple) l(-10%));
-  border: 1px solid #ddd;
-  border-radius: 0.3em;
-  background: color(#fafafa a(0.6));
-}
-
-:global .hljs-comment {
-  opacity: 0.4;
-
-  &:hover {
-    opacity: 0.6;
-  }
-}
-
-:global .hljs-keyword {
-  font-weight: bold;
-}
-
-:global .hljs-class,
-:global .hljs-tag,
-:global .hljs-keyword,
-:global .hljs-pseudo,
-:global .hljs-function {
-  color: var(--purple);
 }
 
 /* * */
