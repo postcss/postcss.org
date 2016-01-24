@@ -23,16 +23,18 @@ export default class Wrapper extends Component {
     } = this.context.metadata
 
     return (
-      <div className={ styles.wrapper }>
-        <Helmet
-          meta={ [
-            { property: "og:site_name", content: pkg.name },
-            { name: "twitter:site", content: `@${ pkg.twitter }` },
-          ] }
-        />
+      <div>
         <Navbar />
-        { this.props.children }
-        <Footer />
+        <div className={ styles.wrapper }>
+          <Helmet
+            meta={ [
+              { property: "og:site_name", content: pkg.name },
+              { name: "twitter:site", content: `@${ pkg.twitter }` },
+            ] }
+          />
+          { this.props.children }
+          <Footer />
+        </div>
       </div>
     )
   }
