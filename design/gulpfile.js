@@ -12,7 +12,7 @@ gulp.task('sketch', function(){
     getutil.log(error); return;
   }
 
-  return gulp.src('./src/sketch/frontpage-dark.sketch')
+  return gulp.src('./src/sketch/*.sketch')
     .pipe(sketch({
       export: 'slices',
       formats: 'png'
