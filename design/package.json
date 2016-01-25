@@ -5,8 +5,10 @@
   "main": "gulpfile.js",
   "dependencies": {},
   "devDependencies": {
+    "gulp": "^3.9.0",
     "gulp-sketch": "^0.1.0",
     "gulp-svgmin": "^1.2.0",
+    "gulp-util": "^3.0.7",
     "npm-which": "^2.0.0",
     "pre-commit": "^1.1.2"
   },
@@ -25,7 +27,7 @@
     "open",
     "design",
     "boilerplate",
-		"gulp"
+    "gulp"
   ],
   "author": "Stephen Way <stephen@stephenway.net> (http://stephenway.net)",
   "license": "Creative Commons Attribution 4.0 International License",

@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 
-import Header from "Header"
+import Navbar from "Navbar"
 import Footer from "Footer"
 
 import styles from "./index.css"
@@ -23,16 +23,18 @@ export default class Wrapper extends Component {
     } = this.context.metadata
 
     return (
-      <div className={ styles.wrapper }>
-        <Helmet
-          meta={ [
-            { property: "og:site_name", content: pkg.name },
-            { name: "twitter:site", content: `@${ pkg.twitter }` },
-          ] }
-        />
-        <Header />
-        { this.props.children }
-        <Footer />
+      <div>
+        <Navbar />
+        <div className={ styles.wrapper }>
+          <Helmet
+            meta={ [
+              { property: "og:site_name", content: pkg.name },
+              { name: "twitter:site", content: `@${ pkg.twitter }` },
+            ] }
+          />
+          { this.props.children }
+          <Footer />
+        </div>
       </div>
     )
   }
