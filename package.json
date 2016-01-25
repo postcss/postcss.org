@@ -7,7 +7,9 @@
     "static": "babel-node scripts/build --static --production",
     "pretest": "npm run lint",
     "test": "npm run static",
-    "posttest": "echo 'postcss.org' > dist/CNAME && touch dist/.nojekyll"
+    "posttest": "echo 'postcss.org' > dist/CNAME && touch dist/.nojekyll",
+    "styleguide-server": "styleguidist server --config style-guide/styleguide.config.js ",
+    "styleguide-build": "styleguidist build"
   },
   "babel": {
     "stage": 0
@@ -42,11 +44,12 @@
     "markdown-it-toc-and-anchor": "^1.0.1",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.7.0",
-    "react": "^0.14.5",
-    "react-dom": "^0.14.5",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
     "react-helmet": "^2.2.0",
     "react-redux": "^2.1.2",
     "react-router": "^1.0.3",
+    "react-styleguidist": "^1.3.2",
     "react-transform-catch-errors": "^1.0.1",
     "react-transform-hmr": "^1.0.1",
     "redbox-react": "^1.2.0",
