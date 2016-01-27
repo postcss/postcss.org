@@ -1,4 +1,10 @@
 .footer {
+  background: #eee7df;
+}
+
+.footer_wrap {
+  max-width: 50rem;
+  margin: 0 auto;
   display: flex;
   justify-content: space-between;
 }

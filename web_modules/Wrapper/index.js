@@ -25,7 +25,6 @@ export default class Wrapper extends Component {
     return (
       <div>
         <Navbar />
-        <div className={ styles.wrapper }>
           <Helmet
             meta={ [
               { property: "og:site_name", content: pkg.name },
@@ -34,7 +33,6 @@ export default class Wrapper extends Component {
           />
           { this.props.children }
           <Footer />
-        </div>
       </div>
     )
   }
