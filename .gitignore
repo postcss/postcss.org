@@ -4,6 +4,7 @@
 # node cache/logs
 npm-debug.log
 node_modules
+design/node_modules
 
 # statinamic builded files
 /dist
