@@ -4,6 +4,8 @@ import Helmet from "react-helmet"
 import invariant from "invariant"
 import Hero from "Hero"
 
+import styles from "./index.css"
+
 export default class HomePage extends Component {
 
   static propTypes = {
@@ -42,19 +44,24 @@ export default class HomePage extends Component {
 
     return (
       <div>
-        <Helmet
-          title={ head.title }
-          meta={ meta }
-        />
-
-        <Hero />
-        {
-          body &&
-          <div
-            dangerouslySetInnerHTML={ { __html: body } }
+       <section>
+          <Helmet
+            title={ head.title }
+            meta={ meta }
           />
-        }
-        { this.props.children }
+
+          <Hero />
+        </section>
+
+        <section className={ styles.wrapper }>
+          {
+            body &&
+            <div
+              dangerouslySetInnerHTML={ { __html: body } }
+            />
+          }
+          { this.props.children }
+          </section>
       </div>
     )
   }
