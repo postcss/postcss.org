@@ -8,7 +8,7 @@ export default class Footer extends Component {
     return (
       <footer className={ styles.footer }>
         <div className={ styles.footer_wrap }>
-          <section>
+          <section className={ styles.info }>
             <p>{ "Distributed under the MIT License." }</p>
             <p>{ "Found an issue?" }
               <a href="https://github.com/postcss/postcss.org">
@@ -17,7 +17,7 @@ export default class Footer extends Component {
             </p>
           </section>
           <section>
-            <img alt="Evil Martians Logo" />
+            <img className={ styles.logo } alt="Evil Martians Logo" />
           </section>
         </div>
       </footer>

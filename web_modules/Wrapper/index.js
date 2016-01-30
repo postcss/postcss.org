@@ -23,7 +23,7 @@ export default class Wrapper extends Component {
     } = this.context.metadata
 
     return (
-      <div>
+      <div className={ styles.linterror }> 
         <Navbar />
           <Helmet
             meta={ [
