@@ -11,7 +11,10 @@ export default class Footer extends Component {
           <section className={ styles.info }>
             <p>{ "Distributed under the MIT License." }</p>
             <p>{ "Found an issue?" }
-              <a href="https://github.com/postcss/postcss.org">
+              <a
+                className={ styles.report }
+                href="https://github.com/postcss/postcss.org"
+              >
                 { "Report it!" }
               </a>
             </p>
