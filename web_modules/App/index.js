@@ -2,7 +2,8 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 
-import Navbar from "Navbar"
+import Navigation from "Navigation"
+import Social from "Social"
 import Footer from "Footer"
 
 import styles from "./index.css"
@@ -23,8 +24,7 @@ export default class Wrapper extends Component {
     } = this.context.metadata
 
     return (
-      <div className={ styles.linterror }> 
-        <Navbar />
+      <div className={ styles.root }>
           <Helmet
             meta={ [
               { property: "og:site_name", content: pkg.name },
@@ -32,6 +32,8 @@ export default class Wrapper extends Component {
             ] }
           />
           { this.props.children }
+          <Navigation />
+          <Social />
           <Footer />
       </div>
     )

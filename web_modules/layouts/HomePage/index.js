@@ -2,8 +2,6 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 import invariant from "invariant"
-import Hero from "Hero"
-
 import styles from "./index.css"
 
 export default class HomePage extends Component {
@@ -26,7 +24,6 @@ export default class HomePage extends Component {
 
     const {
       head,
-      body,
     } = this.props
 
     invariant(typeof head.title === "string", "Your page needs a title")
@@ -43,25 +40,19 @@ export default class HomePage extends Component {
     ]
 
     return (
-      <div>
-       <section>
-          <Helmet
-            title={ head.title }
-            meta={ meta }
-          />
-
-          <Hero />
-        </section>
-
-        <section className={ styles.wrapper }>
-          {
-            body &&
-            <div
-              dangerouslySetInnerHTML={ { __html: body } }
-            />
-          }
-          { this.props.children }
+      <div className={ styles.root }>
+        <Helmet
+          title={ head.title }
+          meta={ meta }
+        />
+        <main className={ styles.main }>
+          <section className={ styles.hero }>
+            <img alt="PostCSS Logo" />
+            <button>{ "Github" }</button>
           </section>
+
+          { this.props.children }
+        </main>
       </div>
     )
   }

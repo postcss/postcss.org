@@ -1,8 +1,8 @@
-.footer {
+.root {
   background: #eee7df;
 }
 
-.footer_wrap {
+.inner {
   display: flex;
   flex-direction: column;
   justify-content: center;

@@ -6,8 +6,8 @@ export default class Footer extends Component {
 
   render() {
     return (
-      <footer className={ styles.footer }>
-        <div className={ styles.footer_wrap }>
+      <footer className={ styles.root }>
+        <div className={ styles.inner }>
           <section className={ styles.info }>
             <p>{ "Distributed under the MIT License." }</p>
             <p>{ "Found an issue?" }

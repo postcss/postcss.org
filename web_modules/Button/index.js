@@ -13,7 +13,7 @@ export default function Button({
   }
 
   return (
-    <button className={ s.button } style={ styles }>{ children }</button>
+    <button className={ s.root } style={ styles }>{ children }</button>
   )
 }
 Button.propTypes = {

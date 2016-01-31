@@ -1,0 +1,22 @@
+/**
+ * Some global resets
+ *
+ * 1. Match footer color for full height effect.
+ * 2. Use border-box everywhere.
+ * 3. iOS orientation fix.
+ */
+
+:global(body),
+:global(html) {
+  background: #f4f2ed; /* 1 */
+  box-sizing: border-box; /* 2 */
+  margin: 0;
+  padding: 0;
+  text-size-adjust: 100%; /* 3 */
+}
+
+:global(*),
+:global(*::before),
+:global(*::after) {
+  box-sizing: inherit;
+}

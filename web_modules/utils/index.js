@@ -12,9 +12,9 @@ import layouts from "./layouts"
 /*
  * Route Handler
  */
-import Wrapper from "Wrapper"
+import App from "App"
 export const RouteHandler = (
-  <Route component={ Wrapper }>
+  <Route component={ App }>
     <Route path="*" component={ PageContainer } />
   </Route>
 )

@@ -1,4 +1,4 @@
-.nav {
+.root {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,14 +8,6 @@
   width: 100%;
 }
 
-:local(.item) {
+.item {
   color: #eee7df;
-}
-
-.left .item {
-  margin-left: 2em;
-}
-
-.right .item {
-  margin-right: 2em;
 }
