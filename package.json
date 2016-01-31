@@ -8,7 +8,7 @@
     "pretest": "npm run lint",
     "test": "npm run static",
     "posttest": "echo 'postcss.org' > dist/CNAME && touch dist/.nojekyll",
-    "styleguide-server": "styleguidist server --config style-guide/styleguide.config.js ",
+    "styleguide-server": "styleguidist server",
     "styleguide-build": "styleguidist build"
   },
   "babel": {
