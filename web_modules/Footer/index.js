@@ -8,9 +8,11 @@ export default class Footer extends Component {
     return (
       <footer className={ styles.root }>
         <div className={ styles.inner }>
-          <section className={ styles.info }>
-            <p>{ "Distributed under the MIT License." }</p>
-            <p>{ "Found an issue?" }
+          <div className={ styles.info }>
+            <p className={ styles.license }>
+              { "Distributed under the MIT License." }
+            </p>
+            <p className={ styles.issue }>{ "Found an issue?" }
               <a
                 className={ styles.report }
                 href="https://github.com/postcss/postcss.org"
@@ -18,10 +20,10 @@ export default class Footer extends Component {
                 { "Report it!" }
               </a>
             </p>
-          </section>
-          <section>
-            <img className={ styles.logo } alt="Evil Martians Logo" />
-          </section>
+          </div>
+          <div className={ styles.logo }>
+            <img className={ styles.logoInner } alt="Evil Martians Logo" />
+          </div>
         </div>
       </footer>
     )

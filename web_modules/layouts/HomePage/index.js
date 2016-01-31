@@ -40,20 +40,20 @@ export default class HomePage extends Component {
     ]
 
     return (
-      <div className={ styles.root }>
+      <main className={ styles.root }>
         <Helmet
           title={ head.title }
           meta={ meta }
         />
-        <main className={ styles.main }>
-          <section className={ styles.hero }>
-            <img alt="PostCSS Logo" />
-            <button>{ "Github" }</button>
-          </section>
-
-          { this.props.children }
-        </main>
-      </div>
+        <section className={ styles.hero }>
+          <img className={ styles.heroLogo } alt="PostCSS Logo" />
+          <button className={ styles.heroStar }>{ "Github" }</button>
+        </section>
+        <section>
+          { "Home page static content" }
+        </section>
+        { this.props.children }
+      </main>
     )
   }
 }

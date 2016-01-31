@@ -10,8 +10,6 @@
 :global(html) {
   background: #f4f2ed; /* 1 */
   box-sizing: border-box; /* 2 */
-  margin: 0;
-  padding: 0;
   text-size-adjust: 100%; /* 3 */
 }
 
@@ -20,3 +18,13 @@
 :global(*::after) {
   box-sizing: inherit;
 }
+
+:global(*) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.root { /* placeholder */ }
+
+.children { /* placeholder */ }

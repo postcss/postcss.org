@@ -1,9 +1,23 @@
 .root {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 50px;
   background-color: rgba(0, 0, 0, 0.75);
-  position: fixed;
+  display: flex;
+  height: 50px;
+  justify-content: space-between;
+  padding: 0 1rem;
   width: 100%;
+}
+
+@media (width > 500px) {
+  .root {
+    justify-content: flex-end;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+  }
+
+  .item {
+    margin-left: 1rem;
+  }
 }

@@ -31,7 +31,9 @@ export default class Wrapper extends Component {
               { name: "twitter:site", content: `@${ pkg.twitter }` },
             ] }
           />
-          { this.props.children }
+          <div className={ styles.children }>
+            { this.props.children }
+          </div>
           <Navigation />
           <Social />
           <Footer />

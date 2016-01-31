@@ -1,20 +1,10 @@
 .root {
-  background: #eee7df;
+  background: #f4f2ed;
+  padding: 0 1rem;
 }
 
 .inner {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   text-align: center;
-  max-width: 50rem;
-  margin: 0 auto;
-
-  @media (width >= 500px) {
-    text-align: initial;
-    justify-content: space-between;
-    flex-direction: row;
-  }
 }
 
 .info {
@@ -24,4 +14,15 @@
 .report {
   color: #48463e;
   margin-left: 0.25rem;
+}
+
+@media (width > 500px) {
+  .inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 50rem;
+    text-align: initial;
+  }
 }
