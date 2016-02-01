@@ -2,6 +2,9 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 import invariant from "invariant"
+
+import Hero from "Hero"
+
 import styles from "./index.css"
 
 export default class HomePage extends Component {
@@ -45,13 +48,7 @@ export default class HomePage extends Component {
           title={ head.title }
           meta={ meta }
         />
-        <section className={ styles.hero }>
-          <img className={ styles.heroLogo } alt="PostCSS Logo" />
-          <button className={ styles.heroStar }>{ "Github" }</button>
-        </section>
-        <section>
-          { "Home page static content" }
-        </section>
+        <Hero />
         { this.props.children }
       </main>
     )

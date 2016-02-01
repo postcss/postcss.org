@@ -1,0 +1,22 @@
+.root {
+  align-items: center;
+  background: #2b2723 url("./alchemy.jpg") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  justify-content: center;
+}
+
+.title {
+  margin-top: 3rem; /* Navigation/Social height */
+}
+
+.tagline {
+  color: color(white a(75%));
+  font-size: 20px;
+  line-height: 28px;
+  margin-top: 1rem;
+  padding: 0 1rem;
+  text-align: center;
+}
