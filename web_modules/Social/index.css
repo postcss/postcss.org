@@ -1,5 +1,6 @@
 .root {
   background-color: color(black a(60%));
+  margin-top: 3rem;
 }
 
 .inner {
@@ -49,6 +50,7 @@
 @media (width > 580px) {
   .root {
     background-color: color(black a(30%));
+    margin-top: 0;
     position: absolute;
     right: 0;
     top: 0;
