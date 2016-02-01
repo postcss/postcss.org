@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import invariant from "invariant"
 
 import Hero from "Hero"
+import ByTheCommunity from "ByTheCommunity"
 
 import styles from "./index.css"
 
@@ -48,7 +49,12 @@ export default class HomePage extends Component {
           title={ head.title }
           meta={ meta }
         />
-        <Hero />
+        <div className={ styles.hero }>
+          <Hero />
+        </div>
+        <div className={ styles.byTheCommunity }>
+          <ByTheCommunity />
+        </div>
         { this.props.children }
       </main>
     )

@@ -1,1 +1,6 @@
 .root { /* placeholder */ }
+
+.byTheCommunity {
+  background: url("./flowers.svg") center 2rem no-repeat;
+  padding-top: 5rem;
+}
