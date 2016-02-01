@@ -3,5 +3,5 @@ module.exports = {
   rootDir: "./web_modules/",
   components: "./**/*.js",
   serverPort: 3001,
-  skipComponentsWithoutExample: true
+  skipComponentsWithoutExample: true,
 }
