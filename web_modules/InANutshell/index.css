@@ -79,7 +79,7 @@
   text-align: right;
 }
 
-@media (width > 580px) {
+@media (width > 640px) {
   .itemInner {
     display: flex;
     justify-content: space-between;
