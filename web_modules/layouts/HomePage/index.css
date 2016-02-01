@@ -1,15 +1,22 @@
 .root { /* placeholder */ }
 
-.wayFinder {
-  padding-top: 2rem;
-}
-
 .showcase {
-  background: url("./burst.svg") center 3rem no-repeat;
-  padding-top: 5rem;
+  background: url("./burst.svg") center 2rem no-repeat;
+  padding-top: 4rem;
 }
 
 .byTheCommunity {
   background: url("./flowers.svg") center 1rem no-repeat;
   padding-top: 4rem;
+}
+
+@media (width > 420px) {
+  .wayFinder {
+    padding-top: 2rem;
+  }
+
+  .showcase {
+    background-position: center 3rem;
+    padding-top: 5rem;
+  }
 }
