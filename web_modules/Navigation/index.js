@@ -6,7 +6,7 @@ export default class Navigation extends Component {
 
   render() {
     return (
-      <nav className={ styles.root }>
+      <nav className={ styles.root } role="navigation">
         <ul className={ styles.inner }>
           <li className={ styles.item }>
             <a

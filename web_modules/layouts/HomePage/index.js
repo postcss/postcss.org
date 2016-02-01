@@ -40,7 +40,7 @@ export default class HomePage extends Component {
     ]
 
     return (
-      <main className={ styles.root }>
+      <main className={ styles.root } role="main">
         <Helmet
           title={ head.title }
           meta={ meta }
