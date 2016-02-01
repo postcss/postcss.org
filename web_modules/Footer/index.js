@@ -16,7 +16,7 @@ export default class Footer extends Component {
             <p className={ styles.issue }>{ "Found an issue?" }
               <a
                 className={ styles.report }
-                href="https://github.com/postcss/postcss.org"
+                href="https://github.com/postcss/postcss.org/issues"
               >
                 { "Report it!" }
               </a>
