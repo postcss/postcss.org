@@ -12,17 +12,13 @@
 }
 
 .items {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
   margin: 1.5rem auto 0;
 }
 
 .item {
+  display: block;
   align-items: center;
   display: flex;
-  flex-basis: calc(50% - 2rem);
   justify-content: center;
   margin: 1rem;
 }
@@ -43,6 +39,19 @@
 
   &:hover {
     text-decoration: none;
+  }
+}
+
+@media (width > 410px) {
+  .items {
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .item {
+    flex-basis: calc(50% - 2rem);
   }
 }
 
