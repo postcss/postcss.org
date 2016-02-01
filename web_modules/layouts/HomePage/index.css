@@ -1,8 +1,12 @@
 .root { /* placeholder */ }
 
+.wayFinder {
+  padding-top: 2rem;
+}
+
 .showcase {
-  background: url("./burst.svg") center 1rem no-repeat;
-  padding-top: 3rem;
+  background: url("./burst.svg") center 3rem no-repeat;
+  padding-top: 5rem;
 }
 
 .byTheCommunity {
