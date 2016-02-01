@@ -4,6 +4,7 @@ import Helmet from "react-helmet"
 import invariant from "invariant"
 
 import Hero from "Hero"
+import InANutshell from "InANutshell"
 import WayFinder from "WayFinder"
 import Showcase from "Showcase"
 import ByTheCommunity from "ByTheCommunity"
@@ -53,6 +54,9 @@ export default class HomePage extends Component {
         />
         <div className={ styles.hero }>
           <Hero />
+        </div>
+        <div className={ styles.inANutshell }>
+          <InANutshell />
         </div>
         <div className={ styles.wayFinder }>
           <WayFinder />

@@ -1,0 +1,109 @@
+.root { /* placeholder */ }
+
+.header {
+  align-items: center;
+  display: flex;
+}
+
+.logo {
+  margin-right: 1rem;
+}
+
+.title {
+  color: #3f526b;
+  font-size: 26px;
+  font-weight: lighter;
+  line-height: 32px;
+}
+
+.body {
+  color: color(#48463e a(84%));
+  font-size: 13px;
+  line-height: 20px;
+  margin-top: 1rem;
+}
+
+.item {
+  background: #faf8f5;
+  padding: 2rem 1rem 1rem;
+}
+
+.itemAlt {
+  composes: item;
+  background: #f4f2ed;
+}
+
+.example {
+  padding: 1rem 1rem 0;
+}
+
+.figure {
+  display: flex;
+  flex-direction: column-reverse;
+  width: 80%;
+}
+
+.figureOutput {
+  composes: figure;
+  flex-direction: column;
+  margin-left: 2rem;
+  transform: translateY(-1rem);
+  width: auto;
+}
+
+.code {
+  background: white;
+  border: 1px solid gray(200);
+  color: color(black a(84%));
+  font: 13px/20px monospace;
+  overflow: auto;
+  padding: 0.5rem 0.25rem;
+}
+
+.highlight {
+  background: #007ede;
+  color: white;
+  display: inline-block;
+  margin: 0.125rem 0;
+  padding: 0.125rem;
+}
+
+.caption {
+  color: color(#48463e a(54%));
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.captionOutput {
+  composes: caption;
+  text-align: right;
+}
+
+@media (width > 580px) {
+  .itemInner {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 45rem;
+  }
+
+  .itemInnerAlt {
+    composes: itemInner;
+    flex-direction: row-reverse;
+  }
+
+  .info {
+    margin-right: 1rem;
+    padding-top: 2rem;
+  }
+
+  .infoAlt {
+    composes: info;
+    margin-left: 1rem;
+    margin-right: 0;
+  }
+
+  .figure {
+    min-width: 18.5rem;
+  }
+}
