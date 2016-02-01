@@ -1,21 +1,21 @@
 import React from "react"
 
-import style from "./index.css"
+import styles from "./index.css"
 
 import logo from "./postcss.svg"
 
 export default function Hero() {
 
   return (
-    <header className={ style.root } role="banner">
-      <h1 className={ style.title }>
+    <header className={ styles.root } role="banner">
+      <h1 className={ styles.title }>
         <img
           alt="PostCSS"
-          className={ style.logo }
+          className={ styles.logo }
           src={ logo }
         />
       </h1>
-      <p className={ style.tagline }>
+      <p className={ styles.tagline }>
         { "A tool for transforming CSS with\u00A0JavaScript" }
       </p>
     </header>
