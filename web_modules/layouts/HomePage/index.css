@@ -1,5 +1,10 @@
 .root { /* placeholder */ }
 
+.showcase {
+  background: url("./burst.svg") center 1rem no-repeat;
+  padding-top: 3rem;
+}
+
 .byTheCommunity {
   background: url("./flowers.svg") center 1rem no-repeat;
   padding-top: 4rem;
