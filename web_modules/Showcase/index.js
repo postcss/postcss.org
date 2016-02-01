@@ -29,18 +29,18 @@ export default function Showcase() {
         </li>
         <li className={ styles.item }>
           <img
-            alt="Taobao"
-            className={ styles.logo }
-            src={ taobao }
-          />
-        </li>
-        <li className={ styles.item }>
-          <img
             alt="Webpack"
             className={ styles.logo }
             src={ webpack }
           />
         </li>
+        <li className={ styles.item }>
+          <img
+            alt="Taobao"
+            className={ styles.logo }
+            src={ taobao }
+          />
+        </li>  
       </ul>
       <p className={ styles.callToAction }>
         { "Your company is using PostCSS? " }
