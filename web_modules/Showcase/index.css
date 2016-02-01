@@ -1,0 +1,53 @@
+.root {
+  justify-content: center;
+  padding: 1rem;
+}
+
+.title {
+  color: #dd3a0a;
+  font-size: 26px;
+  font-weight: normal;
+  line-height: 32px;
+  text-align: center;
+}
+
+.items {
+  align-items: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem auto 0;
+}
+
+.item {
+  align-items: center;
+  display: flex;
+  flex-basis: calc(50% - 2rem);
+  justify-content: center;
+  margin: 1rem;
+}
+
+.callToAction {
+  color: #3f526b;
+  font-size: 12px;
+  font-style: italic;
+  line-height: 20px;
+  margin: 2rem auto 0;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.letUsKnow {
+  color: #3f526b;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+@media (width > 800px) {
+  .item {
+    flex-basis: 150px;
+  }
+}
