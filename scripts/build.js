@@ -97,7 +97,7 @@ const webpackConfig = {
         ),
       },
       {
-        test: /\.(html|ico|jpe?g|png|gif)$/,
+        test: /\.(html|ico|jpe?g|png|gif|svg)$/,
         loader: "file-loader?name=[path][name].[ext]&context=./content",
       },
     ],

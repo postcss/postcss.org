@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 
 import styles from "./index.css"
+import logo from "./evilmartians.svg"
 
 export default class Footer extends Component {
 
@@ -22,7 +23,11 @@ export default class Footer extends Component {
             </p>
           </div>
           <div className={ styles.logo }>
-            <img className={ styles.logoInner } alt="Evil Martians Logo" />
+            <img
+              alt="Evil Martians Logo"
+              className={ styles.logoInner }
+              src={ logo }
+            />
           </div>
         </div>
       </footer>

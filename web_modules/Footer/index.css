@@ -1,6 +1,6 @@
 .root {
   background: #f4f2ed;
-  padding: 0 1rem;
+  padding: 1rem;
 }
 
 .inner {
@@ -8,12 +8,25 @@
 }
 
 .info {
-  color: #48463e;
+  color: color(#48463e a(46%));
+  font-size: 13px;
+  line-height: 20px;
+  margin-bottom: 0.25rem;
+}
+
+.issue {
+  margin-bottom: 1rem;
 }
 
 .report {
-  color: #48463e;
+  color: color(#48463e a(46%));
+  display: inline-block;
+  text-decoration: underline;
   margin-left: 0.25rem;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 @media (width > 500px) {
