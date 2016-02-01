@@ -76,7 +76,7 @@ export default function InANutShell() {
                 src={ cssnext }
               />
               <h2 className={ styles.title }>
-                { "Use tomorrows CSS, today!" }
+                { "Use tomorrows CSS,\u00A0today!" }
               </h2>
             </header>
             <p className={ styles.body }>
@@ -139,7 +139,7 @@ export default function InANutShell() {
                 src={ cssModules }
               />
               <h2 className={ styles.title }>
-                { "The end of the global CSS" }
+                { "The end of the global\u00A0CSS" }
               </h2>
             </header>
             <p className={ styles.body }>
@@ -191,7 +191,7 @@ export default function InANutShell() {
                 src={ stylelint }
               />
               <h2 className={ styles.title }>
-                { "Avoid errors in your CSS" }
+                { "Avoid errors in your\u00A0CSS" }
               </h2>
             </header>
             <p className={ styles.body }>
