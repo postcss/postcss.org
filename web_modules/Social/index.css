@@ -1,23 +1,60 @@
 .root {
-  align-items: center;
-  background-color: rgba(0, 0, 0, 0.75);
-  display: flex;
-  height: 50px;
-  justify-content: space-between;
-  padding: 0 1rem;
-  width: 100%;
+  background-color: color(black a(75%));
 }
 
-@media (width > 500px) {
+.inner {
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  margin-right: 1.5rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.itemLink {
+  background: no-repeat 0 center;
+  color: #eee7df;
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 1.25rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.itemLinkTwitter {
+  composes: itemLink;
+  background-image: url("./twitter.svg");
+}
+
+.itemLinkGithub {
+  composes: itemLink;
+  background-image: url("./github.svg");
+}
+
+.itemLinkGitter {
+  composes: itemLink;
+  background-image: url("./gitter.svg");
+}
+
+@media (width > 580px) {
   .root {
-    justify-content: flex-end;
     position: absolute;
     right: 0;
     top: 0;
     width: 50%;
   }
 
-  .item {
-    margin-left: 1rem;
+  .inner {
+    justify-content: flex-end;
   }
 }

@@ -1,32 +1,39 @@
 import React, { Component } from "react"
-import { Link } from "react-router"
 
 import styles from "./index.css"
 
-export default class Navbar extends Component {
+export default class Social extends Component {
 
   render() {
     return (
-      <nav className={ styles.root }>      
-        <Link
-          className={ styles.item }
-          to="/"
-        >
-          { "Slack" }
-        </Link>
-        <Link
-          className={ styles.item }
-          to="/"
-        >
-          { "Twitter" }
-        </Link>
-        <Link
-          className={ styles.item }
-          to="/"
-        >
-          { "Github" }
-        </Link>
-      </nav>
+      <aside className={ styles.root }>
+        <ul className={ styles.inner }>
+          <li className={ styles.item }>
+            <a
+              className={ styles.itemLinkTwitter }
+              href="https://twitter.com/postcss"
+            >
+              { "Twitter" }
+            </a>
+          </li>
+          <li className={ styles.item }>
+            <a
+              className={ styles.itemLinkGitter }
+              href="https://gitter.im/postcss/postcss"
+            >
+              { "Gitter" }
+            </a>
+          </li>
+          <li className={ styles.item }>
+            <a
+              className={ styles.itemLinkGithub }
+              href="https://github.com/postcss/postcss"
+            >
+              { "Github" }
+            </a>
+          </li>
+        </ul>
+      </aside>
     )
   }
 }
