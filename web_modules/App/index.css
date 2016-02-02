@@ -1,0 +1,43 @@
+/**
+ * Some global resets
+ *
+ * 1. Match footer color for full height effect.
+ * 2. Use border-box everywhere.
+ * 3. Use system font (warning - global cascade)
+ * 4. iOS orientation fix.
+ */
+
+:global(body),
+:global(html) {
+  background: #f4f2ed; /* 1 */
+  box-sizing: border-box; /* 2 */
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    "Roboto",
+    "Oxygen",
+    "Ubuntu",
+    "Cantarell",
+    "Fira Sans",
+    "Droid Sans",
+    "Helvetica Neue",
+    sans-serif; /* 3 */
+  text-size-adjust: 100%; /* 4 */
+}
+
+:global(*),
+:global(*::before),
+:global(*::after) {
+  box-sizing: inherit;
+}
+
+:global(*) {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.root { /* placeholder */ }
+
+.children { /* placeholder */ }

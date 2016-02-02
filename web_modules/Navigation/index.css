@@ -1,0 +1,45 @@
+.root {
+  background-color: color(black a(40%));
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.inner {
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  margin-right: 1.5rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.itemLink {
+  color: #eee7df;
+  font-size: 14px;
+  line-height: 20px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+@media (width > 580px) {
+  .root {
+    right: auto;
+    width: 50%;
+  }
+
+  .inner {
+    justify-content: flex-start;
+  }
+}

@@ -1,6 +1,6 @@
 import React from "react"
 import { PropTypes } from "react"
-import s from "./index.css"
+import styles from "./index.css"
 
 export default function Button({
   color,
@@ -13,7 +13,7 @@ export default function Button({
   }
 
   return (
-    <button className={ s.button } style={ styles }>{ children }</button>
+    <button className={ styles.root } style={ styles }>{ children }</button>
   )
 }
 Button.propTypes = {

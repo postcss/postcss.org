@@ -1,0 +1,62 @@
+.root {
+  background-color: color(black a(68%));
+}
+
+.inner {
+  align-items: center;
+  height: 3rem;
+  padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.item {
+  margin-right: 1.5rem;
+
+  &:last-child {
+    margin-right: 0;
+  }
+}
+
+.itemLink {
+  background: no-repeat 0 center;
+  color: #eee7df;
+  font-size: 14px;
+  line-height: 20px;
+  padding-left: 1.25rem;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.itemLinkTwitter {
+  composes: itemLink;
+  background-image: url("./twitter.svg");
+}
+
+.itemLinkGithub {
+  composes: itemLink;
+  background-image: url("./github.svg");
+}
+
+.itemLinkGitter {
+  composes: itemLink;
+  background-image: url("./gitter.svg");
+}
+
+@media (width > 580px) {
+  .root {
+    background-color: color(black a(30%));
+    margin-top: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+  }
+
+  .inner {
+    justify-content: flex-end;
+  }
+}

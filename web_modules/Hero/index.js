@@ -1,15 +1,23 @@
-import React, { Component } from "react"
+import React from "react"
 
 import styles from "./index.css"
 
-export default class Hero extends Component {
+import logo from "./postcss.svg"
 
-  render() {
-    return (
-      <section className={ styles.hero }>
-        <img alt="PostCSS Logo" />
-        <button>{ "Github" }</button>
-      </section>
-    )
-  }
+export default function Hero() {
+
+  return (
+    <header className={ styles.root } role="banner">
+      <h1 className={ styles.title }>
+        <img
+          alt="PostCSS"
+          className={ styles.logo }
+          src={ logo }
+        />
+      </h1>
+      <p className={ styles.tagline }>
+        { "A tool for transforming CSS with\u00A0JavaScript" }
+      </p>
+    </header>
+  )
 }

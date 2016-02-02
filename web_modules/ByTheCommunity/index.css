@@ -1,0 +1,36 @@
+.root {
+  align-items: center;
+  background: #f3f1ec url("./avatars.jpg") no-repeat center center;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  height: 20rem;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.title {
+  color: #dd3a0a;
+  font-size: 26px;
+  font-weight: normal;
+  line-height: 32px;
+  text-align: center;
+}
+
+.body {
+  color: #3f526b;
+  font-size: 15px;
+  line-height: 28px;
+  margin: 2rem auto 0;
+  max-width: 34rem;
+  text-align: center;
+}
+
+.submit {
+  color: #3f526b;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
