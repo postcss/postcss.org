@@ -14,11 +14,11 @@ export default class Page extends Component {
     __url: PropTypes.string.isRequired,
     head: PropTypes.object.isRequired,
     body: PropTypes.string.isRequired,
-  }
+  };
 
   static contextTypes = {
     metadata: PropTypes.object.isRequired,
-  }
+  };
 
   render() {
     const {

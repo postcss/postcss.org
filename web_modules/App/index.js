@@ -12,11 +12,11 @@ export default class Wrapper extends Component {
 
   static propTypes = {
     children: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-  }
+  };
 
   static contextTypes = {
     metadata: PropTypes.object.isRequired,
-  }
+  };
 
   render() {
     const {
