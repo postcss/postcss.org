@@ -40,10 +40,10 @@ export default function Showcase() {
             className={ styles.logo }
             src={ taobao }
           />
-        </li>  
+        </li>
       </ul>
       <p className={ styles.callToAction }>
-        { "Your company is using PostCSS? " }
+        { "Is your company using PostCSS? " }
         <a
           className={ styles.letUsKnow }
           href="https://twitter.com/postcss"
