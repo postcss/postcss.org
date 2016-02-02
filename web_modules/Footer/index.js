@@ -23,11 +23,16 @@ export default class Footer extends Component {
             </p>
           </div>
           <div className={ styles.logo }>
-            <img
-              alt="Evil Martians Logo"
-              className={ styles.logoInner }
-              src={ logo }
-            />
+            <a
+              className={ styles.logoLink }
+              href="https://evilmartians.com/"
+            >
+              <img
+                alt="Evil Martians"
+                className={ styles.logoInner }
+                src={ logo }
+              />
+            </a>
           </div>
         </div>
       </footer>
