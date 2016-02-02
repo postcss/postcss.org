@@ -40,15 +40,15 @@
 .figure {
   display: flex;
   flex-direction: column-reverse;
-  width: 80%;
+  margin-right: 2rem;
 }
 
 .figureOutput {
   composes: figure;
   flex-direction: column;
   margin-left: 2rem;
+  margin-right: 0;
   transform: translateY(-1rem);
-  width: auto;
 }
 
 .code {
@@ -104,6 +104,6 @@
   }
 
   .example {
-    min-width: 18.5rem;
+    min-width: 22rem;
   }
 }
