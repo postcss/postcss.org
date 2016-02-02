@@ -2,8 +2,11 @@
 
 [![Join the chat at https://gitter.im/postcss/postcss.org](https://badges.gitter.im/postcss/postcss.org.svg)](https://gitter.im/postcss/postcss.org?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-It's time for [PostCSS](https://github.com/postcss/postcss) to finally get an website up and running. The project will be lead by [Andrey Sitnik](https://github.com/ai) and [Marcus Tisäter](https://github.com/marcustisater) with great pleasure to have [Max Stoiber](https://github.com/mxstbr) as Lead Developer and [Stephen Way](https://github.com/stephenway) as Lead Designer.
+The official website for [PostCSS](https://github.com/postcss/postcss) built by the community for the community :heart:
 
+## Milestone 1.0
+
+We are doing a very lightweight release with just a homepage and some hyperlinks - [**Milestone 1.0**](https://github.com/postcss/postcss.org/milestones/1.0). If you would like to report any bugs or similar before that, let us know.
 
 ## Gitter
 
