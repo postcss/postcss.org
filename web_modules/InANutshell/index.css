@@ -23,6 +23,15 @@
   margin-top: 1rem;
 }
 
+.tool {
+  color: inherit;
+  text-decoration: underline;
+  
+  &:hover {
+    text-decoration: none;
+  }
+}
+
 .item {
   background: #faf8f5;
   padding: 2rem 1rem 1rem;
