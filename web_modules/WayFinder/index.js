@@ -7,7 +7,7 @@ export default class WayFinder extends Component {
   render() {
     return (
       <nav className={ styles.root } role="navigation">
-        <ul className={ styles.inner }>
+        <ul className={ styles.items }>
           <li className={ styles.item }>
             <a
               className={ styles.itemLink }

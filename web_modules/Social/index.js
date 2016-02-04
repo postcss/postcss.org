@@ -7,7 +7,7 @@ export default class Social extends Component {
   render() {
     return (
       <aside className={ styles.root } role="complementary">
-        <ul className={ styles.inner }>
+        <ul className={ styles.items }>
           <li className={ styles.item }>
             <a
               className={ styles.itemLinkTwitter }

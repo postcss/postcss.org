@@ -6,7 +6,7 @@
   top: 0;
 }
 
-.inner {
+.items {
   align-items: center;
   height: 3rem;
   padding: 0 1rem;
@@ -15,10 +15,8 @@
 }
 
 .item {
-  margin-right: 1.5rem;
-
-  &:last-child {
-    margin-right: 0;
+  &:not(:last-child) {
+    margin-right: 1.5rem;
   }
 }
 
@@ -39,7 +37,7 @@
     width: 50%;
   }
 
-  .inner {
+  .items {
     justify-content: flex-start;
   }
 }

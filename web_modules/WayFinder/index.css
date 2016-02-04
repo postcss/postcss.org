@@ -2,7 +2,7 @@
   padding: 1rem;
 }
 
-.inner {
+.items {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
 }
 
 @media (width > 720px) {
-  .inner {
+  .items {
     flex-direction: row;
   }
 
