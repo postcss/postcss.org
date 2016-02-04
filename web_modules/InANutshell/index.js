@@ -25,7 +25,14 @@ export default function InANutShell() {
               </h2>
             </header>
             <p className={ styles.body }>
-              { "Add vendor prefixes to CSS rules using values from Can I Use. Autoprefixer will use the data based on current browser popularity and property support to apply prefixes for\u00A0you." }
+              { "Add vendor prefixes to CSS rules using values from Can I Use. " }
+              <a
+                className={ styles.tool }
+                href="https://github.com/postcss/autoprefixer"
+              >
+                { "Autoprefixer" }
+              </a>
+              { " will use the data based on current browser popularity and property support to apply prefixes for\u00A0you." }
             </p>
           </div>
           <div className={ styles.example }>
@@ -80,7 +87,14 @@ export default function InANutShell() {
               </h2>
             </header>
             <p className={ styles.body }>
-              { "Write future-proof CSS and forget old preprocessor specific syntax. Use the latest CSS syntax today. It transforms CSS specs into more compatible CSS so you don’t need to wait for browser\u00A0support." }
+              { "Write future-proof CSS and forget old preprocessor specific syntax. Use the latest CSS syntax today with " }
+              <a
+                className={ styles.tool }
+                href="http://cssnext.io/"
+              >
+                { "cssnext" }
+              </a>
+              { ". It transforms CSS specs into more compatible CSS so you don’t need to wait for browser\u00A0support." }
             </p>
           </div>
           <div className={ styles.example }>
@@ -143,7 +157,13 @@ export default function InANutShell() {
               </h2>
             </header>
             <p className={ styles.body }>
-              { "CSS Modules means you never need to worry about your names being too generic, just use whatever makes the most sense." }
+             <a
+               className={ styles.tool }
+               href="https://github.com/css-modules/css-modules"
+             >
+               { "CSS Modules" }
+             </a>
+             { " means you never need to worry about your names being too generic, just use whatever makes the most sense." }
             </p>
           </div>
           <div className={ styles.example }>
@@ -195,7 +215,14 @@ export default function InANutShell() {
               </h2>
             </header>
             <p className={ styles.body }>
-              { "Enforce consistent conventions and avoid errors in your stylesheets with stylelint, a modern CSS linter. It supports the latest CSS syntax, as well as CSS-like syntaxes, such as SCSS." }
+              { "Enforce consistent conventions and avoid errors in your stylesheets with " }
+              <a
+                className={ styles.tool }
+                href="http://stylelint.io/"
+              >
+                { "stylelint" }
+              </a>
+              { ", a modern CSS linter. It supports the latest CSS syntax, as well as CSS-like syntaxes, such as SCSS." }
             </p>
           </div>
           <div className={ styles.example }>
