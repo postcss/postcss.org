@@ -9,7 +9,9 @@
     "test": "npm run static",
     "posttest": "echo 'postcss.org' > dist/CNAME && touch dist/.nojekyll",
     "styleguide-server": "styleguidist server",
-    "styleguide-build": "styleguidist build"
+    "styleguide-build": "styleguidist build",
+    "predeploy": "npm run build",
+    "deploy": "./scripts/deploy.sh"
   },
   "babel": {
     "stage": 0

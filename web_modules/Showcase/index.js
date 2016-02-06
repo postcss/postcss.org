@@ -4,7 +4,7 @@ import styles from "./index.css"
 import google from "./google.svg"
 import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
-import webpack from "./webpack.svg"
+import jetbrains from "./jetbrains.svg"
 
 export default function Showcase() {
 
@@ -29,9 +29,9 @@ export default function Showcase() {
         </li>
         <li className={ styles.item }>
           <img
-            alt="Webpack"
+            alt="Jetbrains"
             className={ styles.logo }
-            src={ webpack }
+            src={ jetbrains }
           />
         </li>
         <li className={ styles.item }>
