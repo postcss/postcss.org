@@ -11,6 +11,11 @@
   text-align: center;
 }
 
+:global(.fira-sans-loaded) .title {
+  font-family: 'Fira Sans', sans-serif;
+  font-weight: 300;
+}
+
 .items {
   margin: 1.5rem auto 0;
 }
