@@ -8,12 +8,13 @@ export default function Hero() {
 
   return (
     <header className={ styles.root } role="banner">
+      <img
+        alt="PostCSS"
+        className={ styles.logo }
+        src={ logo }
+      /> 
       <h1 className={ styles.title }>
-        <img
-          alt="PostCSS"
-          className={ styles.logo }
-          src={ logo }
-        />
+        { "PostCSS" }
       </h1>
       <p className={ styles.tagline }>
         { "A tool for transforming CSS with\u00A0JavaScript" }
