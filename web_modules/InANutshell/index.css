@@ -38,9 +38,11 @@
 }
 
 .figure {
+  position: relative;
   display: flex;
   flex-direction: column-reverse;
   margin-right: 2rem;
+  overflow: hidden;
 }
 
 .figureOutput {
@@ -51,13 +53,18 @@
   transform: translateY(-1rem);
 }
 
-.code {
+.pre {
   background: white;
   border: 1px solid gray(200);
+  border-radius: 4px;
   color: color(black a(84%));
-  font: 13px/20px monospace;
+  /*font: 13px/20px monospace;*/
   overflow: auto;
-  padding: 0.5rem 0.25rem;
+  padding: 0.5rem;
+}
+
+.code {
+  font: 13px/20px Monaco, Menlo, "Fira Mono", monospace;
 }
 
 .highlight {
@@ -69,9 +76,15 @@
 }
 
 .caption {
+  position: absolute;
+  top: 1px;
+  right: 1px;
+  border-top-right-radius: 3px;
+  background-color: #f4f2ed;
   color: color(#48463e a(54%));
   font-size: 11px;
   line-height: 16px;
+  padding: 0.125rem .25rem;
 }
 
 .captionOutput {

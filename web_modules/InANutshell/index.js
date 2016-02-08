@@ -30,8 +30,8 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   { ":fullscreen {" }<br/>
                   { "}" }
                 </code>
@@ -41,8 +41,8 @@ export default function InANutShell() {
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   { ":" }
                   <span className={ styles.highlight }>
                     { "-webkit-" }
@@ -85,8 +85,8 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   { ":root { " }<br/>
                   { "\u00A0\u00A0--red: #d33;" }<br/>
                   { "}" }<br/>
@@ -102,8 +102,8 @@ export default function InANutShell() {
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   <span className={ styles.highlight }>
                     { "a:hover" }
                   </span>
@@ -148,8 +148,8 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   { ".name {" }<br/>
                   { "\u00A0\u00A0color: gray;" }<br/>
                   { "}" }
@@ -160,8 +160,8 @@ export default function InANutShell() {
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   <span className={ styles.highlight }>
                     { ".Logo" }
                   </span>
@@ -200,8 +200,8 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   { "a { " }<br/>
                   { "\u00A0\u00A0color: #d3;" }<br/>
                   { "}" }<br/>
@@ -212,8 +212,8 @@ export default function InANutShell() {
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <code className={ styles.code }>
                   <u>{ "app.css" }</u><br/>
                   { "2:10 Invalid hex color" }
                 </code>
