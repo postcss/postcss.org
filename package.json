@@ -3,6 +3,8 @@
   "homepage": "http://postcss.org/",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . && stylelint web_modules/**/*.css",
+    "eslint-staged": "eslint-staged",
+    "stylelint-staged": "stylelint-staged",
     "start": "babel-node scripts/build --server --dev --open",
     "static": "babel-node scripts/build --static --production",
     "pretest": "npm run lint",
@@ -25,6 +27,7 @@
   "stylelint": {
     "extends": "stylelint-config-standard"
   },
+  "pre-commit": ["eslint-staged", "stylelint-staged"],
   "devDependencies": {
     "babel": "^5.8.34",
     "babel-core": "^5.8.34",
@@ -42,10 +45,12 @@
     "history": "^1.17.0",
     "invariant": "^2.2.0",
     "json-loader": "^0.5.4",
+    "lint-staged": "^0.1.1",
     "markdown-it": "^5.0.3",
     "markdown-it-toc-and-anchor": "^1.0.1",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.7.0",
+    "pre-commit": "^1.1.2",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
     "react-helmet": "^2.2.0",
