@@ -9,8 +9,8 @@ import Footer from "Footer"
 import styles from "./index.css"
 
 if (typeof window !== "undefined") {
-  const FontFaceObserver = require("FontFaceObserver")
-  
+  const FontFaceObserver = require("fontfaceobserver")
+
   const MerriweatherObserver = new FontFaceObserver("Merriweather", {})
   const FiraSansObserver = new FontFaceObserver("Fira Sans", {})
 
