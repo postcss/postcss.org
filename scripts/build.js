@@ -88,12 +88,21 @@ const webpackConfig = {
       },
       {
         test: /\.css$/,
+        exclude: /node_modules/,
         loader: ExtractTextPlugin.extract(
           "style-loader",
           "css-loader" +
             "?localIdentName=[path][name]--[local]--[hash:base64:5]" +
             "&modules"+
           "!postcss-loader"
+        ),
+      },
+      {
+        test: /\.css$/,
+        include: /node_modules/,
+        loader: ExtractTextPlugin.extract(
+          "style-loader",
+          "css-loader"
         ),
       },
       {

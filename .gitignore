@@ -1,5 +1,6 @@
 # OS X crap
 .DS_Store
+.idea
 
 # node cache/logs
 npm-debug.log
