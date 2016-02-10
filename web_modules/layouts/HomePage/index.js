@@ -3,11 +3,11 @@ import { PropTypes } from "react"
 import Helmet from "react-helmet"
 import invariant from "invariant"
 
-import Hero from "Hero"
-import InANutshell from "InANutshell"
-import WayFinder from "WayFinder"
-import Showcase from "Showcase"
-import ByTheCommunity from "ByTheCommunity"
+import Hero from "../../Hero"
+import InANutshell from "../../InANutshell"
+import WayFinder from "../../WayFinder"
+import Showcase from "../../Showcase"
+import ByTheCommunity from "../../ByTheCommunity"
 
 import styles from "./index.css"
 
