@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
-import FontFaceObserver from "fontfaceobserver"
 
 import Navigation from "Navigation"
 import Social from "Social"
@@ -9,20 +8,24 @@ import Footer from "Footer"
 
 import styles from "./index.css"
 
-const MerriweatherObserver = new FontFaceObserver("Merriweather", {})
-const FiraSansObserver = new FontFaceObserver("Fira Sans", {})
+if (typeof window !== "undefined") {
+  const FontFaceObserver = require("FontFaceObserver")
+  
+  const MerriweatherObserver = new FontFaceObserver("Merriweather", {})
+  const FiraSansObserver = new FontFaceObserver("Fira Sans", {})
 
-MerriweatherObserver.check().then(() => {
-  document.body.classList.add("merriweather-loaded")
-}, () => {
-  document.body.classList.remove("merriweather-loaded")
-})
+  MerriweatherObserver.check().then(() => {
+    document.body.classList.add("merriweather-loaded")
+  }, () => {
+    document.body.classList.remove("merriweather-loaded")
+  })
 
-FiraSansObserver.check().then(() => {
-  document.body.classList.add("fira-sans-loaded")
-}, () => {
-  document.body.classList.remove("fira-sans-loaded")
-})
+  FiraSansObserver.check().then(() => {
+    document.body.classList.add("fira-sans-loaded")
+  }, () => {
+    document.body.classList.remove("fira-sans-loaded")
+  })
+}
 
 export default class Wrapper extends Component {
 
