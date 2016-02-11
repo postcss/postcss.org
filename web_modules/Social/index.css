@@ -46,7 +46,7 @@
 
 @media (width > 580px) {
   .root {
-    background-color: color(black a(30%));
+    background-color: color(black a(40%));
     margin-top: 0;
     position: absolute;
     right: 0;
