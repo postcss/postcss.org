@@ -16,10 +16,15 @@
   line-height: 32px;
 }
 
+:global(.fira-sans-loaded) .title {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+}
+
 .body {
   color: color(#48463e a(84%));
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1.8;
   margin-top: 1rem;
 }
 

@@ -46,6 +46,7 @@
     "eslint-plugin-react": "^3.14.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.5",
+    "fontfaceobserver": "^1.6.3",
     "highlight.js": "^8.9.1",
     "history": "^1.17.0",
     "invariant": "^2.2.0",

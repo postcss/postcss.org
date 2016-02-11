@@ -1,5 +1,10 @@
 .root {
+  font-family: sans-serif;
   background-color: color(black a(68%));
+}
+
+:global(.fira-sans-loaded) .root {
+  font-family: "Fira Sans", sans-serif;
 }
 
 .items {

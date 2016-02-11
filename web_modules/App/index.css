@@ -26,6 +26,10 @@
   text-size-adjust: 100%; /* 4 */
 }
 
+:global(body.merriweather-loaded) {
+  font-family: "Merriweather", serif;
+}
+
 :global(*),
 :global(*::before),
 :global(*::after) {
