@@ -25,7 +25,8 @@ export default class Footer extends Component {
           <div className={ styles.logo }>
             <a
               className={ styles.logoLink }
-              href="https://evilmartians.com/"
+              href={ "https://evilmartians.com/" +
+                     "?utm_source=postcss&utm_campaign=homepage" }
             >
               <img
                 alt="Evil Martians"
