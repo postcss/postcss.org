@@ -8,6 +8,8 @@ import Footer from "Footer"
 
 import styles from "./index.css"
 
+import ogImage from "./opengraph@2x.jpg"
+
 export default class Wrapper extends Component {
 
   static propTypes = {
@@ -28,6 +30,7 @@ export default class Wrapper extends Component {
           <Helmet
             meta={ [
               { property: "og:site_name", content: pkg.name },
+              { property: "og:image", content: ogImage },
               { name: "twitter:site", content: `@${ pkg.twitter }` },
             ] }
           />
