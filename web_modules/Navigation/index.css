@@ -9,6 +9,7 @@
 
 :global(.fira-sans-loaded) .root {
   font-family: "Fira Sans", sans-serif;
+  font-weight: 500;
 }
 
 .items {

@@ -1,7 +1,9 @@
 {
   "private": true,
+  "name": "PostCSS",
   "homepage": "http://postcss.org/",
   "googleAnalyticsUA": "UA-73693753-1",
+  "twitter": "PostCSS",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . && stylelint web_modules/**/*.css",
     "eslint-staged": "eslint-staged",
