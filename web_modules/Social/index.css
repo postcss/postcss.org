@@ -1,5 +1,10 @@
 .root {
+  font-family: sans-serif;
   background-color: color(black a(68%));
+}
+
+:global(.fira-sans-loaded) .root {
+  font-family: "Fira Sans", sans-serif;
 }
 
 .items {
@@ -46,7 +51,7 @@
 
 @media (width > 580px) {
   .root {
-    background-color: color(black a(30%));
+    background-color: color(black a(40%));
     margin-top: 0;
     position: absolute;
     right: 0;

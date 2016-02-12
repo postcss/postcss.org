@@ -5,6 +5,7 @@
     "lint": "eslint --ignore-path .gitignore . && stylelint web_modules/**/*.css",
     "eslint-staged": "eslint-staged",
     "stylelint-staged": "stylelint-staged",
+    "svgo-staged": "./scripts/svgo.sh",
     "start": "babel-node scripts/build --server --dev --open",
     "static": "babel-node scripts/build --static --production",
     "pretest": "npm run lint",
@@ -27,7 +28,11 @@
   "stylelint": {
     "extends": "stylelint-config-standard"
   },
-  "pre-commit": ["eslint-staged", "stylelint-staged"],
+  "pre-commit": [
+    "eslint-staged",
+    "stylelint-staged",
+    "svgo-staged"
+  ],
   "devDependencies": {
     "babel": "^5.8.34",
     "babel-core": "^5.8.34",
@@ -41,6 +46,7 @@
     "eslint-plugin-react": "^3.14.0",
     "extract-text-webpack-plugin": "^0.8.2",
     "file-loader": "^0.8.5",
+    "fontfaceobserver": "^1.6.3",
     "highlight.js": "^8.9.1",
     "history": "^1.17.0",
     "invariant": "^2.2.0",
@@ -63,11 +69,17 @@
     "redux": "^2.0.0",
     "redux-devtools": "^2.1.5",
     "redux-thunk": "^0.1.0",
+    "staged-files": "^0.1.2",
     "statinamic": "^0.5.1",
     "style-loader": "^0.12.4",
     "stylelint": "^3.2.2",
     "stylelint-config-standard": "^0.2.0",
+    "svgo": "^0.6.1",
     "webpack": "^1.12.9",
     "whatwg-fetch": "^0.9.0"
+  },
+  "dependencies": {
+    "highlight.js": "^8.9.1",
+    "react-highlight": "^0.6.1"
   }
 }

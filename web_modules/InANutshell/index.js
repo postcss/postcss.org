@@ -1,4 +1,6 @@
 import React from "react"
+import Highlight from "react-highlight"
+import "highlight.js/styles/tomorrow.css"
 
 import styles from "./index.css"
 import autoprefixer from "./autoprefixer.svg"
@@ -37,19 +39,19 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   { ":fullscreen {" }<br/>
                   { "}" }
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.caption }>
                 { "CSS input" }
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   { ":" }
                   <span className={ styles.highlight }>
                     { "-webkit-" }
@@ -64,7 +66,7 @@ export default function InANutShell() {
                   { "}" }<br/>
                   { ":full-screen {" }<br/>
                   { "}" }<br/>
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "CSS output" }
@@ -99,8 +101,8 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   { ":root { " }<br/>
                   { "\u00A0\u00A0--red: #d33;" }<br/>
                   { "}" }<br/>
@@ -109,15 +111,15 @@ export default function InANutShell() {
                   { "\u00A0\u00A0\u00A0\u00A0color: color(var(--red) a(54%));" }<br/>
                   { "\u00A0\u00A0}" }<br/>
                   { "}" }
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.caption }>
                 { "CSS input" }
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   <span className={ styles.highlight }>
                     { "a:hover" }
                   </span>
@@ -134,7 +136,7 @@ export default function InANutShell() {
                   </span>
                   { ";" }<br/>
                   { "}" }<br/>
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "CSS output" }
@@ -168,20 +170,20 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   { ".name {" }<br/>
                   { "\u00A0\u00A0color: gray;" }<br/>
                   { "}" }
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.caption }>
                 { "CSS input" }
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   <span className={ styles.highlight }>
                     { ".Logo" }
                   </span>
@@ -192,7 +194,7 @@ export default function InANutShell() {
                   { " {" }<br/>
                   { "\u00A0\u00A0color: gray;" }<br/>
                   { "}" }
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "CSS output" }
@@ -227,23 +229,23 @@ export default function InANutShell() {
           </div>
           <div className={ styles.example }>
             <figure className={ styles.figure }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
                   { "a { " }<br/>
                   { "\u00A0\u00A0color: #d3;" }<br/>
                   { "}" }<br/>
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.caption }>
                 { "CSS input" }
               </figcaption>
             </figure>
             <figure className={ styles.figureOutput }>
-              <pre className={ styles.code }>
-                <code>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " bash" }>
                   <u>{ "app.css" }</u><br/>
                   { "2:10 Invalid hex color" }
-                </code>
+                </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "Console output" }

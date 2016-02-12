@@ -13,6 +13,7 @@
 .item {
   background: #475871;
   margin-bottom: 1px;
+  font-family: sans-serif;
   width: 15rem;
 
   &:first-child {
@@ -24,11 +25,14 @@
   }
 }
 
+:global(.fira-sans-loaded) .item {
+  font-family: "Fira Sans", sans-serif;
+}
+
 .itemLink {
   color: #faf8f5;
   display: block;
   font-size: 16px;
-  font-weight: bold;
   line-height: 20px;
   padding: 1.25rem 2rem;
   text-align: center;

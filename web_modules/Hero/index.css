@@ -1,10 +1,10 @@
 .root {
   align-items: center;
-  background: #2b2723 url("./alchemy.jpg") no-repeat center bottom;
+  background: #2b2723 url("./alchemy.jpg") no-repeat 50% 75%;
   background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 27.5rem;
+  height: 24rem;
 }
 
 .logo {
@@ -13,14 +13,24 @@
 
 .title {
   color: #fff;
+  font-family: sans-serif;
   font-size: 36px;
+  font-weight: 500;
 }
 
 .tagline {
-  color: #fff;
+  color: color(#fff a(70%));
+  font-family: sans-serif;
   font-size: 32px;
+  font-weight: 300;
   line-height: 28px;
   margin-top: 1rem;
   padding: 0 1rem;
   text-align: center;
 }
+
+:global(.fira-sans-loaded) .title,
+:global(.fira-sans-loaded) .tagline {
+  font-family: "Fira Sans", sans-serif;
+}
+

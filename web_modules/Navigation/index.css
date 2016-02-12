@@ -4,6 +4,11 @@
   position: absolute;
   right: 0;
   top: 0;
+  font-family: sans-serif;
+}
+
+:global(.fira-sans-loaded) .root {
+  font-family: "Fira Sans", sans-serif;
 }
 
 .items {
