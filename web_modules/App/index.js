@@ -8,6 +8,8 @@ import Footer from "Footer"
 
 import styles from "./index.css"
 
+import ogImage from "./opengraph@2x.jpg"
+
 if (typeof window !== "undefined") {
   const FontFaceObserver = require("fontfaceobserver")
 
@@ -59,6 +61,7 @@ export default class Wrapper extends Component {
 
             meta={ [
               { property: "og:site_name", content: pkg.name },
+              { property: "og:image", content: ogImage },
               { name: "twitter:site", content: `@${ pkg.twitter }` },
             ] }
           />
