@@ -1,6 +1,7 @@
 {
   "private": true,
   "homepage": "http://postcss.org/",
+  "googleAnalyticsUA": "UA-73693753-1",
   "scripts": {
     "lint": "eslint --ignore-path .gitignore . && stylelint web_modules/**/*.css",
     "eslint-staged": "eslint-staged",
@@ -59,6 +60,7 @@
     "pre-commit": "^1.1.2",
     "react": "^0.14.6",
     "react-dom": "^0.14.6",
+    "react-google-analytics": "^0.2.0",
     "react-helmet": "^2.2.0",
     "react-redux": "^2.1.2",
     "react-router": "^1.0.3",
