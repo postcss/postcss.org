@@ -30,9 +30,8 @@
 
 .callToAction {
   color: #3f526b;
-  font-size: 13px;
-  font-style: italic;
-  line-height: 20px;
+  font-size: 15px;
+  font-style: 300;
   margin: 2rem auto 0;
   max-width: 34rem;
   text-align: center;
