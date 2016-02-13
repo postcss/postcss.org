@@ -6,15 +6,14 @@ require.context("../content", true, /\.md$/)
 import "whatwg-fetch"
 import statinamicClient from "statinamic/lib/client"
 
-import pkg from "../package.json"
-import { RouteHandler, store } from "utils"
-
-const routes = RouteHandler
+import * as layouts from "layouts"
+import metadata from "app/metadata"
+import routes from "app/routes"
+import store from "app/store"
 
 statinamicClient({
-  metadata: {
-    pkg,
-  },
+  layouts,
+  metadata,
   routes,
   store,
 })
