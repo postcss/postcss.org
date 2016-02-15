@@ -8,7 +8,7 @@ import Footer from "Footer"
 
 import styles from "./index.css"
 
-import ogImage from "./opengraph@2x.jpg"
+import ogImage from "./opengraph.jpg"
 
 if (typeof window !== "undefined") {
   const FontFaceObserver = require("fontfaceobserver")
