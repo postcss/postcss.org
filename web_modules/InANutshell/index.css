@@ -11,7 +11,7 @@
 
 .title {
   color: #3f526b;
-  font-size: 28px;
+  font-size: 25px;
   font-weight: lighter;
   line-height: 32px;
 }
@@ -22,9 +22,9 @@
 }
 
 .body {
-  color: color(#48463e a(84%));
-  font-size: 14px;
-  line-height: 1.8;
+  color: #636870;
+  font-size: 15px;
+  line-height: 23px;
   margin-top: 1rem;
 }
 
@@ -73,11 +73,12 @@
   border-radius: 4px;
   color: color(black a(84%));
   overflow: auto;
-  padding: 0.5rem;
+  padding: 0.3rem;
 }
 
 .code {
   font: 13px/20px Monaco, Menlo, "Fira Mono", monospace;
+  overflow-x: hidden;
 }
 
 .highlight {

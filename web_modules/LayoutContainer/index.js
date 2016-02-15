@@ -2,9 +2,10 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 
-import Navigation from "Navigation"
-import Social from "Social"
-import Footer from "Footer"
+import Navigation from "../Navigation"
+import Social from "../Social"
+import Footer from "../Footer"
+import GoogleAnalyticsTracker from "../GoogleAnalyticsTracker"
 
 import styles from "./index.css"
 
@@ -29,10 +30,11 @@ if (typeof window !== "undefined") {
   })
 }
 
-export default class Wrapper extends Component {
+export default class LayoutContainer extends Component {
 
   static propTypes = {
     children: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
+    params: PropTypes.object,
   };
 
   static contextTypes = {
@@ -45,7 +47,8 @@ export default class Wrapper extends Component {
     } = this.context.metadata
 
     return (
-      <div className={ styles.root }>
+      <GoogleAnalyticsTracker params={ this.props.params }>
+        <div className={ styles.root }>
           <Helmet
             link={ [
               { "rel": "stylesheet",
@@ -71,7 +74,8 @@ export default class Wrapper extends Component {
           <Navigation />
           <Social />
           <Footer />
-      </div>
+        </div>
+      </GoogleAnalyticsTracker>
     )
   }
 }

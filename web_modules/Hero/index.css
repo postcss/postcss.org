@@ -19,7 +19,7 @@
 }
 
 .tagline {
-  color: color(#fff a(70%));
+  color: #fff;
   font-family: sans-serif;
   font-size: 32px;
   font-weight: 300;
@@ -33,4 +33,3 @@
 :global(.fira-sans-loaded) .tagline {
   font-family: "Fira Sans", sans-serif;
 }
-
