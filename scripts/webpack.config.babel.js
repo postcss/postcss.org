@@ -86,6 +86,9 @@ export default {
   ),
 
   plugins: [
+    new webpack.ProvidePlugin({
+      "fetch": "imports?this=>global!exports?global.fetch!whatwg-fetch",
+    }),
     new ExtractTextPlugin("[name].[hash].css", { disable: config.dev }),
     new webpack.DefinePlugin({ "process.env": {
       NODE_ENV: JSON.stringify(
