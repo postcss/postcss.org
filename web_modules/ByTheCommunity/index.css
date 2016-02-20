@@ -1,10 +1,11 @@
 .root {
+  position: relative;
   align-items: center;
-  background: #f3f1ec url("./avatars.jpg") no-repeat center center;
+  background: #faf8f5;
   background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 20rem;
+  height: 340px;
   justify-content: center;
   padding: 0 1rem;
 }
@@ -37,5 +38,38 @@
 
   &:hover {
     text-decoration: none;
+  }
+}
+
+.banner {
+  text-shadow: 0 0 3px #fff;
+  z-index: 1;
+}
+
+.contributors {
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 600px);
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+  z-index: 0;
+}
+
+.avatar {
+  display: block;
+  margin: 6px;
+  padding: 0;
+  line-height: 60px;
+  width: 48px;
+  height: 48px;
+  overflow: hidden;
+  opacity: 0.1;
+  border-radius: 100%;
+  transition: opacity 0.5s;
+
+  &:hover {
+    transition: opacity 0;
+    opacity: 1;
   }
 }
