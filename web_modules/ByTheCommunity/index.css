@@ -13,9 +13,9 @@
 
 .title {
   color: #dd3a0a;
-  font-size: 26px;
+  font-size: 1.625rem;
   font-weight: normal;
-  line-height: 32px;
+  line-height: 2;
   text-align: center;
 }
 
@@ -26,8 +26,8 @@
 
 .body {
   color: #3f526b;
-  font-size: 15px;
-  line-height: 28px;
+  font-size: 0.9375rem;
+  line-height: 1.875;
   margin: 2rem auto 0;
   max-width: 34rem;
   text-align: center;

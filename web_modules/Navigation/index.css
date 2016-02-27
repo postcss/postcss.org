@@ -28,8 +28,8 @@
 
 .itemLink {
   color: #eee7df;
-  font-size: 14px;
-  line-height: 20px;
+  font-size: 0.875rem;
+  line-height: 1.425;
   text-decoration: none;
 
   &:hover {

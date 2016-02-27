@@ -5,9 +5,9 @@
 
 .title {
   color: #dd3a0a;
-  font-size: 26px;
+  font-size: 1.625rem;
   font-weight: normal;
-  line-height: 32px;
+  line-height: 1.25;
   text-align: center;
 }
 
@@ -30,7 +30,7 @@
 
 .callToAction {
   color: #3f526b;
-  font-size: 15px;
+  font-size: 0.9375rem;
   font-style: 300;
   margin: 2rem auto 0;
   max-width: 34rem;
