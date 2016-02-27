@@ -77,7 +77,9 @@
 }
 
 .code {
-  font: 13px/20px Monaco, Menlo, "Fira Mono", monospace;
+  font-family: Monaco, Menlo, "Fira Mono", monospace;
+  font-size: 0.675rem;
+  line-height: 1.6;
   overflow-x: hidden;
 }
 
