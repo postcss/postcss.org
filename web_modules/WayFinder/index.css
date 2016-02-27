@@ -32,8 +32,8 @@
 .itemLink {
   color: #faf8f5;
   display: block;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1rem;
+  line-height: 1.25;
   padding: 1.25rem 2rem;
   text-align: center;
   text-decoration: none;

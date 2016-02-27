@@ -11,9 +11,9 @@
 
 .title {
   color: #3f526b;
-  font-size: 25px;
+  font-size: 1.5625rem;
   font-weight: lighter;
-  line-height: 32px;
+  line-height: 1.28;
 }
 
 :global(.fira-sans-loaded) .title {
@@ -23,8 +23,8 @@
 
 .body {
   color: #636870;
-  font-size: 15px;
-  line-height: 23px;
+  font-size: 0.9375rem;
+  line-height: 1.55;
   margin-top: 1rem;
 }
 
@@ -96,8 +96,8 @@
   border-top-right-radius: 3px;
   background-color: #f4f2ed;
   color: color(#48463e a(54%));
-  font-size: 11px;
-  line-height: 16px;
+  font-size: 0.6875rem;
+  line-height: 1.5;
   padding: 0.125rem 0.25rem;
 }
 

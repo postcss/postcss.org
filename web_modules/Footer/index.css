@@ -9,8 +9,8 @@
 
 .info {
   color: color(#48463e a(46%));
-  font-size: 13px;
-  line-height: 28px;
+  font-size: 0.8125rem;
+  line-height: 2.15;
   margin-bottom: 0.25rem;
 }
 
