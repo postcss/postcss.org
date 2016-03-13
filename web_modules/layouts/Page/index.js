@@ -36,12 +36,13 @@ export default class Page extends Component {
       { property: "og:title", content: head.title },
       { property: "og:type", content: "article" },
       { property: "og:url", content: this.props.__url },
-      // { property: "og:description", content: pageDescription(body) },
+      { property: "og:description", content: head.description },
+
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: head.title },
       { name: "twitter:creator", content: `@${ pkg.twitter }` },
-      // { name: "twitter:description", content: pageDescription(body) },
-    ] 
+      { name: "description", content: head.description },
+    ]
 
     return (
       <div>
