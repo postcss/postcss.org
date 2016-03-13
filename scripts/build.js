@@ -1,9 +1,11 @@
 import builder from "statinamic/lib/builder"
-
-import * as layouts from "../web_modules/layouts"
-import metadata from "../web_modules/app/metadata"
-import routes from "../web_modules/app/routes"
 import store from "../web_modules/app/store"
+
+const exports = {
+  layouts: require.resolve("../web_modules/layouts"),
+  metadata: require.resolve("../web_modules/app/metadata"),
+  routes: require.resolve("../web_modules/app/routes"),
+}
 
 import config from "./config.js"
 import webpackConfig from "./webpack.config.babel.js"
@@ -14,8 +16,6 @@ builder({
   webpackConfig,
   clientWebpackConfig,
 
-  layouts,
-  metadata,
-  routes,
+  exports,
   store,
 })
