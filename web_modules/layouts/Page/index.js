@@ -41,7 +41,7 @@ export default class Page extends Component {
       { name: "twitter:title", content: head.title },
       { name: "twitter:creator", content: `@${ pkg.twitter }` },
       // { name: "twitter:description", content: pageDescription(body) },
-    ]
+    ] 
 
     return (
       <div>
