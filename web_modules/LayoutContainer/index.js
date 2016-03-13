@@ -10,6 +10,8 @@ import GoogleAnalyticsTracker from "../GoogleAnalyticsTracker"
 import styles from "./index.css"
 
 import ogImage from "./opengraph.jpg"
+import favicon from "./favicon.ico" 
+import favicon192x192 from "./favicon-192x192.png"
 
 if (typeof window !== "undefined") {
   const FontFaceObserver = require("fontfaceobserver")
@@ -50,6 +52,7 @@ export default class LayoutContainer extends Component {
       <GoogleAnalyticsTracker params={ this.props.params }>
         <div className={ styles.root }>
           <Helmet
+
             link={ [
               { "rel": "stylesheet",
                 "href":
@@ -60,6 +63,19 @@ export default class LayoutContainer extends Component {
                 "href":
                 "https://fonts.googleapis.com/css?family=Fira+Sans:500,300,700",
               },
+              {
+                "rel": "shortcut icon",
+                "type": "image/png",
+                "href": favicon,
+              },
+
+              {
+                "rel": "icon",
+                "type": "image/png",
+                "href": favicon192x192,
+                "sizes": "192x192",
+              },
+
             ] }
 
             meta={ [
