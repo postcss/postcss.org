@@ -22,7 +22,7 @@ export default class PageError extends Component {
     } = this.props
 
     return (
-      <main className={ styles.root }>
+      <main>
 
         <Helmet
           title={ `${error} - ${errorText}` }
