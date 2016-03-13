@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import Helmet from "react-helmet"
+import styles from "./index.css"
 
 export default class PageError extends Component {
   static propTypes = {
@@ -16,10 +17,10 @@ export default class PageError extends Component {
     const {
       error,
       errorText,
-    } = this.props
+    } = this.props 
 
     return (
-      <div>
+      <div className={ styles.root }>
         <Helmet
           title={ `${error} - ${errorText}` }
         />
@@ -27,13 +28,13 @@ export default class PageError extends Component {
           <p>
             <strong>{ error }</strong>
             { ' ' }
-            { errorText } 
+            { errorText }
           </p>
           {
             error === 404 &&
               <div>
                 <p>
-                  { '404 Not found' }
+                  { 'The page you requested was not found.' }
                 </p>
               </div>
           }
