@@ -1,0 +1,81 @@
+.root {
+  /* placeholder */
+}
+
+.inner {
+  margin: 0 auto;
+  max-width: 50rem;
+}
+
+:global(.fira-sans-loaded) .title {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+}
+
+.title {
+  color: #dd3a0a;
+  font-size: 2.5rem;
+  font-weight: normal;
+  line-height: 1.25;
+  margin: 2rem 0;
+}
+
+:global(.fira-sans-loaded) .content h1,
+:global(.fira-sans-loaded) .content h2,
+:global(.fira-sans-loaded) .content h3 {
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 300;
+}
+
+.content h1 {
+  color: #3f526b;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1.25rem 0;
+}
+
+.content h2 {
+  color: #3f526b;
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1rem 0;
+}
+
+.content h3 {
+  color: #3f526b;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.25;
+  margin: 1rem 0;
+}
+
+.content p {
+  margin: 0 0 1rem 0;
+}
+
+.content a {
+  color: inherit;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.content pre {
+  background: #e7e5d9;
+  padding: 1.5rem 1rem;
+  border: 1px solid gray(200);
+  border-radius: 4px;
+  color: color(black a(84%));
+  overflow: auto;
+}
+
+.content code {
+  font-family: Monaco, Menlo, "Fira Mono", monospace;
+  font-size: 0.675rem;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
