@@ -10,9 +10,8 @@ import GoogleAnalyticsTracker from "../GoogleAnalyticsTracker"
 import styles from "./index.css"
 
 import ogImage from "./opengraph.jpg"
-import favicon16x16 from "./favicon-16x16.png"
-import favicon32x32 from "./favicon-32x32.png"
-import favicon96x96 from "./favicon-96x96.png"
+import favicon from "./favicon.ico" 
+import favicon192x192 from "./favicon-192x192.png"
 
 if (typeof window !== "undefined") {
   const FontFaceObserver = require("fontfaceobserver")
@@ -65,25 +64,18 @@ export default class LayoutContainer extends Component {
                 "https://fonts.googleapis.com/css?family=Fira+Sans:500,300,700",
               },
               {
-                "rel": "icon",
+                "rel": "shortcut icon",
                 "type": "image/png",
-                "href": favicon16x16,
-                "sizes": "16x16",
+                "href": favicon,
               },
 
               {
                 "rel": "icon",
                 "type": "image/png",
-                "href": favicon32x32,
-                "sizes": "32x32",
+                "href": favicon192x192,
+                "sizes": "192x192",
               },
 
-              {
-                "rel": "icon",
-                "type": "image/png",
-                "href": favicon96x96,
-                "sizes": "96x96",
-              },
             ] }
 
             meta={ [

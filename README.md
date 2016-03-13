@@ -5,9 +5,9 @@
 
 The official website for [PostCSS](https://github.com/postcss/postcss) built by the community for the community :heart:
 
-## Milestone 1.0
+## Milestone 1.1
 
-We are doing a very lightweight release with just a homepage and some hyperlinks - [**Milestone 1.0**](https://github.com/postcss/postcss.org/milestones/1.0). If you would like to report any bugs or similar before that, let us know.
+The goal for [**Milestone 1.1**](https://github.com/postcss/postcss.org/milestones/1.1) is to build documentation pages, styleguide and plugin search. If you would like to contribute read through our [contributing guidelines](https://github.com/postcss/postcss.org/blob/master/CONTRIBUTING.md).    
 
 ## Gitter
 
