@@ -28,9 +28,7 @@ export default class PageError extends Component {
           title={ `${error} - ${errorText}` }
         />
 
-        <div className={ styles.hero }>
-          <Hero />
-        </div>
+        <Hero />
 
         <div className={ styles.inner }>
           <h2>{ 'Whooops!' }</h2>
