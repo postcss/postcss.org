@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from "react"
 import Helmet from "react-helmet"
+import Hero from "../../Hero"
+
 import styles from "./index.css"
 
 export default class PageError extends Component {
@@ -17,28 +19,34 @@ export default class PageError extends Component {
     const {
       error,
       errorText,
-    } = this.props 
+    } = this.props
 
     return (
-      <div className={ styles.root }>
+      <main>
+
         <Helmet
           title={ `${error} - ${errorText}` }
         />
-        <h2>{ 'Whooops!' }</h2>
-          <p>
-            <strong>{ error }</strong>
-            { ' ' }
-            { errorText }
-          </p>
-          {
-            error === 404 &&
-              <div>
-                <p>
-                  { 'The page you requested was not found.' }
-                </p>
-              </div>
-          }
-      </div>
+
+        <Hero />
+
+        <div className={ styles.inner }>
+          <h2>{ 'Whooops!' }</h2>
+            <p>
+              <strong>{ error }</strong>
+              { ' ' }
+              { errorText }
+            </p>
+            {
+              error === 404 &&
+                <div>
+                  <p>
+                    { 'The page you requested was not found.' }
+                  </p>
+                </div>
+            }
+        </div>
+      </main>
     )
   }
 }
