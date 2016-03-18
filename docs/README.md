@@ -10,4 +10,4 @@
 
 * [style-guide](../style-guide/README.md) is built on keeping the designers on track with colors, typography and components for the website.
 
-* If you would like to know more about the PostCSS Brand or start contributing for it, there is another [repository]((https://github.com/postcss/brand)) for that.
+* If you would like to know more about the PostCSS Brand or start contributing for it, there is another [repository](https://github.com/postcss/brand) for that.
