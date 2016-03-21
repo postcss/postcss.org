@@ -8,13 +8,9 @@ const exports = {
 }
 
 import config from "./config.js"
-import webpackConfig from "./webpack.config.babel.js"
-import clientWebpackConfig from "./webpack.config.client.js"
 
 builder({
   config,
-  webpackConfig,
-  clientWebpackConfig,
 
   exports,
   store,
