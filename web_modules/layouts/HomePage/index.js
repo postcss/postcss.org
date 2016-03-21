@@ -43,7 +43,9 @@ export default class HomePage extends Component {
 
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: head.title },
-      { name: "twitter:creator", content: `@${ pkg.twitter }` },
+      { name: "twitter:site", content: `@${ pkg.twitter }` },
+      { name: "twitter:description", content: head.description },
+
       { name: "description", content: head.description },
     ]
 
