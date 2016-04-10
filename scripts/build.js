@@ -1,5 +1,6 @@
 import builder from "statinamic/lib/builder"
-import store from "../web_modules/app/store"
+
+import config from "./config.js"
 
 const exports = {
   layouts: require.resolve("../web_modules/layouts"),
@@ -7,7 +8,7 @@ const exports = {
   routes: require.resolve("../web_modules/app/routes"),
 }
 
-import config from "./config.js"
+import store from "../web_modules/app/store"
 
 builder({
   config,
