@@ -159,13 +159,13 @@ export default function InANutShell() {
               </h2>
             </header>
             <p className={ styles.body }>
-             <a
-               className={ styles.tool }
-               href="https://github.com/css-modules/css-modules"
-             >
-               { "CSS Modules" }
-             </a>
-             { " means you never need to worry about your names being too generic, just use whatever makes the most sense." }
+              <a
+                className={ styles.tool }
+                href="https://github.com/css-modules/css-modules"
+              >
+                { "CSS Modules" }
+              </a>
+              { " means you never need to worry about your names being too generic, just use whatever makes the most sense." }
             </p>
           </div>
           <div className={ styles.example }>
