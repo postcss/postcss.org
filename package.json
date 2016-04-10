@@ -85,7 +85,7 @@
     "stylelint": "^4.5.1",
     "stylelint-config-standard": "^2.0.0",
     "svgo": "^0.6.1",
-    "webpack": "^1.12.9",
+    "webpack": "^1.12.9"
   },
   "dependencies": {
     "react-highlight": "^0.6.1",
