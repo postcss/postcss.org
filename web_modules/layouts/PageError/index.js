@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from "react"
+import { Link } from "react-router"
 import Helmet from "react-helmet"
 import Hero from "../../Hero"
 
@@ -15,6 +16,12 @@ export default class PageError extends Component {
     errorText: "Page Not Found",
   };
 
+  renderNotFoundError(error) {
+    if (error === 404) {
+      return <span>{ "The page you requested was not found." }</span>
+    }
+  }
+
   render() {
     const {
       error,
@@ -30,22 +37,31 @@ export default class PageError extends Component {
 
         <Hero />
 
-        <div className={ styles.inner }>
-          <h2>{ 'Whooops!' }</h2>
-            <p>
-              <strong>{ error }</strong>
-              { ' ' }
-              { errorText }
+        <section className={ styles.item }>
+          <div className={ styles.itemInner }>
+            <header>
+              <h2 className={ styles.title }>
+                { "Whooops!" }
+              </h2>
+            </header>
+            <p className={ styles.body }>
+              <strong className={ styles.error }>{ error }</strong>
+              { " " }
+              { errorText } <br/>
+              { this.renderNotFoundError(error) } <br />
             </p>
-            {
-              error === 404 &&
-                <div>
-                  <p>
-                    { 'The page you requested was not found.' }
-                  </p>
-                </div>
-            }
-        </div>
+            <p className={ styles.redirectMessage }>
+              { "Return to the " }
+              <Link
+                to="/"
+                className={ styles.link }
+              >
+                { "homepage" }
+              </Link>
+            </p>
+          </div>
+        </section>
+
       </main>
     )
   }

@@ -55,14 +55,14 @@
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-  margin-right: 2rem;
+  margin-right: 1.1rem;
   overflow: hidden;
 }
 
 .figureOutput {
   composes: figure;
   flex-direction: column;
-  margin-left: 2rem;
+  margin-left: 1.1rem;
   margin-right: 0;
   transform: translateY(-1rem);
 }
@@ -85,7 +85,6 @@
 
 .highlight {
   background: #fff478;
-  color: white;
   display: inline-block;
   margin: 0.125rem 0;
   padding: 0.125rem;
