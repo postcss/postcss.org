@@ -28,6 +28,10 @@
   margin: 1rem;
 }
 
+.logo {
+  max-width: 100%;
+}
+
 .callToAction {
   color: #3f526b;
   font-size: 0.9375rem;
@@ -55,7 +59,7 @@
   }
 
   .item {
-    flex-basis: calc(50% - 2rem);
+    flex-basis: calc(33% - 2rem);
   }
 }
 

@@ -5,6 +5,7 @@ import google from "./google.svg"
 import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
 import jetbrains from "./jetbrains.svg"
+import wikipedia from "./wikipedia.svg"
 
 export default function Showcase() {
 
@@ -18,6 +19,13 @@ export default function Showcase() {
             alt="Google"
             className={ styles.logo }
             src={ google }
+          />
+        </li>
+        <li className={ styles.item }>
+          <img
+            alt="Wikipedia"
+            className={ styles.logo }
+            src={ wikipedia }
           />
         </li>
         <li className={ styles.item }>
