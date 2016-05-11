@@ -1,6 +1,6 @@
-# Statinamic
+# Phenomic
 
-The best place to learn more about how Statinamic works is the [official documentation](http://moox.io/statinamic).
+The best place to learn more about how phenomic works is the [official documentation](http://moox.io/phenomic).
 
 If you want the some specific pointers, here is how you can get started with helping out on `postcss.org`.
 
@@ -20,7 +20,7 @@ layout: post
 ---
 ```
 
-This will tell Statinamic that the title of the page should be "About Us", and that it should render the contents of the file with the layout called `post`.
+This will tell phenomic that the title of the page should be "About Us", and that it should render the contents of the file with the layout called `post`.
 
 ## Code
 
