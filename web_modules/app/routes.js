@@ -6,7 +6,7 @@ import LayoutContainer from "../LayoutContainer"
 
 import Page from "../layouts/Page"
 import PageError from "../layouts/PageError"
-import HomePage from "../layouts/Homepage"
+import HomePage from "../layouts/HomePage"
 
 class PageContainer extends Component {
   render() {
