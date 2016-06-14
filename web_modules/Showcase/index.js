@@ -2,6 +2,7 @@ import React from "react"
 
 import styles from "./index.css"
 import google from "./google.svg"
+import github from "./github.svg"
 import facebook from "./facebook.svg"
 import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
@@ -24,6 +25,13 @@ export default function Showcase() {
         </li>
         <li className={ styles.item }>
           <img
+            alt="GitHub"
+            className={ styles.logo }
+            src={ github }
+          />
+        </li>
+        <li className={ styles.item }>
+          <img
             alt="Google"
             className={ styles.logo }
             src={ google }
@@ -31,16 +39,16 @@ export default function Showcase() {
         </li>
         <li className={ styles.item }>
           <img
-            alt="Wikipedia"
+            alt="Wordpress"
             className={ styles.logo }
-            src={ wikipedia }
+            src={ wordpress }
           />
         </li>
         <li className={ styles.item }>
           <img
-            alt="Wordpress"
+            alt="Wikipedia"
             className={ styles.logo }
-            src={ wordpress }
+            src={ wikipedia }
           />
         </li>
         <li className={ styles.item }>
