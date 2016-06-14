@@ -2,6 +2,7 @@ import React from "react"
 
 import styles from "./index.css"
 import google from "./google.svg"
+import facebook from "./facebook.svg"
 import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
 import jetbrains from "./jetbrains.svg"
@@ -14,6 +15,13 @@ export default function Showcase() {
     <section className={ styles.root }>
       <h2 className={ styles.title }>{ "Trusted by industry leaders" }</h2>
       <ul className={ styles.items }>
+        <li className={ styles.item }>
+          <img
+            alt="Facebook"
+            className={ styles.logo }
+            src={ facebook }
+          />
+        </li>
         <li className={ styles.item }>
           <img
             alt="Google"
