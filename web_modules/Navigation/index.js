@@ -40,6 +40,14 @@ export default class Navigation extends Component {
               { "Plugins" }
             </a>
           </li>
+          <li className={ styles.item }>
+            <a
+              className={ styles.itemLink }
+              href="/documentation/api"
+            >
+              { "API" }
+            </a>
+          </li>
         </ul>
       </nav>
     )

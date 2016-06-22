@@ -2,10 +2,9 @@ import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
 import invariant from "invariant"
+import Hero from "../../Hero"
 
-// function pageDescription(text) {
-//   return text
-// }
+import styles from "./index.css"
 
 export default class Page extends Component {
 
@@ -45,21 +44,29 @@ export default class Page extends Component {
     ]
 
     return (
-      <div>
+
+      <main className={ styles.root } role="main">
         <Helmet
           title={ head.title }
           meta={ meta }
         />
 
-        <h1>{ head.title }</h1>
-        {
-          body &&
-          <div
-            dangerouslySetInnerHTML={ { __html: body } }
-          />
-        }
-        { this.props.children }
-      </div>
+        <div className={ styles.hero }>
+          <Hero />
+        </div>
+
+        <div className={ styles.inner }>
+          <h1 className={ styles.title }>{ head.title }</h1>
+          {
+            body &&
+            <div
+              className={ styles.content }
+              dangerouslySetInnerHTML={ { __html: body } }
+            />
+          }
+          { this.props.children }
+        </div>
+      </main>
     )
   }
 }
