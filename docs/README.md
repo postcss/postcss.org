@@ -4,7 +4,7 @@
 
 * [react.md](react.md): A short introduction to React.js components with further links if you're new to React.
 
-* [statinamic.md](statinamic.md): Explains how Statinamic works and how you can edit the code and the content of `postcss.org`.
+* [phenomic.md](phenomic.md): Explains how phenomic works and how you can edit the code and the content of `postcss.org`.
 
 * The [design](../design/README.md) directory is the place to start if you would like to contribute with design for `postcss.org` or to keep up with the latest sketches.
 

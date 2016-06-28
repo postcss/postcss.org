@@ -26,7 +26,7 @@ export default class ByTheCommunity extends React.Component {
 
           <h2 className={ styles.title }>{ "Built by community for community" }</h2>
           <p className={ styles.body }>
-            { "PostCSS developed and maintained by hundreds of open source contributors. Become part of the family — " }
+            { "PostCSS is developed and maintained by hundreds of open source contributors. Become part of the family — " }
             <a
               className={ styles.submit }
               href="https://github.com/postcss/postcss/issues"
