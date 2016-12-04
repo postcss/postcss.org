@@ -1,7 +1,3 @@
-# OS X crap
-.DS_Store
-.idea
-
 # node / npm
 node_modules
 *.log
