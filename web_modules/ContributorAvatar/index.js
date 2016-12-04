@@ -1,4 +1,4 @@
-import React from "react"
+import React, { PropTypes } from "react"
 import LazyLoad from "react-lazy-load"
 
 const ContributorItem = ({ avatar_url, login, size = 48 }) => {
@@ -13,6 +13,12 @@ const ContributorItem = ({ avatar_url, login, size = 48 }) => {
       />
     </LazyLoad>
   )
+}
+
+ContributorItem.propTypes = {
+  avatar_url: PropTypes.string,
+  login: PropTypes.string,
+  size: PropTypes.number,
 }
 
 export default ContributorItem

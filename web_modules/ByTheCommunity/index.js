@@ -42,7 +42,7 @@ export default class ByTheCommunity extends React.Component {
               className={ styles.avatar }
               key={ contributor.id }
             >
-              <ContributorAvatar { ...contributor } size={ 48 }/>
+              <ContributorAvatar { ...contributor } size={ 48 } />
             </li>
           )) }
         </ul>

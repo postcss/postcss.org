@@ -47,7 +47,7 @@ export default class PageError extends Component {
             <p className={ styles.body }>
               <strong className={ styles.error }>{ error }</strong>
               { " " }
-              { errorText } <br/>
+              { errorText } <br />
               { this.renderNotFoundError(error) } <br />
             </p>
             <p className={ styles.redirectMessage }>

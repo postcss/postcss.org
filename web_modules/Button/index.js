@@ -18,6 +18,8 @@ export default function Button({
 }
 Button.propTypes = {
   color: PropTypes.string,
+  className: PropTypes.string,
+  children: PropTypes.object,
   /**
    * inherit from className
    */
