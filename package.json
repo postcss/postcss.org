@@ -96,7 +96,7 @@
     "json-loader": "^0.5.4",
     "lint-staged": "^3.2.1",
     "npm-run-all": "^1.7.0",
-    "phenomic": "0.13.0",
+    "phenomic": "^0.14.0",
     "postcss-browser-reporter": "^0.4.0",
     "postcss-cssnext": "^2.4.0",
     "postcss-loader": "^0.7.0",

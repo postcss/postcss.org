@@ -1964,6 +1964,10 @@ dom-converter@~0.1:
   dependencies:
     utila "~0.3"
 
+dom-helpers@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/dom-helpers/-/dom-helpers-2.4.0.tgz#9bb4b245f637367b1fa670274272aa28fe06c367"
+
 dom-serializer@0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
@@ -2842,7 +2846,7 @@ highlight.js@^8.9.1:
   version "8.9.1"
   resolved "https://registry.yarnpkg.com/highlight.js/-/highlight.js-8.9.1.tgz#b8a9c5493212a9392f0222b649c9611497ebfb88"
 
-history@^2.0.0, history@^2.1.2:
+history@^2.0.0, history@^2.1.1, history@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/history/-/history-2.1.2.tgz#4aa2de897a0e4867e4539843be6ecdb2986bfdec"
   dependencies:
@@ -4398,9 +4402,9 @@ pbkdf2-compat@2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pbkdf2-compat/-/pbkdf2-compat-2.0.1.tgz#b6e0c8fa99494d94e0511575802a59a5c142f288"
 
-phenomic@0.13.0:
-  version "0.13.0"
-  resolved "https://registry.yarnpkg.com/phenomic/-/phenomic-0.13.0.tgz#16878495c44780158e6aefaa885385c369734344"
+phenomic@^0.14.0:
+  version "0.14.2"
+  resolved "https://registry.yarnpkg.com/phenomic/-/phenomic-0.14.2.tgz#1edc8ffdbafe8bd510d5fe85cdf7ac22c928b0ad"
   dependencies:
     babel-polyfill "^6.5.0"
     babel-register "^6.6.5"
@@ -4423,6 +4427,7 @@ phenomic@0.13.0:
     opn "^4.0.2"
     pify "^2.3.0"
     portfinder "^1.0.2"
+    react-router-scroll "^0.2.0"
     redbox-react "^1.2.2"
     remark "^4.1.1"
     remark-autolink-headings "^3.0.0"
@@ -5178,6 +5183,13 @@ react-redux@^4.4.1:
     lodash "^4.2.0"
     loose-envify "^1.1.0"
 
+react-router-scroll@^0.2.0:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/react-router-scroll/-/react-router-scroll-0.2.1.tgz#8e4805cdf48db7a637dd7aa3d6090d92bce35807"
+  dependencies:
+    history "^2.1.1"
+    scroll-behavior "^0.7.0"
+
 react-router@^2.2.2:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-2.8.1.tgz#73e9491f6ceb316d0f779829081863e378ee4ed7"
@@ -5661,6 +5673,12 @@ rxjs@^5.0.0-beta.11:
 sax@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.1.tgz#7b8e656190b228e81a66aea748480d828cd2d37a"
+
+scroll-behavior@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/scroll-behavior/-/scroll-behavior-0.7.0.tgz#8e65ac4ea9c15f93319e482350852b64ef1e296d"
+  dependencies:
+    dom-helpers "^2.4.0"
 
 semver-utils@1.1.1:
   version "1.1.1"
