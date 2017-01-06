@@ -41,7 +41,7 @@ export default function InANutShell() {
             <figure className={ styles.figure }>
               <pre className={ styles.pre }>
                 <Highlight className={ styles.code + " css" }>
-                  { ":fullscreen {" }<br/>
+                  { ":fullscreen {" }<br />
                   { "}" }
                 </Highlight>
               </pre>
@@ -56,16 +56,16 @@ export default function InANutShell() {
                   <span className={ styles.highlight }>
                     { "-webkit-" }
                   </span>
-                  { ":full-screen {" }<br/>
-                  { "}" }<br/>
+                  { ":full-screen {" }<br />
+                  { "}" }<br />
                   { ":" }
                   <span className={ styles.highlight }>
                     { "-moz-" }
                   </span>
-                  { ":full-screen {" }<br/>
-                  { "}" }<br/>
-                  { ":full-screen {" }<br/>
-                  { "}" }<br/>
+                  { ":full-screen {" }<br />
+                  { "}" }<br />
+                  { ":full-screen {" }<br />
+                  { "}" }<br />
                 </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
@@ -103,13 +103,13 @@ export default function InANutShell() {
             <figure className={ styles.figure }>
               <pre className={ styles.pre }>
                 <Highlight className={ styles.code + " css" }>
-                  { ":root { " }<br/>
-                  { "\u00A0\u00A0--red: #d33;" }<br/>
-                  { "}" }<br/>
-                  { "a { " }<br/>
-                  { "\u00A0\u00A0&:hover {" }<br/>
-                  { "\u00A0\u00A0\u00A0\u00A0color: color(var(--red) a(54%));" }<br/>
-                  { "\u00A0\u00A0}" }<br/>
+                  { ":root { " }<br />
+                  { "\u00A0\u00A0--red: #d33;" }<br />
+                  { "}" }<br />
+                  { "a { " }<br />
+                  { "\u00A0\u00A0&:hover {" }<br />
+                  { "\u00A0\u00A0\u00A0\u00A0color: color(var(--red) a(54%));" }<br />
+                  { "\u00A0\u00A0}" }<br />
                   { "}" }
                 </Highlight>
               </pre>
@@ -124,18 +124,18 @@ export default function InANutShell() {
                     { "a:hover" }
                   </span>
                   { " { " }
-                  <br/>
+                  <br />
                   { "\u00A0\u00A0color: " }
                   <span className={ styles.highlight }>
                     { "#dd3333" }
                   </span>
-                  { ";" }<br/>
+                  { ";" }<br />
                   { "\u00A0\u00A0color: " }
                   <span className={ styles.highlight }>
                     { "rgba(221, 51, 51, 0.54)" }
                   </span>
-                  { ";" }<br/>
-                  { "}" }<br/>
+                  { ";" }<br />
+                  { "}" }<br />
                 </Highlight>
               </pre>
               <figcaption className={ styles.captionOutput }>
@@ -172,8 +172,8 @@ export default function InANutShell() {
             <figure className={ styles.figure }>
               <pre className={ styles.pre }>
                 <Highlight className={ styles.code + " css" }>
-                  { ".name {" }<br/>
-                  { "\u00A0\u00A0color: gray;" }<br/>
+                  { ".name {" }<br />
+                  { "\u00A0\u00A0color: gray;" }<br />
                   { "}" }
                 </Highlight>
               </pre>
@@ -191,8 +191,8 @@ export default function InANutShell() {
                   <span className={ styles.highlight }>
                     { "SVK0g" }
                   </span>
-                  { " {" }<br/>
-                  { "\u00A0\u00A0color: gray;" }<br/>
+                  { " {" }<br />
+                  { "\u00A0\u00A0color: gray;" }<br />
                   { "}" }
                 </Highlight>
               </pre>
@@ -231,9 +231,9 @@ export default function InANutShell() {
             <figure className={ styles.figure }>
               <pre className={ styles.pre }>
                 <Highlight className={ styles.code + " css" }>
-                  { "a { " }<br/>
-                  { "\u00A0\u00A0color: #d3;" }<br/>
-                  { "}" }<br/>
+                  { "a { " }<br />
+                  { "\u00A0\u00A0color: #d3;" }<br />
+                  { "}" }<br />
                 </Highlight>
               </pre>
               <figcaption className={ styles.caption }>
@@ -243,7 +243,7 @@ export default function InANutShell() {
             <figure className={ styles.figureOutput }>
               <pre className={ styles.pre }>
                 <Highlight className={ styles.code + " bash" }>
-                  <u>{ "app.css" }</u><br/>
+                  <u>{ "app.css" }</u><br />
                   { "2:10 Invalid hex color" }
                 </Highlight>
               </pre>
