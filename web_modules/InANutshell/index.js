@@ -7,6 +7,7 @@ import autoprefixer from "./autoprefixer.svg"
 import cssnext from "./cssnext.svg"
 import cssModules from "./css-modules.svg"
 import stylelint from "./stylelint.svg"
+import lostgrid from "./lost-grid.svg"
 
 export default function InANutShell() {
 
@@ -249,6 +250,87 @@ export default function InANutShell() {
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "Console output" }
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <section className={ styles.item }>
+        <div className={ styles.itemInner }>
+          <div className={ styles.info }>
+            <header className={ styles.header }>
+              <img
+                alt="LostGrid"
+                className={ styles.logo }
+                src={ lostgrid }
+              />
+              <h2 className={ styles.title }>
+                { "Powerful grid system" }
+              </h2>
+            </header>
+            <p className={ styles.body }>
+              <a
+                className={ styles.tool }
+                href="https://github.com/peterramsing/lost"
+              >
+                { "LostGrid" }
+              </a>
+
+              { " makes use of calc() to create stunning grids based on fractions you define without having to pass a lot of options." }
+
+            </p>
+          </div>
+          <div className={ styles.example }>
+            <figure className={ styles.figure }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
+                  { "div {" }<br />
+                  { "\u00A0\u00A0lost-column: 1/3"  } <br />
+                  { "}" }
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.caption }>
+                { "CSS input" }
+              </figcaption>
+            </figure>
+            <figure className={ styles.figureOutput }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
+                  { "div {" }<br />
+                  { "\u00A0\u00A0width: calc(99.9% * 1/3 - " } <br />
+                  { "\u00A0\u00A0(30px - 30px * 1/3));" } <br />
+                  { "}" }
+
+                  <br />
+
+                  { "div:nth-child(1n) {" }<br />
+                  { "\u00A0\u00A0float: left;" } <br />
+                  { "\u00A0\u00A0margin-right: 30px;" } <br />
+                  { "\u00A0\u00A0clear: none;" } <br />
+                  { "}" }
+
+                  <br />
+
+                  { "div:last-child {" }<br />
+                  { "\u00A0\u00A0margin-right: 0;" } <br />
+                  { "}" }
+
+                  <br />
+
+                  { "div:nth-child(3n) {" }<br />
+                  { "\u00A0\u00A0margin-right: 0;" } <br />
+                  { "\u00A0\u00A0float: right;" } <br />
+                  { "}" }
+
+                  <br />
+
+                  { "div:nth-child(3n + 1) {" }<br />
+                  { "\u00A0\u00A0clear: both;" } <br />
+                  { "}" }
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.captionOutput }>
+                { "CSS output" }
               </figcaption>
             </figure>
           </div>
