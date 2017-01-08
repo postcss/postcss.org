@@ -42,6 +42,15 @@
   padding: 0;
 }
 
+:global(.gitter-open-chat-button) {
+  background-color: #dd3a0a;
+}
+
+:global(.gitter-open-chat-button:hover),
+:global(.gitter-open-chat-button:focus) {
+  background-color: #c73307;
+}
+
 .root { /* placeholder */ }
 
 .children { /* placeholder */ }

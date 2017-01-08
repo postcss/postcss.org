@@ -78,6 +78,20 @@ export default class LayoutContainer extends Component {
 
             ] }
 
+            script={ [
+              { 
+                type: "text/javascript",
+                innerHTML: "((window.gitter = {}).chat = {}).options = {" +
+                "room: 'postcss/postcss'};",
+              },
+              { 
+                type: "text/javascript",
+                src: "https://sidecar.gitter.im/dist/sidecar.v1.js",
+                async: undefined,
+                defer: undefined,
+              },
+            ] }
+
             meta={ [
               { property: "og:site_name", content: pkg.name },
               { property: "og:image", content: ogImage },
