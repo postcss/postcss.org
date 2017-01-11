@@ -1,6 +1,6 @@
-import React, { Component } from "react"
+import React from "react"
 import { Route } from "react-router"
-import PhenomicPageContainer from "phenomic/lib/PageContainer"
+import { PageContainer as PhenomicPageContainer } from "phenomic"
 
 import LayoutContainer from "../LayoutContainer"
 
@@ -8,21 +8,16 @@ import Page from "../layouts/Page"
 import PageError from "../layouts/PageError"
 import HomePage from "../layouts/HomePage"
 
-class PageContainer extends Component {
-  render() {
-    const { props } = this
-    return (
-      <PhenomicPageContainer
-        { ...props }
-        layouts={ {
-          Page,
-          PageError,
-          HomePage,
-        } }
-      />
-    )
-  }
-}
+const PageContainer = (props) => (
+  <PhenomicPageContainer
+    { ...props }
+    layouts={ {
+      Page,
+      PageError,
+      HomePage,
+    } }
+  />
+)
 
 // routes
 export default (

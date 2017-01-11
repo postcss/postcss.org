@@ -2,6 +2,9 @@ import path from "path"
 
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+import { phenomicLoader } from "phenomic"
+import PhenomicLoaderFeedWebpackPlugin
+  from "phenomic/lib/loader-feed-webpack-plugin"
 
 import pkg from "./package.json"
 
@@ -23,10 +26,14 @@ export const makeConfig = (config = {}) => {
         {
           // phenomic requirement
           test: /\.md$/,
-          loader: "phenomic/lib/content-loader",
-          // config is in phenomic.contentLoader section below
-          // so you can use functions (and not just JSON) due to a restriction
-          // of webpack that serialize/deserialize loader `query` option.
+          loader: phenomicLoader,
+          query: {
+            context: path.join(__dirname, config.source),
+            // plugins: [
+            //   ...require("phenomic/lib/loader-preset-markdown").default
+            // ]
+            // see https://phenomic.io/docs/usage/plugins/
+          },
         },
 
         // *.json => like in node, return json
@@ -98,27 +105,6 @@ export const makeConfig = (config = {}) => {
       ],
     },
 
-    phenomic: {
-      contentLoader: {
-        context: path.join(__dirname, config.source),
-        // renderer: (text) => html
-        feedsOptions: {
-          title: pkg.name,
-          site_url: pkg.homepage,
-        },
-        feeds: {
-          "feed.xml": {
-            collectionOptions: {
-              filter: { layout: "Post" },
-              sort: "date",
-              reverse: true,
-              limit: 20,
-            },
-          },
-        },
-      },
-    },
-
     postcss: () => [
       require("stylelint")(),
       require("postcss-cssnext")({ browsers: "last 2 versions" }),
@@ -134,6 +120,23 @@ export const makeConfig = (config = {}) => {
           { compress: { warnings: false } }
         ),
       ],
+      new PhenomicLoaderFeedWebpackPlugin({
+        feedsOptions: {
+          title: pkg.name,
+          site_url: pkg.homepage,
+        },
+        feeds: {
+          "feed.xml": {
+            title: pkg.name + ": Latest Posts",
+            collectionOptions: {
+              filter: { layout: "Post" },
+              sort: "date",
+              reverse: true,
+              limit: 20,
+            },
+          },
+        },
+      }),
     ],
 
     output: {

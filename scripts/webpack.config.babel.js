@@ -1,13 +1,14 @@
 import path from "path"
 import webpack from "webpack"
 import ExtractTextPlugin from "extract-text-webpack-plugin"
+import { phenomicLoader } from "phenomic"
 
 export default ({ config, pkg }) => ({
   module: {
     loaders: [
       { // phenomic requirement
         test: /\.md$/,
-        loader: "phenomic/lib/content-loader",
+        loader: phenomicLoader,
         query: {
           context: path.join(config.cwd, config.source),
           feedsOptions: {
