@@ -11,7 +11,7 @@ export default class Page extends Component {
 
   static propTypes = {
     children: PropTypes.oneOfType([ PropTypes.array, PropTypes.object ]),
-    __url: PropTypes.string.isRequired,
+    __url: PropTypes.string,
     head: PropTypes.object.isRequired,
     body: PropTypes.string.isRequired,
   };
