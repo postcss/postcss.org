@@ -1,25 +1,19 @@
 language: node_js
 node_js:
   - '5'
-
 notifications:
   email:
     on_failure: change
-
-# deploy is run after "npm test"
 deploy:
   skip_cleanup: true
   provider: script
   script: ./scripts/deploy.sh
-  # will be run only on master, node v5
-  on:
+  'on':
     branch: master
     node: '5'
-
 env:
   global:
-    # for ./scripts/deploy.sh
-    # GH_TOKEN
-    - secure: "roYpoJOg6QAcBDP65dw33B0LvnNxzVuv+a3hmullqu9Regyo3na9lFojZ6OhfEjI9OVaRwrjsJ5vdWoRs9lDx15ROqWbNFwRtvipYOhWOPd+HXC9D9Fuaa2hf87XtPpoavMi6yp4XRUM33aun2YWr5q1tX2Z+DEKAbq1a4FJUBIDHXIRgsOPxTdTS4lxixyKZ7qqcBkM5QLy/zJpw8Btq0PwnxQVxrNmx4ufdal/3L836dbUawQkyvD5kYplxRSRpsvc+M/Q3CJBQQMVi4kFqlb9FKfJj44VWoVzwE+x7ICNGtd0NDSLA1YmfgD3TpLZFO9k0/hyNLqkcZ/zGTKS9WtEfKAU9paazfVrvStZcARID/WTmJR0PAEMpymP+5afWctdpS2+yEjO3wzwP86+55Gi4RzeLPJyCsVmGzrioWl+g0z5g5NRD7g/dgjxCRs8Qq6ccNRhQ6aBSuF21cwMLBzJHrHg93nceMqo2qCYSc20ltPmFgds9UbBlirGtGIcFoixgiqcs3CsJAM3EAwcYRsB+QXUArFBgAjn0HBVBhRuUEnhDbiaDhrC1TpOo1E9GU1mDj0OfaDSc8gSeiES0toMeCzuGcuc+NozEfO4FspQnhxAUVDawpQPY0XCYcQnRRhlJTaoCa1AWsLRjndoL8ewhFhiH5PkVcCwh+148WE="
-    - GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/postcss/postcss.org.git
+    - secure: >-
+        JmH1Vv6Ue2Z/d36uRBw3cCNRabvFuqEabWdO6Rhh/sfedo0J0915TyRF6iVw+c5JjHzFnOanCGg7U3gITstHcenNxAs5spyw3RBZsofT/qPd23gcj1sz07N9P223BpVZckxLdGAM3H9zXB9YFLWOXoZ52/7OuN7/a6Wu5uOK6wUE7DXUzySzaHN7O4flwOi5KeBM3jusgGYq7MFCGAxoMVzMe/jmbOpy7N/LN24SwzSiqCPQtht6cZhXYdFRPuMmIlIpyHQnGv8jtArkHHO77k3HFqANNf+a07gwiO4N1Qm3JMpytycXXFgt+283zaOgffkyvctDp+3Yg+qkLF+L4qDh3Nez7AcmKg68u2UfN6FptV1STTjYi4p61B19Cq5t+goidpYg0lzRdXZqPqLz8YPQxrujPKNek4p98ZyFbmxKYZop0ZwlecIe63krbuO/7cDdRbUhyyyoHZEiNuPLEuk2dOXKCZ9mc6NYFllKI7fkKnhvgxLCQqm7kj0FD/ltvQlgF9Lolf2+06ViCK0T7/TTDOaxVxixkvNTqmRWsGZjU0rYk7zlgp9usYZRlG76TwuxQ19roAGlwq0KWOEBnYMGQIPwBVz0TnBr7bMr5WqwIVFr3QNbI9G9gc2h9l6OSWtuS2mKKyUpRlr9c/EOoEFPZkDVMFwX5Vvbuo+GQKg=
+    - 'GIT_DEPLOY_REPO=https://$GH_TOKEN@github.com/postcss/postcss.org.git'
     - GIT_DEPLOY_DIR=dist
