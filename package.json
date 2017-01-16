@@ -4,6 +4,7 @@
   "homepage": "http://postcss.org/",
   "googleAnalyticsUA": "UA-73693753-1",
   "twitter": "PostCSS",
+  "repository": "https://github.com/postcss/postcss.org.git",
   "scripts": {
     "lint:js": "eslint --ignore-path .gitignore --fix .",
     "lint:css": "stylelint \"web_modules/**/*.css\"",
