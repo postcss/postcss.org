@@ -3,6 +3,7 @@
   "name": "PostCSS",
   "homepage": "http://postcss.org/",
   "googleAnalyticsUA": "UA-73693753-1",
+  "repository": "https://github.com/postcss/postcss.org.git",
   "twitter": "PostCSS",
   "scripts": {
     "lint:js": "eslint --ignore-path .gitignore --fix .",
