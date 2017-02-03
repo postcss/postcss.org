@@ -81,6 +81,115 @@ export default function InANutShell() {
           <div className={ styles.infoAlt }>
             <header className={ styles.header }>
               <img
+                alt="CSS Modules"
+                className={ styles.logo }
+                src={ cssModules }
+              />
+              <h2 className={ styles.title }>
+                { "The end of global\u00A0CSS" }
+              </h2>
+            </header>
+            <p className={ styles.body }>
+              <a
+                className={ styles.tool }
+                href="https://github.com/css-modules/css-modules"
+              >
+                { "CSS Modules" }
+              </a>
+              { " means you never need to worry about your names being too generic, just use whatever makes the most sense." }
+            </p>
+          </div>
+          <div className={ styles.example }>
+            <figure className={ styles.figure }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
+                  { ".name {" }<br />
+                  { "\u00A0\u00A0color: gray;" }<br />
+                  { "}" }
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.caption }>
+                { "CSS input" }
+              </figcaption>
+            </figure>
+            <figure className={ styles.figureOutput }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
+                  <span className={ styles.highlight }>
+                    { ".Logo" }
+                  </span>
+                  { "__name__" }
+                  <span className={ styles.highlight }>
+                    { "SVK0g" }
+                  </span>
+                  { " {" }<br />
+                  { "\u00A0\u00A0color: gray;" }<br />
+                  { "}" }
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.captionOutput }>
+                { "CSS output" }
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <section className={ styles.item }>
+        <div className={ styles.itemInner }>
+          <div className={ styles.info }>
+            <header className={ styles.header }>
+              <img
+                alt="stylelint"
+                className={ styles.logo }
+                src={ stylelint }
+              />
+              <h2 className={ styles.title }>
+                { "Avoid errors in your\u00A0CSS" }
+              </h2>
+            </header>
+            <p className={ styles.body }>
+              { "Enforce consistent conventions and avoid errors in your stylesheets with " }
+              <a
+                className={ styles.tool }
+                href="http://stylelint.io/"
+              >
+                { "stylelint" }
+              </a>
+              { ", a modern CSS linter. It supports the latest CSS syntax, as well as CSS-like syntaxes, such as SCSS." }
+            </p>
+          </div>
+          <div className={ styles.example }>
+            <figure className={ styles.figure }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " css" }>
+                  { "a { " }<br />
+                  { "\u00A0\u00A0color: #d3;" }<br />
+                  { "}" }<br />
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.caption }>
+                { "CSS input" }
+              </figcaption>
+            </figure>
+            <figure className={ styles.figureOutput }>
+              <pre className={ styles.pre }>
+                <Highlight className={ styles.code + " bash" }>
+                  <u>{ "app.css" }</u><br />
+                  { "2:10 Invalid hex color" }
+                </Highlight>
+              </pre>
+              <figcaption className={ styles.captionOutput }>
+                { "Console output" }
+              </figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+      <section className={ styles.itemAlt }>
+        <div className={ styles.itemInnerAlt }>
+          <div className={ styles.infoAlt }>
+            <header className={ styles.header }>
+              <img
                 alt="Cssnext"
                 className={ styles.logo }
                 src={ cssnext }
@@ -141,115 +250,6 @@ export default function InANutShell() {
               </pre>
               <figcaption className={ styles.captionOutput }>
                 { "CSS output" }
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section className={ styles.item }>
-        <div className={ styles.itemInner }>
-          <div className={ styles.info }>
-            <header className={ styles.header }>
-              <img
-                alt="CSS Modules"
-                className={ styles.logo }
-                src={ cssModules }
-              />
-              <h2 className={ styles.title }>
-                { "The end of global\u00A0CSS" }
-              </h2>
-            </header>
-            <p className={ styles.body }>
-              <a
-                className={ styles.tool }
-                href="https://github.com/css-modules/css-modules"
-              >
-                { "CSS Modules" }
-              </a>
-              { " means you never need to worry about your names being too generic, just use whatever makes the most sense." }
-            </p>
-          </div>
-          <div className={ styles.example }>
-            <figure className={ styles.figure }>
-              <pre className={ styles.pre }>
-                <Highlight className={ styles.code + " css" }>
-                  { ".name {" }<br />
-                  { "\u00A0\u00A0color: gray;" }<br />
-                  { "}" }
-                </Highlight>
-              </pre>
-              <figcaption className={ styles.caption }>
-                { "CSS input" }
-              </figcaption>
-            </figure>
-            <figure className={ styles.figureOutput }>
-              <pre className={ styles.pre }>
-                <Highlight className={ styles.code + " css" }>
-                  <span className={ styles.highlight }>
-                    { ".Logo" }
-                  </span>
-                  { "__name__" }
-                  <span className={ styles.highlight }>
-                    { "SVK0g" }
-                  </span>
-                  { " {" }<br />
-                  { "\u00A0\u00A0color: gray;" }<br />
-                  { "}" }
-                </Highlight>
-              </pre>
-              <figcaption className={ styles.captionOutput }>
-                { "CSS output" }
-              </figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-      <section className={ styles.itemAlt }>
-        <div className={ styles.itemInnerAlt }>
-          <div className={ styles.infoAlt }>
-            <header className={ styles.header }>
-              <img
-                alt="stylelint"
-                className={ styles.logo }
-                src={ stylelint }
-              />
-              <h2 className={ styles.title }>
-                { "Avoid errors in your\u00A0CSS" }
-              </h2>
-            </header>
-            <p className={ styles.body }>
-              { "Enforce consistent conventions and avoid errors in your stylesheets with " }
-              <a
-                className={ styles.tool }
-                href="http://stylelint.io/"
-              >
-                { "stylelint" }
-              </a>
-              { ", a modern CSS linter. It supports the latest CSS syntax, as well as CSS-like syntaxes, such as SCSS." }
-            </p>
-          </div>
-          <div className={ styles.example }>
-            <figure className={ styles.figure }>
-              <pre className={ styles.pre }>
-                <Highlight className={ styles.code + " css" }>
-                  { "a { " }<br />
-                  { "\u00A0\u00A0color: #d3;" }<br />
-                  { "}" }<br />
-                </Highlight>
-              </pre>
-              <figcaption className={ styles.caption }>
-                { "CSS input" }
-              </figcaption>
-            </figure>
-            <figure className={ styles.figureOutput }>
-              <pre className={ styles.pre }>
-                <Highlight className={ styles.code + " bash" }>
-                  <u>{ "app.css" }</u><br />
-                  { "2:10 Invalid hex color" }
-                </Highlight>
-              </pre>
-              <figcaption className={ styles.captionOutput }>
-                { "Console output" }
               </figcaption>
             </figure>
           </div>
