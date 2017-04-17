@@ -65,7 +65,7 @@ export default class LayoutContainer extends Component {
               },
               {
                 "rel": "shortcut icon",
-                "type": "image/png",
+                "type": "image/x-icon",
                 "href": favicon,
               },
 
