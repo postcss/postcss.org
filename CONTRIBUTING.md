@@ -17,6 +17,21 @@ and [submitting pull requests](#pull-requests).
 
 If you would like to contribute with some content or documentation for the website, make sure to read our [content start guide](https://github.com/postcss/postcss.org/tree/master/docs/content.md) first.  
 
+* `bug` - Report any bugs regarding postcss.com, please be as specific as possible.
+* `discussion` - Open discussion, please chime in! (E.g. for upcoming features, questions, planning, etc.)
+* `feature request` - Request for a feature or enhancement.
+* `help wanted` - Issues we need help to resolve.
+* `high-priority` - High priority issues that need to be resolved as soon as possible.
+* `low-priority` - Low prioritized issues.
+* `in-progress` - Issues that is on-going.
+* `needs documentation`
+* `needs investigation`
+* `needs revision/testing` - Issues that needs to be reviewed or tested.
+* `PR welcome` - Pull Requests are welcome to be suggested for resolving issue.
+* `question` - Question regarding postcss.com - not to be used as support for [PostCSS](https://github.com/postcss/postcss).
+* `duplicated` - Duplicated issues that have already been created before.
+* `invalid` - Invalid issue, wont-fix.
+
 <a name="bugs"></a>
 ## Bug reports
 
