@@ -48,6 +48,14 @@ export default class Navigation extends Component {
               { "API" }
             </a>
           </li>
+          <li className={ styles.item }>
+            <a
+              className={ styles.itemLink }
+              href="https://github.com/postcss/brand"
+            >
+              { "Logos/Graphics" }
+            </a>
+          </li>
         </ul>
       </nav>
     )
