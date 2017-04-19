@@ -3,6 +3,7 @@
   "name": "PostCSS",
   "homepage": "http://postcss.org/",
   "googleAnalyticsUA": "UA-73693753-1",
+  "repository": "https://github.com/postcss/postcss.org.git",
   "twitter": "PostCSS",
   "repository": "https://github.com/postcss/postcss.org.git",
   "scripts": {
