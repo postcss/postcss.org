@@ -8,6 +8,7 @@ import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
 import jetbrains from "./jetbrains.svg"
 import wikipedia from "./wikipedia.svg"
+import compass from "./compass.svg"
 
 export default function Showcase() {
 
@@ -63,6 +64,13 @@ export default function Showcase() {
             alt="Taobao"
             className={ styles.logo }
             src={ taobao }
+          />
+        </li>
+        <li className={ styles.item }>
+          <img
+            alt="Compass"
+            className={ styles.logo }
+            src={ compass }
           />
         </li>
       </ul>
