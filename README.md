@@ -22,4 +22,4 @@ There is a bunch of documentation on how to work on `postcss.org` in the `docs/`
 
 ### Technical specifications
 
-`postcss.org` uses [Phenomic](http://moox.io/phenomic/) as a static site generator. Phenomic is based on [React](https://github.com/facebook/react), a user interface library made by Facebook. Other top of that we use CSS Modules, Redux, Babel, webpack and (obviously) PostCSS.
+`postcss.org` uses [Phenomic](https://phenomic.io) as a static site generator. Phenomic is based on [React](https://github.com/facebook/react), a user interface library made by Facebook. Other top of that we use CSS Modules, Redux, Babel, webpack and (obviously) PostCSS.

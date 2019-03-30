@@ -55,7 +55,7 @@
   position: relative;
   display: flex;
   flex-direction: column-reverse;
-  margin-right: 1.1rem;
+  margin-right: 1rem;
   overflow: hidden;
 }
 
@@ -121,7 +121,7 @@
   }
 
   .info {
-    margin-right: 1.5rem;
+    margin-right: 0.5rem;
     padding-top: 2rem;
   }
 
@@ -132,6 +132,7 @@
   }
 
   .example {
-    min-width: 22rem;
+    min-width: 23rem;
+    padding: 1rem 0 0;
   }
 }
