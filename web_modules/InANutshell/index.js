@@ -57,15 +57,15 @@ export default function InANutShell() {
                   <span className={ styles.highlight }>
                     { "-webkit-" }
                   </span>
-                  { ":full-screen {" }<br />
+                  { "full-screen {" }<br />
                   { "}" }<br />
                   { ":" }
                   <span className={ styles.highlight }>
                     { "-moz-" }
                   </span>
-                  { ":full-screen {" }<br />
+                  { "full-screen {" }<br />
                   { "}" }<br />
-                  { ":full-screen {" }<br />
+                  { ":fullscreen {" }<br />
                   { "}" }<br />
                 </Highlight>
               </pre>
