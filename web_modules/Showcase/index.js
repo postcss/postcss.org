@@ -4,6 +4,7 @@ import styles from "./index.css"
 import google from "./google.svg"
 import github from "./github.svg"
 import facebook from "./facebook.svg"
+import drupal from "./drupal.svg"
 import wordpress from "./wordpress.svg"
 import taobao from "./taobao.svg"
 import jetbrains from "./jetbrains.svg"
@@ -35,6 +36,13 @@ export default function Showcase() {
             alt="Google"
             className={ styles.logo }
             src={ google }
+          />
+        </li>
+        <li className={ styles.item }>
+          <img
+            alt="Drupal"
+            className={ styles.logo }
+            src={ drupal }
           />
         </li>
         <li className={ styles.item }>
