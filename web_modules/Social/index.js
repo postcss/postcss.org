@@ -29,7 +29,7 @@ export default class Social extends Component {
               className={ styles.itemLinkGithub }
               href="https://github.com/postcss/postcss"
             >
-              { "Github" }
+              { "GitHub" }
             </a>
           </li>
         </ul>
