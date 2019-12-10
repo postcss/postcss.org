@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "PostCSS",
-  "homepage": "http://postcss.org/",
+  "homepage": "https://postcss.org/",
   "googleAnalyticsUA": "UA-73693753-1",
   "twitter": "PostCSS",
   "repository": "https://github.com/postcss/postcss.org.git",
