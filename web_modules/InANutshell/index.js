@@ -230,7 +230,7 @@ export default function InANutShell() {
               { "Enforce consistent conventions and avoid errors in your stylesheets with " }
               <a
                 className={ styles.tool }
-                href="http://stylelint.io/"
+                href="https://stylelint.io/"
               >
                 { "stylelint" }
               </a>
