@@ -1,5 +1,6 @@
 .root { /* placeholder */ }
 
+.sponsor,
 .showcase {
   background: url("./burst.svg") center 2rem no-repeat;
   padding-top: 4rem;
@@ -15,6 +16,7 @@
     padding-top: 2rem;
   }
 
+  .sponsor,
   .showcase {
     background-position: center 3rem;
     padding-top: 5rem;
