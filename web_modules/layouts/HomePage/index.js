@@ -7,6 +7,7 @@ import { joinUri } from "phenomic"
 import Hero from "../../Hero"
 import InANutshell from "../../InANutshell"
 import WayFinder from "../../WayFinder"
+import Sponsor from "../../Sponsor"
 import Showcase from "../../Showcase"
 import ByTheCommunity from "../../ByTheCommunity"
 
@@ -68,6 +69,9 @@ export default class HomePage extends Component {
         </div>
         <div className={ styles.wayFinder }>
           <WayFinder />
+        </div>
+        <div className={ styles.sponsor }>
+          <Sponsor />
         </div>
         <div className={ styles.showcase }>
           <Showcase />
