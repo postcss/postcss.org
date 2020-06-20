@@ -3,4 +3,3 @@ yarn-error.log
 
 .cache/
 dist/
-.env
