@@ -13,9 +13,13 @@
     "build": "NODE_ENV=production ./scripts/build.js"
   },
   "dependencies": {
+    "autoprefixer": "^9.8.1",
     "del": "^5.1.0",
     "del-cli": "^3.0.1",
-    "parcel-bundler": "^1.12.4"
+    "parcel-bundler": "^1.12.4",
+    "postcss-hexrgba": "^2.0.1",
+    "postcss-media-minmax": "^4.0.0",
+    "postcss-nested": "^4.2.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^39.0.3",
@@ -52,6 +56,14 @@
     "not and_qq > 0",
     "not android > 0"
   ],
+  "postcss": {
+    "plugins": {
+      "postcss-media-minmax": {},
+      "postcss-nested": {},
+      "postcss-hexrgba": {},
+      "autoprefixer": {}
+    }
+  },
   "eslintConfig": {
     "extends": "@logux/eslint-config",
     "rules": {
