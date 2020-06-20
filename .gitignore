@@ -1,10 +1,6 @@
-# OS X crap
-.DS_Store
-.idea
+node_modules/
+yarn-error.log
 
-# node / npm
-node_modules
-*.log
-
-# phenomic build
-dist
+.cache/
+dist/
+.env
