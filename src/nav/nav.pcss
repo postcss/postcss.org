@@ -1,18 +1,13 @@
-.root {
+.nav {
   position: absolute;
   top: 0;
   right: 0;
   left: 0;
-  font-family: sans-serif;
-  background-color: color(black a(40%));
-}
-
-:global(.fira-sans-loaded) .root {
-  font-family: "Fira Sans", sans-serif;
   font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
-.items {
+.nav_items {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -20,13 +15,13 @@
   padding: 0 1rem;
 }
 
-.item {
+.nav_item {
   &:not(:last-child) {
     margin-right: 1.5rem;
   }
 }
 
-.itemLink {
+.nav_link {
   font-size: 0.875rem;
   line-height: 1.425;
   color: #eee7df;
@@ -38,12 +33,12 @@
 }
 
 @media (width > 580px) {
-  .root {
+  .nav {
     right: auto;
     width: 50%;
   }
 
-  .items {
+  .nav_items {
     justify-content: flex-start;
   }
 }

@@ -52,19 +52,6 @@ export default class LayoutContainer extends Component {
       <GoogleAnalyticsTracker params={ this.props.params }>
         <div className={ styles.root }>
           <Helmet
-
-            link={ [
-              { "rel": "stylesheet",
-                "href":
-                "https://fonts.googleapis.com/css?family=Merriweather:400,700",
-              },
-
-              { "rel": "stylesheet",
-                "href":
-                "https://fonts.googleapis.com/css?family=Fira+Sans:500,300,700",
-              }
-            ] }
-
             script={ [
               {
                 type: "text/javascript",
