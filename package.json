@@ -3,7 +3,6 @@
   "private": true,
   "homepage": "https://postcss.org/",
   "repository": "postcss/postcss.org",
-  "googleAnalyticsUA": "UA-73693753-1",
   "license": "MIT",
   "scripts": {
     "start": "parcel serve src/index.pug --open",

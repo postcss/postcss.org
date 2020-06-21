@@ -10,7 +10,7 @@ import GoogleAnalyticsTracker from "../GoogleAnalyticsTracker"
 import styles from "./index.css"
 
 import ogImage from "./opengraph.jpg"
-import favicon from "./favicon.ico" 
+import favicon from "./favicon.ico"
 import favicon192x192 from "./favicon-192x192.png"
 
 if (typeof window !== "undefined") {
@@ -62,40 +62,21 @@ export default class LayoutContainer extends Component {
               { "rel": "stylesheet",
                 "href":
                 "https://fonts.googleapis.com/css?family=Fira+Sans:500,300,700",
-              },
-              {
-                "rel": "shortcut icon",
-                "type": "image/x-icon",
-                "href": favicon,
-              },
-
-              {
-                "rel": "icon",
-                "type": "image/png",
-                "href": favicon192x192,
-                "sizes": "192x192",
-              },
-
+              }
             ] }
 
             script={ [
-              { 
+              {
                 type: "text/javascript",
                 innerHTML: "((window.gitter = {}).chat = {}).options = {" +
                 "room: 'postcss/postcss'};",
               },
-              { 
+              {
                 type: "text/javascript",
                 src: "https://sidecar.gitter.im/dist/sidecar.v1.js",
                 async: undefined,
                 defer: undefined,
               },
-            ] }
-
-            meta={ [
-              { property: "og:site_name", content: pkg.name },
-              { property: "og:image", content: ogImage },
-              { name: "twitter:site", content: `@${ pkg.twitter }` },
             ] }
           />
           <div className={ styles.children }>

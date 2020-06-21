@@ -1,8 +1,6 @@
 import React, { Component } from "react"
 import { PropTypes } from "react"
 import Helmet from "react-helmet"
-import invariant from "invariant"
-import { joinUri } from "phenomic"
 
 import Hero from "../../Hero"
 import InANutshell from "../../InANutshell"
@@ -35,25 +33,6 @@ export default class HomePage extends Component {
     const {
       head,
     } = this.props
-
-    invariant(typeof head.title === "string", "Your page needs a title")
-
-    const meta = [
-      { property: "og:title", content: head.title },
-      { property: "og:type", content: "article" },
-      {
-        property: "og:url",
-        content: joinUri(process.env.PHENOMIC_USER_URL, __url),
-      },
-      { property: "og:description", content: head.description },
-
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:title", content: head.title },
-      { name: "twitter:site", content: `@${ pkg.twitter }` },
-      { name: "twitter:description", content: head.description },
-
-      { name: "description", content: head.description },
-    ]
 
     return (
       <main className={ styles.root } role="main">
