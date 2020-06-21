@@ -9,7 +9,6 @@
 
 :global(body),
 :global(html) {
-  box-sizing: border-box; /* 2 */
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -22,19 +21,10 @@
     "Droid Sans",
     "Helvetica Neue",
     sans-serif; /* 3 */
-
-  background: #f4f2ed; /* 1 */
-  text-size-adjust: 100%; /* 4 */
 }
 
 :global(body.merriweather-loaded) {
   font-family: "Merriweather", serif;
-}
-
-:global(*),
-:global(*::before),
-:global(*::after) {
-  box-sizing: inherit;
 }
 
 :global(.gitter-open-chat-button) {

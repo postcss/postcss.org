@@ -3,3 +3,15 @@
   margin: 0;
   list-style: none;
 }
+
+*,
+*::before,
+**::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  background: #f4f2ed;
+  text-size-adjust: 100%;
+}
