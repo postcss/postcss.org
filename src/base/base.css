@@ -15,3 +15,8 @@ html {
   background: #f4f2ed;
   text-size-adjust: 100%;
 }
+
+body {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 16px;
+}
