@@ -18,33 +18,19 @@
   justify-content: center;
   height: 3rem;
   padding: 0 1rem;
-}
-
-.socials_item {
-  &:not(:last-child) {
-    margin-right: 1.5rem;
-  }
 
   @media (width > 580px) {
     justify-content: flex-end;
   }
 }
 
-.socials_twitter {
-  background-image: url("./twitter.svg");
+.socials_item {
+  &:not(:last-child) {
+    margin-right: 1.5rem;
+  }
 }
 
-.socials_gitter {
-  background-image: url("./github.svg");
-}
-
-.socials_github {
-  background-image: url("./gitter.svg");
-}
-
-.socials_twitter,
-.socials_gitter,
-.socials_github {
+.socials_link {
   padding-left: 1.25rem;
   font-size: 0.875rem;
   line-height: 1.425;
@@ -55,5 +41,17 @@
 
   &:hover {
     text-decoration: underline;
+  }
+
+  &.is-twitter {
+    background-image: url("./twitter.svg");
+  }
+
+  &.is-gitter {
+    background-image: url("./gitter.svg");
+  }
+
+  &.is-github {
+    background-image: url("./github.svg");
   }
 }
