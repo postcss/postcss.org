@@ -1,28 +1,28 @@
-.root {
-  background: #f4f2ed;
+.footer {
   padding: 3rem 1rem;
+  background: #f4f2ed;
 }
 
-.inner {
+.footer_inner {
   text-align: center;
 }
 
-.info {
-  color: color(#48463e a(46%));
+.footer_info {
+  margin-bottom: 0.25rem;
   font-size: 0.8125rem;
   line-height: 2.15;
-  margin-bottom: 0.25rem;
+  color: rgba(72, 70, 62, 0.46);
 }
 
-.issue {
+.footer_issue {
   margin-bottom: 1rem;
 }
 
-.report {
-  color: color(#48463e a(46%));
+.footer_report {
   display: inline-block;
-  text-decoration: underline;
   margin-left: 0.25rem;
+  color: rgba(72, 70, 62, 0.46);
+  text-decoration: underline;
 
   &:hover {
     text-decoration: none;
@@ -30,12 +30,12 @@
 }
 
 @media (width > 500px) {
-  .inner {
+  .footer_inner {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 0 auto;
     max-width: 50rem;
+    margin: 0 auto;
     text-align: initial;
   }
 }
