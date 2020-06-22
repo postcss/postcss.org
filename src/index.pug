@@ -3,12 +3,14 @@ html( lang="en" )
   head
     include ./base/base.pug
     link( rel="stylesheet" href="/index.pcss" )
+    script( defer src="/index.js" )
   body
     main
       include ./hero/hero.pug
       include ./features/features.pug
       include ./way/way.pug
       include ./showcase/showcase.pug
+      include ./community/community.pug
     include ./nav/nav.pug
     include ./socials/socials.pug
     include ./footer/footer.pug

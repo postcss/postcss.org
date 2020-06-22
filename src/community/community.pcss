@@ -1,39 +1,39 @@
-.root {
+.community {
+  padding-top: 4rem;
+  background: url("./flowers.svg") center 1rem no-repeat;
+}
+
+.community_inner {
   position: relative;
-  align-items: center;
-  background: #faf8f5;
-  background-size: cover;
   display: flex;
   flex-direction: column;
-  height: 340px;
+  align-items: center;
   justify-content: center;
+  height: 340px;
   padding: 0 1rem;
   overflow: hidden;
+  background: #faf8f5;
 }
 
-.title {
-  color: #dd3a0a;
+.community_title {
   font-size: 1.625rem;
   font-weight: normal;
+  font-weight: 300;
   line-height: 2;
+  color: #dd3a0a;
   text-align: center;
 }
 
-:global(.fira-sans-loaded) .title {
-  font-family: "Fira Sans", sans-serif;
-  font-weight: 300;
-}
-
-.body {
-  color: #3f526b;
+.community_body {
+  max-width: 34rem;
+  margin: 2rem auto 0;
   font-size: 0.9375rem;
   line-height: 1.875;
-  margin: 2rem auto 0;
-  max-width: 34rem;
+  color: #3f526b;
   text-align: center;
 }
 
-.submit {
+.community_submit {
   color: #3f526b;
   text-decoration: underline;
 
@@ -42,35 +42,35 @@
   }
 }
 
-.banner {
-  text-shadow: 0 0 3px #fff;
+.community_banner {
   z-index: 1;
+  text-shadow: 0 0 3px #fff;
 }
 
-.contributors {
+.community_contributors {
   position: absolute;
   top: 20px;
   left: calc(50% - 600px);
+  z-index: 0;
   display: flex;
   flex-wrap: wrap;
   width: 1200px;
-  z-index: 0;
 }
 
-.avatar {
+.community_avatar {
   display: block;
-  margin: 6px;
-  padding: 0;
-  line-height: 60px;
   width: 48px;
   height: 48px;
+  padding: 0;
+  margin: 6px;
   overflow: hidden;
-  opacity: 0.1;
+  line-height: 60px;
   border-radius: 100%;
+  opacity: 0.1;
   transition: opacity 0.5s;
 
   &:hover {
-    transition: opacity 0;
     opacity: 1;
+    transition: opacity 0;
   }
 }
