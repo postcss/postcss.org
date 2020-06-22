@@ -96,7 +96,7 @@
         "dist/index.html",
         "dist/*.svg"
       ],
-      "limit": "70 KB"
+      "limit": "80 KB"
     }
   ]
 }
