@@ -1,20 +1,19 @@
-.root {
+.way {
   padding: 1rem;
 }
 
-.items {
-  align-items: center;
+.way_items {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
   padding: 0 1rem;
 }
 
-.item {
-  background: #475871;
-  margin-bottom: 1px;
-  font-family: sans-serif;
+.way_item {
   width: 15rem;
+  margin-bottom: 1px;
+  background: #475871;
 
   &:first-child {
     border-radius: 5px 5px 0 0;
@@ -25,16 +24,12 @@
   }
 }
 
-:global(.fira-sans-loaded) .item {
-  font-family: "Fira Sans", sans-serif;
-}
-
-.itemLink {
-  color: #faf8f5;
+.way_link {
   display: block;
+  padding: 1.25rem 2rem;
   font-size: 1rem;
   line-height: 1.25;
-  padding: 1.25rem 2rem;
+  color: #faf8f5;
   text-align: center;
   text-decoration: none;
 
@@ -44,13 +39,13 @@
 }
 
 @media (width > 720px) {
-  .items {
+  .way_items {
     flex-direction: row;
   }
 
-  .item {
-    margin-right: 1px;
+  .way_item {
     width: auto;
+    margin-right: 1px;
 
     &:first-child {
       border-radius: 5px 0 0 5px;
