@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "parcel serve src/index.pug --open",
-    "lint": "eslint . && stylelint src/**/*.css",
+    "lint": "eslint . && stylelint src/**/*.pcss",
     "test": "yarn lint && yarn build && size-limit",
     "clean": "del-cli dist/ .cache",
     "build": "NODE_ENV=production ./scripts/build.js"
