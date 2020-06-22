@@ -1,5 +1,9 @@
 .way {
   padding: 1rem;
+
+  @media (width > 420px) {
+    padding-top: 3rem;
+  }
 }
 
 .way_items {
@@ -8,6 +12,10 @@
   align-items: center;
   justify-content: center;
   padding: 0 1rem;
+
+  @media (width > 720px) {
+    flex-direction: row;
+  }
 }
 
 .way_item {
@@ -22,6 +30,19 @@
   &:last-child {
     border-radius: 0 0 5px 5px;
   }
+
+  @media (width > 720px) {
+    width: auto;
+    margin-right: 1px;
+
+    &:first-child {
+      border-radius: 5px 0 0 5px;
+    }
+
+    &:last-child {
+      border-radius: 0 5px 5px 0;
+    }
+  }
 }
 
 .way_link {
@@ -35,30 +56,5 @@
 
   &:hover {
     text-decoration: underline;
-  }
-}
-
-@media (width > 420px) {
-  .way {
-    padding-top: 3rem;
-  }
-}
-
-@media (width > 720px) {
-  .way_items {
-    flex-direction: row;
-  }
-
-  .way_item {
-    width: auto;
-    margin-right: 1px;
-
-    &:first-child {
-      border-radius: 5px 0 0 5px;
-    }
-
-    &:last-child {
-      border-radius: 0 5px 5px 0;
-    }
   }
 }

@@ -5,6 +5,15 @@
 
 .footer_inner {
   text-align: center;
+
+  @media (width > 500px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 50rem;
+    margin: 0 auto;
+    text-align: initial;
+  }
 }
 
 .footer_info {
@@ -26,16 +35,5 @@
 
   &:hover {
     text-decoration: none;
-  }
-}
-
-@media (width > 500px) {
-  .footer_inner {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    max-width: 50rem;
-    margin: 0 auto;
-    text-align: initial;
   }
 }

@@ -5,6 +5,11 @@
   left: 0;
   font-weight: 500;
   background-color: rgba(0, 0, 0, 0.4);
+
+  @media (width > 580px) {
+    right: auto;
+    width: 50%;
+  }
 }
 
 .nav_items {
@@ -13,6 +18,10 @@
   justify-content: center;
   height: 3rem;
   padding: 0 1rem;
+
+  @media (width > 580px) {
+    justify-content: flex-start;
+  }
 }
 
 .nav_item {
@@ -29,16 +38,5 @@
 
   &:hover {
     text-decoration: underline;
-  }
-}
-
-@media (width > 580px) {
-  .nav {
-    right: auto;
-    width: 50%;
-  }
-
-  .nav_items {
-    justify-content: flex-start;
   }
 }

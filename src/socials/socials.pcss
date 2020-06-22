@@ -1,6 +1,15 @@
 .socials {
   font-weight: 500;
   background-color: rgba(0, 0, 0, 0.68);
+
+  @media (width > 580px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    margin-top: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
 }
 
 .socials_items {
@@ -14,6 +23,10 @@
 .socials_item {
   &:not(:last-child) {
     margin-right: 1.5rem;
+  }
+
+  @media (width > 580px) {
+    justify-content: flex-end;
   }
 }
 
@@ -42,20 +55,5 @@
 
   &:hover {
     text-decoration: underline;
-  }
-}
-
-@media (width > 580px) {
-  .socials {
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 50%;
-    margin-top: 0;
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-
-  .socials_items {
-    justify-content: flex-end;
   }
 }

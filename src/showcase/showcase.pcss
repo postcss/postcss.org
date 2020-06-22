@@ -4,6 +4,11 @@
   padding: 5rem 1rem 1rem 1rem;
   margin: 0 auto;
   background: url("./burst.svg") center 2rem no-repeat;
+
+  @media (width > 410px) {
+    padding-top: 6rem;
+    background-position: center 3rem;
+  }
 }
 
 .showcase_title {
@@ -17,6 +22,13 @@
 
 .showcase_items {
   margin: 1.5rem auto 0;
+
+  @media (width > 410px) {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
 }
 
 .showcase_item {
@@ -25,32 +37,16 @@
   align-items: center;
   justify-content: center;
   margin: 1rem;
+
+  @media (width > 410px) {
+    flex-basis: calc(33% - 2rem);
+  }
+
+  @media (width > 800px) {
+    flex-basis: 150px;
+  }
 }
 
 .showcase_logo {
   max-width: 100%;
-}
-
-@media (width > 410px) {
-  .showcase {
-    padding-top: 6rem;
-    background-position: center 3rem;
-  }
-
-  .showcase_items {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .showcase_item {
-    flex-basis: calc(33% - 2rem);
-  }
-}
-
-@media (width > 800px) {
-  .showcase_item {
-    flex-basis: 150px;
-  }
 }
