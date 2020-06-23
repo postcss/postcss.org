@@ -108,7 +108,7 @@
         "dist/alchemy.*.jpg",
         "dist/*.woff2"
       ],
-      "limit": "200 KB"
+      "limit": "300 KB"
     }
   ]
 }
