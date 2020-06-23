@@ -1,3 +1,6 @@
+[build.environment]
+  NODE_ENV = "production"
+
 [[headers]]
   for = "/*.svg"
   [headers.values]
