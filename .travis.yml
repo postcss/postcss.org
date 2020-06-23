@@ -4,7 +4,7 @@ node_js:
 deploy:
   provider: pages
   skip-cleanup: true
-  github-token: $DEPLOY_TOKEN
+  github-token: $GITHUB_TOKEN
   local-dir: dist
   "on":
     branch: master
