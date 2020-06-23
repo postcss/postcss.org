@@ -13,7 +13,7 @@
     "start:build": "serve dist"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.1",
+    "autoprefixer": "^9.8.2",
     "del": "^5.1.0",
     "del-cli": "^3.0.1",
     "jstransformer-lowlight": "^0.1.0",
@@ -31,10 +31,10 @@
     "@logux/eslint-config": "^39.0.3",
     "@logux/stylelint-config": "^0.1.3",
     "@size-limit/file": "^4.5.1",
-    "eslint": "^7.3.0",
+    "eslint": "^7.3.1",
     "eslint-config-standard": "^14.1.1",
     "eslint-plugin-import": "^2.21.2",
-    "eslint-plugin-jest": "^23.13.2",
+    "eslint-plugin-jest": "^23.16.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-let": "^1.0.1",
     "eslint-plugin-prettierx": "^0.12.1",
