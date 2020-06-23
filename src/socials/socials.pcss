@@ -1,0 +1,57 @@
+.socials {
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.68);
+
+  @media (width > 580px) {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 50%;
+    margin-top: 0;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+}
+
+.socials_items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 3rem;
+  padding: 0 1rem;
+
+  @media (width > 580px) {
+    justify-content: flex-end;
+  }
+}
+
+.socials_item {
+  &:not(:last-child) {
+    margin-right: 1.5rem;
+  }
+}
+
+.socials_link {
+  padding-left: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.425;
+  color: #eee7df;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  background-position: 0 center;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &.is-twitter {
+    background-image: url("./twitter.svg");
+  }
+
+  &.is-gitter {
+    background-image: url("./gitter.svg");
+  }
+
+  &.is-github {
+    background-image: url("./github.svg");
+  }
+}

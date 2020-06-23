@@ -1,0 +1,76 @@
+.community {
+  padding-top: 4rem;
+  background: url("./flowers.svg") center 1rem no-repeat;
+}
+
+.community_inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 340px;
+  padding: 0 1rem;
+  overflow: hidden;
+  background: #faf8f5;
+}
+
+.community_title {
+  font-size: 1.625rem;
+  font-weight: normal;
+  font-weight: 300;
+  line-height: 2;
+  color: #dd3a0a;
+  text-align: center;
+}
+
+.community_body {
+  max-width: 34rem;
+  margin: 2rem auto 0;
+  font-size: 0.9375rem;
+  line-height: 1.875;
+  color: #3f526b;
+  text-align: center;
+}
+
+.community_submit {
+  color: #3f526b;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.community_banner {
+  z-index: 1;
+  text-shadow: 0 0 3px #fff;
+}
+
+.community_contributors {
+  position: absolute;
+  top: 20px;
+  left: calc(50% - 600px);
+  z-index: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 1200px;
+}
+
+.community_avatar {
+  display: block;
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  margin: 6px;
+  overflow: hidden;
+  line-height: 60px;
+  border-radius: 100%;
+  opacity: 0.1;
+  transition: opacity 0.5s;
+
+  &:hover {
+    opacity: 1;
+    transition: opacity 0;
+  }
+}

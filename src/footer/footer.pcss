@@ -1,0 +1,39 @@
+.footer {
+  padding: 3rem 1rem;
+  background: #f4f2ed;
+}
+
+.footer_inner {
+  text-align: center;
+
+  @media (width > 500px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    max-width: 50rem;
+    margin: 0 auto;
+    text-align: initial;
+  }
+}
+
+.footer_info {
+  margin-bottom: 0.25rem;
+  font-size: 0.8125rem;
+  line-height: 2.15;
+  color: rgba(72, 70, 62, 0.77);
+}
+
+.footer_issue {
+  margin-bottom: 1rem;
+}
+
+.footer_report {
+  display: inline-block;
+  margin-left: 0.25rem;
+  color: rgba(72, 70, 62, 0.77);
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
