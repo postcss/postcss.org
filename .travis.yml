@@ -1,3 +1,10 @@
 language: node_js
 node_js:
   - node
+deploy:
+  provider: pages
+  skip-cleanup: true
+  github-token: $DEPLOY_TOKEN
+  local-dir: dist
+  "on":
+    branch: master
