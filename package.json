@@ -24,6 +24,7 @@
     "postcss-media-minmax": "^4.0.0",
     "postcss-nested": "^4.2.1",
     "posthtml": "^0.13.1",
+    "pug": "^3.0.0",
     "rollup": "^2.18.0",
     "rollup-plugin-terser": "^6.1.0"
   },
@@ -44,7 +45,6 @@
     "eslint-plugin-unicorn": "^20.1.0",
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
-    "pug": "^3.0.0",
     "serve": "^11.3.2",
     "size-limit": "^4.5.1",
     "stylelint": "^13.6.1",
