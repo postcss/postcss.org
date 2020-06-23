@@ -104,9 +104,11 @@
     {
       "path": [
         "dist/index.html",
-        "dist/*.svg"
+        "dist/*.svg",
+        "dist/alchemy.*.jpg",
+        "dist/*.woff2"
       ],
-      "limit": "80 KB"
+      "limit": "200 KB"
     }
   ]
 }
