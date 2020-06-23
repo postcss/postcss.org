@@ -26,7 +26,11 @@
 
 .nav_item {
   &:not(:last-child) {
-    margin-right: 1.5rem;
+    margin-right: 0.8rem;
+
+    @media (width > 580px) {
+      margin-right: 1.5rem;
+    }
   }
 }
 
