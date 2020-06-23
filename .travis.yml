@@ -5,6 +5,7 @@ deploy:
   provider: pages
   skip-cleanup: true
   github-token: $GITHUB_TOKEN
+  fqdn: postcss.org
   local-dir: dist
   "on":
     branch: master
