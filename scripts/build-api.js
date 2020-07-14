@@ -34,6 +34,7 @@ async function downloadProject (name) {
   if (existsSync(dir)) return
   let url = `https://github.com/postcss/${name}.git`
   await exec(`git clone --depth 1 ${url} "${dir}"`)
+  await exec(`git pull`)
   await exec(`git checkout ose`)
   await exec('yarn install', { cwd: dir })
 }
@@ -152,9 +153,13 @@ function toHTML (markdown) {
     .contents.replace(/hljs language-js/g, 'code')
 }
 
-function comment (node) {
-  if (!node.comment) return ''
-  return toHTML(node.comment.shortText + '\n\n' + node.comment.text)
+function commentHtml (node) {
+  let comment = node.comment
+  if (node.name === 'Postcss') {
+    comment = node.signatures[0].comment
+  }
+  if (!comment) return ''
+  return toHTML(comment.shortText + '\n\n' + comment.text)
 }
 
 function generateBody (nodes) {
@@ -195,11 +200,10 @@ function generateBody (nodes) {
       let type = node
       if (node.name === 'postcss') {
         type = node.type.reflection
-        console.log(type)
       }
       return tag(
         'section.doc',
-        tag('h1.doc_title', { id }, node.name) + comment(node)
+        tag('h1.doc_title', { id }, node.name) + commentHtml(type)
       )
     })
     .join('')
