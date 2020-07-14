@@ -34,7 +34,8 @@ async function downloadProject (name) {
   if (existsSync(dir)) return
   let url = `https://github.com/postcss/${name}.git`
   await exec(`git clone --depth 1 ${url} "${dir}"`)
-  await exec('yarn install --production=false', { cwd: dir })
+  await exec(`git checkout ose`)
+  await exec('yarn install', { cwd: dir })
 }
 
 async function readTypedoc () {
@@ -157,7 +158,19 @@ function comment (node) {
 }
 
 function generateBody (nodes) {
-  let ignore = ['Postcss', 'List']
+  let ignore = [
+    'Postcss',
+    'List',
+    'stringify',
+    'space',
+    'rule',
+    'root',
+    'plugin',
+    'parse',
+    'decl',
+    'comma',
+    'atRule'
+  ]
   return nodes
     .filter(node => !ignore.includes(node.name))
     .sort((a, b) => {
