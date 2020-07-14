@@ -33,10 +33,7 @@ async function downloadProject (name) {
   let dir = join(PROJECTS, name)
   if (existsSync(dir)) return
   let url = `https://github.com/postcss/${name}.git`
-  // await exec(`git clone --depth 1 ${url} "${dir}"`)
-  await exec(`git clone ${url} "${dir}"`)
-  await exec(`git pull`)
-  await exec(`git checkout ose`)
+  await exec(`git clone --branch ose --depth 1 ${url} "${dir}"`)
   await exec('yarn install', { cwd: dir })
 }
 
