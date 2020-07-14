@@ -34,6 +34,7 @@ async function downloadProject (name) {
   if (existsSync(dir)) return
   let url = `https://github.com/postcss/${name}.git`
   await exec(`git clone --depth 1 ${url} "${dir}"`)
+  await exec('yarn install --production=false', { cwd: dir })
 }
 
 async function readTypedoc () {
@@ -178,6 +179,11 @@ function generateBody (nodes) {
     })
     .map(node => {
       let id = node.name.toLowerCase()
+      let type = node
+      if (node.name === 'postcss') {
+        type = node.type.reflection
+        console.log(type)
+      }
       return tag(
         'section.doc',
         tag('h1.doc_title', { id }, node.name) + comment(node)
