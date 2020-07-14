@@ -112,6 +112,7 @@
   },
   "size-limit": [
     {
+      "name": "Home",
       "path": [
         "dist/index.html",
         "dist/*.svg",
@@ -119,6 +120,17 @@
         "dist/*.woff2"
       ],
       "limit": "300 KB"
+    },
+    {
+      "name": "API",
+      "path": [
+        "dist/api/index.html",
+        "dist/api-*.css",
+        "dist/postcss.*.jpg",
+        "dist/alchemy.*.jpg",
+        "dist/*.woff2"
+      ],
+      "limit": "250 KB"
     }
   ]
 }
