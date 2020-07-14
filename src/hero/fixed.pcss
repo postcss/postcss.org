@@ -1,0 +1,27 @@
+.hero::before {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 3rem;
+  content: "";
+  background: #2b2723 url("./alchemy.jpg") no-repeat 50% 4%;
+  background-size: cover;
+}
+
+.hero_home {
+  position: fixed;
+  top: 0.5rem;
+  left: 50%;
+  z-index: 2;
+  margin-left: -1rem;
+
+  &:hover {
+    opacity: 0.7;
+  }
+}
+
+.hero_logo {
+  width: 2rem;
+  height: 2rem;
+}

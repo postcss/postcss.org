@@ -1,0 +1,36 @@
+.sidemenu {
+  position: fixed;
+  top: 3rem;
+  bottom: 0;
+  left: 0;
+  width: 11rem;
+  overflow-y: auto;
+  background: #faf8f5;
+}
+
+.sidemenu_section,
+.sidemenu_child {
+  display: block;
+  padding: 0.4rem 1rem;
+  text-decoration: none;
+}
+
+.sidemenu_section {
+  font-weight: bold;
+  color: #dd3a0a;
+
+  :not(:first-child) > & {
+    margin-top: 1rem;
+  }
+}
+
+.sidemenu_child {
+  padding-left: 2rem;
+  font-size: 14px;
+  color: #3f526b;
+}
+
+.sidemenu_section:hover,
+.sidemenu_child:hover {
+  background: #fff;
+}
