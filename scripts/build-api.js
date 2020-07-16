@@ -142,22 +142,74 @@ function generateSidemenu (nodes) {
   return html
 }
 
-function toHTML (markdown) {
-  return unified()
+function toHTML (nodes, markdown) {
+  if (!markdown) return ''
+  let html = unified()
     .use(remarkParse)
     .use(remarkHighlight, { prefix: 'code_' })
     .use(remarkHtml)
-    .processSync(markdown)
-    .contents.replace(/hljs language-js/g, 'code')
+    .processSync(markdown).contents
+  return html
+    .replace(/hljs language-js/g, 'code')
+    .replace(/<code>[A-Z]\w+(#\w+)?<\/code>/g, str => {
+      let cls = str.match(/[A-Z]\w+/)[0]
+      if (nodes.some(i => i.name === cls)) {
+        if (str.includes('#')) {
+          let method = str.match(/#(\w+)/)[1]
+          return tag(
+            'code',
+            tag(
+              'a',
+              { href: `#${cls.toLowerCase()}-${method.toLowerCase()}` },
+              cls + '#' + method
+            )
+          )
+        } else {
+          return tag('code', tag('a', { href: `#${cls.toLowerCase()}` }, cls))
+        }
+      } else {
+        return str
+      }
+    })
 }
 
-function commentHtml (node) {
+function commentHtml (nodes, node) {
   let comment = node.comment
-  if (node.name === 'Postcss') {
+  if (node.signatures && node.signatures[0].comment) {
     comment = node.signatures[0].comment
   }
   if (!comment) return ''
-  return toHTML(comment.shortText + '\n\n' + comment.text)
+  return toHTML(nodes, comment.shortText + '\n\n' + comment.text)
+}
+
+function typeHtml (nodes, type) {
+  return type.toString().replace(/[A-Z]\w+/, cls => {
+    if (nodes.some(i => i.name === cls)) {
+      return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
+    } else {
+      return cls
+    }
+  })
+}
+
+function signaturesHtml (nodes, node) {
+  if (!node.signatures) return ''
+  let comment = node.comment || node.signatures[0].comment || {}
+  let returns
+  if (node.signatures[0].type.name === 'this') {
+    returns = tag('p', 'Returns itself for methods chain.')
+  } else if (node.signatures[0].type.name === 'void') {
+    returns = ''
+  } else {
+    returns = tag(
+      'p',
+      'Returns ' +
+        tag('code', typeHtml(nodes, node.signatures[0].type)) +
+        '. ' +
+        toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
+    )
+  }
+  return returns
 }
 
 function generateBody (nodes) {
@@ -201,7 +253,32 @@ function generateBody (nodes) {
       }
       return tag(
         'section.doc',
-        tag('h1.doc_title', { id }, node.name) + commentHtml(type)
+        tag('h1.doc_title', { id }, node.name) +
+          commentHtml(nodes, type) +
+          signaturesHtml(nodes, type) +
+          (type.children || [])
+            .filter(member => member.name !== 'constructor')
+            .map(member => {
+              let memberId = id + '-' + member.name.toLowerCase()
+              let prefix = node.name
+              if (node.name === 'postcss' || node.name === 'list') {
+                prefix += '.'
+              } else {
+                prefix += '#'
+              }
+              let postfix = ''
+              if (member.kindString === 'Method') postfix += '()'
+              return (
+                tag(
+                  'h2.doc_subtitle',
+                  { id: memberId },
+                  tag('span.doc_prefix', prefix) + member.name + postfix
+                ) +
+                commentHtml(nodes, member) +
+                signaturesHtml(nodes, member)
+              )
+            })
+            .join('')
       )
     })
     .join('')

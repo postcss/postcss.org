@@ -8,13 +8,27 @@
   }
 }
 
-.doc_title {
+.doc_title,
+.doc_subtitle {
   margin-bottom: 1rem;
   font-size: 1.5625rem;
   font-weight: lighter;
   font-weight: 300;
   line-height: 1.28;
   color: #3f526b;
+}
+
+.doc_title {
+  font-size: 1.5625rem;
+}
+
+.doc_subtitle {
+  font-size: 1.25rem;
+}
+
+.doc_prefix {
+  padding-right: 0.2rem;
+  opacity: 0.5;
 }
 
 .doc > p {
@@ -27,9 +41,17 @@
 
 .doc > p code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
-  font-size: 0.825rem;
+  font-size: 0.9rem;
+}
+
+.doc > p a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 html {
-  scroll-padding-top: 90px;
+  scroll-padding-top: 70px;
 }
