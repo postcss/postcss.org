@@ -183,13 +183,21 @@ function commentHtml (nodes, node) {
 }
 
 function typeHtml (nodes, type) {
-  return type.toString().replace(/[A-Z]\w+/, cls => {
-    if (nodes.some(i => i.name === cls)) {
-      return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
-    } else {
-      return cls
-    }
-  })
+  return type
+    .toString()
+    .replace(/[A-Z]\w+/g, cls => {
+      if (nodes.some(i => i.name === cls)) {
+        return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
+      } else {
+        return cls
+      }
+    })
+    .replace(/<>/g, '')
+}
+
+function varHtml (nodes, type) {
+  if (!type) return ''
+  return tag('p', 'Type: ' + typeHtml(nodes, type) + '.')
 }
 
 function signaturesHtml (nodes, node) {
@@ -255,6 +263,7 @@ function generateBody (nodes) {
         'section.doc',
         tag('h1.doc_title', { id }, node.name) +
           commentHtml(nodes, type) +
+          varHtml(nodes, type.type) +
           signaturesHtml(nodes, type) +
           (type.children || [])
             .filter(member => member.name !== 'constructor')
@@ -275,6 +284,7 @@ function generateBody (nodes) {
                   tag('span.doc_prefix', prefix) + member.name + postfix
                 ) +
                 commentHtml(nodes, member) +
+                varHtml(nodes, member.type) +
                 signaturesHtml(nodes, member)
               )
             })
