@@ -187,7 +187,7 @@ function functionHtml (nodes, node) {
   return (
     '(' +
     (signature.parameters || [])
-      .map(param => param.name + ': ' + typeHtml(nodes, param.type))
+      .map(param => param.name + ': ' + typeHtml(nodes, param.type))
       .join(', ') +
     ') => ' +
     typeHtml(nodes, signature.type)
@@ -205,9 +205,9 @@ function typeHtml (nodes, type) {
       type.declaration.children
         .map(i => {
           if (i.kindString === 'Function') {
-            return i.name + ': ' + functionHtml(nodes, i)
+            return i.name + ': ' + functionHtml(nodes, i)
           } else {
-            return i.name + ': ' + typeHtml(nodes, i.type)
+            return i.name + ': ' + typeHtml(nodes, i.type)
           }
         })
         .join(', ') +
@@ -216,14 +216,28 @@ function typeHtml (nodes, type) {
     string = functionHtml(nodes, type.declaration)
   }
   return string
-    .replace(/[A-Z]\w+/g, cls => {
+    .replace(/<>/g, '')
+    .replace(
+      'DeclarationProps | Declaration | AtRule | Rule | Comment | AtRuleProps' +
+        ' | RuleProps | CommentProps',
+      'ChildProps | ChildNode'
+    )
+    .replace(
+      /\(DeclarationProps \| At(?:RuleProps \| ){2}CommentProps\)/g,
+      'ChildProps'
+    )
+    .replace(/\(Declaration \| AtRule \| Rule \| Comment\)/g, 'ChildNode')
+    .replace(
+      /DeclarationProps \| Node \| At(?:RuleProps \| ){2}Com{2}entProps/g,
+      'ChildProps | Node'
+    )
+    .replace(/[A-Z]\w+(?!:)/g, cls => {
       if (nodes.some(i => i.name === cls)) {
         return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
       } else {
         return cls
       }
     })
-    .replace(/<>/g, '')
 }
 
 function varHtml (nodes, type) {
@@ -269,12 +283,18 @@ function signaturesHtml (nodes, node) {
   if (node.signatures[0].type.name === 'this') {
     returns = tag('p', 'Returns itself for methods chain.')
   } else if (/^(walk|each)/.test(node.name)) {
-    returns = tag('p', [
-      'Returns ',
-      tag('code', 'undefined | false'),
-      '. ',
-      toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
-    ])
+    return (
+      tableHtml(nodes, 'Argument', node.signatures[0].parameters).replace(
+        ' => void',
+        ' => void | false'
+      ) +
+      tag('p', [
+        'Returns ',
+        tag('code', 'void | false'),
+        '. ',
+        toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
+      ])
+    )
   } else if (node.signatures[0].type.name === 'void') {
     returns = ''
   } else {
@@ -338,7 +358,9 @@ function generateBody (nodes) {
         tag('h1.doc_title', { id }, node.name) + commentHtml(nodes, type)
 
       if (
-        /(Options|Raws|Props|Source|Position|Message)$/.test(node.name) &&
+        /(Options|Raws|Props|Source|Position|Message|Syntax)$/.test(
+          node.name
+        ) &&
         node.name !== 'ChildProps'
       ) {
         return tag('section.doc', [
