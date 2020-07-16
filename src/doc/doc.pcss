@@ -27,30 +27,58 @@
 }
 
 .doc_prefix {
-  font-weight: lighter;
   font-weight: 300;
   opacity: 0.5;
 }
 
-.doc > p {
+.doc > p,
+.doc > pre,
+.doc > ul,
+.doc > table {
   margin-bottom: 1rem;
 }
 
-.doc > pre {
-  margin-bottom: 1rem;
+.doc > ul li {
+  margin-bottom: 0.5rem;
+  list-style: disc;
 }
 
-.doc > p code {
+.doc > p code,
+.doc > table code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
   font-size: 0.9rem;
 }
 
-.doc > p a {
+.doc > p a,
+.doc > table a,
+.doc > ul a {
   color: inherit;
 
   &:hover {
     text-decoration: none;
   }
+}
+
+.doc > table {
+  width: 100%;
+  margin: -0.5rem -0.5rem 1rem -0.5rem;
+  border-collapse: collapse;
+}
+
+.doc > table tr:nth-child(2n) {
+  background: #faf8f5;
+}
+
+.doc > table th {
+  padding: 0.5rem;
+  font-weight: 300;
+  color: #3f526b;
+  text-align: left;
+}
+
+.doc > table td {
+  padding: 0.5rem;
+  vertical-align: top;
 }
 
 html {

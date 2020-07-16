@@ -182,9 +182,40 @@ function commentHtml (nodes, node) {
   return toHTML(nodes, comment.shortText + '\n\n' + comment.text)
 }
 
+function functionHtml (nodes, node) {
+  let signature = node.signatures[0]
+  return (
+    '(' +
+    (signature.parameters || [])
+      .map(param => param.name + ': ' + typeHtml(nodes, param.type))
+      .join(', ') +
+    ') => ' +
+    typeHtml(nodes, signature.type)
+  )
+}
+
 function typeHtml (nodes, type) {
-  return type
-    .toString()
+  if (type.type === 'union') {
+    return type.types.map(i => typeHtml(nodes, i)).join(' | ')
+  }
+  let string = type.toString()
+  if (string === 'object' && type.declaration) {
+    string =
+      '{ ' +
+      type.declaration.children
+        .map(i => {
+          if (i.kindString === 'Function') {
+            return i.name + ': ' + functionHtml(nodes, i)
+          } else {
+            return i.name + ': ' + typeHtml(nodes, i.type)
+          }
+        })
+        .join(', ') +
+      ' }'
+  } else if (string === 'function') {
+    string = functionHtml(nodes, type.declaration)
+  }
+  return string
     .replace(/[A-Z]\w+/g, cls => {
       if (nodes.some(i => i.name === cls)) {
         return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
@@ -200,24 +231,68 @@ function varHtml (nodes, type) {
   return tag('p', 'Type: ' + typeHtml(nodes, type) + '.')
 }
 
+function tableHtml (nodes, title, values) {
+  let comments = values.map((i, index) => {
+    let comment = i
+    if (!comment.comment && i.parent.parent.signatures) {
+      comment = i.parent.parent.signatures[0].parameters[index] || {}
+    }
+    if (!comment.comment && i.parent.overwrites) {
+      comment = i.parent.overwrites.reflection.signatures[0].parameters[index]
+    }
+    return commentHtml(nodes, comment).replace(/<\/?p>/g, '')
+  })
+  let hasComment = comments.some(i => i)
+  return tag('table', [
+    tag('tr', [
+      tag('th', title),
+      tag('th', 'Type'),
+      hasComment ? tag('th', 'Description') : ''
+    ]),
+    ...values.map((i, index) => {
+      let name = i.name
+      if (i.flags.isRest) name += '…'
+      if (i.isOptional) name += '?'
+      return tag('tr', [
+        tag('td', tag('code', name)),
+        tag('td', typeHtml(nodes, i.type)),
+        hasComment ? tag('td', comments[index]) : ''
+      ])
+    })
+  ])
+}
+
 function signaturesHtml (nodes, node) {
   if (!node.signatures) return ''
   let comment = node.comment || node.signatures[0].comment || {}
   let returns
   if (node.signatures[0].type.name === 'this') {
     returns = tag('p', 'Returns itself for methods chain.')
+  } else if (/^(walk|each)/.test(node.name)) {
+    returns = tag('p', [
+      'Returns ',
+      tag('code', 'undefined | false'),
+      '. ',
+      toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
+    ])
   } else if (node.signatures[0].type.name === 'void') {
     returns = ''
   } else {
-    returns = tag(
-      'p',
-      'Returns ' +
-        tag('code', typeHtml(nodes, node.signatures[0].type)) +
-        '. ' +
-        toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
-    )
+    returns = tag('p', [
+      'Returns ',
+      tag('code', typeHtml(nodes, node.signatures[0].type)),
+      '. ',
+      toHTML(nodes, comment.returns).replace(/<\/?p>/g, '')
+    ])
   }
-  return returns
+  return (
+    node.signatures
+      .filter(signature => signature.parameters)
+      .map(signature => {
+        return tableHtml(nodes, 'Argument', signature.parameters)
+      })
+      .join('') + returns
+  )
 }
 
 function generateBody (nodes) {
@@ -256,40 +331,66 @@ function generateBody (nodes) {
     .map(node => {
       let id = node.name.toLowerCase()
       let type = node
-      if (node.name === 'postcss') {
+      if (node.name === 'postcss' || node.name === 'list') {
         type = node.type.reflection
       }
-      return tag(
-        'section.doc',
-        tag('h1.doc_title', { id }, node.name) +
-          commentHtml(nodes, type) +
-          varHtml(nodes, type.type) +
-          signaturesHtml(nodes, type) +
-          (type.children || [])
-            .filter(member => member.name !== 'constructor')
-            .map(member => {
-              let memberId = id + '-' + member.name.toLowerCase()
-              let prefix = node.name
-              if (node.name === 'postcss' || node.name === 'list') {
-                prefix += '.'
-              } else {
-                prefix += '#'
-              }
-              let postfix = ''
-              if (member.kindString === 'Method') postfix += '()'
-              return (
-                tag(
-                  'h2.doc_subtitle',
-                  { id: memberId },
-                  tag('span.doc_prefix', prefix) + member.name + postfix
-                ) +
-                commentHtml(nodes, member) +
-                varHtml(nodes, member.type) +
-                signaturesHtml(nodes, member)
+      let title =
+        tag('h1.doc_title', { id }, node.name) + commentHtml(nodes, type)
+
+      if (
+        /(Options|Raws|Props|Source|Position|Message)$/.test(node.name) &&
+        node.name !== 'ChildProps'
+      ) {
+        return tag('section.doc', [
+          title,
+          tableHtml(nodes, 'Property', type.children)
+        ])
+      }
+
+      let content = type.type
+      let children = type.children || []
+      if (type.type && type.type.toString() === 'object') {
+        content = false
+        children = type.type.declaration.children
+      }
+      return tag('section.doc', [
+        title,
+        varHtml(nodes, content),
+        signaturesHtml(nodes, type),
+        ...children
+          .filter(member => member.name !== 'constructor')
+          .map(member => {
+            let memberId = id + '-' + member.name.toLowerCase()
+            let prefix = node.name
+            if (node.name === 'postcss' || node.name === 'list') {
+              prefix += '.'
+            } else {
+              prefix += '#'
+            }
+            let postfix = ''
+            if (member.kindString === 'Method') postfix += '()'
+            let memberContent
+            if (member.type && member.type.toString() === 'object') {
+              children = tableHtml(
+                nodes,
+                'Property',
+                member.type.declaration.children
               )
-            })
-            .join('')
-      )
+            } else {
+              memberContent = varHtml(nodes, member.type)
+            }
+            return (
+              tag(
+                'h2.doc_subtitle',
+                { id: memberId },
+                tag('span.doc_prefix', prefix) + member.name + postfix
+              ) +
+              commentHtml(nodes, member) +
+              memberContent +
+              signaturesHtml(nodes, member)
+            )
+          })
+      ])
     })
     .join('')
 }
