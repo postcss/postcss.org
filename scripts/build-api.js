@@ -182,40 +182,46 @@ function commentHtml (nodes, node) {
   return toHTML(nodes, comment.shortText + '\n\n' + comment.text)
 }
 
-function functionHtml (nodes, node) {
+function functionString (node) {
   let signature = node.signatures[0]
   return (
     '(' +
     (signature.parameters || [])
-      .map(param => param.name + ': ' + typeHtml(nodes, param.type))
+      .map(param => param.name + ': ' + typeString(param.type))
       .join(', ') +
     ') => ' +
-    typeHtml(nodes, signature.type)
+    typeString(signature.type)
   )
 }
 
-function typeHtml (nodes, type) {
+function typeString (type) {
   if (type.type === 'union') {
-    return type.types.map(i => typeHtml(nodes, i)).join(' | ')
+    return type.types.map(i => typeString(i)).join(' | ')
   }
   let string = type.toString()
   if (string === 'object' && type.declaration) {
-    string =
+    return (
       '{ ' +
       type.declaration.children
         .map(i => {
           if (i.kindString === 'Function') {
-            return i.name + ': ' + functionHtml(nodes, i)
+            return i.name + ': ' + functionString(i)
           } else {
-            return i.name + ': ' + typeHtml(nodes, i.type)
+            return i.name + ': ' + typeString(i.type)
           }
         })
         .join(', ') +
       ' }'
+    )
   } else if (string === 'function') {
-    string = functionHtml(nodes, type.declaration)
+    return functionString(type.declaration)
+  } else {
+    return string
   }
-  return string
+}
+
+function typeHtml (nodes, type) {
+  return typeString(type)
     .replace(/<>/g, '')
     .replace(
       'DeclarationProps | Declaration | AtRule | Rule | Comment | AtRuleProps' +
@@ -231,6 +237,8 @@ function typeHtml (nodes, type) {
       /DeclarationProps \| Node \| At(?:RuleProps \| ){2}Com{2}entProps/g,
       'ChildProps | Node'
     )
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
     .replace(/[A-Z]\w+(?!:)/g, cls => {
       if (nodes.some(i => i.name === cls)) {
         return tag('a', { href: `#${cls.toLowerCase()}` }, cls)
