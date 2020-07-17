@@ -1,0 +1,132 @@
+.doc {
+  max-width: 70rem;
+  padding: 2rem 2rem 1rem 2rem;
+  margin: 0 auto;
+
+  @media (width > 975px) {
+    padding: 2rem 2rem 1rem 13rem;
+
+    &:first-child {
+      padding-top: 5rem;
+    }
+  }
+
+  @media (width <= 975px) {
+    padding: 2rem 1rem 1rem 1rem;
+
+    &:first-child {
+      padding-top: 4rem;
+    }
+  }
+}
+
+.doc_title,
+.doc_subtitle {
+  margin-bottom: 1rem;
+  font-size: 1.5625rem;
+  font-weight: normal;
+  line-height: 1.28;
+  color: #3f526b;
+}
+
+.doc_title {
+  font-size: 1.5625rem;
+}
+
+.doc_subtitle {
+  margin-top: 2rem;
+  font-size: 1.25rem;
+}
+
+.doc_prefix {
+  font-weight: 300;
+  opacity: 0.5;
+}
+
+.doc > p,
+.doc > pre,
+.doc > ul,
+.doc > table {
+  margin-bottom: 1rem;
+}
+
+.doc > ul li {
+  margin-bottom: 0.5rem;
+  list-style: disc;
+}
+
+.doc > p code,
+.doc > table code {
+  font-family: Monaco, Menlo, "Fira Mono", monospace;
+  font-size: 0.9rem;
+}
+
+.doc > p a,
+.doc > table a,
+.doc > ul a {
+  color: inherit;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.doc > table {
+  width: calc(100% + 1rem);
+  margin: -0.5rem -0.5rem 1rem -0.5rem;
+  border-collapse: collapse;
+}
+
+.doc > table tr {
+  @media (width <= 975px) {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto auto;
+  }
+}
+
+.doc > table tr:nth-child(2n) {
+  background: #faf8f5;
+}
+
+.doc > table th {
+  padding: 0.5rem;
+  font-weight: 300;
+  color: #3f526b;
+  text-align: left;
+
+  @media (width <= 975px) {
+    display: none;
+  }
+}
+
+.doc > table td {
+  vertical-align: top;
+
+  @media (width > 975px) {
+    padding: 0.5rem;
+  }
+
+  @media (width <= 975px) {
+    padding: 0.5rem;
+
+    &:first-child {
+      padding-right: 0
+    }
+
+    &:nth-child(2) {
+      padding-left: 0;
+      text-align: right
+    }
+
+    &:nth-child(3) {
+      grid-column-start: 1;
+      grid-column-end: 3;
+      padding-top: 0;
+    }
+  }
+}
+
+html {
+  scroll-padding-top: 70px;
+}

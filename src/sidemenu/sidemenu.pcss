@@ -1,0 +1,38 @@
+.sidemenu {
+  position: fixed;
+  top: 3rem;
+  bottom: 0;
+  left: 0;
+  width: 11rem;
+  overflow-y: auto;
+  background: #faf8f5;
+
+  @media (width <= 975px) {
+    display: none;
+  }
+}
+
+.sidemenu_section,
+.sidemenu_child {
+  display: block;
+  text-decoration: none;
+}
+
+.sidemenu_section {
+  padding: 0.4rem 0 0.4rem 1rem;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  color: #3f526b;
+}
+
+.sidemenu_child {
+  padding: 0.2rem 0 0.2rem 1rem;
+  padding-left: 2rem;
+  font-size: 14px;
+  color: #3f526b;
+}
+
+.sidemenu_section:hover,
+.sidemenu_child:hover {
+  background: #fff;
+}

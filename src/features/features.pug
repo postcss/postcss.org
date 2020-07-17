@@ -7,14 +7,14 @@ section.feature
       p.feature_body
         | Add vendor prefixes to CSS rules using values from Can I Use. #[a.feature_tool( href="https://github.com/postcss/autoprefixer" ) Autoprefixer] will use the data based on current browser popularity and property support to apply prefixes for you.
     .feature_example
-      figure.code
-        pre.code_pre
+      figure.example
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             :fullscreen {
             }
-        figcaption.code_caption CSS input
-      figure.code.is-out
-        pre.code_pre
+        figcaption.example_caption CSS input
+      figure.example.is-out
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             :-webkit-full-screen {
             }
@@ -22,7 +22,7 @@ section.feature
             }
             :fullscreen {
             }
-        figcaption.code_caption CSS output
+        figcaption.example_caption CSS output
 
 section.feature.is-alt
   .feature_inner
@@ -33,20 +33,20 @@ section.feature.is-alt
       p.feature_body
         | #[a.feature_tool( href="https://preset-env.cssdb.org/" ) PostCSS Preset Env], lets you convert modern CSS into something most browsers can understand, determining the polyfills you need based on your targeted browsers or runtime environments, using #[a.feature_tool( href="https://cssdb.org/" ) cssdb].
     .feature_example
-      figure.code
-        pre.code_pre
+      figure.example
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             body {
               color: lch(53 105 40);
             }
-        figcaption.code_caption CSS input
-      figure.code.is-out
-        pre.code_pre
+        figcaption.example_caption CSS input
+      figure.example.is-out
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             body {
               color: rgb(250, 0, 4);
             }
-        figcaption.code_caption CSS output
+        figcaption.example_caption CSS output
 
 section.feature
   .feature_inner
@@ -57,20 +57,20 @@ section.feature
       p.feature_body
         | #[a.feature_tool( href="https://github.com/css-modules/css-modules" ) CSS Modules] means you never need to worry about your names being too generic, just use whatever makes the most sense.
     .feature_example
-      figure.code
-        pre.code_pre
+      figure.example
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             .name {
               color: gray;
             }
-        figcaption.code_caption CSS input
-      figure.code.is-out
-        pre.code_pre
+        figcaption.example_caption CSS input
+      figure.example.is-out
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             .Logo__name__SVK0g {
               color: gray;
             }
-        figcaption.code_caption CSS output
+        figcaption.example_caption CSS output
 
 section.feature.is-alt
   .feature_inner
@@ -81,16 +81,16 @@ section.feature.is-alt
       p.feature_body
         | Enforce consistent conventions and avoid errors in your stylesheets with #[a.feature_tool( href="https://stylelint.io/" ) stylelint], a modern CSS linter. It supports the latest CSS syntax, as well as CSS-like syntaxes, such as SCSS.
     .feature_example
-      figure.code
-        pre.code_pre
+      figure.example
+        pre.code
           :lowlight( lang="css" prefix="code_" )
             a {
               color: #d3;
             }
-        figcaption.code_caption CSS input
-      figure.code.is-out
-        pre.code_pre
+        figcaption.example_caption CSS input
+      figure.example.is-out
+        pre.code
           :lowlight( prefix="code_" )
             app.css
             2:10 Invalid hex color
-        figcaption.code_caption Console output
+        figcaption.example_caption Console output
