@@ -5,19 +5,31 @@
   left: 0;
   height: 3rem;
   content: "";
-  background: #2b2723 url("./alchemy.jpg") no-repeat 50% 4%;
+  background: #2b2723 no-repeat 50% 4%;
   background-size: cover;
+
+  @media (width > 975px) {
+    background-image: url("./alchemy.jpg");
+  }
 }
 
 .hero_home {
   position: fixed;
   top: 0.5rem;
-  left: 50%;
   z-index: 2;
-  margin-left: -1rem;
 
   &:hover {
     opacity: 0.7;
+  }
+
+  @media (width > 975px) {
+    left: 50%;
+    margin-left: -1rem;
+  }
+
+  @media (width <= 975px) {
+    left: 0.5rem;
+    margin-left: 0;
   }
 }
 
