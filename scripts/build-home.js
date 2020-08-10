@@ -44,7 +44,8 @@ async function build () {
     readFile(cssFile),
     jsBundle.generate({ format: 'iife', strict: false }),
     unlink(jsFile),
-    copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg'))
+    copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg')),
+    copyFile(join(SRC, 'base', 'logo-leftp.svg'), join(DIST, 'logo-leftp.svg'))
   ])
 
   let cssMin = postcss([combineMedia]).process(css, { from: cssFile }).css
