@@ -117,7 +117,8 @@
         "dist/index.html",
         "dist/*.svg",
         "dist/alchemy.*.jpg",
-        "dist/*.woff2"
+        "dist/*.woff2",
+        "!dist/logo.svg"
       ],
       "limit": "300 KB"
     },
