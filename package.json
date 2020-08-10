@@ -118,7 +118,8 @@
         "dist/*.svg",
         "dist/alchemy.*.jpg",
         "dist/*.woff2",
-        "!dist/logo.svg"
+        "!dist/logo.svg",
+        "!dist/logo-leftp.svg"
       ],
       "limit": "300 KB"
     },
