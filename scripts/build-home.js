@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-let { writeFile, readFile, unlink } = require('fs').promises
+let { writeFile, readFile, copyFile, unlink } = require('fs').promises
 let { join, extname } = require('path')
 let combineMedia = require('postcss-combine-media-query')
 let { terser } = require('rollup-plugin-terser')
@@ -43,7 +43,8 @@ async function build () {
     readFile(htmlFile),
     readFile(cssFile),
     jsBundle.generate({ format: 'iife', strict: false }),
-    unlink(jsFile)
+    unlink(jsFile),
+    copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg'))
   ])
 
   let cssMin = postcss([combineMedia]).process(css, { from: cssFile }).css
