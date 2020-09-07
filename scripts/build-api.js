@@ -200,19 +200,33 @@ function typeString (type) {
   }
   let string = type.toString()
   if (string === 'object' && type.declaration) {
-    return (
-      '{ ' +
-      type.declaration.children
-        .map(i => {
-          if (i.kindString === 'Function') {
-            return i.name + ': ' + functionString(i)
-          } else {
-            return i.name + ': ' + typeString(i.type)
-          }
-        })
-        .join(', ') +
-      ' }'
-    )
+    let decl = type.declaration
+    if (decl.indexSignature) {
+      let param = decl.indexSignature.parameters[0]
+      return (
+        '{ [' +
+        param.name +
+        ': ' +
+        typeString(param.type) +
+        ']: ' +
+        typeString(decl.indexSignature.type) +
+        '}'
+      )
+    } else {
+      return (
+        '{ ' +
+        decl.children
+          .map(i => {
+            if (i.kindString === 'Function') {
+              return i.name + ': ' + functionString(i)
+            } else {
+              return i.name + ': ' + typeString(i.type)
+            }
+          })
+          .join(', ') +
+        ' }'
+      )
+    }
   } else if (string === 'function') {
     return functionString(type.declaration)
   } else {
