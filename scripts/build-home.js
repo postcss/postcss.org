@@ -67,9 +67,7 @@ async function build () {
     })
   }
 
-  let inlined = posthtml()
-    .use(htmlPlugin)
-    .process(html, { sync: true }).html
+  let inlined = posthtml().use(htmlPlugin).process(html, { sync: true }).html
 
   await Promise.all([writeFile(htmlFile, inlined), unlink(cssFile)])
 }
