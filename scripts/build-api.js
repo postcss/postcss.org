@@ -8,7 +8,7 @@ let childProcess = require('child_process')
 let remarkParse = require('remark-parse')
 let remarkHtml = require('remark-html')
 let { join } = require('path')
-let Bundler = require('parcel-bundler')
+let Parcel = require('@parcel/core').default
 let { red } = require('colorette')
 let unified = require('unified')
 let TypeDoc = require('typedoc')
@@ -16,13 +16,20 @@ let globby = require('globby')
 
 let exec = promisify(childProcess.exec)
 
-const PROJECTS = join(__dirname, '..', '..')
-const DIST = join(__dirname, '..', 'dist')
-const SRC = join(__dirname, '..', 'src')
+const ROOT = join(__dirname, '..')
+const PROJECTS = join(ROOT, '..')
+const DIST = join(ROOT, 'dist')
+const SRC = join(ROOT, 'src')
 
 async function buildLayout () {
-  let bundler = new Bundler(join(SRC, 'api.pug'), { sourceMaps: false })
-  await bundler.bundle()
+  let bundler = new Parcel({
+    entries: join(SRC, 'api.pug'),
+    defaultConfig: join(ROOT, 'node_modules', '@parcel', 'config-default'),
+    patchConsole: false,
+    sourceMaps: false,
+    mode: 'production'
+  })
+  await bundler.run()
   let htmlFile = join(DIST, 'api.html')
   let html = await readFile(htmlFile)
   await unlink(htmlFile)

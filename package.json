@@ -15,25 +15,21 @@
     "start:build": "serve dist"
   },
   "dependencies": {
-    "autoprefixer": "^9.8.6",
+    "autoprefixer": "^10.0.1",
     "colorette": "^1.2.1",
     "del": "^6.0.0",
     "del-cli": "^3.0.1",
     "globby": "^11.0.1",
     "jstransformer-lowlight": "^0.1.0",
-    "parcel-bundler": "^1.12.4",
-    "postcss": "^7.0.32",
-    "postcss-combine-media-query": "^1.0.1",
+    "parcel": "^2.0.0-nightly.420",
+    "postcss": "^8.1.2",
     "postcss-hexrgba": "^2.0.1",
     "postcss-media-minmax": "^4.0.0",
-    "postcss-nested": "^4.2.3",
-    "posthtml": "^0.13.4",
+    "postcss-nested": "^5.0.1",
     "pug": "^3.0.0",
     "remark-highlight.js": "^6.0.0",
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
-    "rollup": "^2.32.0",
-    "rollup-plugin-terser": "^7.0.2",
     "typedoc": "^0.19.2",
     "unified": "^9.2.0"
   },
@@ -88,14 +84,14 @@
     "extends": "@logux/eslint-config",
     "rules": {
       "security/detect-unsafe-regex": "off",
-      "node/no-unpublished-require": "off"
+      "node/no-unpublished-require": "off",
+      "node/no-extraneous-require": "off"
     }
   },
   "eslintIgnore": [
-    "web_modules/",
+    ".parcel-cache/",
     "design/",
-    "dist/",
-    ".cache/"
+    "dist/"
   ],
   "stylelint": {
     "extends": "@logux/stylelint-config"
