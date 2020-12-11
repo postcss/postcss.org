@@ -15,14 +15,14 @@
     "start:build": "serve dist"
   },
   "dependencies": {
-    "autoprefixer": "^10.0.4",
+    "autoprefixer": "^10.1.0",
     "colorette": "^1.2.1",
     "del": "^6.0.0",
     "del-cli": "^3.0.1",
     "globby": "^11.0.1",
     "jstransformer-lowlight": "^0.1.0",
     "parcel": "^2.0.0-nightly.472",
-    "postcss": "^8.2.0",
+    "postcss": "^8.2.1",
     "postcss-hexrgba": "^2.0.1",
     "postcss-media-minmax": "^4.0.0",
     "postcss-nested": "^5.0.3",
