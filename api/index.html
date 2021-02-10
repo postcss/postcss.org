@@ -144,7 +144,7 @@ rule.each(<span class="code_function"><span class="code_params">decl</span> =></
   decl.cloneBefore({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop })
   <span class="code_comment">// Will be executed only for color and z-index</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-error" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>error()</h2><p>Returns a <code><a href="#csssyntaxerror">CssSyntaxError</a></code> instance containing the original position
 of the node in the source, showing line and column numbers and also
@@ -212,7 +212,7 @@ Returns <code>undefined</code> if the current node is the first child.</p>
 }</code></pre>
 <p>Returns <code><a href="#childnode">ChildNode</a> | undefined</code>. Previous node.
 </p><h2 id="atrule-push" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>push()</h2><p>Add child to the end of the node.</p>
-<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }}))</code></pre>
+<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }))</code></pre>
 <table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td><a href="#childnode">ChildNode</a></td><td>New node.
 </td></tr></table><p>Returns itself for methods chain.</p><h2 id="atrule-raw" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>raw()</h2><p>Returns a <code><a href="#node-raws">Node#raws</a></code> value. If the node is missing
 the code style property (because the node was manually built or cloned),
@@ -282,7 +282,7 @@ use <code><a href="#container-each">Container#each</a></code>.</p>
 <pre><code class="code">root.walk(<span class="code_function"><span class="code_params">node</span> =></span> {
   <span class="code_comment">// Traverses all descendant nodes.</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-walkatrules" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>walkAtRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each at-rule node.</p>
@@ -302,7 +302,7 @@ root.walkAtRules(<span class="code_string">'charset'</span>, <span class="code_f
     rule.remove()
   }
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-walkcomments" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>walkComments()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each comment node.</p>
@@ -311,7 +311,7 @@ to use if you are mutating arrays during iteration.</p>
 <pre><code class="code">root.walkComments(<span class="code_function"><span class="code_params">comment</span> =></span> {
   comment.remove()
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-walkdecls" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>walkDecls()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each declaration node.</p>
@@ -330,7 +330,7 @@ root.walkDecls(<span class="code_regexp">/^background/</span>, <span class="code
 })</code></pre>
 <p>Like <code><a href="#container-each">Container#each</a></code>, this method is safe
 to use if you are mutating arrays during iteration.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-walkrules" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>walkRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each rule node.</p>
@@ -343,7 +343,7 @@ root.walkRules(<span class="code_function"><span class="code_params">rule</span>
   selectors.push(rule.selector)
 })
 <span class="code_built_in">console</span>.log(<span class="code_string">`Your CSS uses <span class="code_subst">${ selectors.length }</span> selectors`</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="atrule-warn" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>warn()</h2><p>This method is provided as a convenience wrapper for <code><a href="#result-warn">Result#warn</a></code>.</p>
 <pre><code class="code">  Declaration: {
@@ -612,7 +612,7 @@ rule.each(<span class="code_function"><span class="code_params">decl</span> =></
   decl.cloneBefore({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop })
   <span class="code_comment">// Will be executed only for color and z-index</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-error" class="doc_subtitle"><span class="doc_prefix">Container#</span>error()</h2><p>Returns a <code><a href="#csssyntaxerror">CssSyntaxError</a></code> instance containing the original position
 of the node in the source, showing line and column numbers and also
@@ -680,7 +680,7 @@ Returns <code>undefined</code> if the current node is the first child.</p>
 }</code></pre>
 <p>Returns <code><a href="#childnode">ChildNode</a> | undefined</code>. Previous node.
 </p><h2 id="container-push" class="doc_subtitle"><span class="doc_prefix">Container#</span>push()</h2><p>Add child to the end of the node.</p>
-<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }}))</code></pre>
+<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }))</code></pre>
 <table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td><a href="#childnode">ChildNode</a></td><td>New node.
 </td></tr></table><p>Returns itself for methods chain.</p><h2 id="container-raw" class="doc_subtitle"><span class="doc_prefix">Container#</span>raw()</h2><p>Returns a <code><a href="#node-raws">Node#raws</a></code> value. If the node is missing
 the code style property (because the node was manually built or cloned),
@@ -750,7 +750,7 @@ use <code><a href="#container-each">Container#each</a></code>.</p>
 <pre><code class="code">root.walk(<span class="code_function"><span class="code_params">node</span> =></span> {
   <span class="code_comment">// Traverses all descendant nodes.</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-walkatrules" class="doc_subtitle"><span class="doc_prefix">Container#</span>walkAtRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each at-rule node.</p>
@@ -770,7 +770,7 @@ root.walkAtRules(<span class="code_string">'charset'</span>, <span class="code_f
     rule.remove()
   }
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-walkcomments" class="doc_subtitle"><span class="doc_prefix">Container#</span>walkComments()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each comment node.</p>
@@ -779,7 +779,7 @@ to use if you are mutating arrays during iteration.</p>
 <pre><code class="code">root.walkComments(<span class="code_function"><span class="code_params">comment</span> =></span> {
   comment.remove()
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-walkdecls" class="doc_subtitle"><span class="doc_prefix">Container#</span>walkDecls()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each declaration node.</p>
@@ -798,7 +798,7 @@ root.walkDecls(<span class="code_regexp">/^background/</span>, <span class="code
 })</code></pre>
 <p>Like <code><a href="#container-each">Container#each</a></code>, this method is safe
 to use if you are mutating arrays during iteration.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-walkrules" class="doc_subtitle"><span class="doc_prefix">Container#</span>walkRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each rule node.</p>
@@ -811,7 +811,7 @@ root.walkRules(<span class="code_function"><span class="code_params">rule</span>
   selectors.push(rule.selector)
 })
 <span class="code_built_in">console</span>.log(<span class="code_string">`Your CSS uses <span class="code_subst">${ selectors.length }</span> selectors`</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="container-warn" class="doc_subtitle"><span class="doc_prefix">Container#</span>warn()</h2><p>This method is provided as a convenience wrapper for <code><a href="#result-warn">Result#warn</a></code>.</p>
 <pre><code class="code">  Declaration: {
@@ -1431,7 +1431,8 @@ Use it with syntaxes that generate non-CSS output.</p>
 <pre><code class="code"><span class="code_keyword">if</span> (decl.important) {
   result.warn(<span class="code_string">'Avoid !important'</span>, { <span class="code_attr">node</span>: decl, <span class="code_attr">word</span>: <span class="code_string">'!important'</span> })
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>message</code></td><td>string</td></tr><tr><td><code>options</code></td><td><a href="#warningoptions">WarningOptions</a></td></tr></table><h2 id="result-warnings" class="doc_subtitle"><span class="doc_prefix">Result#</span>warnings()</h2><p>Returns warnings from plugins. Filters <code><a href="#warning">Warning</a></code> instances
+<table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>message</code></td><td>string</td></tr><tr><td><code>options</code></td><td><a href="#warningoptions">WarningOptions</a></td></tr></table><p>Returns <code><a href="#warning">Warning</a></code>. Created warning.
+</p><h2 id="result-warnings" class="doc_subtitle"><span class="doc_prefix">Result#</span>warnings()</h2><p>Returns warnings from plugins. Filters <code><a href="#warning">Warning</a></code> instances
 from <code><a href="#result-messages">Result#messages</a></code>.</p>
 <pre><code class="code">result.warnings().forEach(<span class="code_function"><span class="code_params">warn</span> =></span> {
   <span class="code_built_in">console</span>.warn(warn.toString())
@@ -1536,7 +1537,7 @@ rule.each(<span class="code_function"><span class="code_params">decl</span> =></
   decl.cloneBefore({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop })
   <span class="code_comment">// Will be executed only for color and z-index</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-error" class="doc_subtitle"><span class="doc_prefix">Root#</span>error()</h2><p>Returns a <code><a href="#csssyntaxerror">CssSyntaxError</a></code> instance containing the original position
 of the node in the source, showing line and column numbers and also
@@ -1604,7 +1605,7 @@ Returns <code>undefined</code> if the current node is the first child.</p>
 }</code></pre>
 <p>Returns <code><a href="#childnode">ChildNode</a> | undefined</code>. Previous node.
 </p><h2 id="root-push" class="doc_subtitle"><span class="doc_prefix">Root#</span>push()</h2><p>Add child to the end of the node.</p>
-<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }}))</code></pre>
+<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }))</code></pre>
 <table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td><a href="#childnode">ChildNode</a></td><td>New node.
 </td></tr></table><p>Returns itself for methods chain.</p><h2 id="root-raw" class="doc_subtitle"><span class="doc_prefix">Root#</span>raw()</h2><p>Returns a <code><a href="#node-raws">Node#raws</a></code> value. If the node is missing
 the code style property (because the node was manually built or cloned),
@@ -1680,7 +1681,7 @@ use <code><a href="#container-each">Container#each</a></code>.</p>
 <pre><code class="code">root.walk(<span class="code_function"><span class="code_params">node</span> =></span> {
   <span class="code_comment">// Traverses all descendant nodes.</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-walkatrules" class="doc_subtitle"><span class="doc_prefix">Root#</span>walkAtRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each at-rule node.</p>
@@ -1700,7 +1701,7 @@ root.walkAtRules(<span class="code_string">'charset'</span>, <span class="code_f
     rule.remove()
   }
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-walkcomments" class="doc_subtitle"><span class="doc_prefix">Root#</span>walkComments()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each comment node.</p>
@@ -1709,7 +1710,7 @@ to use if you are mutating arrays during iteration.</p>
 <pre><code class="code">root.walkComments(<span class="code_function"><span class="code_params">comment</span> =></span> {
   comment.remove()
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-walkdecls" class="doc_subtitle"><span class="doc_prefix">Root#</span>walkDecls()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each declaration node.</p>
@@ -1728,7 +1729,7 @@ root.walkDecls(<span class="code_regexp">/^background/</span>, <span class="code
 })</code></pre>
 <p>Like <code><a href="#container-each">Container#each</a></code>, this method is safe
 to use if you are mutating arrays during iteration.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-walkrules" class="doc_subtitle"><span class="doc_prefix">Root#</span>walkRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each rule node.</p>
@@ -1741,7 +1742,7 @@ root.walkRules(<span class="code_function"><span class="code_params">rule</span>
   selectors.push(rule.selector)
 })
 <span class="code_built_in">console</span>.log(<span class="code_string">`Your CSS uses <span class="code_subst">${ selectors.length }</span> selectors`</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="root-warn" class="doc_subtitle"><span class="doc_prefix">Root#</span>warn()</h2><p>This method is provided as a convenience wrapper for <code><a href="#result-warn">Result#warn</a></code>.</p>
 <pre><code class="code">  Declaration: {
@@ -1861,7 +1862,7 @@ rule.each(<span class="code_function"><span class="code_params">decl</span> =></
   decl.cloneBefore({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop })
   <span class="code_comment">// Will be executed only for color and z-index</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-error" class="doc_subtitle"><span class="doc_prefix">Rule#</span>error()</h2><p>Returns a <code><a href="#csssyntaxerror">CssSyntaxError</a></code> instance containing the original position
 of the node in the source, showing line and column numbers and also
@@ -1929,7 +1930,7 @@ Returns <code>undefined</code> if the current node is the first child.</p>
 }</code></pre>
 <p>Returns <code><a href="#childnode">ChildNode</a> | undefined</code>. Previous node.
 </p><h2 id="rule-push" class="doc_subtitle"><span class="doc_prefix">Rule#</span>push()</h2><p>Add child to the end of the node.</p>
-<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }}))</code></pre>
+<pre><code class="code">rule.push(<span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> }))</code></pre>
 <table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td><a href="#childnode">ChildNode</a></td><td>New node.
 </td></tr></table><p>Returns itself for methods chain.</p><h2 id="rule-raw" class="doc_subtitle"><span class="doc_prefix">Rule#</span>raw()</h2><p>Returns a <code><a href="#node-raws">Node#raws</a></code> value. If the node is missing
 the code style property (because the node was manually built or cloned),
@@ -1999,7 +2000,7 @@ use <code><a href="#container-each">Container#each</a></code>.</p>
 <pre><code class="code">root.walk(<span class="code_function"><span class="code_params">node</span> =></span> {
   <span class="code_comment">// Traverses all descendant nodes.</span>
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(node: <a href="#childnode">ChildNode</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-walkatrules" class="doc_subtitle"><span class="doc_prefix">Rule#</span>walkAtRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each at-rule node.</p>
@@ -2019,7 +2020,7 @@ root.walkAtRules(<span class="code_string">'charset'</span>, <span class="code_f
     rule.remove()
   }
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nameFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#atrule">AtRule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-walkcomments" class="doc_subtitle"><span class="doc_prefix">Rule#</span>walkComments()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each comment node.</p>
@@ -2028,7 +2029,7 @@ to use if you are mutating arrays during iteration.</p>
 <pre><code class="code">root.walkComments(<span class="code_function"><span class="code_params">comment</span> =></span> {
   comment.remove()
 })</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>callback</code></td><td>(comment: <a href="#comment">Comment</a>, indexed: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-walkdecls" class="doc_subtitle"><span class="doc_prefix">Rule#</span>walkDecls()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each declaration node.</p>
@@ -2047,7 +2048,7 @@ root.walkDecls(<span class="code_regexp">/^background/</span>, <span class="code
 })</code></pre>
 <p>Like <code><a href="#container-each">Container#each</a></code>, this method is safe
 to use if you are mutating arrays during iteration.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>propFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(decl: <a href="#declaration">Declaration</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-walkrules" class="doc_subtitle"><span class="doc_prefix">Rule#</span>walkRules()</h2><p>Traverses the container’s descendant nodes, calling callback
 for each rule node.</p>
@@ -2060,7 +2061,7 @@ root.walkRules(<span class="code_function"><span class="code_params">rule</span>
   selectors.push(rule.selector)
 })
 <span class="code_built_in">console</span>.log(<span class="code_string">`Your CSS uses <span class="code_subst">${ selectors.length }</span> selectors`</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => void | false</td><td>Iterator receives each node and index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>selectorFilter</code></td><td>string | RegExp</td><td></td></tr><tr><td><code>callback</code></td><td>(atRule: <a href="#rule">Rule</a>, index: number) => false | void</td><td>Iterator receives each node and index.
 </td></tr></table><p>Returns <code>void | false</code>. Returns <code>false</code> if iteration was broke.
 </p><h2 id="rule-warn" class="doc_subtitle"><span class="doc_prefix">Rule#</span>warn()</h2><p>This method is provided as a convenience wrapper for <code><a href="#result-warn">Result#warn</a></code>.</p>
 <pre><code class="code">  Declaration: {
@@ -2111,7 +2112,7 @@ and <code>_</code> symbols before the declaration (IE hack).
 </td></tr><tr><td><code>line</code></td><td>number</td><td>Line in source file.
 </td></tr><tr><td><code>source</code></td><td>string</td><td>Source code.
 </td></tr><tr><td><code>url</code></td><td>string</td><td>URL for the source file.
-</td></tr></table></section><section class="doc"><h1 id="helpers" class="doc_title">Helpers</h1><p>Type: object &amp; <a href="#postcss">Postcss</a>.</p></section><section class="doc"><h1 id="jsonhydrator" class="doc_title">JSONHydrator</h1><table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>data</code></td><td>object</td></tr></table><p>Returns <code><a href="#node">Node</a></code>. </p></section><section class="doc"><h1 id="message" class="doc_title">Message</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>plugin</code></td><td>string</td><td>Source PostCSS plugin name.
+</td></tr></table></section><section class="doc"><h1 id="helpers" class="doc_title">Helpers</h1><p>Type: object &amp; <a href="#postcss">Postcss</a>.</p></section><section class="doc"><h1 id="jsonhydrator" class="doc_title">JSONHydrator</h1><table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>data</code></td><td>object[]</td></tr></table><table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>data</code></td><td>object</td></tr></table><p>Returns <code><a href="#node">Node</a>[]</code>. </p></section><section class="doc"><h1 id="message" class="doc_title">Message</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>plugin</code></td><td>string</td><td>Source PostCSS plugin name.
 </td></tr><tr><td><code>type</code></td><td>string</td><td>Message type.
 </td></tr></table></section><section class="doc"><h1 id="nodeerroroptions" class="doc_title">NodeErrorOptions</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>index</code></td><td>number</td><td>An index inside a node's string that should be highlighted as source
 of error.
