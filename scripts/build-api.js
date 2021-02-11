@@ -52,17 +52,19 @@ async function readTypedoc () {
 
   let app = new TypeDoc.Application()
   app.bootstrap({
-    includeDeclarations: true,
-    excludeExternals: true,
+    entryPoints: files.flat(),
+    tsconfig: join(PROJECTS, 'postcss', 'tsconfig.json')
+  })
+  app.options.setCompilerOptions(files.flat(), {
     esModuleInterop: true
   })
-  let { errors, project } = app.converter.convert(files.flat())
-  if (errors.length > 0) {
+  let project = app.convert()
+  if (!project || app.logger.hasErrors()) {
     console.error(`Error during API types generation`)
-    throw new Error(errors[0].messageText)
+    throw new Error('TypeDoc error')
   }
   if (!project.children) {
-    throw new Error(JSON.stringify(project))
+    throw new Error(`Project is empty`)
   }
   let nodes = []
   for (let file of project.children) {
@@ -224,7 +226,7 @@ function typeString (type) {
         '{ ' +
         decl.children
           .map(i => {
-            if (i.kindString === 'Function') {
+            if (i.kindString === 'Function' || i.kindString === 'Method') {
               return i.name + ': ' + functionString(i)
             } else {
               return i.name + ': ' + typeString(i.type)
@@ -281,7 +283,7 @@ function tableHtml (nodes, title, values) {
       comment = i.parent.parent.signatures[0].parameters[index] || {}
     }
     if (!comment.comment && i.parent.overwrites) {
-      comment = i.parent.overwrites.reflection.signatures[0].parameters[index]
+      comment = i.parent.overwrites.reflection.parameters[index]
     }
     return commentHtml(nodes, comment).replace(/<\/?p>/g, '')
   })
@@ -381,7 +383,7 @@ function generateBody (nodes) {
       let id = node.name.toLowerCase()
       let type = node
       if (node.name === 'postcss' || node.name === 'list') {
-        type = node.type.reflection
+        type = node._target.type.getReflection()
       }
       let title =
         tag('h1.doc_title', { id }, node.name) + commentHtml(nodes, type)
@@ -390,7 +392,8 @@ function generateBody (nodes) {
         /(Options|Raws|Props|Source|Position|Message|Syntax)$/.test(
           node.name
         ) &&
-        node.name !== 'ChildProps'
+        node.name !== 'ChildProps' &&
+        type.children
       ) {
         return tag('section.doc', [
           title,

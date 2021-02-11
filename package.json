@@ -30,7 +30,7 @@
     "remark-highlight.js": "^6.0.0",
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
-    "typedoc": "^0.19.2",
+    "typedoc": "^0.20.23",
     "unified": "^9.2.0"
   },
   "devDependencies": {
