@@ -92,6 +92,21 @@ function link (cls, hash, text) {
   return tag(`a.${cls}`, { href: `#${hash}` }, text)
 }
 
+function getName (node) {
+  if (node.name === 'default') {
+    if (node.kindString === 'Class') {
+      return (
+        node.parent.name[0].toUpperCase() +
+        node.parent.name.slice(1).replace(/-\w/g, str => str[1].toUpperCase())
+      )
+    } else {
+      return node.parent.name
+    }
+  } else {
+    return node.name
+  }
+}
+
 function generateSidemenu (nodes) {
   let ignore = ['LazyResult', 'Processor', 'Container', 'Node']
   let classes = nodes
@@ -101,13 +116,13 @@ function generateSidemenu (nodes) {
         i.name === 'postcss'
     )
     .sort((a, b) => {
-      if (a.name === 'postcss') {
+      if (getName(a) === 'postcss') {
         return -1
-      } else if (b.name === 'postcss') {
+      } else if (getName(b) === 'postcss') {
         return 1
-      } else if (a.name < b.name) {
+      } else if (getName(a) < getName(b)) {
         return -1
-      } else if (b.name < a.name) {
+      } else if (getName(b) < getName(a)) {
         return 1
       } else {
         return 0
@@ -118,8 +133,8 @@ function generateSidemenu (nodes) {
     tag(
       'ul',
       classes.map(cls => {
-        let clsSlug = cls.name.toLowerCase()
-        let name = link('sidemenu_section', clsSlug, cls.name)
+        let clsSlug = getName(cls).toLowerCase()
+        let name = link('sidemenu_section', clsSlug, getName(cls))
         let children = cls.children
         if (cls.name === 'postcss') {
           children = cls.type.reflection.children
@@ -362,37 +377,43 @@ function generateBody (nodes) {
   ]
   return nodes
     .filter(node => !ignore.includes(node.name))
+    .filter(node => {
+      let name = getName(node)
+      return !(name === 'list' && !node._target)
+    })
     .sort((a, b) => {
-      if (a.name === 'postcss') {
+      if (getName(a) === 'postcss') {
         return -1
-      } else if (b.name === 'postcss') {
+      } else if (getName(b) === 'postcss') {
         return 1
       } else if (a.kindString === 'Class' && b.kindString !== 'Class') {
         return -1
       } else if (b.kindString === 'Class' && a.kindString !== 'Class') {
         return 1
-      } else if (a.name < b.name) {
+      } else if (getName(a) < getName(b)) {
         return -1
-      } else if (b.name < a.name) {
+      } else if (getName(b) < getName(a)) {
         return 1
       } else {
         return 0
       }
     })
     .map(node => {
-      let id = node.name.toLowerCase()
+      let id = getName(node).toLowerCase()
       let type = node
-      if (node.name === 'postcss' || node.name === 'list') {
+      if (id === 'list' && node._target) {
         type = node._target.type.getReflection()
       }
-      let title =
-        tag('h1.doc_title', { id }, node.name) + commentHtml(nodes, type)
+      if (id === 'postcss') {
+        type = node.type.getReflection()
+      }
+
+      let name = getName(node)
+      let title = tag('h1.doc_title', { id }, name) + commentHtml(nodes, type)
 
       if (
-        /(Options|Raws|Props|Source|Position|Message|Syntax)$/.test(
-          node.name
-        ) &&
-        node.name !== 'ChildProps' &&
+        /(Options|Raws|Props|Source|Position|Message|Syntax)$/.test(name) &&
+        name !== 'ChildProps' &&
         type.children
       ) {
         return tag('section.doc', [
@@ -415,8 +436,8 @@ function generateBody (nodes) {
           .filter(member => member.name !== 'constructor')
           .map(member => {
             let memberId = id + '-' + member.name.toLowerCase()
-            let prefix = node.name
-            if (node.name === 'postcss' || node.name === 'list') {
+            let prefix = name
+            if (name === 'postcss' || name === 'list') {
               prefix += '.'
             } else {
               prefix += '#'
