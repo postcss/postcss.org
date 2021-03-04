@@ -126,7 +126,7 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <h2 id="atrule-after" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-append" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>append()</h2><p>Inserts new nodes to the end of the container.</p>
 <pre><code class="code"><span class="code_keyword">const</span> decl1 = <span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> })
@@ -140,12 +140,12 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-before" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-cleanraws" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -203,16 +203,16 @@ for all of the container’s children.</p>
 </td></tr></table><p>Returns <code>boolean</code>. Is every child pass condition.
 </p><h2 id="atrule-index" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>index()</h2><p>Returns a <code>child</code>’s index within the <code><a href="#container-nodes">Container#nodes</a></code> array.</p>
 <pre><code class="code">rule.index( rule.nodes[<span class="code_number">2</span>] ) <span class="code_comment">//=> 2</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child of the current container.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child of the current container.
 </td></tr></table><p>Returns <code>number</code>. Child index.
 </p><h2 id="atrule-insertafter" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>insertAfter()</h2><p>Insert new node after old node within the container.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-insertbefore" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>insertBefore()</h2><p>Insert new node before old node within the container.</p>
 <pre><code class="code">rule.insertBefore(decl, decl.clone({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop }))</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-next" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>next()</h2><p>Returns the next child of the node’s parent.
 Returns <code>undefined</code> if the current node is the last child.</p>
@@ -238,7 +238,7 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-prev" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>prev()</h2><p>Returns the previous child of the node’s parent.
 Returns <code>undefined</code> if the current node is the first child.</p>
@@ -280,7 +280,7 @@ from the node and its children.</p>
 rule.removeChild(decl)
 rule.nodes.length  <span class="code_comment">//=> 4</span>
 decl.parent        <span class="code_comment">//=> undefined</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="atrule-replacevalues" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>replaceValues()</h2><p>Passes all declaration values within the container that match pattern
 through callback, replacing those values with the returned result
@@ -299,7 +299,7 @@ and need to iterate through all values.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="atrule-root" class="doc_subtitle"><span class="doc_prefix">AtRule#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -462,12 +462,12 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <p>Type: "comment".</p><h2 id="comment-after" class="doc_subtitle"><span class="doc_prefix">Comment#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="comment-before" class="doc_subtitle"><span class="doc_prefix">Comment#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="comment-cleanraws" class="doc_subtitle"><span class="doc_prefix">Comment#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -537,7 +537,7 @@ from the node and its children.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="comment-root" class="doc_subtitle"><span class="doc_prefix">Comment#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -628,7 +628,7 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <h2 id="container-after" class="doc_subtitle"><span class="doc_prefix">Container#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-append" class="doc_subtitle"><span class="doc_prefix">Container#</span>append()</h2><p>Inserts new nodes to the end of the container.</p>
 <pre><code class="code"><span class="code_keyword">const</span> decl1 = <span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> })
@@ -642,12 +642,12 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-before" class="doc_subtitle"><span class="doc_prefix">Container#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-cleanraws" class="doc_subtitle"><span class="doc_prefix">Container#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -720,16 +720,16 @@ for all of the container’s children.</p>
 </td></tr></table><p>Returns <code>boolean</code>. Is every child pass condition.
 </p><h2 id="container-index" class="doc_subtitle"><span class="doc_prefix">Container#</span>index()</h2><p>Returns a <code>child</code>’s index within the <code><a href="#container-nodes">Container#nodes</a></code> array.</p>
 <pre><code class="code">rule.index( rule.nodes[<span class="code_number">2</span>] ) <span class="code_comment">//=> 2</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child of the current container.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child of the current container.
 </td></tr></table><p>Returns <code>number</code>. Child index.
 </p><h2 id="container-insertafter" class="doc_subtitle"><span class="doc_prefix">Container#</span>insertAfter()</h2><p>Insert new node after old node within the container.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-insertbefore" class="doc_subtitle"><span class="doc_prefix">Container#</span>insertBefore()</h2><p>Insert new node before old node within the container.</p>
 <pre><code class="code">rule.insertBefore(decl, decl.clone({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop }))</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-next" class="doc_subtitle"><span class="doc_prefix">Container#</span>next()</h2><p>Returns the next child of the node’s parent.
 Returns <code>undefined</code> if the current node is the last child.</p>
@@ -755,7 +755,7 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-prev" class="doc_subtitle"><span class="doc_prefix">Container#</span>prev()</h2><p>Returns the previous child of the node’s parent.
 Returns <code>undefined</code> if the current node is the first child.</p>
@@ -797,7 +797,7 @@ from the node and its children.</p>
 rule.removeChild(decl)
 rule.nodes.length  <span class="code_comment">//=> 4</span>
 decl.parent        <span class="code_comment">//=> undefined</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="container-replacevalues" class="doc_subtitle"><span class="doc_prefix">Container#</span>replaceValues()</h2><p>Passes all declaration values within the container that match pattern
 through callback, replacing those values with the returned result
@@ -816,7 +816,7 @@ and need to iterate through all values.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="container-root" class="doc_subtitle"><span class="doc_prefix">Container#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -1080,12 +1080,12 @@ one.variable <span class="code_comment">//=> true</span></code></pre>
 <p>Type: boolean.</p><h2 id="declaration-after" class="doc_subtitle"><span class="doc_prefix">Declaration#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="declaration-before" class="doc_subtitle"><span class="doc_prefix">Declaration#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="declaration-cleanraws" class="doc_subtitle"><span class="doc_prefix">Declaration#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -1155,7 +1155,7 @@ from the node and its children.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="declaration-root" class="doc_subtitle"><span class="doc_prefix">Declaration#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -1340,12 +1340,12 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <p>Type: string.</p><h2 id="node-after" class="doc_subtitle"><span class="doc_prefix">Node#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="node-before" class="doc_subtitle"><span class="doc_prefix">Node#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="node-cleanraws" class="doc_subtitle"><span class="doc_prefix">Node#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -1430,7 +1430,7 @@ from the node and its children.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="node-root" class="doc_subtitle"><span class="doc_prefix">Node#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -1642,7 +1642,7 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <h2 id="root-after" class="doc_subtitle"><span class="doc_prefix">Root#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-append" class="doc_subtitle"><span class="doc_prefix">Root#</span>append()</h2><p>Inserts new nodes to the end of the container.</p>
 <pre><code class="code"><span class="code_keyword">const</span> decl1 = <span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> })
@@ -1656,12 +1656,12 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-before" class="doc_subtitle"><span class="doc_prefix">Root#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-cleanraws" class="doc_subtitle"><span class="doc_prefix">Root#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -1734,16 +1734,16 @@ for all of the container’s children.</p>
 </td></tr></table><p>Returns <code>boolean</code>. Is every child pass condition.
 </p><h2 id="root-index" class="doc_subtitle"><span class="doc_prefix">Root#</span>index()</h2><p>Returns a <code>child</code>’s index within the <code><a href="#container-nodes">Container#nodes</a></code> array.</p>
 <pre><code class="code">rule.index( rule.nodes[<span class="code_number">2</span>] ) <span class="code_comment">//=> 2</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child of the current container.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child of the current container.
 </td></tr></table><p>Returns <code>number</code>. Child index.
 </p><h2 id="root-insertafter" class="doc_subtitle"><span class="doc_prefix">Root#</span>insertAfter()</h2><p>Insert new node after old node within the container.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-insertbefore" class="doc_subtitle"><span class="doc_prefix">Root#</span>insertBefore()</h2><p>Insert new node before old node within the container.</p>
 <pre><code class="code">rule.insertBefore(decl, decl.clone({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop }))</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-next" class="doc_subtitle"><span class="doc_prefix">Root#</span>next()</h2><p>Returns the next child of the node’s parent.
 Returns <code>undefined</code> if the current node is the last child.</p>
@@ -1769,7 +1769,7 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-prev" class="doc_subtitle"><span class="doc_prefix">Root#</span>prev()</h2><p>Returns the previous child of the node’s parent.
 Returns <code>undefined</code> if the current node is the first child.</p>
@@ -1811,7 +1811,7 @@ from the node and its children.</p>
 rule.removeChild(decl)
 rule.nodes.length  <span class="code_comment">//=> 4</span>
 decl.parent        <span class="code_comment">//=> undefined</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="root-replacevalues" class="doc_subtitle"><span class="doc_prefix">Root#</span>replaceValues()</h2><p>Passes all declaration values within the container that match pattern
 through callback, replacing those values with the returned result
@@ -1830,7 +1830,7 @@ and need to iterate through all values.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="root-root" class="doc_subtitle"><span class="doc_prefix">Root#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -2024,7 +2024,7 @@ decl.source.end        <span class="code_comment">//=> { line: 10, column: 12 }<
 <h2 id="rule-after" class="doc_subtitle"><span class="doc_prefix">Rule#</span>after()</h2><p>Insert new node after current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertAfter(node, add)</code>.</p>
 <pre><code class="code">decl.after(<span class="code_string">'color: black'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-append" class="doc_subtitle"><span class="doc_prefix">Rule#</span>append()</h2><p>Inserts new nodes to the end of the container.</p>
 <pre><code class="code"><span class="code_keyword">const</span> decl1 = <span class="code_keyword">new</span> Declaration({ <span class="code_attr">prop</span>: <span class="code_string">'color'</span>, <span class="code_attr">value</span>: <span class="code_string">'black'</span> })
@@ -2038,12 +2038,12 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-before" class="doc_subtitle"><span class="doc_prefix">Rule#</span>before()</h2><p>Insert new node before current node to current node’s parent.</p>
 <p>Just alias for <code>node.parent.insertBefore(node, add)</code>.</p>
 <pre><code class="code">decl.before(<span class="code_string">'content: ""'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>newNode</code></td><td>string | <a href="#childprops">ChildProps</a> | default | default[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-cleanraws" class="doc_subtitle"><span class="doc_prefix">Rule#</span>cleanRaws()</h2><p>Clear the code style properties for the node and its children.</p>
 <pre><code class="code">node.raws.before  <span class="code_comment">//=> ' '</span>
@@ -2101,16 +2101,16 @@ for all of the container’s children.</p>
 </td></tr></table><p>Returns <code>boolean</code>. Is every child pass condition.
 </p><h2 id="rule-index" class="doc_subtitle"><span class="doc_prefix">Rule#</span>index()</h2><p>Returns a <code>child</code>’s index within the <code><a href="#container-nodes">Container#nodes</a></code> array.</p>
 <pre><code class="code">rule.index( rule.nodes[<span class="code_number">2</span>] ) <span class="code_comment">//=> 2</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child of the current container.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child of the current container.
 </td></tr></table><p>Returns <code>number</code>. Child index.
 </p><h2 id="rule-insertafter" class="doc_subtitle"><span class="doc_prefix">Rule#</span>insertAfter()</h2><p>Insert new node after old node within the container.</p>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-insertbefore" class="doc_subtitle"><span class="doc_prefix">Rule#</span>insertBefore()</h2><p>Insert new node before old node within the container.</p>
 <pre><code class="code">rule.insertBefore(decl, decl.clone({ <span class="code_attr">prop</span>: <span class="code_string">'-webkit-'</span> + decl.prop }))</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
-</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>oldNode</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
+</td></tr><tr><td><code>newNode</code></td><td>string | <a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[] | string[]</td><td>New node.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-next" class="doc_subtitle"><span class="doc_prefix">Rule#</span>next()</h2><p>Returns the next child of the node’s parent.
 Returns <code>undefined</code> if the current node is the last child.</p>
@@ -2136,7 +2136,7 @@ rule.append({ <span class="code_attr">text</span>: <span class="code_string">'Co
 
 root.append(<span class="code_string">'a {}'</span>)
 root.first.append(<span class="code_string">'color: black; z-index: 1'</span>)</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(string | <a href="#childprops">ChildProps</a> | default | default[] | <a href="#childprops">ChildProps</a>[] | string[])[]</td><td>New nodes.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-prev" class="doc_subtitle"><span class="doc_prefix">Rule#</span>prev()</h2><p>Returns the previous child of the node’s parent.
 Returns <code>undefined</code> if the current node is the first child.</p>
@@ -2178,7 +2178,7 @@ from the node and its children.</p>
 rule.removeChild(decl)
 rule.nodes.length  <span class="code_comment">//=> 4</span>
 decl.parent        <span class="code_comment">//=> undefined</span></code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | default | default | default | default</td><td>Child or child’s index.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>child</code></td><td>number | <a href="#childnode">ChildNode</a></td><td>Child or child’s index.
 </td></tr></table><p>Returns <code>default</code>. This node for methods chain.
 </p><h2 id="rule-replacevalues" class="doc_subtitle"><span class="doc_prefix">Rule#</span>replaceValues()</h2><p>Passes all declaration values within the container that match pattern
 through callback, replacing those values with the returned result
@@ -2197,7 +2197,7 @@ and need to iterate through all values.</p>
     atrule.replaceWith(mixinRules[atrule.params])
   }
 }</code></pre>
-<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
+<table><tr><th>Argument</th><th>Type</th><th>Description</th></tr><tr><td><code>nodes…</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a> | <a href="#childnode">ChildNode</a>[] | <a href="#childprops">ChildProps</a>[])[]</td><td>Mode(s) to replace current one.
 </td></tr></table><p>Returns <code>default</code>. Current node to methods chain.
 </p><h2 id="rule-root" class="doc_subtitle"><span class="doc_prefix">Rule#</span>root()</h2><p>Finds the Root instance of the node’s tree.</p>
 <pre><code class="code">root.nodes[<span class="code_number">0</span>].nodes[<span class="code_number">0</span>].root() === root</code></pre>
@@ -2314,7 +2314,7 @@ Always equal to <code>"warning"</code>.</p>
 <p>Type: "warning".</p><h2 id="warning-tostring" class="doc_subtitle"><span class="doc_prefix">Warning#</span>toString()</h2><p>Returns a warning position and message.</p>
 <pre><code class="code">warning.toString() <span class="code_comment">//=> 'postcss-lint:a.css:10:14: Avoid !important'</span></code></pre>
 <table><tr><th>Argument</th><th>Type</th></tr></table><p>Returns <code>string</code>. Warning position and message.
-</p></section><section class="doc"><h1 id="acceptedplugin" class="doc_title">AcceptedPlugin</h1><p>Type: <a href="#plugin">Plugin</a> | <a href="#plugincreator">PluginCreator</a>&lt;any> | <a href="#oldplugin">OldPlugin</a>&lt;any> | <a href="#transformcallback">TransformCallback</a> | { postcss: <a href="#transformcallback">TransformCallback</a> | default } | default.</p></section><section class="doc"><h1 id="anynode" class="doc_title">AnyNode</h1><p>Type: default | default | default | default | default.</p></section><section class="doc"><h1 id="anynode" class="doc_title">AnyNode</h1></section><section class="doc"><h1 id="atrule" class="doc_title">AtRule</h1></section><section class="doc"><h1 id="atruleprops" class="doc_title">AtRuleProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>name</code></td><td>string</td></tr><tr><td><code>nodes</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a>)[]</td></tr><tr><td><code>params</code></td><td>string | number</td></tr><tr><td><code>raws</code></td><td><a href="#atruleraws">AtRuleRaws</a></td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="atruleprops" class="doc_title">AtRuleProps</h1></section><section class="doc"><h1 id="atruleraws" class="doc_title">AtRuleRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child of the node to the end of the node.
+</p></section><section class="doc"><h1 id="acceptedplugin" class="doc_title">AcceptedPlugin</h1><p>Type: <a href="#plugin">Plugin</a> | <a href="#plugincreator">PluginCreator</a>&lt;any> | <a href="#oldplugin">OldPlugin</a>&lt;any> | <a href="#transformcallback">TransformCallback</a> | { postcss: <a href="#transformcallback">TransformCallback</a> | default } | default.</p></section><section class="doc"><h1 id="anynode" class="doc_title">AnyNode</h1><p>Type: default | default | default | default | default.</p></section><section class="doc"><h1 id="anynode" class="doc_title">AnyNode</h1></section><section class="doc"><h1 id="atrule" class="doc_title">AtRule</h1></section><section class="doc"><h1 id="atruleprops" class="doc_title">AtRuleProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>name</code></td><td>string</td></tr><tr><td><code>nodes</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a>)[]</td></tr><tr><td><code>params</code></td><td>string | number</td></tr><tr><td><code>raws</code></td><td><a href="#atruleraws">AtRuleRaws</a></td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="atruleprops" class="doc_title">AtRuleProps</h1></section><section class="doc"><h1 id="atruleraws" class="doc_title">AtRuleRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child of the node to the end of the node.
 </td></tr><tr><td><code>afterName</code></td><td>string</td><td>The space between the at-rule name and its parameters.
 </td></tr><tr><td><code>before</code></td><td>string</td><td>The space symbols before the node. It also stores <code>*</code>
 and <code>_</code> symbols before the declaration (IE hack).
@@ -2324,7 +2324,7 @@ and <code>_</code> symbols before the declaration (IE hack).
 </td></tr></table></section><section class="doc"><h1 id="builder" class="doc_title">Builder</h1><table><tr><th>Argument</th><th>Type</th></tr><tr><td><code>part</code></td><td>string</td></tr><tr><td><code>node</code></td><td><a href="#anynode">AnyNode</a></td></tr><tr><td><code>type</code></td><td>"start" | "end"</td></tr></table></section><section class="doc"><h1 id="childnode" class="doc_title">ChildNode</h1><p>Type: default | default | default | default.</p></section><section class="doc"><h1 id="childnode" class="doc_title">ChildNode</h1></section><section class="doc"><h1 id="childprops" class="doc_title">ChildProps</h1><p>Type: <a href="#atruleprops">AtRuleProps</a> | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a>.</p></section><section class="doc"><h1 id="childprops" class="doc_title">ChildProps</h1></section><section class="doc"><h1 id="comment" class="doc_title">Comment</h1></section><section class="doc"><h1 id="commentprops" class="doc_title">CommentProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>raws</code></td><td><a href="#commentraws">CommentRaws</a></td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr><tr><td><code>text</code></td><td>string</td></tr></table></section><section class="doc"><h1 id="commentprops" class="doc_title">CommentProps</h1></section><section class="doc"><h1 id="commentraws" class="doc_title">CommentRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>before</code></td><td>string</td><td>The space symbols before the node.
 </td></tr><tr><td><code>left</code></td><td>string</td><td>The space symbols between <code>/*</code> and the comment’s text.
 </td></tr><tr><td><code>right</code></td><td>string</td><td>The space symbols between the comment’s text.
-</td></tr></table></section><section class="doc"><h1 id="container" class="doc_title">Container</h1></section><section class="doc"><h1 id="containerprops" class="doc_title">ContainerProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a>)[]</td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="containerprops" class="doc_title">ContainerProps</h1></section><section class="doc"><h1 id="csssyntaxerror" class="doc_title">CssSyntaxError</h1></section><section class="doc"><h1 id="declaration" class="doc_title">Declaration</h1></section><section class="doc"><h1 id="declarationprops" class="doc_title">DeclarationProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>prop</code></td><td>string</td></tr><tr><td><code>raws</code></td><td><a href="#declarationraws">DeclarationRaws</a></td></tr><tr><td><code>value</code></td><td>string</td></tr></table></section><section class="doc"><h1 id="declarationprops" class="doc_title">DeclarationProps</h1></section><section class="doc"><h1 id="declarationraws" class="doc_title">DeclarationRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>before</code></td><td>string</td><td>The space symbols before the node. It also stores <code>*</code>
+</td></tr></table></section><section class="doc"><h1 id="container" class="doc_title">Container</h1></section><section class="doc"><h1 id="containerprops" class="doc_title">ContainerProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a>)[]</td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="containerprops" class="doc_title">ContainerProps</h1></section><section class="doc"><h1 id="csssyntaxerror" class="doc_title">CssSyntaxError</h1></section><section class="doc"><h1 id="declaration" class="doc_title">Declaration</h1></section><section class="doc"><h1 id="declarationprops" class="doc_title">DeclarationProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>prop</code></td><td>string</td></tr><tr><td><code>raws</code></td><td><a href="#declarationraws">DeclarationRaws</a></td></tr><tr><td><code>value</code></td><td>string</td></tr></table></section><section class="doc"><h1 id="declarationprops" class="doc_title">DeclarationProps</h1></section><section class="doc"><h1 id="declarationraws" class="doc_title">DeclarationRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>before</code></td><td>string</td><td>The space symbols before the node. It also stores <code>*</code>
 and <code>_</code> symbols before the declaration (IE hack).
 </td></tr><tr><td><code>between</code></td><td>string</td><td>The symbols between the property and value for declarations.
 </td></tr><tr><td><code>important</code></td><td>string</td><td>The content of the important statement, if it is not just <code>!important</code>.
@@ -2389,9 +2389,9 @@ automatically with <code><a href="#plugin-postcssplugin">Plugin#postcssPlugin</a
 </td></tr><tr><td><code>syntax</code></td><td><a href="#syntax">Syntax</a></td><td>Object with parse and stringify.
 </td></tr><tr><td><code>to</code></td><td>string</td><td>The path where you'll put the output CSS file. You should always set <code>to</code>
 to generate correct source maps.
-</td></tr></table></section><section class="doc"><h1 id="root" class="doc_title">Root</h1></section><section class="doc"><h1 id="rootprops" class="doc_title">RootProps</h1></section><section class="doc"><h1 id="rootprops" class="doc_title">RootProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a>)[]</td></tr><tr><td><code>raws</code></td><td><a href="#rootraws">RootRaws</a></td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="rootraws" class="doc_title">RootRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child to the end of file.
+</td></tr></table></section><section class="doc"><h1 id="root" class="doc_title">Root</h1></section><section class="doc"><h1 id="rootprops" class="doc_title">RootProps</h1></section><section class="doc"><h1 id="rootprops" class="doc_title">RootProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a>)[]</td></tr><tr><td><code>raws</code></td><td><a href="#rootraws">RootRaws</a></td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="rootraws" class="doc_title">RootRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child to the end of file.
 </td></tr><tr><td><code>semicolon</code></td><td>boolean</td><td>Is the last child has an (optional) semicolon.
-</td></tr></table></section><section class="doc"><h1 id="rule" class="doc_title">Rule</h1></section><section class="doc"><h1 id="ruleprops" class="doc_title">RuleProps</h1></section><section class="doc"><h1 id="ruleprops" class="doc_title">RuleProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#atruleprops">AtRuleProps</a> | default | default | default | default | <a href="#ruleprops">RuleProps</a> | <a href="#declarationprops">DeclarationProps</a> | <a href="#commentprops">CommentProps</a>)[]</td></tr><tr><td><code>raws</code></td><td><a href="#ruleraws">RuleRaws</a></td></tr><tr><td><code>selector</code></td><td>string</td></tr><tr><td><code>selectors</code></td><td>string[]</td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="ruleraws" class="doc_title">RuleRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child of the node to the end of the node.
+</td></tr></table></section><section class="doc"><h1 id="rule" class="doc_title">Rule</h1></section><section class="doc"><h1 id="ruleprops" class="doc_title">RuleProps</h1></section><section class="doc"><h1 id="ruleprops" class="doc_title">RuleProps</h1><table><tr><th>Property</th><th>Type</th></tr><tr><td><code>nodes</code></td><td>(<a href="#childnode">ChildNode</a> | <a href="#childprops">ChildProps</a>)[]</td></tr><tr><td><code>raws</code></td><td><a href="#ruleraws">RuleRaws</a></td></tr><tr><td><code>selector</code></td><td>string</td></tr><tr><td><code>selectors</code></td><td>string[]</td></tr><tr><td><code>source</code></td><td><a href="#source">Source</a></td></tr></table></section><section class="doc"><h1 id="ruleraws" class="doc_title">RuleRaws</h1><table><tr><th>Property</th><th>Type</th><th>Description</th></tr><tr><td><code>after</code></td><td>string</td><td>The space symbols after the last child of the node to the end of the node.
 </td></tr><tr><td><code>before</code></td><td>string</td><td>The space symbols before the node. It also stores <code>*</code>
 and <code>_</code> symbols before the declaration (IE hack).
 </td></tr><tr><td><code>between</code></td><td>string</td><td>The symbols between the selector and <code>{</code> for rules.
