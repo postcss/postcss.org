@@ -60,7 +60,7 @@ async function readTypedoc () {
   })
   let project = app.convert()
   if (!project || app.logger.hasErrors()) {
-    console.error(`Error during API types generation`)
+    process.stderr.write(`Error during API types generation\n`)
     throw new Error('TypeDoc error')
   }
   if (!project.children) {
