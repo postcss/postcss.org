@@ -15,7 +15,7 @@
     "start:build": "serve dist"
   },
   "dependencies": {
-    "@babel/core": "^7.13.8",
+    "@babel/core": "^7.13.10",
     "@parcel/optimizer-cssnano": "^2.0.0-nightly.612",
     "@parcel/optimizer-htmlnano": "^2.0.0-nightly.612",
     "@parcel/packager-css": "^2.0.0-nightly.612",
@@ -26,32 +26,32 @@
     "@parcel/transformer-postcss": "^2.0.0-nightly.612",
     "@parcel/transformer-posthtml": "^2.0.0-nightly.612",
     "@parcel/transformer-pug": "^2.0.0-nightly.612",
-    "autoprefixer": "^10.2.4",
+    "autoprefixer": "^10.2.5",
     "colorette": "^1.2.2",
     "del": "^6.0.0",
     "del-cli": "^3.0.1",
     "globby": "^11.0.2",
     "jstransformer-lowlight": "^0.1.0",
     "parcel": "^2.0.0-nightly.472",
-    "postcss": "^8.2.7",
+    "postcss": "^8.2.8",
     "postcss-hexrgba": "^2.0.1",
     "postcss-media-minmax": "^5.0.0",
-    "postcss-nested": "^5.0.4",
+    "postcss-nested": "^5.0.5",
     "pug": "^3.0.2",
     "remark-highlight.js": "^6.0.0",
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
-    "typedoc": "^0.20.29",
+    "typedoc": "^0.20.30",
     "unified": "^9.2.1"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^45.0.0",
-    "@logux/stylelint-config": "^0.2.0",
-    "@size-limit/file": "^4.10.0",
+    "@logux/eslint-config": "^45.2.0",
+    "@logux/stylelint-config": "^0.3.1",
+    "@size-limit/file": "^4.10.1",
     "eslint": "^7.21.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.1.5",
+    "eslint-plugin-jest": "^24.2.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-let": "^1.1.0",
     "eslint-plugin-prettierx": "^0.17.1",
@@ -59,15 +59,13 @@
     "eslint-plugin-security": "^1.4.0",
     "eslint-plugin-unicorn": "^28.0.2",
     "lint-staged": "^10.5.4",
+    "prettier": "^2.2.1",
     "serve": "^11.3.2",
-    "simple-pre-commit": "^1.2.1",
-    "size-limit": "^4.10.0",
-    "stylelint": "^13.11.0",
-    "stylelint-config-recess-order": "^2.3.0",
-    "stylelint-config-standard": "^20.0.0",
-    "stylelint-order": "^4.1.0",
-    "svgo": "^2.2.0",
-    "typescript": "^4.2.2"
+    "simple-git-hooks": "^2.0.2",
+    "size-limit": "^4.10.1",
+    "stylelint": "^13.12.0",
+    "svgo": "^2.2.2",
+    "typescript": "^4.2.3"
   },
   "engines": {
     "node": "^14.0.0"
@@ -106,9 +104,22 @@
   "stylelint": {
     "extends": "@logux/stylelint-config"
   },
-  "simple-pre-commit": "npx lint-staged",
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "prettier": {
+    "arrowParens": "avoid",
+    "jsxSingleQuote": false,
+    "quoteProps": "consistent",
+    "semi": false,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
   "lint-staged": {
-    "*.js": "eslint --fix",
+    "*.js": [
+      "prettier --write",
+      "eslint --fix"
+    ],
     "*.svg": "svgo",
     "*.sss": "stylelint --fix"
   },
