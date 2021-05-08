@@ -8,14 +8,14 @@
     "start": "parcel serve src/index.pug --open",
     "lint": "eslint . && stylelint src/**/*.pcss",
     "test": "yarn lint && yarn build && size-limit",
-    "clean": "rm -R dist/ .parcel-cache",
+    "clean": "rm -Rf dist/ .parcel-cache/",
     "build:home": "NODE_ENV=production ./scripts/build-home.js",
     "build:api": "NODE_ENV=production ./scripts/build-api.js",
     "build": "yarn build:home && yarn build:api",
     "start:build": "serve dist"
   },
   "dependencies": {
-    "@babel/core": "^7.13.10",
+    "@babel/core": "^7.14.0",
     "@parcel/optimizer-cssnano": "^2.0.0-nightly.612",
     "@parcel/optimizer-htmlnano": "^2.0.0-nightly.612",
     "@parcel/packager-css": "^2.0.0-nightly.612",
@@ -29,10 +29,10 @@
     "autoprefixer": "^10.2.5",
     "colorette": "^1.2.2",
     "del": "^6.0.0",
-    "globby": "^11.0.2",
+    "globby": "^11.0.3",
     "jstransformer-lowlight": "^0.1.0",
     "parcel": "^2.0.0-nightly.472",
-    "postcss": "^8.2.8",
+    "postcss": "^8.2.14",
     "postcss-hexrgba": "^2.0.1",
     "postcss-media-minmax": "^5.0.0",
     "postcss-nested": "^5.0.5",
@@ -40,30 +40,30 @@
     "remark-highlight.js": "^6.0.0",
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
-    "typedoc": "^0.20.30",
+    "typedoc": "^0.20.36",
     "unified": "^9.2.1"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^45.2.0",
+    "@logux/eslint-config": "^45.4.1",
     "@logux/stylelint-config": "^0.3.1",
-    "@size-limit/file": "^4.10.1",
-    "eslint": "^7.21.0",
+    "@size-limit/file": "^4.10.2",
+    "eslint": "^7.26.0",
     "eslint-config-standard": "^16.0.2",
     "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jest": "^24.2.1",
+    "eslint-plugin-jest": "^24.3.6",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-prefer-let": "^1.1.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint-plugin-promise": "^5.1.0",
     "eslint-plugin-security": "^1.4.0",
-    "eslint-plugin-unicorn": "^28.0.2",
-    "lint-staged": "^10.5.4",
+    "eslint-plugin-unicorn": "^31.0.0",
+    "lint-staged": "^11.0.0",
     "prettier": "^2.2.1",
     "serve": "^11.3.2",
-    "simple-git-hooks": "^2.0.2",
-    "size-limit": "^4.10.1",
-    "stylelint": "^13.12.0",
-    "svgo": "^2.2.2",
-    "typescript": "^4.2.3"
+    "simple-git-hooks": "^2.4.1",
+    "size-limit": "^4.10.2",
+    "stylelint": "^13.13.1",
+    "svgo": "^2.3.0",
+    "typescript": "^4.2.4"
   },
   "engines": {
     "node": "^16.0.0"
@@ -132,7 +132,7 @@
         "!dist/logo.svg",
         "!dist/logo-leftp.svg"
       ],
-      "limit": "310 KB"
+      "limit": "320 KB"
     },
     {
       "name": "API",
@@ -143,7 +143,7 @@
         "dist/alchemy.*.jpg",
         "dist/*.woff2"
       ],
-      "limit": "260 KB"
+      "limit": "270 KB"
     }
   ]
 }
