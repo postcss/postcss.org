@@ -1,11 +1,14 @@
 #!/usr/bin/env node
 
-let { copyFile } = require('fs').promises
-let { join } = require('path')
-let Parcel = require('@parcel/core').default
-let del = require('del')
+import { fileURLToPath } from 'url'
+import { copyFile } from 'fs/promises'
+import parcelCore from '@parcel/core'
+import { join } from 'path'
+import del from 'del'
 
-const ROOT = join(__dirname, '..')
+let Parcel = parcelCore.default
+
+const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const SRC = join(ROOT, 'src')
 const DIST = join(ROOT, 'dist')
 

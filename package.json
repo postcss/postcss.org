@@ -4,6 +4,7 @@
   "homepage": "https://postcss.org/",
   "repository": "postcss/postcss.org",
   "license": "MIT",
+  "type": "module",
   "scripts": {
     "start": "parcel serve src/index.pug --open",
     "lint": "eslint . && stylelint src/**/*.pcss",
@@ -41,7 +42,7 @@
     "remark-html": "^13.0.1",
     "remark-parse": "^9.0.0",
     "typedoc": "^0.21.4",
-    "unified": "^9.2.1"
+    "unified": "^10.0.0"
   },
   "devDependencies": {
     "@logux/eslint-config": "^45.4.6",

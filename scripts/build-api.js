@@ -1,22 +1,24 @@
 #!/usr/bin/env node
 
-let { readFile, writeFile, unlink, mkdir } = require('fs').promises
-let remarkHighlight = require('remark-highlight.js')
-let { existsSync } = require('fs')
-let { promisify } = require('util')
-let childProcess = require('child_process')
-let remarkParse = require('remark-parse')
-let remarkHtml = require('remark-html')
-let { join } = require('path')
-let unified = require('unified')
-let { red } = require('colorette')
-let TypeDoc = require('typedoc')
-let Parcel = require('@parcel/core').default
-let globby = require('globby')
+import { readFile, writeFile, unlink, mkdir } from 'fs/promises'
+import { fileURLToPath } from 'url'
+import remarkHighlight from 'remark-highlight.js'
+import { existsSync } from 'fs'
+import { promisify } from 'util'
+import childProcess from 'child_process'
+import remarkParse from 'remark-parse'
+import { unified } from 'unified'
+import remarkHtml from 'remark-html'
+import parcelCore from '@parcel/core'
+import { join } from 'path'
+import { red } from 'colorette'
+import TypeDoc from 'typedoc'
+import globby from 'globby'
 
 let exec = promisify(childProcess.exec)
+let Parcel = parcelCore.default
 
-const ROOT = join(__dirname, '..')
+const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const PROJECTS = join(ROOT, '..')
 const DIST = join(ROOT, 'dist')
 const SRC = join(ROOT, 'src')
@@ -172,8 +174,8 @@ function toHTML(nodes, markdown) {
     .use(remarkParse)
     .use(remarkHighlight, { prefix: 'code_' })
     .use(remarkHtml)
-    .processSync(markdown).contents
-  return html
+    .processSync(markdown)
+  return String(html)
     .replace(/hljs language-js/g, 'code')
     .replace(/<code>[A-Z]\w+(#\w+)?<\/code>/g, str => {
       let cls = str.match(/[A-Z]\w+/)[0]
