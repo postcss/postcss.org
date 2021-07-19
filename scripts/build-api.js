@@ -8,10 +8,10 @@ let childProcess = require('child_process')
 let remarkParse = require('remark-parse')
 let remarkHtml = require('remark-html')
 let { join } = require('path')
-let Parcel = require('@parcel/core').default
-let { red } = require('colorette')
 let unified = require('unified')
+let { red } = require('colorette')
 let TypeDoc = require('typedoc')
+let Parcel = require('@parcel/core').default
 let globby = require('globby')
 
 let exec = promisify(childProcess.exec)
@@ -21,7 +21,7 @@ const PROJECTS = join(ROOT, '..')
 const DIST = join(ROOT, 'dist')
 const SRC = join(ROOT, 'src')
 
-async function buildLayout () {
+async function buildLayout() {
   let bundler = new Parcel({
     entries: join(SRC, 'api.pug'),
     defaultConfig: join(ROOT, 'node_modules', '@parcel', 'config-default'),
@@ -36,7 +36,7 @@ async function buildLayout () {
   return html.toString()
 }
 
-async function downloadProject (name) {
+async function downloadProject(name) {
   let dir = join(PROJECTS, name)
   if (existsSync(dir)) return
   let url = `https://github.com/postcss/${name}.git`
@@ -44,7 +44,7 @@ async function downloadProject (name) {
   await exec('yarn install', { cwd: dir })
 }
 
-async function readTypedoc () {
+async function readTypedoc() {
   let files = await globby('lib/*.d.ts', {
     absolute: true,
     cwd: join(PROJECTS, 'postcss')
@@ -74,7 +74,7 @@ async function readTypedoc () {
   return nodes
 }
 
-function tag (prefix, attrs, body) {
+function tag(prefix, attrs, body) {
   if (typeof body === 'undefined') {
     body = attrs
     attrs = {}
@@ -88,11 +88,11 @@ function tag (prefix, attrs, body) {
   return `<${tagName}${attrsString}>${body}</${tagName}>`
 }
 
-function link (cls, hash, text) {
+function link(cls, hash, text) {
   return tag(`a.${cls}`, { href: `#${hash}` }, text)
 }
 
-function getName (node) {
+function getName(node) {
   if (node.name === 'default') {
     if (node.kindString === 'Class') {
       return (
@@ -107,7 +107,7 @@ function getName (node) {
   }
 }
 
-function generateSidemenu (nodes) {
+function generateSidemenu(nodes) {
   let ignore = ['LazyResult', 'Processor', 'Container', 'Node']
   let classes = nodes
     .filter(
@@ -166,7 +166,7 @@ function generateSidemenu (nodes) {
   return html
 }
 
-function toHTML (nodes, markdown) {
+function toHTML(nodes, markdown) {
   if (!markdown) return ''
   let html = unified()
     .use(remarkParse)
@@ -197,7 +197,7 @@ function toHTML (nodes, markdown) {
     })
 }
 
-function commentHtml (nodes, node) {
+function commentHtml(nodes, node) {
   let comment = node.comment
   if (node.signatures && node.signatures[0].comment) {
     comment = node.signatures[0].comment
@@ -206,7 +206,7 @@ function commentHtml (nodes, node) {
   return toHTML(nodes, comment.shortText + '\n\n' + comment.text)
 }
 
-function functionString (node) {
+function functionString(node) {
   let signature = node.signatures[0]
   return (
     '(' +
@@ -218,7 +218,7 @@ function functionString (node) {
   )
 }
 
-function typeString (type) {
+function typeString(type) {
   if (type.type === 'union') {
     return type.types.map(i => typeString(i)).join(' | ')
   }
@@ -258,7 +258,7 @@ function typeString (type) {
   }
 }
 
-function typeHtml (nodes, type) {
+function typeHtml(nodes, type) {
   return typeString(type)
     .replace(/<>/g, '')
     .replace(
@@ -286,12 +286,12 @@ function typeHtml (nodes, type) {
     })
 }
 
-function varHtml (nodes, type) {
+function varHtml(nodes, type) {
   if (!type) return ''
   return tag('p', 'Type: ' + typeHtml(nodes, type) + '.')
 }
 
-function tableHtml (nodes, title, values) {
+function tableHtml(nodes, title, values) {
   let comments = values.map((i, index) => {
     let comment = i
     if (!comment.comment && i.parent.parent.signatures) {
@@ -322,7 +322,7 @@ function tableHtml (nodes, title, values) {
   ])
 }
 
-function signaturesHtml (nodes, node) {
+function signaturesHtml(nodes, node) {
   if (!node.signatures) return ''
   let comment = node.comment || node.signatures[0].comment || {}
   let returns
@@ -361,7 +361,7 @@ function signaturesHtml (nodes, node) {
   )
 }
 
-function generateBody (nodes) {
+function generateBody(nodes) {
   let ignore = [
     'Postcss',
     'List',
@@ -470,13 +470,13 @@ function generateBody (nodes) {
     .join('')
 }
 
-async function saveFile (html) {
+async function saveFile(html) {
   let api = join(DIST, 'api')
   if (!existsSync(api)) await mkdir(api)
   await writeFile(join(api, 'index.html'), html)
 }
 
-async function build () {
+async function build() {
   await downloadProject('postcss')
   let [nodes, layout] = await Promise.all([readTypedoc(), buildLayout()])
   let submenu = generateSidemenu(nodes)
@@ -485,6 +485,10 @@ async function build () {
 }
 
 build().catch(e => {
-  process.stderr.write(red(e.stack) + '\n')
+  if (e.stack) {
+    process.stderr.write(red(e.stack) + '\n')
+  } else {
+    process.stderr.write(red(e) + '\n')
+  }
   process.exit(1)
 })

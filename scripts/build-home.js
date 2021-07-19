@@ -9,11 +9,11 @@ const ROOT = join(__dirname, '..')
 const SRC = join(ROOT, 'src')
 const DIST = join(ROOT, 'dist')
 
-async function cleanBuildDir () {
+async function cleanBuildDir() {
   await del(join(DIST, '*'), { dot: true })
 }
 
-async function build () {
+async function build() {
   await cleanBuildDir()
   let bundler = new Parcel({
     entries: join(SRC, 'index.pug'),
@@ -30,6 +30,10 @@ async function build () {
 }
 
 build().catch(e => {
-  process.stderr.write(e.stack + '\n')
+  if (e.stack) {
+    process.stderr.write(e.stack + '\n')
+  } else {
+    process.stderr.write(e + '\n')
+  }
   process.exit(1)
 })
