@@ -39,7 +39,7 @@
     "postcss-nested": "^5.0.5",
     "pug": "^3.0.2",
     "remark-highlight.js": "^6.0.0",
-    "remark-html": "^13.0.1",
+    "remark-html": "^13.0.2",
     "remark-parse": "^9.0.0",
     "typedoc": "^0.21.4",
     "unified": "^10.0.0"
