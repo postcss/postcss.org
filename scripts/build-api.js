@@ -10,10 +10,10 @@ import remarkParse from 'remark-parse'
 import { unified } from 'unified'
 import remarkHtml from 'remark-html'
 import parcelCore from '@parcel/core'
+import { globby } from 'globby'
 import { join } from 'path'
 import { red } from 'nanocolors'
 import TypeDoc from 'typedoc'
-import globby from 'globby'
 
 let exec = promisify(childProcess.exec)
 let Parcel = parcelCore.default
