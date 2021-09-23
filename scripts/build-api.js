@@ -11,7 +11,7 @@ import { unified } from 'unified'
 import remarkHtml from 'remark-html'
 import parcelCore from '@parcel/core'
 import { join } from 'path'
-import { red } from 'colorette'
+import { red } from 'nanocolors'
 import TypeDoc from 'typedoc'
 import globby from 'globby'
 
