@@ -12,7 +12,6 @@ import remarkHtml from 'remark-html'
 import parcelCore from '@parcel/core'
 import { globby } from 'globby'
 import { join } from 'path'
-import { red } from 'nanocolors'
 import TypeDoc from 'typedoc'
 
 let exec = promisify(childProcess.exec)
@@ -488,9 +487,9 @@ async function build() {
 
 build().catch(e => {
   if (e.stack) {
-    process.stderr.write(red(e.stack) + '\n')
+    process.stderr.write(e.stack + '\n')
   } else {
-    process.stderr.write(red(e) + '\n')
+    process.stderr.write(e + '\n')
   }
   process.exit(1)
 })

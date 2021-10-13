@@ -4,7 +4,6 @@ import { fileURLToPath } from 'url'
 import { copyFile } from 'fs/promises'
 import parcelCore from '@parcel/core'
 import { join } from 'path'
-import { red } from 'nanocolors'
 import del from 'del'
 
 let Parcel = parcelCore.default
@@ -35,9 +34,9 @@ async function build() {
 
 build().catch(e => {
   if (e.stack) {
-    process.stderr.write(red(e.stack + '\n'))
+    process.stderr.write(e.stack + '\n')
   } else {
-    process.stderr.write(red(e + '\n'))
+    process.stderr.write(e + '\n')
   }
   process.exit(1)
 })

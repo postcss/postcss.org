@@ -31,7 +31,6 @@
     "del": "^6.0.0",
     "globby": "^12.0.2",
     "jstransformer-lowlight": "^0.1.0",
-    "nanocolors": "^0.1.12",
     "parcel": "2.0.0-beta.2",
     "postcss": "^8.3.7",
     "postcss-hexrgba": "^2.0.1",
