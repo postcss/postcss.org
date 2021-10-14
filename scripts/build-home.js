@@ -2,11 +2,9 @@
 
 import { fileURLToPath } from 'url'
 import { copyFile } from 'fs/promises'
-import parcelCore from '@parcel/core'
+import { Parcel } from '@parcel/core'
 import { join } from 'path'
 import del from 'del'
-
-let Parcel = parcelCore.default
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const SRC = join(ROOT, 'src')
