@@ -1,6 +1,6 @@
 .doc {
   max-width: 70rem;
-  padding: 2rem 2rem 1rem 2rem;
+  padding: 2rem 2rem 1rem;
   margin: 0 auto;
 
   @media (width > 975px) {
@@ -12,7 +12,7 @@
   }
 
   @media (width <= 975px) {
-    padding: 2rem 1rem 1rem 1rem;
+    padding: 2rem 1rem 1rem;
 
     &:first-child {
       padding-top: 4rem;
@@ -73,7 +73,7 @@
 
 .doc > table {
   width: calc(100% + 1rem);
-  margin: -0.5rem -0.5rem 1rem -0.5rem;
+  margin: -0.5rem -0.5rem 1rem;
   border-collapse: collapse;
 }
 
@@ -111,17 +111,16 @@
     padding: 0.5rem;
 
     &:first-child {
-      padding-right: 0
+      padding-right: 0;
     }
 
     &:nth-child(2) {
       padding-left: 0;
-      text-align: right
+      text-align: right;
     }
 
     &:nth-child(3) {
-      grid-column-start: 1;
-      grid-column-end: 3;
+      grid-column: 1 / 3;
       padding-top: 0;
     }
   }
