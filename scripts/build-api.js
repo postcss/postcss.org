@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-
-import { readFile, writeFile, unlink, mkdir } from 'fs/promises'
+import { join } from 'path'
+import {  writeFile, mkdir, rm } from 'fs/promises'
 import { fileURLToPath } from 'url'
 import remarkHighlight from 'remark-highlight.js'
 import { existsSync } from 'fs'
@@ -9,13 +9,13 @@ import childProcess from 'child_process'
 import remarkParse from 'remark-parse'
 import { unified } from 'unified'
 import remarkHtml from 'remark-html'
-import parcelCore from '@parcel/core'
 import { globby } from 'globby'
-import { join } from 'path'
 import TypeDoc from 'typedoc'
+import { build as viteBuild } from 'vite'
+
+import pugPlugin from './pugPlugin.js'
 
 let exec = promisify(childProcess.exec)
-let Parcel = parcelCore.default
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const PROJECTS = join(ROOT, '..')
@@ -23,18 +23,23 @@ const DIST = join(ROOT, 'dist')
 const SRC = join(ROOT, 'src')
 
 async function buildLayout() {
-  let bundler = new Parcel({
-    entries: join(SRC, 'api.pug'),
-    defaultConfig: join(ROOT, 'node_modules', '@parcel', 'config-default'),
-    patchConsole: false,
-    sourceMaps: false,
-    mode: 'production'
-  })
-  await bundler.run()
-  let htmlFile = join(DIST, 'api.html')
-  let html = await readFile(htmlFile)
-  await unlink(htmlFile)
-  return html.toString()
+  let data = await viteBuild({
+    plugins: [pugPlugin()],
+    root: SRC,
+    base: '/',
+    mode: 'production',
+    entry:  SRC,
+    build: {
+      outDir: join(DIST, 'api'),
+      rollupOptions: {
+        input: join(SRC, 'api.html'),
+      }
+    }
+  });
+
+  let indexHtml = data.output[data.output.length - 1].source
+
+  return indexHtml
 }
 
 async function downloadProject(name) {
@@ -482,7 +487,12 @@ async function build() {
   let [nodes, layout] = await Promise.all([readTypedoc(), buildLayout()])
   let submenu = generateSidemenu(nodes)
   let body = generateBody(nodes)
-  await saveFile(layout.replace('<main>', submenu + '<main>' + body))
+  await saveFile(
+    layout
+      .replace('<main>', submenu + '<main>' + body)
+      .replace(/\/assets/g, '/api/assets')
+  )
+  await rm(join(DIST, 'api/api.html'))
 }
 
 build().catch(e => {
