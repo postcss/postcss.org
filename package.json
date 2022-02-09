@@ -6,9 +6,10 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "start": "vite",
+    "start": "vite --open",
     "lint": "eslint . && stylelint src/**/*.pcss",
     "test": "pnpm lint && pnpm build && size-limit",
+    "clean": "rm -Rf dist/",
     "build:home": "NODE_ENV=production ./scripts/build-home.js",
     "build:api": "NODE_ENV=production ./scripts/build-api.js",
     "build": "pnpm build:home && pnpm build:api",
@@ -30,7 +31,8 @@
     "remark-html": "^15.0.1",
     "remark-parse": "^10.0.1",
     "typedoc": "^0.21.4",
-    "unified": "^10.1.1"
+    "unified": "^10.1.1",
+    "vite-plugin-pug-transformer": "^1.0.1"
   },
   "devDependencies": {
     "@logux/eslint-config": "^46.1.1",

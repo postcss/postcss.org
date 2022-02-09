@@ -4,9 +4,8 @@ import { fileURLToPath } from 'url'
 import { copyFile } from 'fs/promises'
 import { join } from 'path'
 import del from 'del'
-import { build as viteBuild } from 'vite'
-
-import pugPlugin from './pugPlugin.js'
+import vite from 'vite'
+import vitePugPlugin from 'vite-plugin-pug-transformer'
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const SRC = join(ROOT, 'src')
@@ -18,13 +17,13 @@ async function cleanBuildDir() {
 
 async function build() {
   await cleanBuildDir()
-  await viteBuild({
-    plugins: [pugPlugin()],
-    root: SRC,
-    base: '/',
+  await vite.build({
+    plugins: [vitePugPlugin()],
+    logLevel: 'warn',
     mode: 'production',
     build: {
       outDir: DIST,
+      assetsInlineLimit: 0
     }
   });
   await Promise.all([

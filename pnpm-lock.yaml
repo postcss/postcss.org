@@ -35,6 +35,7 @@ specifiers:
   typescript: ~4.5.5
   unified: ^10.1.1
   vite: ^2.7.13
+  vite-plugin-pug-transformer: ^1.0.1
 
 dependencies:
   '@babel/core': 7.16.12
@@ -53,6 +54,7 @@ dependencies:
   remark-parse: 10.0.1
   typedoc: 0.21.9_typescript@4.5.5
   unified: 10.1.1
+  vite-plugin-pug-transformer: 1.0.1_vite@2.7.13
 
 devDependencies:
   '@logux/eslint-config': 46.1.1_1939207b661bc1aefcd22fa1c63831b1
@@ -6235,6 +6237,17 @@ packages:
       is-buffer: 2.0.5
       unist-util-stringify-position: 3.0.0
       vfile-message: 3.1.0
+    dev: false
+
+  /vite-plugin-pug-transformer/1.0.1_vite@2.7.13:
+    resolution: {integrity: sha512-N62fXAqRNY2O35dUf0ioe/wDBX60UTg58IgcYSpXb/406jH7XB2ZuOll1WJ+qOxc/GfTOfME/TKvwnK4u0c6wQ==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      vite: ^2.5.10
+    dependencies:
+      picocolors: 1.0.0
+      pug: 3.0.2
+      vite: 2.7.13
     dev: false
 
   /vite/2.7.13:

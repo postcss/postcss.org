@@ -11,9 +11,8 @@ import remarkHtml from 'remark-html'
 import { globby } from 'globby'
 import { join } from 'path'
 import TypeDoc from 'typedoc'
-import { build as viteBuild } from 'vite'
-
-import pugPlugin from './pugPlugin.js'
+import vite from 'vite'
+import vitePugPlugin from 'vite-plugin-pug-transformer'
 
 let exec = promisify(childProcess.exec)
 
@@ -23,21 +22,19 @@ const DIST = join(ROOT, 'dist')
 const SRC = join(ROOT, 'src')
 
 async function buildLayout() {
-  let data = await viteBuild({
-    plugins: [pugPlugin()],
-    root: SRC,
-    base: '/',
+  let data = await vite.build({
+    plugins: [vitePugPlugin()],
+    logLevel: 'warn',
     mode: 'production',
-    entry:  SRC,
     build: {
       outDir: join(DIST, 'api'),
       rollupOptions: {
         input: join(SRC, 'api.html'),
+        assetsInlineLimit: 0
       }
     }
-  });
-  let indexHtml = data.output[data.output.length - 1].source
-  return indexHtml
+  })
+  return data.output.find(file => file.fileName === 'api.html').source
 }
 
 async function downloadProject(name) {

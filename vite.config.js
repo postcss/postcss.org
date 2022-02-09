@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite'
-
-import pugPlugin from './scripts/pugPlugin.js'
+import vitePugPlugin from 'vite-plugin-pug-transformer'
 
 export default defineConfig({
-  plugins: [pugPlugin()],
   root: './src',
+  plugins: [vitePugPlugin()],
 })
