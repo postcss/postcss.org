@@ -9,7 +9,6 @@ const DIST = join(ROOT, 'dist')
 
 export default defineConfig({
   root: SRC,
-  logLevel: 'warn',
   build: {
     outDir: DIST,
     assetsInlineLimit: 0
