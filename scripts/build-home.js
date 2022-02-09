@@ -5,7 +5,6 @@ import { copyFile } from 'fs/promises'
 import { join } from 'path'
 import del from 'del'
 import vite from 'vite'
-import vitePugPlugin from 'vite-plugin-pug-transformer'
 
 const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
 const SRC = join(ROOT, 'src')
@@ -17,15 +16,7 @@ async function cleanBuildDir() {
 
 async function build() {
   await cleanBuildDir()
-  await vite.build({
-    plugins: [vitePugPlugin()],
-    logLevel: 'warn',
-    mode: 'production',
-    build: {
-      outDir: DIST,
-      assetsInlineLimit: 0
-    }
-  });
+  await vite.build();
   await Promise.all([
     copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg')),
     copyFile(join(SRC, 'base', 'logo-leftp.svg'), join(DIST, 'logo-leftp.svg'))
