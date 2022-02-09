@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import {  writeFile, mkdir, rm } from 'fs/promises'
-import { join } from 'path'
 import { fileURLToPath } from 'url'
 import remarkHighlight from 'remark-highlight.js'
 import { existsSync } from 'fs'
@@ -10,6 +9,7 @@ import remarkParse from 'remark-parse'
 import { unified } from 'unified'
 import remarkHtml from 'remark-html'
 import { globby } from 'globby'
+import { join } from 'path'
 import TypeDoc from 'typedoc'
 import { build as viteBuild } from 'vite'
 
