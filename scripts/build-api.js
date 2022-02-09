@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { join } from 'path'
 import {  writeFile, mkdir, rm } from 'fs/promises'
+import { join } from 'path'
 import { fileURLToPath } from 'url'
 import remarkHighlight from 'remark-highlight.js'
 import { existsSync } from 'fs'
@@ -36,9 +36,7 @@ async function buildLayout() {
       }
     }
   });
-
   let indexHtml = data.output[data.output.length - 1].source
-
   return indexHtml
 }
 

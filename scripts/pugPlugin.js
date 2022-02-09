@@ -5,10 +5,8 @@ import { compileFile } from 'pug'
   let pugSrc = html.match(/<pug src="(.*)".*?\/.*?>/gi)[0]
     .replace(/<pug src="/gi, '')
     .replace(/".*?\/.*?>/gi, '')
-
   let filedir = htmlfile.replace(/(.*)[\\/].*\.html$/, '$1')
   let filepath = join(filedir, pugSrc)
-
   return compileFile(filepath)()
 }
 
