@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-
-import { fileURLToPath } from 'url'
 import { copyFile } from 'fs/promises'
-import { Parcel } from '@parcel/core'
 import { join } from 'path'
 import del from 'del'
+import vite from 'vite'
 
-const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
-const SRC = join(ROOT, 'src')
-const DIST = join(ROOT, 'dist')
+import { SRC, DIST } from './lib/dir.js'
 
 async function cleanBuildDir() {
   await del(join(DIST, '*'), { dot: true })
@@ -16,14 +12,7 @@ async function cleanBuildDir() {
 
 async function build() {
   await cleanBuildDir()
-  let bundler = new Parcel({
-    entries: join(SRC, 'index.pug'),
-    defaultConfig: join(ROOT, 'node_modules', '@parcel', 'config-default'),
-    patchConsole: false,
-    sourceMaps: false,
-    mode: 'production'
-  })
-  await bundler.run()
+  await vite.build();
   await Promise.all([
     copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg')),
     copyFile(join(SRC, 'base', 'logo-leftp.svg'), join(DIST, 'logo-leftp.svg'))
