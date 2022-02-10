@@ -6,8 +6,9 @@ import { SRC, DIST } from './scripts/lib/dir.js'
 export default defineConfig({
   root: SRC,
   build: {
-    outDir: DIST,
-    assetsInlineLimit: 0
+    assetsInlineLimit: 0,
+    emptyOutDir: true,
+    outDir: DIST
   },
-  plugins: [vitePugPlugin()],
+  plugins: [vitePugPlugin()]
 })
