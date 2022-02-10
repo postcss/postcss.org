@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import {  writeFile, mkdir, rm } from 'fs/promises'
-import { fileURLToPath } from 'url'
 import remarkHighlight from 'remark-highlight.js'
 import { existsSync } from 'fs'
 import { promisify } from 'util'
@@ -14,12 +13,9 @@ import TypeDoc from 'typedoc'
 import vite from 'vite'
 import vitePugPlugin from 'vite-plugin-pug-transformer'
 
-let exec = promisify(childProcess.exec)
+import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
-const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
-const PROJECTS = join(ROOT, '..')
-const DIST = join(ROOT, 'dist')
-const SRC = join(ROOT, 'src')
+let exec = promisify(childProcess.exec)
 
 async function buildLayout() {
   let data = await vite.build({

@@ -1,14 +1,10 @@
 #!/usr/bin/env node
-
-import { fileURLToPath } from 'url'
 import { copyFile } from 'fs/promises'
 import { join } from 'path'
 import del from 'del'
 import vite from 'vite'
 
-const ROOT = join(fileURLToPath(import.meta.url), '..', '..')
-const SRC = join(ROOT, 'src')
-const DIST = join(ROOT, 'dist')
+import { SRC, DIST } from './lib/dir.js'
 
 async function cleanBuildDir() {
   await del(join(DIST, '*'), { dot: true })

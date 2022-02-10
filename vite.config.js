@@ -1,11 +1,7 @@
-import { join } from 'path'
-import { fileURLToPath } from 'url'
 import { defineConfig } from 'vite'
 import vitePugPlugin from 'vite-plugin-pug-transformer'
 
-const ROOT = join(fileURLToPath(import.meta.url), '..')
-const SRC = join(ROOT, 'src')
-const DIST = join(ROOT, 'dist')
+import { SRC, DIST } from './scripts/lib/dir.js'
 
 export default defineConfig({
   root: SRC,
