@@ -11,7 +11,6 @@ import { globby } from 'globby'
 import { join } from 'path'
 import TypeDoc from 'typedoc'
 import vite from 'vite'
-import vitePugPlugin from 'vite-plugin-pug-transformer'
 
 import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
@@ -19,8 +18,6 @@ let exec = promisify(childProcess.exec)
 
 async function buildLayout() {
   let data = await vite.build({
-    plugins: [vitePugPlugin()],
-    logLevel: 'warn',
     mode: 'production',
     build: {
       outDir: join(DIST, 'api'),

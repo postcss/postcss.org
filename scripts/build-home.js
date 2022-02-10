@@ -12,7 +12,9 @@ async function cleanBuildDir() {
 
 async function build() {
   await cleanBuildDir()
-  await vite.build();
+  await vite.build({
+    mode: 'production'
+  })
   await Promise.all([
     copyFile(join(SRC, 'base', 'logo.svg'), join(DIST, 'logo.svg')),
     copyFile(join(SRC, 'base', 'logo-leftp.svg'), join(DIST, 'logo-leftp.svg'))
