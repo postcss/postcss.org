@@ -22,9 +22,9 @@ async function buildLayout() {
     build: {
       outDir: join(DIST, 'api'),
       rollupOptions: {
-        input: join(SRC, 'api.html'),
-        assetsInlineLimit: 0
-      }
+        input: join(SRC, 'api.html')
+      },
+      assetsInlineLimit: 0
     }
   })
   return data.output.find(file => file.fileName === 'api.html').source
