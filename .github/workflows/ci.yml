@@ -3,14 +3,15 @@ on:
   push:
     branches:
       - main
+  pull_request:
 jobs:
-  deploy:
+
+  test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@v3
-        with:
-          persist-credentials: false
       - name: Install asdf
         uses: asdf-vm/actions/setup@v1
       - name: Cache asdf
@@ -28,10 +29,40 @@ jobs:
           cache-name: cache-pnpm-modules
         with:
           path: ~/.pnpm-store
-          key: pnpm-production-${{ hashFiles('pnpm-lock.yaml') }}
+          key: pnpm-all-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: pnpm-
-      - name: Install dependencies
+      - name: Install all dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Run tests
+        run: pnpm test
+        env:
+          FORCE_COLOR: 2
+
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+      - name: Install asdf
+        uses: asdf-vm/actions/setup@v1
+      - name: Cache asdf
+        uses: actions/cache@v3
+        with:
+          path: ~/.asdf
+          key: asdf-${{ hashFiles('**/.tool-versions') }}
+      - name: Cache pnpm modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-pnpm-modules
+        with:
+          path: ~/.pnpm-store
+          key: pnpm-production-${{ hashFiles('pnpm-lock.yaml') }}
+          restore-keys: pnpm--production
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --production --ignore-scripts
       - name: Build
         run: pnpm build
         env:
