@@ -16,7 +16,7 @@
     "start:build": "serve dist"
   },
   "dependencies": {
-    "@babel/core": "^7.17.9",
+    "@types/node": "^17.0.25",
     "autoprefixer": "^10.4.4",
     "del": "^6.0.0",
     "globby": "^13.1.1",
@@ -38,7 +38,6 @@
     "@logux/eslint-config": "^47.0.0",
     "@logux/stylelint-config": "^0.9.2",
     "@size-limit/file": "^7.0.8",
-    "@types/node": "^17.0.25",
     "eslint": "^8.13.0",
     "eslint-config-standard": "^17.0.0",
     "eslint-plugin-import": "^2.26.0",
