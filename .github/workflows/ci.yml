@@ -30,7 +30,6 @@ jobs:
         with:
           path: ~/.pnpm-store
           key: pnpm-all-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm-
       - name: Install all dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Run tests
@@ -63,7 +62,6 @@ jobs:
         with:
           path: ~/.pnpm-store
           key: pnpm-production-${{ hashFiles('pnpm-lock.yaml') }}
-          restore-keys: pnpm--production
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --production --ignore-scripts
       - name: Build
