@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@types/node": "^17.0.25",
-    "autoprefixer": "^10.4.4",
+    "autoprefixer": "^10.4.5",
     "del": "^6.0.0",
     "globby": "^13.1.1",
     "jstransformer-lowlight": "^0.1.0",
@@ -35,7 +35,7 @@
     "vite-plugin-pug-transformer": "^1.0.1"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^47.0.0",
+    "@logux/eslint-config": "^47.2.0",
     "@logux/stylelint-config": "^0.9.2",
     "@size-limit/file": "^7.0.8",
     "eslint": "^8.14.0",
@@ -44,7 +44,7 @@
     "eslint-plugin-n": "^15.1.0",
     "eslint-plugin-prefer-let": "^3.0.1",
     "eslint-plugin-promise": "^6.0.0",
-    "nano-staged": "^0.7.0",
+    "nano-staged": "^0.8.0",
     "serve": "^13.0.2",
     "simple-git-hooks": "^2.7.0",
     "size-limit": "^7.0.8",
