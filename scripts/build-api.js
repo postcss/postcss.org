@@ -86,6 +86,10 @@ function link(cls, hash, text) {
   return tag(`a.${cls}`, { href: `#${hash}` }, text)
 }
 
+function arrow() {
+  return tag(`button.sidemenu_arrow`, `>`)
+}
+
 function getName(node) {
   if (node.name === 'default') {
     if (node.kindString === 'Class') {
@@ -135,9 +139,9 @@ function generateSidemenu(nodes) {
         }
         return tag(
           'li',
-          name +
+          tag('div.sidemenu_control', [name, arrow()]) +
             tag(
-              'ul',
+              'ul.sidemenu_children',
               children
                 .filter(child => child.name !== 'constructor')
                 .map(child => {

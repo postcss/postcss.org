@@ -18,11 +18,12 @@
   text-decoration: none;
 }
 
-.sidemenu_section {
+.sidemenu_section, .sidemenu_arrow {
   padding: 0.4rem 0 0.4rem 1rem;
   margin-top: 0.5rem;
   font-weight: bold;
   color: #3f526b;
+  flex-grow: 1;
 }
 
 .sidemenu_child {
@@ -32,7 +33,26 @@
   color: #3f526b;
 }
 
+.sidemenu_control {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidemenu_arrow {
+  padding: 0.4rem 1rem 0.4rem 1rem;
+  flex-grow: 0;
+  border-style: none;
+  background: #faf8f5;
+  cursor: pointer;
+}
+
+.sidemenu_children {
+  display: none;
+}
+
 .sidemenu_section:hover,
-.sidemenu_child:hover {
+.sidemenu_child:hover,
+.sidemenu_arrow:hover
+{
   background: #fff;
 }
