@@ -90,13 +90,13 @@ function arrow() {
   let attrs = {
     onClick: `if (this.parentElement.nextSibling.style.display == 'block') {
       this.parentElement.nextSibling.style.display = 'none'
-      this.style.transform = 'rotate(0)'
+      this.children[0].style.transform = 'rotate(0)'
     } else {
       this.parentElement.nextSibling.style.display = 'block'
-      this.style.transform = 'rotate(90deg)'
+      this.children[0].style.transform = 'rotate(90deg)'
     }`
   }
-  return tag(`button.sidemenu_arrow`, attrs, `>`)
+  return tag(`button.sidemenu_arrow`, attrs, `<p>></p>`)
 }
 
 function getName(node) {
