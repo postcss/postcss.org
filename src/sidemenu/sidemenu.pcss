@@ -19,8 +19,8 @@
 }
 
 .sidemenu_section,
-.sidemenu_arrow {
-  flex-grow: 1;
+.sidemenu_controller {
+  flex-grow: 0;
   padding: 0.4rem 0 0.4rem 1rem;
   margin-top: 0.5rem;
   font-weight: bold;
@@ -34,22 +34,21 @@
   color: #3f526b;
 }
 
-.sidemenu_control {
+.sidemenu_bar {
   display: flex;
   flex-direction: row;
 }
 
-.sidemenu_arrow {
-  flex-grow: 0;
+.sidemenu_controller {
+  flex-grow: 1;
   padding: 0.4rem 1rem;
   font-weight: 300;
   cursor: pointer;
-  background: #faf8f5;
   border-style: none;
-  opacity: 0.5;
+  opacity: 0;
 }
 
-.sidemenu_arrow > p {
+.sidemenu_controller > p {
   transition-duration: 150ms;
 }
 
@@ -57,12 +56,11 @@
   display: none;
 }
 
-.sidemenu_section:hover,
 .sidemenu_child:hover,
-.sidemenu_arrow:hover {
+.sidemenu_bar:hover {
   background: #fff;
 }
 
-.sidemenu_arrow:hover {
-  opacity: 1;
+.sidemenu_section:hover {
+  text-decoration: underline;
 }

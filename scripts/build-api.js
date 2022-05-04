@@ -86,7 +86,7 @@ function link(cls, hash, text) {
   return tag(`a.${cls}`, { href: `#${hash}` }, text)
 }
 
-function arrow() {
+function controller() {
   let attrs = {
     onClick: `if (this.parentElement.nextSibling.style.display == 'block') {
       this.parentElement.nextSibling.style.display = 'none'
@@ -96,7 +96,7 @@ function arrow() {
       this.children[0].style.transform = 'rotate(90deg)'
     }`
   }
-  return tag(`button.sidemenu_arrow`, attrs, `<p>></p>`)
+  return tag(`button.sidemenu_controller`, attrs, ``)
 }
 
 function getName(node) {
@@ -148,7 +148,7 @@ function generateSidemenu(nodes) {
         }
         return tag(
           'li',
-          tag('div.sidemenu_control', [name, arrow()]) +
+          tag('div.sidemenu_bar', [name, controller()]) +
             tag(
               'ul.sidemenu_children',
               children
