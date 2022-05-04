@@ -87,7 +87,16 @@ function link(cls, hash, text) {
 }
 
 function arrow() {
-  return tag(`button.sidemenu_arrow`, `>`)
+  let attrs = {
+    onClick: `if (this.parentElement.nextSibling.style.display == 'block') {
+      this.parentElement.nextSibling.style.display = 'none'
+      this.style.transform = 'rotate(0)'
+    } else {
+      this.parentElement.nextSibling.style.display = 'block'
+      this.style.transform = 'rotate(90deg)'
+    }`
+  }
+  return tag(`button.sidemenu_arrow`, attrs, `>`)
 }
 
 function getName(node) {
