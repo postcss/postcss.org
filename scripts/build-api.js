@@ -86,19 +86,6 @@ function link(cls, hash, text) {
   return tag(`a.${cls}`, { href: `#${hash}` }, text)
 }
 
-function controller() {
-  let attrs = {
-    onClick: `if (this.parentElement.nextSibling.style.display == 'block') {
-      this.parentElement.nextSibling.style.display = 'none'
-      this.children[0].style.transform = 'rotate(0)'
-    } else {
-      this.parentElement.nextSibling.style.display = 'block'
-      this.children[0].style.transform = 'rotate(90deg)'
-    }`
-  }
-  return tag(`button.sidemenu_controller`, attrs, ``)
-}
-
 function getName(node) {
   if (node.name === 'default') {
     if (node.kindString === 'Class') {
@@ -147,8 +134,11 @@ function generateSidemenu(nodes) {
           children = cls.type.reflection.children
         }
         return tag(
-          'li',
-          tag('div.sidemenu_bar', [name, controller()]) +
+          'li.sidemenu_item',
+          tag('div.sidemenu_bar', [
+            name,
+            tag(`button.sidemenu_controller`, {}, ``)
+          ]) +
             tag(
               'ul.sidemenu_children',
               children
