@@ -18,7 +18,9 @@
   text-decoration: none;
 }
 
-.sidemenu_section {
+.sidemenu_section,
+.sidemenu_controller {
+  flex-grow: 0;
   padding: 0.4rem 0 0.4rem 1rem;
   margin-top: 0.5rem;
   font-weight: bold;
@@ -32,7 +34,33 @@
   color: #3f526b;
 }
 
-.sidemenu_section:hover,
-.sidemenu_child:hover {
+.sidemenu_bar {
+  display: flex;
+  flex-direction: row;
+}
+
+.sidemenu_controller {
+  flex-grow: 1;
+  padding: 0.4rem 1rem;
+  font-weight: 300;
+  cursor: pointer;
+  border-style: none;
+  opacity: 0;
+}
+
+.sidemenu_controller > p {
+  transition-duration: 150ms;
+}
+
+.sidemenu_children {
+  display: none;
+}
+
+.sidemenu_child:hover,
+.sidemenu_bar:hover {
   background: #fff;
+}
+
+.sidemenu_section:hover {
+  text-decoration: underline;
 }
