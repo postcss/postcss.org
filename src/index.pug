@@ -4,17 +4,17 @@ html( lang="en" )
     include ./base/base.pug
     title PostCSS - a tool for transforming CSS with JavaScript
     link( rel="stylesheet" href="./index.pcss" )
-    include ./chat/chat.pug
     link( rel="preconnect" href="https://github.com" )
   body
     main
+      include ./nav/nav.pug
       include ./hero/hero.pug
       include ./features/features.pug
       include ./way/way.pug
       include ./sponsors/sponsors.pug
       include ./showcase/showcase.pug
       include ./community/community.pug
-    include ./nav/nav.pug
+      include ./chat/chat.pug
     include ./socials/socials.pug
     include ./footer/footer.pug
     script( type="module" ) import './community/community.js'

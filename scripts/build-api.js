@@ -480,7 +480,7 @@ async function build() {
   let body = generateBody(nodes)
   await saveFile(
     layout
-      .replace('<main>', submenu + '<main>' + body)
+      .replace('</nav>', '</nav>' + submenu + body)
       .replace(/\/assets/g, '/api/assets')
   )
   await rm(join(DIST, 'api/api.html'))
