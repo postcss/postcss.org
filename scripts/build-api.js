@@ -1,16 +1,18 @@
 #!/usr/bin/env node
 import {  writeFile, mkdir, rm } from 'fs/promises'
-import remarkHighlight from 'remark-highlight.js'
 import { existsSync } from 'fs'
 import { promisify } from 'util'
 import childProcess from 'child_process'
 import remarkParse from 'remark-parse'
 import { unified } from 'unified'
-import remarkHtml from 'remark-html'
 import { globby } from 'globby'
 import { join } from 'path'
 import TypeDoc from 'typedoc'
 import vite from 'vite'
+import remarkGfm from 'remark-gfm'
+import remarkRehype from 'remark-rehype'
+import rehypeStringify from 'rehype-stringify'
+import rehypeHighlight from 'rehype-highlight'
 
 import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
@@ -64,7 +66,6 @@ async function readTypedoc() {
   for (let file of project.children) {
     nodes.push(...file.children)
   }
-
   return nodes
 }
 
@@ -167,8 +168,10 @@ function toHTML(nodes, markdown) {
   if (!markdown) return ''
   let html = unified()
     .use(remarkParse)
-    .use(remarkHighlight, { prefix: 'code_' })
-    .use(remarkHtml)
+    .use(remarkGfm)
+    .use(remarkRehype)
+    .use(rehypeStringify)
+    .use(rehypeHighlight)
     .processSync(markdown)
   return String(html)
     .replace(/hljs language-js/g, 'code')
