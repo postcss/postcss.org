@@ -171,7 +171,7 @@ function toHTML(nodes, markdown) {
     .use(remarkGfm)
     .use(remarkRehype)
     .use(rehypeStringify)
-    .use(rehypeHighlight)
+    .use(rehypeHighlight, { prefix: 'code-' })
     .processSync(markdown)
   return String(html)
     .replace(/hljs language-js/g, 'code')
