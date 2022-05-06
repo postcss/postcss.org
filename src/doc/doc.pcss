@@ -28,23 +28,20 @@
 .doc_subtitle {
   margin-bottom: 1rem;
   font-size: 1.5625rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.28;
-  color: #3f526b;
-}
-
-.doc_title {
-  font-size: 1.5625rem;
+  color: #880000;
 }
 
 .doc_subtitle {
   margin-top: 2rem;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
 }
 
 .doc_prefix {
   font-weight: 300;
   opacity: 0.5;
+  font-weight: bold;
 }
 
 .doc > p,
@@ -52,6 +49,8 @@
 .doc > ul,
 .doc > table {
   margin-bottom: 1rem;
+  color: #3f526b;
+  font-size: 0.9rem;
 }
 
 .doc > ul li {
@@ -68,17 +67,20 @@
 .doc > p a,
 .doc > table a,
 .doc > ul a {
-  color: inherit;
+  color: #3f526b;
 
   &:hover {
     text-decoration: none;
+    color: #880000;
   }
 }
 
 .doc > table {
-  width: calc(100% + 1rem);
-  margin: -0.5rem -0.5rem 1rem;
+  width: 100%;
+  margin: -0.5rem 0rem 1rem 0rem;
   border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 4px;
 }
 
 .doc > table tr {
@@ -90,7 +92,11 @@
 }
 
 .doc > table tr:nth-child(2n) {
-  background: #faf8f5;
+  background: #ffffff;
+}
+
+.doc > table tr:nth-child(odd) {
+  background: #3f526b;
 }
 
 .doc > table th {
@@ -102,6 +108,10 @@
   @media (width <= 975px) {
     display: none;
   }
+}
+
+.doc > table tr:nth-child(odd) th {
+  color: #faf8f5;
 }
 
 .doc > table td {

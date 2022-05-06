@@ -26,14 +26,16 @@
 .sidemenu_section,
 .sidemenu_controller {
   margin-top: 0.5rem;
-  font-weight: bold;
+  font-weight: normal;
+  font-size: 0.9rem;
   color: #3f526b;
 }
 
 .sidemenu_child {
   padding: 0.2rem 0 0.2rem 1rem;
   padding-left: 2rem;
-  font-size: 14px;
+  font-weight: lighter;
+  font-size: 0.9rem;
   color: #3f526b;
 }
 
@@ -58,6 +60,8 @@
 
 .sidemenu_controller::before {
   content: "+";
+  font-weight: normal;
+  font-size: 0.9rem;
 }
 
 .sidemenu_item.is-open .sidemenu_controller::before {
@@ -75,4 +79,8 @@
 
 .sidemenu_item.is-open .sidemenu_children {
   display: block;
+}
+
+.sidemenu a:hover {
+  color: #880000;
 }
