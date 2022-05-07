@@ -28,22 +28,18 @@
 .doc_subtitle {
   margin-bottom: 1rem;
   font-size: 1.5625rem;
-  font-weight: normal;
+  font-weight: bold;
   line-height: 1.28;
-  color: #3f526b;
-}
-
-.doc_title {
-  font-size: 1.5625rem;
+  color: #800;
 }
 
 .doc_subtitle {
   margin-top: 2rem;
-  font-size: 1.25rem;
+  font-size: 0.9rem;
 }
 
 .doc_prefix {
-  font-weight: 300;
+  font-weight: bold;
   opacity: 0.5;
 }
 
@@ -52,6 +48,8 @@
 .doc > ul,
 .doc > table {
   margin-bottom: 1rem;
+  font-size: 0.9rem;
+  color: #3f526b;
 }
 
 .doc > ul li {
@@ -62,35 +60,47 @@
 .doc > p code,
 .doc > table code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
-  font-size: 0.9rem;
+  font-size: 0.825rem;
+}
+
+.doc > table a,
+.doc > p a {
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
+  font-weight: lighter;
+  color: #800;
+  text-decoration: none;
+  background-color: #88000020;
+  border-radius: 4px;
 }
 
 .doc > p a,
 .doc > table a,
 .doc > ul a {
-  color: inherit;
+  color: #800;
 
   &:hover {
-    text-decoration: none;
+    text-decoration: underline;
   }
 }
 
 .doc > table {
-  width: calc(100% + 1rem);
-  margin: -0.5rem -0.5rem 1rem;
+  width: 100%;
+  margin: -0.5rem 0 1rem;
+  overflow: hidden;
   border-collapse: collapse;
+  border-radius: 4px;
 }
 
 .doc > table tr {
+  background: #fff;
+  border-bottom: 1px solid #c8c8c8;
+
   @media (width <= 975px) {
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto auto;
   }
-}
-
-.doc > table tr:nth-child(2n) {
-  background: #faf8f5;
 }
 
 .doc > table th {
