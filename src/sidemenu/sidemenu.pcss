@@ -26,16 +26,15 @@
 .sidemenu_section,
 .sidemenu_controller {
   margin-top: 0.5rem;
-  font-weight: normal;
   font-size: 0.9rem;
+  font-weight: normal;
   color: #3f526b;
 }
 
 .sidemenu_child {
-  padding: 0.2rem 0 0.2rem 1rem;
-  padding-left: 2rem;
-  font-weight: lighter;
+  padding: 0.2rem 0 0.2rem 2rem;
   font-size: 0.9rem;
+  font-weight: lighter;
   color: #3f526b;
 }
 
@@ -59,9 +58,9 @@
 }
 
 .sidemenu_controller::before {
-  content: "+";
-  font-weight: normal;
   font-size: 0.9rem;
+  font-weight: normal;
+  content: "+";
 }
 
 .sidemenu_item.is-open .sidemenu_controller::before {
@@ -77,10 +76,14 @@
   background: #fff;
 }
 
+.sidemenu a:hover {
+  color: #800;
+}
+
 .sidemenu_item.is-open .sidemenu_children {
   display: block;
 }
 
-.sidemenu a:hover {
-  color: #880000;
+.sidemenu_item.is-open .sidemenu_bar a {
+  color: #800;
 }

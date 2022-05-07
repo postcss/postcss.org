@@ -30,7 +30,7 @@
   font-size: 1.5625rem;
   font-weight: bold;
   line-height: 1.28;
-  color: #880000;
+  color: #800;
 }
 
 .doc_subtitle {
@@ -39,9 +39,8 @@
 }
 
 .doc_prefix {
-  font-weight: 300;
-  opacity: 0.5;
   font-weight: bold;
+  opacity: 0.5;
 }
 
 .doc > p,
@@ -49,8 +48,8 @@
 .doc > ul,
 .doc > table {
   margin-bottom: 1rem;
-  color: #3f526b;
   font-size: 0.9rem;
+  color: #3f526b;
 }
 
 .doc > ul li {
@@ -64,39 +63,44 @@
   font-size: 0.9rem;
 }
 
+td > a,
+.doc > p a {
+  padding-right: 0.4rem;
+  padding-left: 0.4rem;
+  font-weight: lighter;
+  color: #800;
+  text-decoration: none;
+  background-color: #88000020;
+  border-radius: 4px;
+}
+
 .doc > p a,
 .doc > table a,
 .doc > ul a {
-  color: #3f526b;
+  color: #800;
 
   &:hover {
-    text-decoration: none;
-    color: #880000;
+    text-decoration: underline;
   }
 }
 
 .doc > table {
   width: 100%;
-  margin: -0.5rem 0rem 1rem 0rem;
-  border-collapse: collapse;
+  margin: -0.5rem 0 1rem;
   overflow: hidden;
+  border-collapse: collapse;
   border-radius: 4px;
 }
 
 .doc > table tr {
+  background: #fff;
+  border-bottom: 1px solid #c8c8c8;
+
   @media (width <= 975px) {
     display: grid;
     grid-template-rows: auto auto;
     grid-template-columns: auto auto;
   }
-}
-
-.doc > table tr:nth-child(2n) {
-  background: #ffffff;
-}
-
-.doc > table tr:nth-child(odd) {
-  background: #3f526b;
 }
 
 .doc > table th {
@@ -108,10 +112,6 @@
   @media (width <= 975px) {
     display: none;
   }
-}
-
-.doc > table tr:nth-child(odd) th {
-  color: #faf8f5;
 }
 
 .doc > table td {
