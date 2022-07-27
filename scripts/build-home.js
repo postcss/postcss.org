@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { copyFile, rm } from 'fs/promises'
+import { build } from 'vite'
 import { join } from 'path'
-import vite from 'vite'
 
 import { SRC, DIST } from './lib/dir.js'
 
@@ -9,9 +9,9 @@ async function cleanBuildDir() {
   await rm(join(DIST, '*'), { force: true, recursive: true })
 }
 
-async function build() {
+async function run() {
   await cleanBuildDir()
-  await vite.build({
+  await build({
     mode: 'production'
   })
   await Promise.all([
@@ -20,7 +20,7 @@ async function build() {
   ])
 }
 
-build().catch(e => {
+run().catch(e => {
   if (e.stack) {
     process.stderr.write(e.stack + '\n')
   } else {

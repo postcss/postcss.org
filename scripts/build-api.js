@@ -1,25 +1,25 @@
 #!/usr/bin/env node
 import {  writeFile, mkdir, rm } from 'fs/promises'
+import rehypeHighlight from 'rehype-highlight'
+import rehypeStringify from 'rehype-stringify'
 import { existsSync } from 'fs'
 import { promisify } from 'util'
+import remarkRehype from 'remark-rehype'
 import childProcess from 'child_process'
 import remarkParse from 'remark-parse'
 import { unified } from 'unified'
 import { globby } from 'globby'
+import remarkGfm from 'remark-gfm'
+import { build } from 'vite'
 import { join } from 'path'
 import TypeDoc from 'typedoc'
-import vite from 'vite'
-import remarkGfm from 'remark-gfm'
-import remarkRehype from 'remark-rehype'
-import rehypeStringify from 'rehype-stringify'
-import rehypeHighlight from 'rehype-highlight'
 
 import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
 let exec = promisify(childProcess.exec)
 
 async function buildLayout() {
-  let data = await vite.build({
+  let data = await build({
     mode: 'production',
     build: {
       outDir: join(DIST, 'api'),
@@ -476,7 +476,7 @@ async function saveFile(html) {
   await writeFile(join(api, 'index.html'), html)
 }
 
-async function build() {
+async function run() {
   await downloadProject('postcss')
   let [nodes, layout] = await Promise.all([readTypedoc(), buildLayout()])
   let submenu = generateSidemenu(nodes)
@@ -489,7 +489,7 @@ async function build() {
   await rm(join(DIST, 'api/api.html'))
 }
 
-build().catch(e => {
+run().catch(e => {
   if (e.stack) {
     process.stderr.write(e.stack + '\n')
   } else {
