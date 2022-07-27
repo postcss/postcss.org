@@ -1,13 +1,12 @@
 #!/usr/bin/env node
-import { copyFile } from 'fs/promises'
+import { copyFile, rm } from 'fs/promises'
 import { join } from 'path'
-import del from 'del'
 import vite from 'vite'
 
 import { SRC, DIST } from './lib/dir.js'
 
 async function cleanBuildDir() {
-  await del(join(DIST, '*'), { dot: true })
+  await rm(join(DIST, '*'), { force: true, recursive: true })
 }
 
 async function build() {

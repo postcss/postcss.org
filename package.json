@@ -18,7 +18,6 @@
   "dependencies": {
     "@types/node": "^17.0.31",
     "autoprefixer": "^10.4.7",
-    "del": "^6.0.0",
     "globby": "^13.1.1",
     "jstransformer-lowlight": "^0.1.0",
     "postcss": "^8.4.13",
