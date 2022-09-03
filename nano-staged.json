@@ -1,0 +1,4 @@
+{
+  "*.svg": "svgo",
+  "*.sss": "stylelint --fix"
+}

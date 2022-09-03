@@ -1,0 +1,6 @@
+{
+  "extends": "@logux/stylelint-config",
+  "rules": {
+    "color-no-hex": null
+  }
+}

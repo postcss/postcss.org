@@ -1,0 +1,8 @@
+{
+  "plugins": {
+    "postcss-media-minmax": {},
+    "postcss-nested": {},
+    "postcss-hexrgba": {},
+    "autoprefixer": {}
+  }
+}

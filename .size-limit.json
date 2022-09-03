@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Home",
+    "path": ["dist/index.html", "dist/assets/*", "!dist/assets/*.ico"],
+    "limit": "320 KB"
+  },
+  {
+    "name": "API",
+    "path": [
+      "dist/api/index.html",
+      "dist/api/assets/*",
+      "!dist/api/assets/*.ico"
+    ],
+    "limit": "310 KB"
+  }
+]

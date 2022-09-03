@@ -58,67 +58,7 @@
   "engines": {
     "node": "^18.0.0"
   },
-  "browserslist": [
-    "defaults",
-    "not op_mini all",
-    "not op_mob > 0",
-    "not and_qq > 0",
-    "not android > 0"
-  ],
-  "postcss": {
-    "plugins": {
-      "postcss-media-minmax": {},
-      "postcss-nested": {},
-      "postcss-hexrgba": {},
-      "autoprefixer": {}
-    }
-  },
-  "eslintConfig": {
-    "extends": "@logux/eslint-config"
-  },
-  "eslintIgnore": [
-    "design/",
-    "dist/"
-  ],
-  "stylelint": {
-    "extends": "@logux/stylelint-config",
-    "rules": {
-      "color-no-hex": null
-    }
-  },
   "simple-git-hooks": {
     "pre-commit": "./node_modules/.bin/nano-staged"
-  },
-  "prettier": {
-    "arrowParens": "avoid",
-    "jsxSingleQuote": false,
-    "quoteProps": "consistent",
-    "semi": false,
-    "singleQuote": true,
-    "trailingComma": "none"
-  },
-  "nano-staged": {
-    "*.svg": "svgo",
-    "*.sss": "stylelint --fix"
-  },
-  "size-limit": [
-    {
-      "name": "Home",
-      "path": [
-        "dist/index.html",
-        "dist/assets/*",
-        "!dist/assets/*.ico"
-      ],
-      "limit": "320 KB"
-    },
-    {
-      "name": "API",
-      "path": [
-        "dist/api/index.html",
-        "dist/api/assets/*",
-        "!dist/api/assets/*.ico"
-      ],
-      "limit": "310 KB"
-    }
-  ]
+  }
 }
