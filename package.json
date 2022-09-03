@@ -59,10 +59,7 @@
     "node": "^18.0.0"
   },
   "browserslist": [
-    "last 2 versions",
-    "firefox esr",
-    "not dead",
-    "not ie 11",
+    "defaults",
     "not op_mini all",
     "not op_mob > 0",
     "not and_qq > 0",
