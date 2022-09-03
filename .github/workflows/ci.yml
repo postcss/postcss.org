@@ -44,6 +44,13 @@ jobs:
     needs:
       - test
     steps:
+      - name: Notify about new deployment
+        uses: bobheadxi/deployments@v1
+        id: deployment
+        with:
+          step: start
+          token: ${{ secrets.GITHUB_TOKEN }}
+          env: production
       - name: Checkout the repository
         uses: actions/checkout@v3
         with:
@@ -73,3 +80,13 @@ jobs:
         with:
           branch: gh-pages
           folder: dist
+      - name: Update deployment status
+        uses: bobheadxi/deployments@v1
+        if: always()
+        with:
+          step: finish
+          token: ${{ secrets.GITHUB_TOKEN }}
+          status: ${{ job.status }}
+          env: ${{ steps.deployment.outputs.env }}
+          env_url: https://postcss.org/
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
