@@ -9,8 +9,6 @@ import { join } from 'path'
 import { promisify } from 'util'
 import { existsSync } from 'fs'
 import { build } from 'vite'
-import { visit } from 'unist-util-visit'
-import remarkHighlight from 'remark-highlight.js'
 import remarkRehype from 'remark-rehype'
 import rehypeRaw from 'rehype-raw'
 
@@ -25,27 +23,6 @@ async function downloadProject(name) {
   await exec(`git clone --depth 1 ${url} "${dir}"`)
 }
 
-function highlightLines(node, cb) {
-  if (!node.data) node.data = {}
-  node.data.hChildren = node.value
-    .split('\n')
-    .map(cb)
-    .flatMap((line, i) => (i === 0 ? line : [text('\n'), ...line]))
-}
-
-function span(cls, value) {
-  return {
-    type: 'element',
-    tagName: 'span',
-    properties: { className: [cls] },
-    children: [text(value)]
-  }
-}
-
-function text(value) {
-  return { type: 'text', value }
-}
-
 function articler(file) {
   return tree => {
     tree.children = [
@@ -55,7 +32,8 @@ function articler(file) {
         properties: {},
         children: tree.children.filter(i => {
           if (i.tagName === 'h1') {
-            i.editUrl = `https://github.com/logux/docs/edit/main/${file}`
+            // this url does not work
+            i.editUrl = `https://github.com/postcss/docs/edit/main/${file}`
             i.noSlug = true
           }
           return i.type !== 'text' || i.value !== '\n'
@@ -65,67 +43,14 @@ function articler(file) {
   }
 }
 
-function iniandBashHighlight() {
-  return tree => {
-    visit(tree, 'code', node => {
-      if (node.lang === 'sh' || node.lang === 'bash') {
-        highlightLines(node, line =>
-          line
-            .split(' ')
-            .map((word, i, all) => {
-              if (i === 0 && (word === 'npx' || word === 'sudo')) {
-                return span('code-block_keyword', word)
-              } else if (
-                i === 0 ||
-                (i === 1 && all[0] === 'npx') ||
-                (i === 1 && all[0] === 'npm' && word === 'i') ||
-                (i === 1 && all[0] === 'yarn' && word === 'add') ||
-                (i === 1 && all[0] === 'pnpm' && word === 'add')
-              ) {
-                return span('code-block_literal', word)
-              } else {
-                return text(word)
-              }
-            })
-            .flatMap((word, i) => (i === 0 ? word : [text(' '), word]))
-        )
-      } else if (node.lang === 'ini') {
-        highlightLines(node, line => {
-          let [name, value] = line.split('=')
-          return [
-            span('code-block_params', name),
-            text('='),
-            span('code-block_string', value)
-          ]
-        })
-      } else if (node.lang === 'diff') {
-        highlightLines(node, line => {
-          let code = line.slice(2)
-          if (line[0] === '+') {
-            return [span('code-block_addition', code)]
-          } else if (line[0] === '-') {
-            return [span('code-block_deletion', code)]
-          } else {
-            return [span('code-block_untouched', code)]
-          }
-        })
-      }
-    })
-  }
-}
-
 async function readDocs() {
-  let files = await globby('../**/docs/*.md', { cwd: ROOT })
+  let ignore = "'../postcss/docs/README-cn.md'"
+  let files = await globby('../postcss/docs/**/*.md')
   let docs = await Promise.all(
-    files.map(async file => {
+    files.filter(file => !ignore.includes(file)).map(async file => {
       let md = await readFile(join(ROOT, file))
       let tree = await unified()().use(remarkParse).parse(md)
       tree = await unified()
-        .use(iniandBashHighlight)
-        .use(remarkHighlight, {
-          exclude: ['bash', 'sh', 'ini', 'diff', 'pcss'],
-          prefix: 'code-block_'
-        })
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw)
         .use(articler, file)
@@ -159,7 +84,12 @@ async function makeHTML(tree) {
 async function saveFile(html) {
   let docs = join(DIST, 'docs')
   if (!existsSync(docs)) await mkdir(docs)
-  await writeFile(join(docs, 'index.html'), html)
+  let fileTitle = randString() + '.html'
+  await writeFile(join(docs, fileTitle), html)
+}
+
+function randString() {
+  return (+new Date * Math.random()).toString(36).substring(0, 6)
 }
 
 function tag(prefix, attrs, body) {
@@ -176,22 +106,64 @@ function tag(prefix, attrs, body) {
   return `<${tagName}${attrsString}>${body}</${tagName}>`
 }
 
+
+function makeSidemenu(contents) {
+
+  //let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "")
+  let chapters = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)|(?<=<li><a(?:.*?)>)(.*)(?=<\/a)/gm).filter(title => title !== "")
+  // TODO: make sidebar links
+  let sidemenu = tag(
+    'nav.sidemenu',
+    tag(
+      'ul',
+      chapters.map(chapter => {
+        let name = tag('sidemenu_section', chapter)
+        let children = chapter
+        return tag(
+          'li.sidemenu_item',
+          tag('div.sidemenu_bar', [
+            name,
+            tag(`button.sidemenu_controller`, {}, ``)
+          ]) +
+          tag(
+            'ul.sidemenu_children',
+            children
+          )
+        )
+      })
+    )
+  )
+  return sidemenu
+}
+
 async function run() {
-    await downloadProject('postcss')
-    let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
-    let body = []
-    for (let i = 0; i !== docs.length; i++) {
-      body[i] = await (makeHTML(docs[i]))
+  await downloadProject('postcss')
+  let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
+  let contents = []
+  let sidemenu
+  for (let i = 0; i < docs.length; i++) {
+
+    if (docs[i].children[0].children[0].children[0].value === "Documentation") {
+      contents[i] = await makeHTML(docs[i])
+      sidemenu = makeSidemenu(contents[i])
     }
-    body = body.join(" ")
+  }
+
+  let body = []
+  for (let i = 0; i !== docs.length; i++) {
+    body[i] = await (makeHTML(docs[i]))
+
+  }
+
+  for (let i = 0; i < body.length + 1; i++) {
     await saveFile(
       layout
-        .replace('</nav>', '</nav>' + body)
+        .replace('</nav>', '</nav>' + sidemenu + body[i])
         .replace(/\/assets/g, '/docs/assets')
     )
-  
-    await rm(join(DIST, 'docs/docs.html'))
+    //await rm(join(DIST, 'docs/docs.html'))
   }
+}
 
 run().catch(e => {
   if (e.stack) {
