@@ -1,6 +1,9 @@
 #!/usr/bin/env node
+import console from 'console'
+import addClasses from 'rehype-add-classes';
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
+import rehypeHighlight from 'rehype-highlight'
 import { unified } from 'unified'
 import { globby } from 'globby'
 import childProcess from 'child_process'
@@ -44,8 +47,9 @@ function articler(file) {
 }
 
 async function readDocs() {
-  let ignore = "'../postcss/docs/README-cn.md'"
-  let files = await globby('../postcss/docs/**/*.md')
+  let ignore = ['../postcss/docs/README-cn.md', '../postcss/CHANGELOG.md']
+  // TODO: exclude node_modules in a different way
+  let files = (await globby('../postcss/**/**/*.md')).filter(file => !file.match(/node_modules/g))
   let docs = await Promise.all(
     files.filter(file => !ignore.includes(file)).map(async file => {
       let md = await readFile(join(ROOT, file))
@@ -54,6 +58,13 @@ async function readDocs() {
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw)
         .use(articler, file)
+        .use(addClasses, {
+          h1: "doc_title",
+          h2: "doc_subtitle",
+          h3: "doc_subtitle",
+          //pre: "code"
+        })
+        .use(rehypeHighlight, { prefix: 'code-', ignoreMissing: true })
         .run(tree)
       return (tree)
     })
@@ -78,18 +89,29 @@ async function buildLayout() {
 async function makeHTML(tree) {
   let html = await unified().use(rehypeStringify).stringify(tree)
   html = tag('section.doc', html)
+
+  //let titles = 
+
+
   return html
 }
 
-async function saveFile(html) {
+async function saveFile(html, fileName) {
   let docs = join(DIST, 'docs')
   if (!existsSync(docs)) await mkdir(docs)
-  let fileTitle = randString() + '.html'
-  await writeFile(join(docs, fileTitle), html)
-}
+  let fileTitle
 
-function randString() {
-  return (+new Date * Math.random()).toString(36).substring(0, 6)
+  //TODO find a better way to search for README
+  let readmeRegex = /PostCSS <a href="https:\/\/gitter.im\/postcss\/postcss"><img src="https:\/\/img.shields.io\/badge\/Gitter-Join_the_PostCSS_chat-brightgreen.svg" alt="Gitter"><\/a>/g
+  if (html.match(readmeRegex)) {
+    fileTitle = 'index.html'
+  }
+  else {
+    // TODO eliminate one undefined filename
+    fileTitle = fileName + '.html'
+  }
+
+  await writeFile(join(docs, fileTitle), html)
 }
 
 function tag(prefix, attrs, body) {
@@ -109,16 +131,20 @@ function tag(prefix, attrs, body) {
 
 function makeSidemenu(contents) {
 
-  //let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "")
+  let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "")
   let chapters = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)|(?<=<li><a(?:.*?)>)(.*)(?=<\/a)/gm).filter(title => title !== "")
   // TODO: make sidebar links
+  let i = 0
   let sidemenu = tag(
     'nav.sidemenu',
     tag(
       'ul',
-      chapters.map(chapter => {
-        let name = tag('sidemenu_section', chapter)
-        let children = chapter
+      titles.map(title => {
+        let name = linkHeadings('sidemenu_section', title.toLowerCase().replaceAll(' ', '-'), title)
+        let children = findChildren(titles, chapters, i)
+        i++
+        // TODO stop if there are no children
+        // TODO link subheadings and make hashes inside pages
         return tag(
           'li.sidemenu_item',
           tag('div.sidemenu_bar', [
@@ -126,8 +152,14 @@ function makeSidemenu(contents) {
             tag(`button.sidemenu_controller`, {}, ``)
           ]) +
           tag(
-            'ul.sidemenu_children',
-            children
+            'ul.sidemenu_children', children.map(child => {
+              return tag(
+                'li', tag(
+                  'a.sidemenu_child', child))
+            })
+            //'li', linkGenerator(
+            //'sidemenu_child', title.toLowerCase().replaceAll(" ", "-"), child))
+            //})
           )
         )
       })
@@ -136,14 +168,37 @@ function makeSidemenu(contents) {
   return sidemenu
 }
 
+function linkHeadings(cls, link, text) {
+  return tag(`a.${cls}`, { href: `${link}` }, text)
+}
+
+function link(cls, hash, text) {
+  return tag(`a.${cls}`, { href: `#${hash}` }, text)
+}
+
+function findChildren(titles, chapters, i) {
+  let titleIndexes = [1,]
+  for (let j = 1; j < chapters.length + 1; j++) {
+    if (titles.includes(chapters[j])) {
+      titleIndexes.push(j)
+    }
+  }
+  let children = chapters.slice(titleIndexes[i] + 1, titleIndexes[i + 1])
+  return children
+}
+
 async function run() {
   await downloadProject('postcss')
   let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
   let contents = []
   let sidemenu
+  let fileNames = []
   for (let i = 0; i < docs.length; i++) {
 
+    fileNames[i] = docs[i].children[0].children[0].children[0].value.toLowerCase().replaceAll(" ", "-")
+
     if (docs[i].children[0].children[0].children[0].value === "Documentation") {
+      //TODO stop making this html twice and not make index at all
       contents[i] = await makeHTML(docs[i])
       sidemenu = makeSidemenu(contents[i])
     }
@@ -152,16 +207,19 @@ async function run() {
   let body = []
   for (let i = 0; i !== docs.length; i++) {
     body[i] = await (makeHTML(docs[i]))
-
   }
 
   for (let i = 0; i < body.length + 1; i++) {
-    await saveFile(
-      layout
-        .replace('</nav>', '</nav>' + sidemenu + body[i])
-        .replace(/\/assets/g, '/docs/assets')
-    )
-    //await rm(join(DIST, 'docs/docs.html'))
+    //TODO make sure undefined does not appear all the way up here
+    if (body[i] !== undefined) {
+      await saveFile(
+        layout
+          .replace('</nav>', '</nav>' + sidemenu + body[i])
+          .replace(/\/assets/g, '/docs/assets'),
+        fileNames[i]
+      )
+      //await rm(join(DIST, 'docs/docs.html'))
+    }
   }
 }
 
@@ -173,3 +231,18 @@ run().catch(e => {
   }
   process.exit(1)
 })
+
+function docHasher(html) {
+
+  // TODO something here breaks links
+
+  let hashes = html.match(/(?<=<h. class="doc_subtitle">)(.*?)(?=<\/h.>)/gm)
+  // TODO make this distinguish b/w h2 & h3
+  console.log(hashes)
+  for (let i in hashes) {
+    let id = hashes[i].toLowerCase().replaceAll(" ", "-")
+    let hashed = tag('h2.doc_subtitle', { id }, hashes[i])
+    html = html.replaceAll(hashes[i], hashed)
+  }
+  return html
+}
