@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 import console from 'console'
-import addClasses from 'rehype-add-classes';
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
 import rehypeHighlight from 'rehype-highlight'
@@ -26,7 +25,8 @@ async function downloadProject(name) {
   await exec(`git clone --depth 1 ${url} "${dir}"`)
 }
 
-function articler(file) {
+function prepareHTML() {
+  let checkDuplicate = false
   return tree => {
     tree.children = [
       {
@@ -34,10 +34,34 @@ function articler(file) {
         tagName: 'article',
         properties: {},
         children: tree.children.filter(i => {
+          if (i.tagName === "a" && i.children[1].tagName === "img") {
+            i.properties = { class: "img-link" }
+          }
           if (i.tagName === 'h1') {
-            // this url does not work
-            i.editUrl = `https://github.com/postcss/docs/edit/main/${file}`
-            i.noSlug = true
+            i.properties = { class: "doc_title" }
+          }
+          if (i.tagName === "h2" || i.tagName === "h3") {
+            let elementID = getName(i.children[0].value)
+            if (i.children[1] !== undefined) {
+              let complexID = []
+              i.children.forEach(element => {
+                if (element.value !== undefined) {
+                  complexID += element.value
+                }
+                else {
+                  complexID += element.children[0].value
+                }
+              });
+              elementID = getName(complexID)
+            }
+
+            if (checkDuplicate && elementID === "main-theory") {
+              elementID = "main-theory-1"
+            }
+            if (elementID === "main-theory") {
+              checkDuplicate = true
+            }
+            i.properties = { class: "doc_subtitle", id: elementID }
           }
           return i.type !== 'text' || i.value !== '\n'
         })
@@ -47,9 +71,9 @@ function articler(file) {
 }
 
 async function readDocs() {
-  let ignore = ['../postcss/docs/README-cn.md', '../postcss/CHANGELOG.md']
-  // TODO: exclude node_modules in a different way
+  let ignore = ['../postcss/docs/README-cn.md', '../postcss/CHANGELOG.md', '../postcss/docs/source-maps.md']
   let files = (await globby('../postcss/**/**/*.md')).filter(file => !file.match(/node_modules/g))
+  console.log(files)
   let docs = await Promise.all(
     files.filter(file => !ignore.includes(file)).map(async file => {
       let md = await readFile(join(ROOT, file))
@@ -57,14 +81,7 @@ async function readDocs() {
       tree = await unified()
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw)
-        .use(articler, file)
-        // TODO add class through properties?
-        .use(addClasses, {
-          h1: "doc_title",
-          h2: "doc_subtitle",
-          h3: "doc_subtitle",
-          //pre: "code"
-        })
+        .use(prepareHTML, file)
         .use(rehypeHighlight, { prefix: 'code-', ignoreMissing: true })
         .run(tree)
       return (tree)
@@ -88,28 +105,8 @@ async function buildLayout() {
 }
 
 async function makeHTML(tree) {
-  for (let i = 0; i < tree.children[0].children.length; i++) {
-    if (tree.children[0].children[i].tagName === "h2" || tree.children[0].children[i].tagName === "h3") {
-      for (let j in tree.children[0].children[i].children) {
-        let wow = []
-        if (tree.children[0].children[i].children[j].value !== undefined) {
-          wow[j] = tree.children[0].children[i].children[j].value.toLowerCase().replaceAll(" ", "-")
-
-          if (tree.children[0].children[i].children[1] !== undefined) {
-            wow[j] = wow[j] + tree.children[0].children[i].children[1].children[0].value
-          }
-          tree.children[0].children[i].properties = { ...tree.children[0].children[i].properties, id: wow.join() }
-        }
-      }
-    }
-  }
-
   let html = await unified().use(rehypeStringify).stringify(tree)
   html = tag('section.doc', html)
-
-  //let titles = 
-
-
   return html
 }
 
@@ -118,16 +115,13 @@ async function saveFile(html, fileName) {
   if (!existsSync(docs)) await mkdir(docs)
   let fileTitle
 
-  //TODO find a better way to search for README
-  let readmeRegex = /PostCSS <a href="https:\/\/gitter.im\/postcss\/postcss"><img src="https:\/\/img.shields.io\/badge\/Gitter-Join_the_PostCSS_chat-brightgreen.svg" alt="Gitter"><\/a>/g
-  if (html.match(readmeRegex)) {
+  if (fileName === "postcss-") {
     fileTitle = 'index.html'
   }
   else {
-    // TODO eliminate one undefined filename
     fileTitle = fileName + '.html'
+    html = html.replace(/PostCSS Documentation/gm, html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm))
   }
-
   await writeFile(join(docs, fileTitle), html)
 }
 
@@ -145,12 +139,10 @@ function tag(prefix, attrs, body) {
   return `<${tagName}${attrsString}>${body}</${tagName}>`
 }
 
-
 function makeSidemenu(contents) {
-
-  let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "")
+  let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "").filter(title => title !== "PostCSS and Source Maps")
+  console.log(titles)
   let chapters = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)|(?<=<li><a(?:.*?)>)(.*)(?=<\/a)/gm).filter(title => title !== "")
-  // TODO: make sidebar links
   let i = 0
   let sidemenu = tag(
     'nav.sidemenu',
@@ -160,8 +152,6 @@ function makeSidemenu(contents) {
         let name = linkHeadings('sidemenu_section', title.toLowerCase().replaceAll(' ', '-'), title)
         let children = findChildren(titles, chapters, i)
         i++
-        // TODO stop if there are no children
-        // TODO link subheadings and make hashes inside pages
         return tag(
           'li.sidemenu_item',
           tag('div.sidemenu_bar', [
@@ -171,9 +161,6 @@ function makeSidemenu(contents) {
           tag(
             'ul.sidemenu_children', children.map(child => {
               return tag(
-                //'li', tag(
-                //'a.sidemenu_child', child))
-                //})
                 'li', linkSubHeadings(
                   'sidemenu_child', getName(title), getName(child), child))
             })
@@ -182,6 +169,9 @@ function makeSidemenu(contents) {
       })
     )
   )
+  sidemenu = sidemenu.slice(0, sidemenu.indexOf("main-theory") + "main-theory".length) +
+    sidemenu.slice(sidemenu.indexOf("main-theory") + "main-theory".length).replace(/main-theory/gm, "main-theory-1")
+
   return sidemenu
 }
 
@@ -191,7 +181,7 @@ function linkHeadings(cls, link, text) {
 
 function linkSubHeadings(cls, link, hash, text) {
   let ref = link + '#' + hash
-  ref.replaceAll("<code>", "").replaceAll("</code>", "")
+  ref = ref.replaceAll("<code>", "").replaceAll("</code>", "")
   return tag(`a.${cls}`, { href: ref }, text)
 }
 
@@ -207,43 +197,37 @@ function findChildren(titles, chapters, i) {
 }
 
 function getName(string) {
-  return string.toLowerCase().replaceAll(" ", "-")
+  string = string.toLowerCase().replaceAll(" ", "-").replaceAll(/[0-9]/g, "").replaceAll(".", "")
+  while (string.charAt(0) === '-') {
+    string = string.substring(1);
+  }
+  return string
 }
 
 async function run() {
   await downloadProject('postcss')
   let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
-  let contents = []
+  
+  let fileNames = docs.map(doc => getName(doc.children[0].children[0].children[0].value))
+  
   let sidemenu
-  let fileNames = []
-  for (let i = 0; i < docs.length; i++) {
-
-    fileNames[i] = docs[i].children[0].children[0].children[0].value.toLowerCase().replaceAll(" ", "-")
-
-    if (docs[i].children[0].children[0].children[0].value === "Documentation") {
-      //TODO stop making this html twice and not make index at all
-      contents[i] = await makeHTML(docs[i])
-      sidemenu = makeSidemenu(contents[i])
-    }
-  }
-
   let body = []
   for (let i = 0; i !== docs.length; i++) {
     body[i] = await (makeHTML(docs[i]))
-  }
-
-  for (let i = 0; i < body.length + 1; i++) {
-    //TODO make sure undefined does not appear all the way up here
-    if (body[i] !== undefined) {
-      await saveFile(
-        layout
-          .replace('</nav>', '</nav>' + sidemenu + body[i])
-          .replace(/\/assets/g, '/docs/assets'),
-        fileNames[i]
-      )
-      //await rm(join(DIST, 'docs/docs.html'))
+    if (i === fileNames.indexOf("documentation")) {
+      sidemenu = makeSidemenu(body[i])
     }
   }
+
+  for (let i = 0; i < body.length; i++) {
+    await saveFile(
+      layout
+        .replace('</nav>', '</nav>' + sidemenu + body[i])
+        .replace(/\/assets/g, '/docs/assets'),
+      fileNames[i]
+    )
+  }
+  await rm(join(DIST, 'docs/docs.html'))
 }
 
 run().catch(e => {
