@@ -58,6 +58,7 @@ async function readDocs() {
         .use(remarkRehype, { allowDangerousHtml: true })
         .use(rehypeRaw)
         .use(articler, file)
+        // TODO add class through properties?
         .use(addClasses, {
           h1: "doc_title",
           h2: "doc_subtitle",
@@ -87,6 +88,22 @@ async function buildLayout() {
 }
 
 async function makeHTML(tree) {
+  for (let i = 0; i < tree.children[0].children.length; i++) {
+    if (tree.children[0].children[i].tagName === "h2" || tree.children[0].children[i].tagName === "h3") {
+      for (let j in tree.children[0].children[i].children) {
+        let wow = []
+        if (tree.children[0].children[i].children[j].value !== undefined) {
+          wow[j] = tree.children[0].children[i].children[j].value.toLowerCase().replaceAll(" ", "-")
+
+          if (tree.children[0].children[i].children[1] !== undefined) {
+            wow[j] = wow[j] + tree.children[0].children[i].children[1].children[0].value
+          }
+          tree.children[0].children[i].properties = { ...tree.children[0].children[i].properties, id: wow.join() }
+        }
+      }
+    }
+  }
+
   let html = await unified().use(rehypeStringify).stringify(tree)
   html = tag('section.doc', html)
 
@@ -154,12 +171,12 @@ function makeSidemenu(contents) {
           tag(
             'ul.sidemenu_children', children.map(child => {
               return tag(
-                'li', tag(
-                  'a.sidemenu_child', child))
+                //'li', tag(
+                //'a.sidemenu_child', child))
+                //})
+                'li', linkSubHeadings(
+                  'sidemenu_child', getName(title), getName(child), child))
             })
-            //'li', linkGenerator(
-            //'sidemenu_child', title.toLowerCase().replaceAll(" ", "-"), child))
-            //})
           )
         )
       })
@@ -172,8 +189,10 @@ function linkHeadings(cls, link, text) {
   return tag(`a.${cls}`, { href: `${link}` }, text)
 }
 
-function link(cls, hash, text) {
-  return tag(`a.${cls}`, { href: `#${hash}` }, text)
+function linkSubHeadings(cls, link, hash, text) {
+  let ref = link + '#' + hash
+  ref.replaceAll("<code>", "").replaceAll("</code>", "")
+  return tag(`a.${cls}`, { href: ref }, text)
 }
 
 function findChildren(titles, chapters, i) {
@@ -185,6 +204,10 @@ function findChildren(titles, chapters, i) {
   }
   let children = chapters.slice(titleIndexes[i] + 1, titleIndexes[i + 1])
   return children
+}
+
+function getName(string) {
+  return string.toLowerCase().replaceAll(" ", "-")
 }
 
 async function run() {
@@ -231,18 +254,3 @@ run().catch(e => {
   }
   process.exit(1)
 })
-
-function docHasher(html) {
-
-  // TODO something here breaks links
-
-  let hashes = html.match(/(?<=<h. class="doc_subtitle">)(.*?)(?=<\/h.>)/gm)
-  // TODO make this distinguish b/w h2 & h3
-  console.log(hashes)
-  for (let i in hashes) {
-    let id = hashes[i].toLowerCase().replaceAll(" ", "-")
-    let hashed = tag('h2.doc_subtitle', { id }, hashes[i])
-    html = html.replaceAll(hashes[i], hashed)
-  }
-  return html
-}
