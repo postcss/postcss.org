@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import console from 'console'
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
 import rehypeHighlight from 'rehype-highlight'
@@ -73,7 +72,6 @@ function prepareHTML() {
 async function readDocs() {
   let ignore = ['../postcss/docs/README-cn.md', '../postcss/CHANGELOG.md', '../postcss/docs/source-maps.md']
   let files = (await globby('../postcss/**/**/*.md')).filter(file => !file.match(/node_modules/g))
-  console.log(files)
   let docs = await Promise.all(
     files.filter(file => !ignore.includes(file)).map(async file => {
       let md = await readFile(join(ROOT, file))
@@ -141,7 +139,6 @@ function tag(prefix, attrs, body) {
 
 function makeSidemenu(contents) {
   let titles = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm).filter(title => title !== "").filter(title => title !== "PostCSS and Source Maps")
-  console.log(titles)
   let chapters = contents.match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)|(?<=<li><a(?:.*?)>)(.*)(?=<\/a)/gm).filter(title => title !== "")
   let i = 0
   let sidemenu = tag(
@@ -197,19 +194,22 @@ function findChildren(titles, chapters, i) {
 }
 
 function getName(string) {
-  string = string.toLowerCase().replaceAll(" ", "-").replaceAll(/[0-9]/g, "").replaceAll(".", "")
-  while (string.charAt(0) === '-') {
-    string = string.substring(1);
+  if (string !== undefined) {
+    string = string.toLowerCase().replaceAll(" ", "-").replaceAll(/[0-9]/g, "").replaceAll(".", "")
+    while (string.charAt(0) === '-') {
+      string = string.substring(1);
+    }
+    return string
   }
-  return string
+  return ("")
 }
 
 async function run() {
   await downloadProject('postcss')
   let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
-  
+
   let fileNames = docs.map(doc => getName(doc.children[0].children[0].children[0].value))
-  
+
   let sidemenu
   let body = []
   for (let i = 0; i !== docs.length; i++) {

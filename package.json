@@ -13,7 +13,7 @@
     "build:home": "NODE_ENV=production ./scripts/build-home.js",
     "build:api": "NODE_ENV=production ./scripts/build-api.js",
     "build:docs": "NODE_ENV=production ./scripts/build-docs.js",
-    "build": "pnpm build:home && pnpm build:api",
+    "build": "pnpm build:home && pnpm build:api && pnpm build:docs",
     "start:build": "serve dist"
   },
   "dependencies": {
