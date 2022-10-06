@@ -71,12 +71,9 @@ function prepareHTML() {
 async function readDocs() {
   let ignore = [
     '../postcss/docs/README-cn.md',
-    '../postcss/CHANGELOG.md',
     '../postcss/docs/source-maps.md'
   ]
-  let files = (await globby('../postcss/**/**/*.md')).filter(
-    file => !file.match(/node_modules/g)
-  )
+  let files = (await globby('../postcss/docs/*.md'))
   let docs = await Promise.all(
     files
       .filter(file => !ignore.includes(file))
@@ -119,8 +116,7 @@ async function saveFile(html, fileName) {
   let docs = join(DIST, 'docs')
   if (!existsSync(docs)) await mkdir(docs)
   let fileTitle
-
-  if (fileName === 'postcss-') {
+  if (fileName === 'documentation') {
     fileTitle = 'index.html'
   } else {
     fileTitle = fileName + '.html'
