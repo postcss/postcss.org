@@ -31,11 +31,8 @@ function prepareHTML() {
       {
         type: 'element',
         tagName: 'article',
-        properties: {},
+        properties: { class: 'doc' },
         children: tree.children.filter(i => {
-          if (i.tagName === 'a' && i.children[1].tagName === 'img') {
-            i.properties = { class: 'img-link' }
-          }
           if (i.tagName === 'h1') {
             i.properties = { class: 'doc_title' }
           }
@@ -73,7 +70,7 @@ async function readDocs() {
     '../postcss/docs/README-cn.md',
     '../postcss/docs/source-maps.md'
   ]
-  let files = (await globby('../postcss/docs/*.md'))
+  let files = await globby('../postcss/docs/**/*.md')
   let docs = await Promise.all(
     files
       .filter(file => !ignore.includes(file))
@@ -83,8 +80,8 @@ async function readDocs() {
         tree = await unified()
           .use(remarkRehype, { allowDangerousHtml: true })
           .use(rehypeRaw)
-          .use(prepareHTML, file)
-          .use(rehypeHighlight, { prefix: 'code-', ignoreMissing: true })
+          .use(prepareHTML)
+          .use(rehypeHighlight, { prefix: 'code-', aliases: { css: 'pcss' } })
           .run(tree)
         return tree
       })
@@ -108,7 +105,6 @@ async function buildLayout() {
 
 async function makeHTML(tree) {
   let html = await unified().use(rehypeStringify).stringify(tree)
-  html = tag('section.doc', html)
   return html
 }
 
@@ -156,11 +152,7 @@ function makeSidemenu(contents) {
     tag(
       'ul',
       titles.map(title => {
-        let name = linkHeadings(
-          'sidemenu_section',
-          title.toLowerCase().replaceAll(' ', '-'),
-          title
-        )
+        let name = linkHeadings('sidemenu_section', getName(title), title)
         let children = findChildren(titles, chapters, i)
         i++
         return tag(
@@ -196,6 +188,23 @@ function makeSidemenu(contents) {
   return sidemenu
 }
 
+function makeIndex(contents) {
+  let titles = contents
+    .match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm)
+    .filter(title => title !== '')
+    .filter(title => title !== 'PostCSS and Source Maps')
+
+  let index = titles.map(title => {
+    return tag('li', linkHeadings('doc_subtitle', getName(title), title))
+  })
+  index =
+    "<article class='doc'><h1 class='doc_title'>Documentation</h1><ul>" +
+    index.join('\n') +
+    '</ul></article>'
+  contents.slice(contents.indexOf(titles[titles.length]))
+  return index
+}
+
 function linkHeadings(cls, link, text) {
   return tag(`a.${cls}`, { href: `${link}` }, text)
 }
@@ -218,7 +227,7 @@ function findChildren(titles, chapters, i) {
 }
 
 function getName(string) {
-  if (string !== undefined) {
+  if (typeof string === 'string') {
     string = string
       .toLowerCase()
       .replaceAll(' ', '-')
@@ -246,13 +255,18 @@ async function run() {
     body[i] = await makeHTML(docs[i])
     if (i === fileNames.indexOf('documentation')) {
       sidemenu = makeSidemenu(body[i])
+      body[i] = makeIndex(body[i])
     }
   }
 
   for (let i = 0; i < body.length; i++) {
     await saveFile(
       layout
-        .replace('</nav>', '</nav>' + sidemenu + body[i])
+        // TODO find better way to replace smiley
+        .replace(
+          '</nav>',
+          '</nav>' + sidemenu + body[i].replace(':smiley:', '&#128512')
+        )
         .replace(/\/assets/g, '/docs/assets'),
       fileNames[i]
     )
