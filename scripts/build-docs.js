@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import console from 'console'
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
 import rehypeHighlight from 'rehype-highlight'
