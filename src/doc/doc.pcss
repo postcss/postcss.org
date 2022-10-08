@@ -1,5 +1,6 @@
 .doc {
   max-width: 70rem;
+  min-height: 75vh;
   padding: 2rem 2rem 1rem;
   margin: 0 auto;
 
@@ -73,14 +74,17 @@
 }
 
 .doc > p code,
-.doc > table code {
+.doc > table code,
+.doc > ol code,
+.doc > ul code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
   font-size: 0.825rem;
 }
 
 .doc > table a,
+.doc > p a,
+.doc > a code,
 .doc > h3 code,
-.doc > p a code,
 .doc > ul h4 a code {
   padding-right: 0.4rem;
   padding-left: 0.4rem;
@@ -96,16 +100,11 @@
 .doc > ul a,
 .doc > ol a {
   color: #800;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
-}
-
-.doc > p a:hover,
-.doc > ul a:hover,
-.doc > ol a:hover {
-  text-decoration: none;
 }
 
 .doc > table {

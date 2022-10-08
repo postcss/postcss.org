@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import console from 'console'
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
 import rehypeHighlight from 'rehype-highlight'
@@ -47,7 +48,6 @@ function prepareTree() {
               removeTocCount = 0
             }
           }
-
           if (
             i.tagName === 'p' &&
             i.children[0].tagName === 'strong' &&
@@ -133,18 +133,14 @@ async function makeHTML(tree) {
 }
 
 async function saveFile(html, fileName) {
-  let docs = join(DIST, 'docs')
-  if (!existsSync(docs)) await mkdir(docs)
   let fileTitle
   if (fileName === 'documentation') {
     fileTitle = 'index.html'
   } else {
     fileTitle = fileName + '.html'
-    html = html.replace(
-      /PostCSS Documentation/gm,
-      html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm)
-    )
   }
+  let docs = join(DIST, 'docs')
+  if (!existsSync(docs)) await mkdir(docs)
   await writeFile(join(docs, fileTitle), html)
 }
 
@@ -254,7 +250,9 @@ function generateSidemenu(body, fileName) {
                     linkSubHeadings(
                       'sidemenu_child',
                       getName(fileName),
-                      dub ? 'main-theory-1' : getName(child),
+                      dub && getName(fileName) === 'main-theory'
+                        ? 'main-theory-1'
+                        : getName(child),
                       child
                     )
                   )
@@ -304,16 +302,13 @@ async function run() {
   }
 
   for (let i = 0; i < html.length; i++) {
+    html[i] = prepareHTML(html[i])
+
     await saveFile(
       layout
-        // TODO find better way to replace smiley
         .replace(
           '</nav>',
-          '</nav>' +
-            generateSidemenu(html[i], fileNames[i]) +
-            html[i]
-              .replace(':smiley:', '&#128512')
-              .replace('<p><strong></strong></p><delete></delete>', '')
+          '</nav>' + generateSidemenu(html[i], fileNames[i]) + html[i]
         )
         .replace(/\/assets/g, '/docs/assets'),
       fileNames[i]
@@ -330,3 +325,13 @@ run().catch(e => {
   }
   process.exit(1)
 })
+
+function prepareHTML(html) {
+  return html
+    .replace(':smiley:', '&#128512')
+    .replace('<p><strong></strong></p><delete></delete>', '')
+    .replace(
+      /PostCSS Documentation/gm,
+      html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm)
+    )
+}
