@@ -46,10 +46,20 @@
 .doc > p,
 .doc > pre,
 .doc > ul,
-.doc > table {
+.doc > table,
+.doc > blockquote {
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: #3f526b;
+}
+
+.doc > blockquote {
+  padding: 0 1em;
+  border-left: 0.25em solid #88000020;
+}
+
+.doc > blockquote p {
+  margin-right: 0.15em;
 }
 
 .doc > ul li {
@@ -64,7 +74,8 @@
 }
 
 .doc > table a,
-.doc > p a {
+.doc > p a,
+.doc > h3 code {
   padding-right: 0.4rem;
   padding-left: 0.4rem;
   font-weight: lighter;
@@ -82,6 +93,10 @@
   &:hover {
     text-decoration: underline;
   }
+}
+
+.doc > ul a:hover {
+  text-decoration: none;
 }
 
 .doc > table {

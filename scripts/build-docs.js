@@ -138,56 +138,6 @@ function tag(prefix, attrs, body) {
   return `<${tagName}${attrsString}>${body}</${tagName}>`
 }
 
-function makeSidemenu(contents) {
-  let titles = contents
-    .match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm)
-    .filter(title => title !== '')
-    .filter(title => title !== 'PostCSS and Source Maps')
-  let chapters = contents
-    .match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)|(?<=<li><a(?:.*?)>)(.*)(?=<\/a)/gm)
-    .filter(title => title !== '')
-  let i = 0
-  let sidemenu = tag(
-    'nav.sidemenu',
-    tag(
-      'ul',
-      titles.map(title => {
-        let name = linkHeadings('sidemenu_section', getName(title), title)
-        let children = findChildren(titles, chapters, i)
-        i++
-        return tag(
-          'li.sidemenu_item',
-          tag('div.sidemenu_bar', [
-            name,
-            tag(`button.sidemenu_controller`, {}, ``)
-          ]) +
-            tag(
-              'ul.sidemenu_children',
-              children.map(child => {
-                return tag(
-                  'li',
-                  linkSubHeadings(
-                    'sidemenu_child',
-                    getName(title),
-                    getName(child),
-                    child
-                  )
-                )
-              })
-            )
-        )
-      })
-    )
-  )
-  sidemenu =
-    sidemenu.slice(0, sidemenu.indexOf('main-theory') + 'main-theory'.length) +
-    sidemenu
-      .slice(sidemenu.indexOf('main-theory') + 'main-theory'.length)
-      .replace(/main-theory/gm, 'main-theory-1')
-
-  return sidemenu
-}
-
 function makeIndex(contents) {
   let titles = contents
     .match(/(?<=<p><a(?:.*?)>)(.*?)(?=<)/gm)
@@ -249,23 +199,26 @@ async function run() {
     getName(doc.children[0].children[0].children[0].value)
   )
 
-  let sidemenu
   let body = []
   for (let i = 0; i !== docs.length; i++) {
     body[i] = await makeHTML(docs[i])
     if (i === fileNames.indexOf('documentation')) {
-      sidemenu = makeSidemenu(body[i])
       body[i] = makeIndex(body[i])
     }
   }
 
   for (let i = 0; i < body.length; i++) {
+    // TODO move this tos replacement somewhere more sensible
+    let toc = body[i].match(/<p><strong>Table of Contents(.*)(?=(<\/ul>))/gs)
+    if (toc !== null) toc = toc.join()
     await saveFile(
       layout
         // TODO find better way to replace smiley
         .replace(
           '</nav>',
-          '</nav>' + sidemenu + body[i].replace(':smiley:', '&#128512')
+          '</nav>' +
+            generateSidemenu(body[i], fileNames[i]) +
+            body[i].replace(':smiley:', '&#128512').replace(toc, '')
         )
         .replace(/\/assets/g, '/docs/assets'),
       fileNames[i]
@@ -282,3 +235,69 @@ run().catch(e => {
   }
   process.exit(1)
 })
+
+function generateSidemenu(body, fileName) {
+  let h2Regex = /(?<=<h2(?:.*?)>)(.*?)(?=<\/h2)/gm
+  let h3Regex = /(?<=<h3(?:.*?)>)(.*?)(?=<\/h3)/gm
+  let h23Regex =
+    /(?<=<h2(?:.*?)>)(.*?)(?=<\/h2)|(?<=<h3(?:.*?)>)(.*?)(?=<\/h3)/gm
+
+  let headers = body.match(h23Regex)
+
+  // TODO make correct links
+
+  let h2 = body.match(h2Regex)
+
+  let h3 = body.match(h3Regex)
+
+  if (fileName === 'postcss-architecture') {
+    h2 = h3
+  }
+
+  let i = 0
+
+  if (headers !== null) {
+    let sidemenu = tag(
+      'nav.sidemenu',
+      tag(
+        'ul',
+        h2.map(hdr => {
+          let name = linkHeadings(
+            'sidemenu_section',
+            getName(fileName) + '/' + '#' + getName(hdr),
+            hdr
+          )
+          let children = findChildren(h2, headers, i)
+          i++
+          if (children[0] === undefined) {
+            return name
+          }
+          return tag(
+            'li.sidemenu_item',
+            tag('div.sidemenu_bar', [
+              name,
+              tag(`button.sidemenu_controller`, {}, ``)
+            ]) +
+              tag(
+                'ul.sidemenu_children',
+                children.map(child => {
+                  return tag(
+                    'li',
+                    linkSubHeadings(
+                      'sidemenu_child',
+                      getName(hdr),
+                      getName(child),
+                      child
+                    )
+                  )
+                })
+              )
+          )
+        })
+      )
+    )
+    return sidemenu
+  } else {
+    return ''
+  }
+}
