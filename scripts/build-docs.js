@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import console from 'console'
 import { readFile, writeFile, mkdir, rm } from 'fs/promises'
 import remarkParse from 'remark-parse/lib/index.js'
 import rehypeHighlight from 'rehype-highlight'
@@ -24,8 +25,11 @@ async function downloadProject(name) {
   await exec(`git clone --depth 1 ${url} "${dir}"`)
 }
 
-function prepareHTML() {
-  let checkDuplicate = false
+function prepareTree() {
+  let removeDub = false
+  let removeToc = false
+  let removeTocCount = 0
+
   return tree => {
     tree.children = [
       {
@@ -33,6 +37,27 @@ function prepareHTML() {
         tagName: 'article',
         properties: { class: 'doc' },
         children: tree.children.filter(i => {
+          if (removeToc && removeTocCount < 2) {
+            if (removeTocCount === 1) {
+              i.children = ''
+              i.tagName = 'delete'
+            }
+            removeTocCount++
+            if (removeTocCount === 2) {
+              removeToc = false
+              removeTocCount = 0
+            }
+          }
+
+          if (
+            i.tagName === 'p' &&
+            i.children[0].tagName === 'strong' &&
+            i.children[0].children[0].value === 'Table of Contents'
+          ) {
+            i.children[0].children[0].value = ''
+            removeToc = true
+          }
+
           if (i.tagName === 'h1') {
             i.properties = { class: 'doc_title' }
           }
@@ -50,11 +75,11 @@ function prepareHTML() {
               elementID = getName(complexID)
             }
 
-            if (checkDuplicate && elementID === 'main-theory') {
+            if (removeDub && elementID === 'main-theory') {
               elementID = 'main-theory-1'
             }
             if (elementID === 'main-theory') {
-              checkDuplicate = true
+              removeDub = true
             }
             i.properties = { class: 'doc_subtitle', id: elementID }
           }
@@ -80,7 +105,7 @@ async function readDocs() {
         tree = await unified()
           .use(remarkRehype, { allowDangerousHtml: true })
           .use(rehypeRaw)
-          .use(prepareHTML)
+          .use(prepareTree)
           .use(rehypeHighlight, { prefix: 'code-', aliases: { css: 'pcss' } })
           .run(tree)
         return tree
@@ -176,66 +201,6 @@ function findChildren(titles, chapters, i) {
   return children
 }
 
-function getName(string) {
-  if (typeof string === 'string') {
-    string = string
-      .toLowerCase()
-      .replaceAll(' ', '-')
-      .replaceAll(/[0-9]/g, '')
-      .replaceAll('.', '')
-    while (string.charAt(0) === '-') {
-      string = string.substring(1)
-    }
-    return string
-  }
-  return ''
-}
-
-async function run() {
-  await downloadProject('postcss')
-  let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
-
-  let fileNames = docs.map(doc =>
-    getName(doc.children[0].children[0].children[0].value)
-  )
-
-  let body = []
-  for (let i = 0; i !== docs.length; i++) {
-    body[i] = await makeHTML(docs[i])
-    if (i === fileNames.indexOf('documentation')) {
-      body[i] = makeIndex(body[i])
-    }
-  }
-
-  for (let i = 0; i < body.length; i++) {
-    // TODO move this tos replacement somewhere more sensible
-    let toc = body[i].match(/<p><strong>Table of Contents(.*)(?=(<\/ul>))/gs)
-    if (toc !== null) toc = toc.join()
-    await saveFile(
-      layout
-        // TODO find better way to replace smiley
-        .replace(
-          '</nav>',
-          '</nav>' +
-            generateSidemenu(body[i], fileNames[i]) +
-            body[i].replace(':smiley:', '&#128512').replace(toc, '')
-        )
-        .replace(/\/assets/g, '/docs/assets'),
-      fileNames[i]
-    )
-  }
-  await rm(join(DIST, 'docs/docs.html'))
-}
-
-run().catch(e => {
-  if (e.stack) {
-    process.stderr.write(e.stack + '\n')
-  } else {
-    process.stderr.write(e + '\n')
-  }
-  process.exit(1)
-})
-
 function generateSidemenu(body, fileName) {
   let h2Regex = /(?<=<h2(?:.*?)>)(.*?)(?=<\/h2)/gm
   let h3Regex = /(?<=<h3(?:.*?)>)(.*?)(?=<\/h3)/gm
@@ -244,17 +209,17 @@ function generateSidemenu(body, fileName) {
 
   let headers = body.match(h23Regex)
 
-  // TODO make correct links
-
   let h2 = body.match(h2Regex)
 
   let h3 = body.match(h3Regex)
 
+  //TODO remove this when architecture.md is corrected
   if (fileName === 'postcss-architecture') {
     h2 = h3
   }
 
   let i = 0
+  let dub = false
 
   if (headers !== null) {
     let sidemenu = tag(
@@ -262,9 +227,10 @@ function generateSidemenu(body, fileName) {
       tag(
         'ul',
         h2.map(hdr => {
-          let name = linkHeadings(
+          let name = linkSubHeadings(
             'sidemenu_section',
-            getName(fileName) + '/' + '#' + getName(hdr),
+            getName(fileName),
+            getName(hdr),
             hdr
           )
           let children = findChildren(h2, headers, i)
@@ -281,12 +247,15 @@ function generateSidemenu(body, fileName) {
               tag(
                 'ul.sidemenu_children',
                 children.map(child => {
+                  if (getName(child) === 'main-theory') {
+                    dub = !dub
+                  }
                   return tag(
                     'li',
                     linkSubHeadings(
                       'sidemenu_child',
-                      getName(hdr),
-                      getName(child),
+                      getName(fileName),
+                      dub ? 'main-theory-1' : getName(child),
                       child
                     )
                   )
@@ -301,3 +270,64 @@ function generateSidemenu(body, fileName) {
     return ''
   }
 }
+
+function getName(string) {
+  if (typeof string === 'string') {
+    string = string
+      .toLowerCase()
+      .replaceAll(' ', '-')
+      .replaceAll(/[0-9]/g, '')
+      .replaceAll('.', '')
+      .replaceAll(':', '')
+      .replaceAll('--', '-')
+    while (string.charAt(0) === '-') {
+      string = string.substring(1)
+    }
+    return string
+  }
+  return ''
+}
+
+async function run() {
+  await downloadProject('postcss')
+  let [docs, layout] = await Promise.all([readDocs(), buildLayout()])
+
+  let fileNames = docs.map(doc =>
+    getName(doc.children[0].children[0].children[0].value)
+  )
+
+  let html = []
+  for (let i = 0; i !== docs.length; i++) {
+    html[i] = await makeHTML(docs[i])
+    if (i === fileNames.indexOf('documentation')) {
+      html[i] = makeIndex(html[i])
+    }
+  }
+
+  for (let i = 0; i < html.length; i++) {
+    await saveFile(
+      layout
+        // TODO find better way to replace smiley
+        .replace(
+          '</nav>',
+          '</nav>' +
+            generateSidemenu(html[i], fileNames[i]) +
+            html[i]
+              .replace(':smiley:', '&#128512')
+              .replace('<p><strong></strong></p><delete></delete>', '')
+        )
+        .replace(/\/assets/g, '/docs/assets'),
+      fileNames[i]
+    )
+  }
+  await rm(join(DIST, 'docs/docs.html'))
+}
+
+run().catch(e => {
+  if (e.stack) {
+    process.stderr.write(e.stack + '\n')
+  } else {
+    process.stderr.write(e + '\n')
+  }
+  process.exit(1)
+})

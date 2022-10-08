@@ -46,6 +46,7 @@
 .doc > p,
 .doc > pre,
 .doc > ul,
+.doc > ol,
 .doc > table,
 .doc > blockquote {
   margin-bottom: 1rem;
@@ -67,6 +68,10 @@
   list-style: disc;
 }
 
+.doc > ol li {
+  margin-bottom: 0.5rem;
+}
+
 .doc > p code,
 .doc > table code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
@@ -74,8 +79,9 @@
 }
 
 .doc > table a,
-.doc > p a,
-.doc > h3 code {
+.doc > h3 code,
+.doc > p a code,
+.doc > ul h4 a code {
   padding-right: 0.4rem;
   padding-left: 0.4rem;
   font-weight: lighter;
@@ -87,7 +93,8 @@
 
 .doc > p a,
 .doc > table a,
-.doc > ul a {
+.doc > ul a,
+.doc > ol a {
   color: #800;
 
   &:hover {
@@ -95,7 +102,9 @@
   }
 }
 
-.doc > ul a:hover {
+.doc > p a:hover,
+.doc > ul a:hover,
+.doc > ol a:hover {
   text-decoration: none;
 }
 
