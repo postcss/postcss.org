@@ -132,6 +132,8 @@ async function makeHTML(tree) {
 }
 
 async function saveFile(html, fileName) {
+  let docTitle = html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm)
+  html = html.replace(/PostCSS Documentation/gm, docTitle)
   let fileTitle
   if (fileName === 'documentation') {
     fileTitle = 'index.html'
@@ -261,7 +263,7 @@ function generateSidemenu(body, fileName) {
         })
       )
     )
-    return sidemenu
+    return sidemenu.replaceAll('<code>', '').replaceAll('</code>', '')
   } else {
     return ''
   }
@@ -282,6 +284,12 @@ function getName(string) {
     return string
   }
   return ''
+}
+
+function prepareHTML(html) {
+  return html
+    .replace(':smiley:', '&#128512')
+    .replace('<p><strong></strong></p><delete></delete>', '')
 }
 
 async function run() {
@@ -324,13 +332,3 @@ run().catch(e => {
   }
   process.exit(1)
 })
-
-function prepareHTML(html) {
-  return html
-    .replace(':smiley:', '&#128512')
-    .replace('<p><strong></strong></p><delete></delete>', '')
-    .replace(
-      /PostCSS Documentation/gm,
-      html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm)
-    )
-}
