@@ -1,5 +1,6 @@
 .doc {
   max-width: 70rem;
+  min-height: 70vh;
   padding: 2rem 2rem 1rem;
   margin: 0 auto;
 
@@ -46,10 +47,23 @@
 .doc > p,
 .doc > pre,
 .doc > ul,
-.doc > table {
+.doc > ol,
+.doc > table,
+.doc > blockquote,
+.doc > ul p {
+  margin-top: 1rem;
   margin-bottom: 1rem;
   font-size: 0.9rem;
   color: #3f526b;
+}
+
+.doc > blockquote {
+  padding: 0 1em;
+  border-left: 0.25em solid #88000020;
+}
+
+.doc > blockquote p {
+  margin-right: 0.15em;
 }
 
 .doc > ul li {
@@ -57,14 +71,23 @@
   list-style: disc;
 }
 
+.doc > ol li {
+  margin-bottom: 0.5rem;
+}
+
 .doc > p code,
-.doc > table code {
+.doc > table code,
+.doc > ol code,
+.doc > ul code {
   font-family: Monaco, Menlo, "Fira Mono", monospace;
   font-size: 0.825rem;
 }
 
 .doc > table a,
-.doc > p a {
+.doc > p a,
+.doc > a code,
+.doc > h3 code,
+.doc > ul h4 a code {
   padding-right: 0.4rem;
   padding-left: 0.4rem;
   font-weight: lighter;
@@ -76,8 +99,10 @@
 
 .doc > p a,
 .doc > table a,
-.doc > ul a {
+.doc > ul a,
+.doc > ol a {
   color: #800;
+  text-decoration: none;
 
   &:hover {
     text-decoration: underline;
