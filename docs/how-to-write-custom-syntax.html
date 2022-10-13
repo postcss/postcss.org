@@ -1,0 +1,96 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta property="og:type" content="article"><meta property="og:url" content="http://postcss.org/"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@postcss"><meta name="twitter:creator" content="@postcss"><meta name="description" content="Transform CSS with the power of JavaScript. Auto-prefixing, future CSS syntaxes, modules, linting and more are possible with hundreds of PostCSS plugins."><link rel="icon" type="image/x-icon" sizes="any" href="/docs/assets/favicon.659f5617.ico"><link rel="icon" href="/docs/assets/logo.3e39b0aa.svg" type="image/svg+xml"><meta property="og:image" content="./base/og.jpg"><title>How to Write Custom Syntax</title><script>((window.gitter = {}).chat = {}).options = {room: 'postcss/postcss'};</script><script src="https://sidecar.gitter.im/dist/sidecar.v1.js" async></script>  <script type="module" crossorigin src="/docs/assets/docs.d9f0e0ef.js"></script>
+  <link rel="stylesheet" href="/docs/assets/docs.ac18865a.css">
+</head><body><main><div class="hero is-small"><a class="hero_home" rel="home" href="/"><img class="hero_logo" src="/docs/assets/postcss.83d93145.svg" alt="PostCSS logo"></a></div><nav class="nav"><ul class="nav_items"><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/postcss#usage">Setup</a></li><li class="nav_item"><a class="nav_link" href="/docs/">Docs</a></li><li class="nav_item"><a class="nav_link" href="https://www.postcss.parts/">Plugins</a></li><li class="nav_item"><a class="nav_link" href="/api/">API</a></li><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/brand">Logo</a></li></ul></nav><nav class="sidemenu"><ul><a href="how-to-write-custom-syntax#syntax" class="sidemenu_section">Syntax</a><li class="sidemenu_item"><div class="sidemenu_bar"><a href="how-to-write-custom-syntax#parser" class="sidemenu_section">Parser</a><button class="sidemenu_controller"></button></div><ul class="sidemenu_children"><li><a href="how-to-write-custom-syntax#main-theory" class="sidemenu_child">Main Theory</a></li><li><a href="how-to-write-custom-syntax#performance" class="sidemenu_child">Performance</a></li><li><a href="how-to-write-custom-syntax#node-source" class="sidemenu_child">Node Source</a></li><li><a href="how-to-write-custom-syntax#raw-values" class="sidemenu_child">Raw Values</a></li><li><a href="how-to-write-custom-syntax#tests" class="sidemenu_child">Tests</a></li></ul></li><li class="sidemenu_item"><div class="sidemenu_bar"><a href="how-to-write-custom-syntax#stringifier" class="sidemenu_section">Stringifier</a><button class="sidemenu_controller"></button></div><ul class="sidemenu_children"><li><a href="how-to-write-custom-syntax#main-theory" class="sidemenu_child">Main Theory</a></li><li><a href="how-to-write-custom-syntax#builder-function" class="sidemenu_child">Builder Function</a></li><li><a href="how-to-write-custom-syntax#raw-values" class="sidemenu_child">Raw Values</a></li><li><a href="how-to-write-custom-syntax#tests" class="sidemenu_child">Tests</a></li></ul></li></ul></nav><article class="doc"><h1 class="doc_title">How to Write Custom Syntax</h1><p>PostCSS can transform styles in any syntax, and is not limited to just CSS.
+By writing a custom syntax, you can transform styles in any desired format.</p><p>Writing a custom syntax is much harder than writing a PostCSS plugin, but
+it is an awesome adventure.</p><p>There are 3 types of PostCSS syntax packages:</p><ul>
+<li><strong>Parser</strong> to parse input string to node’s tree.</li>
+<li><strong>Stringifier</strong> to generate output string by node’s tree.</li>
+<li><strong>Syntax</strong> contains both parser and stringifier.</li>
+</ul><h2 class="doc_subtitle" id="syntax">Syntax</h2><p>A good example of a custom syntax is <a href="https://github.com/postcss/postcss-scss">SCSS</a>. Some users may want to transform
+SCSS sources with PostCSS plugins, for example if they need to add vendor
+prefixes or change the property order. So this syntax should output SCSS from
+an SCSS input.</p><p>The syntax API is a very simple plain object, with <code>parse</code> &#x26; <code>stringify</code>
+functions:</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = {
+  <span class="code-attr">parse</span>:     <span class="code-built_in">require</span>(<span class="code-string">'./parse'</span>),
+  <span class="code-attr">stringify</span>: <span class="code-built_in">require</span>(<span class="code-string">'./stringify'</span>)
+}
+</code></pre><h2 class="doc_subtitle" id="parser">Parser</h2><p>A good example of a parser is <a href="https://github.com/postcss/postcss-safe-parser">Safe Parser</a>, which parses malformed/broken CSS.
+Because there is no point to generate broken output, this package only provides
+a parser.</p><p>The parser API is a function which receives a string &#x26; returns a <a href="https://postcss.org/api/#root"><code>Root</code></a>
+or <a href="https://postcss.org/api/#document"><code>Document</code></a> node. The second argument is a function which receives
+an object with PostCSS options.</p><pre><code class="code language-js"><span class="code-keyword">const</span> postcss = <span class="code-built_in">require</span>(<span class="code-string">'postcss'</span>)
+
+<span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-keyword">function</span> <span class="code-title function_">parse</span> (css, opts) {
+  <span class="code-keyword">const</span> root = postcss.<span class="code-title function_">root</span>()
+  <span class="code-comment">// Add other nodes to root</span>
+  <span class="code-keyword">return</span> root
+}
+</code></pre><p>For open source parser npm package must have <code>postcss</code> in <code>peerDependencies</code>,
+not in direct <code>dependencies</code>.</p><h3 class="doc_subtitle" id="main-theory">Main Theory</h3><p>There are many books about parsers; but do not worry because CSS syntax is
+very easy, and so the parser will be much simpler than a programming language
+parser.</p><p>The default PostCSS parser contains two steps:</p><ol>
+<li><a href="https://github.com/postcss/postcss/blob/main/lib/tokenize.js">Tokenizer</a> which reads input string character by character and builds a
+tokens array. For example, it joins space symbols to a <code>['space', '\n  ']</code>
+token, and detects strings to a <code>['string', '"\"{"']</code> token.</li>
+<li><a href="https://github.com/postcss/postcss/blob/main/lib/parser.js">Parser</a> which reads the tokens array, creates node instances and
+builds a tree.</li>
+</ol><h3 class="doc_subtitle" id="performance">Performance</h3><p>Parsing input is often the most time consuming task in CSS processors. So it
+is very important to have a fast parser.</p><p>The main rule of optimization is that there is no performance without a
+benchmark. You can look at <a href="https://github.com/postcss/benchmark">PostCSS benchmarks</a> to build your own.</p><p>Of parsing tasks, the tokenize step will often take the most time, so its
+performance should be prioritized. Unfortunately, classes, functions and
+high level structures can slow down your tokenizer. Be ready to write dirty
+code with repeated statements. This is why it is difficult to extend the
+default <a href="https://github.com/postcss/postcss/blob/main/lib/tokenize.js">PostCSS tokenizer</a>; copy &#x26; paste will be a necessary evil.</p><p>Second optimization is using character codes instead of strings.</p><pre><code class="code language-js"><span class="code-comment">// Slow</span>
+string[i] === <span class="code-string">'{'</span>
+
+<span class="code-comment">// Fast</span>
+<span class="code-keyword">const</span> <span class="code-variable constant_">OPEN_CURLY</span> = <span class="code-number">123</span> <span class="code-comment">// `{'</span>
+string.<span class="code-title function_">charCodeAt</span>(i) === <span class="code-variable constant_">OPEN_CURLY</span>
+</code></pre><p>Third optimization is “fast jumps”. If you find open quotes, you can find
+next closing quote much faster by <code>indexOf</code>:</p><pre><code class="code language-js"><span class="code-comment">// Simple jump</span>
+next = string.<span class="code-title function_">indexOf</span>(<span class="code-string">'"'</span>, currentPosition + <span class="code-number">1</span>)
+
+<span class="code-comment">// Jump by RegExp</span>
+regexp.<span class="code-property">lastIndex</span> = currentPosion + <span class="code-number">1</span>
+regexp.<span class="code-title function_">test</span>(string)
+next = regexp.<span class="code-property">lastIndex</span>
+</code></pre><p>The parser can be a well written class. There is no need in copy-paste and
+hardcore optimization there. You can extend the default <a href="https://github.com/postcss/postcss/blob/main/lib/parser.js">PostCSS parser</a>.</p><h3 class="doc_subtitle" id="node-source">Node Source</h3><p>Every node should have <code>source</code> property to generate correct source map.
+This property contains <code>start</code> and <code>end</code> properties with <code>{ line, column }</code>,
+and <code>input</code> property with an <a href="https://github.com/postcss/postcss/blob/main/lib/input.js"><code>Input</code></a> instance.</p><p>Your tokenizer should save the original position so that you can propagate
+the values to the parser, to ensure that the source map is correctly updated.</p><h3 class="doc_subtitle" id="raw-values">Raw Values</h3><p>A good PostCSS parser should provide all information (including spaces symbols)
+to generate byte-to-byte equal output. It is not so difficult, but respectful
+for user input and allow integration smoke tests.</p><p>A parser should save all additional symbols to <code>node.raws</code> object.
+It is an open structure for you, you can add additional keys.
+For example, <a href="https://github.com/postcss/postcss-scss">SCSS parser</a> saves comment types (<code>/* */</code> or <code>//</code>)
+in <code>node.raws.inline</code>.</p><p>The default parser cleans CSS values from comments and spaces.
+It saves the original value with comments to <code>node.raws.value.raw</code> and uses it,
+if the node value was not changed.</p><h3 class="doc_subtitle" id="tests">Tests</h3><p>Of course, all parsers in the PostCSS ecosystem must have tests.</p><p>If your parser just extends CSS syntax (like <a href="https://github.com/postcss/postcss-scss">SCSS</a> or <a href="https://github.com/postcss/postcss-safe-parser">Safe Parser</a>),
+you can use the <a href="https://github.com/postcss/postcss-parser-tests">PostCSS Parser Tests</a>. It contains unit &#x26; integration tests.</p><h2 class="doc_subtitle" id="stringifier">Stringifier</h2><p>A style guide generator is a good example of a stringifier. It generates output
+HTML which contains CSS components. For this use case, a parser isn't necessary,
+so the package should just contain a stringifier.</p><p>The Stringifier API is little bit more complicated, than the parser API.
+PostCSS generates a source map, so a stringifier can’t just return a string.
+It must link every substring with its source node.</p><p>A Stringifier is a function which receives <a href="https://postcss.org/api/#root"><code>Root</code></a> or <a href="https://postcss.org/api/#document"><code>Document</code></a> node and builder callback.
+Then it calls builder with every node’s string and node instance.</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-keyword">function</span> <span class="code-title function_">stringify</span> (root, builder) {
+  <span class="code-comment">// Some magic</span>
+  <span class="code-keyword">const</span> string = decl.<span class="code-property">prop</span> + <span class="code-string">':'</span> + decl.<span class="code-property">value</span> + <span class="code-string">';'</span>
+  <span class="code-title function_">builder</span>(string, decl)
+  <span class="code-comment">// Some science</span>
+};
+</code></pre><h3 class="doc_subtitle" id="main-theory-1">Main Theory</h3><p>PostCSS <a href="https://github.com/postcss/postcss/blob/main/lib/stringifier.js">default stringifier</a> is just a class with a method for each node type
+and many methods to detect raw properties.</p><p>In most cases it will be enough just to extend this class,
+like in <a href="https://github.com/postcss/postcss-scss/blob/main/lib/scss-stringifier.js">SCSS stringifier</a>.</p><h3 class="doc_subtitle" id="builder-function">Builder Function</h3><p>A builder function will be passed to <code>stringify</code> function as second argument.
+For example, the default PostCSS stringifier class saves it
+to <code>this.builder</code> property.</p><p>Builder receives output substring and source node to append this substring
+to the final output.</p><p>Some nodes contain other nodes in the middle. For example, a rule has a <code>{</code>
+at the beginning, many declarations inside and a closing <code>}</code>.</p><p>For these cases, you should pass a third argument to builder function:
+<code>'start'</code> or <code>'end'</code> string:</p><pre><code class="code language-js"><span class="code-variable language_">this</span>.<span class="code-title function_">builder</span>(rule.<span class="code-property">selector</span> + <span class="code-string">'{'</span>, rule, <span class="code-string">'start'</span>)
+<span class="code-comment">// Stringify declarations inside</span>
+<span class="code-variable language_">this</span>.<span class="code-title function_">builder</span>(<span class="code-string">'}'</span>, rule, <span class="code-string">'end'</span>)
+</code></pre><h3 class="doc_subtitle" id="raw-values">Raw Values</h3><p>A good PostCSS custom syntax saves all symbols and provide byte-to-byte equal
+output if there were no changes.</p><p>This is why every node has <code>node.raws</code> object to store space symbol, etc.</p><p>All data related to source code and not CSS structure, should be in <code>Node#raws</code>. For instance, <code>postcss-scss</code> keep in <code>Comment#raws.inline</code> boolean marker of inline comment (<code>// comment</code> instead of <code>/* comment */</code>).</p><p>Be careful, because sometimes these raw properties will not be present; some
+nodes may be built manually, or may lose their indentation when they are moved
+to another parent node.</p><p>This is why the default stringifier has a <code>raw()</code> method to autodetect raw
+properties by other nodes. For example, it will look at other nodes to detect
+indent size and them multiply it with the current node depth.</p><h3 class="doc_subtitle" id="tests">Tests</h3><p>A stringifier must have tests too.</p><p>You can use unit and integration test cases from <a href="https://github.com/postcss/postcss-parser-tests">PostCSS Parser Tests</a>.
+Just compare input CSS with CSS after your parser and stringifier.</p></article><aside class="socials"><ul class="socials_items"><li class="socials_item"><a class="socials_link is-open-collective" href="https://opencollective.com/postcss/" rel="me">Open Collective</a></li><li class="socials_item"><a class="socials_link is-twitter" href="https://twitter.com/postcss" rel="me">Twitter</a></li><li class="socials_item"><a class="socials_link is-gitter" href="https://gitter.im/postcss/postcss" rel="me">Gitter</a></li><li class="socials_item"><a class="socials_link is-github" href="https://github.com/postcss/postcss" rel="me">GitHub</a></li></ul></aside><footer class="footer"><div class="footer_inner"><div class="footer_info"><p class="footer_license">Distributed under the MIT License.</p><p class="footer_issue">Found an issue?<a class="footer_report" href="https://github.com/postcss/postcss.org/issues">Report it!</a></p></div><div><a href="https://evilmartians.com/?utm_source=postcss&amp;utm_campaign=homepage"><img alt="Evil Martians" src="/docs/assets/evilmartians.1daec88e.svg"></a></div></div></footer></main></body></html>
