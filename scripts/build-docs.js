@@ -133,11 +133,11 @@ async function makeHTML(tree) {
 
 async function saveFile(html, fileName) {
   let docTitle = html.match(/(?<="doc_title">)(.*)(?=<\/h1)/gm)
-  html = html.replace(/PostCSS Documentation/gm, docTitle)
   let fileTitle
   if (fileName === 'documentation') {
     fileTitle = 'index.html'
   } else {
+    html = html.replace(/PostCSS Documentation/gm, docTitle)
     fileTitle = fileName + '.html'
   }
   let docs = join(DIST, 'docs')
