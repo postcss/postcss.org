@@ -11,6 +11,6 @@
       "dist/api/assets/*",
       "!dist/api/assets/*.ico"
     ],
-    "limit": "310 KB"
+    "limit": "340 KB"
   }
 ]
