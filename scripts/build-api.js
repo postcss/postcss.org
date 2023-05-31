@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import {  writeFile, mkdir, rm } from 'fs/promises'
+import { writeFile, mkdir, rm } from 'fs/promises'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
 import { existsSync } from 'fs'
@@ -12,11 +12,29 @@ import { globby } from 'globby'
 import remarkGfm from 'remark-gfm'
 import { build } from 'vite'
 import { join } from 'path'
-import TypeDoc from 'typedoc'
+import TypeDoc, { Converter, ReflectionKind } from 'typedoc'
 
 import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
 let exec = promisify(childProcess.exec)
+
+function signatureComparator(a, b) {
+  if (getName(a) === 'postcss') {
+    return -1
+  } else if (getName(b) === 'postcss') {
+    return 1
+  } else if (a.kind === ReflectionKind.Class && b.kind !== ReflectionKind.Class) {
+    return -1
+  } else if (b.kind === ReflectionKind.Class && a.kind !== ReflectionKind.Class) {
+    return 1
+  } else if (getName(a) < getName(b)) {
+    return -1
+  } else if (getName(b) < getName(a)) {
+    return 1
+  } else {
+    return 0
+  }
+}
 
 async function buildLayout() {
   let data = await build({
@@ -54,6 +72,17 @@ async function readTypedoc() {
   app.options.setCompilerOptions(files.flat(), {
     esModuleInterop: true
   })
+
+  app.converter.on(Converter.EVENT_CREATE_DECLARATION, (context, reflection) => {
+    if (reflection.name !== 'default' && reflection.name !== 'export=') {
+      return
+    }
+
+    if (reflection.escapedName && reflection.escapedName !== 'default') {
+      reflection.name = reflection.escapedName
+    }
+  })
+
   let project = app.convert()
   if (!project || app.logger.hasErrors()) {
     process.stderr.write(`Error during API types generation\n`)
@@ -89,7 +118,7 @@ function link(cls, hash, text) {
 
 function getName(node) {
   if (node.name === 'default') {
-    if (node.kindString === 'Class') {
+    if (node.kind === ReflectionKind.Class) {
       return (
         node.parent.name[0].toUpperCase() +
         node.parent.name.slice(1).replace(/-\w/g, str => str[1].toUpperCase())
@@ -103,12 +132,12 @@ function getName(node) {
 }
 
 function generateSidemenu(nodes) {
-  let ignore = ['LazyResult', 'Processor', 'Container', 'Node']
+  let ignore = []
   let classes = nodes
     .filter(
       i =>
-        (i.kindString === 'Class' && !ignore.includes(i.name)) ||
-        i.name === 'postcss'
+        (i.kind === ReflectionKind.Class && !ignore.includes(i.name)) ||
+        (i.name === 'postcss' && i.kind === ReflectionKind.Namespace)
     )
     .sort((a, b) => {
       if (getName(a) === 'postcss') {
@@ -132,7 +161,7 @@ function generateSidemenu(nodes) {
         let name = link('sidemenu_section', clsSlug, getName(cls))
         let children = cls.children
         if (cls.name === 'postcss') {
-          children = cls.type.reflection.children
+          return []
         }
         return tag(
           'li.sidemenu_item',
@@ -140,23 +169,23 @@ function generateSidemenu(nodes) {
             name,
             tag(`button.sidemenu_controller`, {}, ``)
           ]) +
-            tag(
-              'ul.sidemenu_children',
-              children
-                .filter(child => child.name !== 'constructor')
-                .map(child => {
-                  let childName = child.name
-                  if (
-                    child.kindString === 'Method' ||
-                    child.name === 'parse' ||
-                    child.name === 'stringify'
-                  ) {
-                    childName += '()'
-                  }
-                  let childSlug = clsSlug + '-' + child.name.toLowerCase()
-                  return tag('li', link('sidemenu_child', childSlug, childName))
-                })
-            )
+          tag(
+            'ul.sidemenu_children',
+            children
+              .filter(child => child.name !== 'constructor')
+              .map(child => {
+                let childName = child.name
+                if (
+                  child.kind === ReflectionKind.Method ||
+                  child.name === 'parse' ||
+                  child.name === 'stringify'
+                ) {
+                  childName += '()'
+                }
+                let childSlug = clsSlug + '-' + child.name.toLowerCase()
+                return tag('li', link('sidemenu_child', childSlug, childName))
+              })
+          )
         )
       })
     )
@@ -203,7 +232,7 @@ function commentHtml(nodes, node) {
     comment = node.signatures[0].comment
   }
   if (!comment) return ''
-  return toHTML(nodes, comment.shortText + '\n\n' + comment.text)
+  return toHTML(nodes, comment.summary.map(c => c.text).join(''))
 }
 
 function functionString(node) {
@@ -241,7 +270,7 @@ function typeString(type) {
         '{ ' +
         decl.children
           .map(i => {
-            if (i.kindString === 'Function' || i.kindString === 'Method') {
+            if (i.kind === ReflectionKind.Function || i.kind === ReflectionKind.Method) {
               return i.name + ': ' + functionString(i)
             } else {
               return i.name + ': ' + typeString(i.type)
@@ -263,7 +292,7 @@ function typeHtml(nodes, type) {
     .replace(/<>/g, '')
     .replace(
       'DeclarationProps | Declaration | AtRule | Rule | Comment | AtRuleProps' +
-        ' | RuleProps | CommentProps',
+      ' | RuleProps | CommentProps',
       'ChildProps | ChildNode'
     )
     .replace(
@@ -292,6 +321,7 @@ function varHtml(nodes, type) {
 }
 
 function tableHtml(nodes, title, values) {
+  if (values.length === 0) return ''
   let comments = values.map((i, index) => {
     let comment = i
     if (!comment.comment && i.parent.parent.signatures) {
@@ -362,6 +392,7 @@ function signaturesHtml(nodes, node) {
 }
 
 function generateBody(nodes) {
+  let functionDeclaration
   let ignore = [
     'Postcss',
     'List',
@@ -381,31 +412,22 @@ function generateBody(nodes) {
       let name = getName(node)
       return !(name === 'list' && !node._target)
     })
-    .sort((a, b) => {
-      if (getName(a) === 'postcss') {
-        return -1
-      } else if (getName(b) === 'postcss') {
-        return 1
-      } else if (a.kindString === 'Class' && b.kindString !== 'Class') {
-        return -1
-      } else if (b.kindString === 'Class' && a.kindString !== 'Class') {
-        return 1
-      } else if (getName(a) < getName(b)) {
-        return -1
-      } else if (getName(b) < getName(a)) {
-        return 1
-      } else {
-        return 0
-      }
-    })
+    .sort(signatureComparator)
     .map(node => {
       let id = getName(node).toLowerCase()
       let type = node
-      if (id === 'list' && node._target) {
-        type = node._target.type.getReflection()
+      if (id === 'list') {
+        type = node.getTargetReflection()
       }
       if (id === 'postcss') {
-        type = node.type.getReflection()
+        if (node.kind === ReflectionKind.Function) {
+          // add constructor declaration to namespace later
+          functionDeclaration = node
+          return ''
+        }
+        if (node.kind === ReflectionKind.Namespace) {
+          type = functionDeclaration
+        }
       }
 
       let name = getName(node)
@@ -422,28 +444,39 @@ function generateBody(nodes) {
         ])
       }
 
-      let content = type.type
       let children = type.children || []
-      if (type.type && type.type.toString() === 'object') {
-        content = false
-        children = type.type.declaration.children
+      if (name === 'postcss' && node.kind === ReflectionKind.Namespace) {
+        children = node.children
+      } else if (!node.signatures?.length && !node.comment && !node.children?.length) {
+        type = node.tryGetTargetReflection();
+        children = type.children || [];
+        if (!children.length) return ''
+      } else if (name !== 'postcss' && node.kind === ReflectionKind.Namespace) {
+        return ''
       }
+
       return tag('section.doc', [
         title,
-        varHtml(nodes, content),
         signaturesHtml(nodes, type),
         ...children
           .filter(member => member.name !== 'constructor')
+          .sort(signatureComparator)
           .map(member => {
             let memberId = id + '-' + member.name.toLowerCase()
             let prefix = name
+
+            // --- catch inline exported postcss.list
+            if (memberId === 'postcss-list') {
+              member = member.getTargetReflection()
+            }
+
             if (name === 'postcss' || name === 'list') {
               prefix += '.'
             } else {
               prefix += '#'
             }
             let postfix = ''
-            if (member.kindString === 'Method') postfix += '()'
+            if (member.kind === ReflectionKind.Method) postfix += '()'
             let memberContent
             if (member.type && member.type.toString() === 'object') {
               children = tableHtml(
@@ -454,6 +487,12 @@ function generateBody(nodes) {
             } else {
               memberContent = varHtml(nodes, member.type)
             }
+
+            // --- hide all signatures without content
+            if (!memberContent && !member.signatures?.length > 0) {
+              return ''
+            }
+
             return (
               tag(
                 'h2.doc_subtitle',
