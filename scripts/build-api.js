@@ -16,6 +16,8 @@ import TypeDoc, { Converter, ReflectionKind } from 'typedoc'
 
 import { PROJECTS, DIST, SRC } from './lib/dir.js'
 
+let SIDEMENU_IGNORE = ['LazyResult', 'Processor', 'Container', 'Node']
+
 let exec = promisify(childProcess.exec)
 
 function signatureComparator(a, b) {
@@ -23,9 +25,15 @@ function signatureComparator(a, b) {
     return -1
   } else if (getName(b) === 'postcss') {
     return 1
-  } else if (a.kind === ReflectionKind.Class && b.kind !== ReflectionKind.Class) {
+  } else if (
+    a.kind === ReflectionKind.Class &&
+    b.kind !== ReflectionKind.Class
+  ) {
     return -1
-  } else if (b.kind === ReflectionKind.Class && a.kind !== ReflectionKind.Class) {
+  } else if (
+    b.kind === ReflectionKind.Class &&
+    a.kind !== ReflectionKind.Class
+  ) {
     return 1
   } else if (getName(a) < getName(b)) {
     return -1
@@ -73,15 +81,18 @@ async function readTypedoc() {
     esModuleInterop: true
   })
 
-  app.converter.on(Converter.EVENT_CREATE_DECLARATION, (context, reflection) => {
-    if (reflection.name !== 'default' && reflection.name !== 'export=') {
-      return
-    }
+  app.converter.on(
+    Converter.EVENT_CREATE_DECLARATION,
+    (context, reflection) => {
+      if (reflection.name !== 'default' && reflection.name !== 'export=') {
+        return
+      }
 
-    if (reflection.escapedName && reflection.escapedName !== 'default') {
-      reflection.name = reflection.escapedName
+      if (reflection.escapedName && reflection.escapedName !== 'default') {
+        reflection.name = reflection.escapedName
+      }
     }
-  })
+  )
 
   let project = app.convert()
   if (!project || app.logger.hasErrors()) {
@@ -132,11 +143,11 @@ function getName(node) {
 }
 
 function generateSidemenu(nodes) {
-  let ignore = []
   let classes = nodes
     .filter(
       i =>
-        (i.kind === ReflectionKind.Class && !ignore.includes(i.name)) ||
+        (i.kind === ReflectionKind.Class &&
+          !SIDEMENU_IGNORE.includes(i.name)) ||
         (i.name === 'postcss' && i.kind === ReflectionKind.Namespace)
     )
     .sort((a, b) => {
@@ -169,23 +180,23 @@ function generateSidemenu(nodes) {
             name,
             tag(`button.sidemenu_controller`, {}, ``)
           ]) +
-          tag(
-            'ul.sidemenu_children',
-            children
-              .filter(child => child.name !== 'constructor')
-              .map(child => {
-                let childName = child.name
-                if (
-                  child.kind === ReflectionKind.Method ||
-                  child.name === 'parse' ||
-                  child.name === 'stringify'
-                ) {
-                  childName += '()'
-                }
-                let childSlug = clsSlug + '-' + child.name.toLowerCase()
-                return tag('li', link('sidemenu_child', childSlug, childName))
-              })
-          )
+            tag(
+              'ul.sidemenu_children',
+              children
+                .filter(child => child.name !== 'constructor')
+                .map(child => {
+                  let childName = child.name
+                  if (
+                    child.kind === ReflectionKind.Method ||
+                    child.name === 'parse' ||
+                    child.name === 'stringify'
+                  ) {
+                    childName += '()'
+                  }
+                  let childSlug = clsSlug + '-' + child.name.toLowerCase()
+                  return tag('li', link('sidemenu_child', childSlug, childName))
+                })
+            )
         )
       })
     )
