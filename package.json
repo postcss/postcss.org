@@ -7,8 +7,10 @@
   "type": "module",
   "scripts": {
     "start": "vite --open",
-    "lint": "eslint . && stylelint src/**/*.pcss",
-    "test": "pnpm lint && pnpm build && size-limit",
+    "test:js": "eslint .",
+    "test:css": "stylelint src/**/*.pcss",
+    "test:build": "pnpm build && size-limit",
+    "test": "pnpm run /^test:/",
     "clean": "rm -Rf dist/",
     "build:home": "NODE_ENV=production ./scripts/build-home.js",
     "build:api": "NODE_ENV=production ./scripts/build-api.js",
