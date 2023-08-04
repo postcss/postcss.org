@@ -1,13 +1,6 @@
 # postcss.org
 
-[![Join the chat at https://gitter.im/postcss/postcss.org](https://badges.gitter.im/postcss/postcss.org.svg)](https://gitter.im/postcss/postcss.org?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
 The official website for [PostCSS](https://github.com/postcss/postcss) built by the community for the community :heart:
-
-
-## Gitter
-
-We use Gitter[[?]](https://gitter.im) to keep each other up-to date on what's going on with the current status of the project as well as status meetings. You can join our Gitter channel [here](https://gitter.im/postcss/postcss.org)
 
 
 ## Contributing
