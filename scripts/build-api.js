@@ -1,20 +1,20 @@
 #!/usr/bin/env node
-import { writeFile, mkdir, rm } from 'fs/promises'
+import childProcess from 'child_process'
+import { existsSync } from 'fs'
+import { mkdir, rm, writeFile } from 'fs/promises'
+import { globby } from 'globby'
+import { join } from 'path'
 import rehypeHighlight from 'rehype-highlight'
 import rehypeStringify from 'rehype-stringify'
-import { existsSync } from 'fs'
-import { promisify } from 'util'
-import remarkRehype from 'remark-rehype'
-import childProcess from 'child_process'
-import remarkParse from 'remark-parse'
-import { unified } from 'unified'
-import { globby } from 'globby'
 import remarkGfm from 'remark-gfm'
-import { build } from 'vite'
-import { join } from 'path'
+import remarkParse from 'remark-parse'
+import remarkRehype from 'remark-rehype'
 import TypeDoc, { Converter, ReflectionKind } from 'typedoc'
+import { unified } from 'unified'
+import { promisify } from 'util'
+import { build } from 'vite'
 
-import { PROJECTS, DIST, SRC } from './lib/dir.js'
+import { DIST, PROJECTS, SRC } from './lib/dir.js'
 
 let SIDEMENU_IGNORE = ['LazyResult', 'Processor', 'Container', 'Node']
 
@@ -46,14 +46,14 @@ function signatureComparator(a, b) {
 
 async function buildLayout() {
   let data = await build({
-    mode: 'production',
     build: {
+      assetsInlineLimit: 0,
       outDir: join(DIST, 'api'),
       rollupOptions: {
         input: join(SRC, 'api.html')
-      },
-      assetsInlineLimit: 0
-    }
+      }
+    },
+    mode: 'production'
   })
   return data.output.find(file => file.fileName === 'api.html').source
 }

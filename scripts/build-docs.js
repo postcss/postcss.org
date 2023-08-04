@@ -1,19 +1,19 @@
 #!/usr/bin/env node
-import { readFile, writeFile, mkdir, rm } from 'fs/promises'
-import remarkParse from 'remark-parse/lib/index.js'
-import rehypeHighlight from 'rehype-highlight'
-import { unified } from 'unified'
-import { globby } from 'globby'
 import childProcess from 'child_process'
-import rehypeStringify from 'rehype-stringify'
-import { join } from 'path'
-import { promisify } from 'util'
 import { existsSync } from 'fs'
-import { build } from 'vite'
-import remarkRehype from 'remark-rehype'
+import { mkdir, readFile, rm, writeFile } from 'fs/promises'
+import { globby } from 'globby'
+import { join } from 'path'
+import rehypeHighlight from 'rehype-highlight'
 import rehypeRaw from 'rehype-raw'
+import rehypeStringify from 'rehype-stringify'
+import remarkParse from 'remark-parse/lib/index.js'
+import remarkRehype from 'remark-rehype'
+import { unified } from 'unified'
+import { promisify } from 'util'
+import { build } from 'vite'
 
-import { PROJECTS, ROOT, DIST, SRC } from './lib/dir.js'
+import { DIST, PROJECTS, ROOT, SRC } from './lib/dir.js'
 
 let exec = promisify(childProcess.exec)
 
@@ -32,9 +32,6 @@ function prepareTree() {
   return tree => {
     tree.children = [
       {
-        type: 'element',
-        tagName: 'article',
-        properties: { class: 'doc' },
         children: tree.children.filter(i => {
           if (removeToc && removeTocCount < 2) {
             if (removeTocCount === 1) {
@@ -82,7 +79,10 @@ function prepareTree() {
             i.properties = { class: 'doc_subtitle', id: elementID }
           }
           return i.type !== 'text' || i.value !== '\n'
-        })
+        }),
+        properties: { class: 'doc' },
+        tagName: 'article',
+        type: 'element'
       }
     ]
   }
@@ -104,7 +104,7 @@ async function readDocs() {
           .use(remarkRehype, { allowDangerousHtml: true })
           .use(rehypeRaw)
           .use(prepareTree)
-          .use(rehypeHighlight, { prefix: 'code-', aliases: { css: 'pcss' } })
+          .use(rehypeHighlight, { aliases: { css: 'pcss' }, prefix: 'code-' })
           .run(tree)
         return tree
       })
@@ -114,14 +114,14 @@ async function readDocs() {
 
 async function buildLayout() {
   let data = await build({
-    mode: 'production',
     build: {
+      assetsInlineLimit: 0,
       outDir: join(DIST, 'docs'),
       rollupOptions: {
         input: join(SRC, 'docs.html')
-      },
-      assetsInlineLimit: 0
-    }
+      }
+    },
+    mode: 'production'
   })
   return data.output.find(file => file.fileName === 'docs.html').source
 }
