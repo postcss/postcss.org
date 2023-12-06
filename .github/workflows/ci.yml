@@ -5,7 +5,6 @@ on:
       - main
   pull_request:
 jobs:
-
   test:
     name: Test
     runs-on: ubuntu-latest
@@ -13,7 +12,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Install tools from asdf config
         uses: ai/asdf-cache-action@v1
       - name: Install all dependencies
@@ -31,7 +30,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout the repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           persist-credentials: false
       - name: Install tools from asdf config
