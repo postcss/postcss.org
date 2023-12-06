@@ -66,11 +66,11 @@ dependencies:
     specifier: ^5.0.0
     version: 5.0.0
   vite:
-    specifier: ^4.4.8
-    version: 4.4.8(@types/node@20.4.7)
+    specifier: ^4.4.12
+    version: 4.4.12(@types/node@20.4.7)
   vite-plugin-pug-transformer:
     specifier: ^1.0.3
-    version: 1.0.3(vite@4.4.8)
+    version: 1.0.3(vite@4.4.12)
 
 devDependencies:
   '@logux/eslint-config':
@@ -4514,7 +4514,7 @@ packages:
       vfile-message: 3.1.4
     dev: false
 
-  /vite-plugin-pug-transformer@1.0.3(vite@4.4.8):
+  /vite-plugin-pug-transformer@1.0.3(vite@4.4.12):
     resolution: {integrity: sha512-cndWLK7iQE/yryjRNGJAOxPYnL7v5miMbwCXUbkP754BILh5hwJKbE10X4QKDl1X46ntIb1oBMBYKcw4NVBnkg==}
     engines: {node: '>=12.22.0'}
     peerDependencies:
@@ -4522,11 +4522,11 @@ packages:
     dependencies:
       picocolors: 1.0.0
       pug: 3.0.2
-      vite: 4.4.8(@types/node@20.4.7)
+      vite: 4.4.12(@types/node@20.4.7)
     dev: false
 
-  /vite@4.4.8(@types/node@20.4.7):
-    resolution: {integrity: sha512-LONawOUUjxQridNWGQlNizfKH89qPigK36XhMI7COMGztz8KNY0JHim7/xDd71CZwGT4HtSRgI7Hy+RlhG0Gvg==}
+  /vite@4.4.12(@types/node@20.4.7):
+    resolution: {integrity: sha512-KtPlUbWfxzGVul8Nut8Gw2Qe8sBzWY+8QVc5SL8iRFnpnrcoCaNlzO40c1R6hPmcdTwIPEDkq0Y9+27a5tVbdQ==}
     engines: {node: ^14.18.0 || >=16.0.0}
     hasBin: true
     peerDependencies:
