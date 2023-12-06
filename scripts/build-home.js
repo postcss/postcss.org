@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import { copyFile, rm } from 'fs/promises'
-import { join } from 'path'
+import { copyFile, rm } from 'node:fs/promises'
+import { join } from 'node:path'
 import { build } from 'vite'
 
 import { DIST, SRC } from './lib/dir.js'
