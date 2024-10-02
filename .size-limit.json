@@ -2,7 +2,7 @@
   {
     "name": "Home",
     "path": ["dist/index.html", "dist/assets/*", "!dist/assets/*.ico"],
-    "limit": "320 KB"
+    "limit": "310 KB"
   },
   {
     "name": "API",
@@ -11,6 +11,6 @@
       "dist/api/assets/*",
       "!dist/api/assets/*.ico"
     ],
-    "limit": "340 KB"
+    "limit": "280 KB"
   }
 ]
