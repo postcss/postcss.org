@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { globby } from 'globby'
 import childProcess from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, globSync } from 'node:fs'
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
@@ -13,7 +12,7 @@ import remarkRehype from 'remark-rehype'
 import { unified } from 'unified'
 import { build } from 'vite'
 
-import { DIST, PROJECTS, ROOT, SRC } from './lib/dir.js'
+import { DIST, PROJECTS, SRC } from './lib/dir.js'
 
 let exec = promisify(childProcess.exec)
 
@@ -94,12 +93,12 @@ const IGNORE_FILES = [
 ]
 
 async function readDocs() {
-  let files = await globby(join(PROJECTS, 'postcss/docs/**/*.md'))
+  let files = globSync(join(PROJECTS, 'postcss/docs/**/*.md'))
   let docs = await Promise.all(
     files
       .filter(file => !IGNORE_FILES.includes(file))
       .map(async file => {
-        let md = await readFile(join(ROOT, file))
+        let md = await readFile(file)
         let tree = await unified()().use(remarkParse).parse(md)
         tree = await unified()
           .use(remarkRehype, { allowDangerousHtml: true })

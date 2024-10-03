@@ -1,7 +1,6 @@
 #!/usr/bin/env node
-import { globby } from 'globby'
 import childProcess from 'node:child_process'
-import { existsSync } from 'node:fs'
+import { existsSync, globSync } from 'node:fs'
 import { mkdir, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { promisify } from 'node:util'
@@ -67,17 +66,14 @@ async function downloadProject(name) {
 }
 
 async function readTypedoc() {
-  let files = await globby('lib/*.d.ts', {
-    absolute: true,
-    cwd: join(PROJECTS, 'postcss')
-  })
+  let files = globSync(join(PROJECTS, 'postcss/lib/*.d.ts'))
 
   let app = new TypeDoc.Application()
   app.bootstrap({
-    entryPoints: files.flat(),
+    entryPoints: files,
     tsconfig: join(PROJECTS, 'postcss', 'tsconfig.json')
   })
-  app.options.setCompilerOptions(files.flat(), {
+  app.options.setCompilerOptions(files, {
     esModuleInterop: true
   })
 
@@ -281,7 +277,10 @@ function typeString(type) {
         '{ ' +
         decl.children
           .map(i => {
-            if (i.kind === ReflectionKind.Function || i.kind === ReflectionKind.Method) {
+            if (
+              i.kind === ReflectionKind.Function ||
+              i.kind === ReflectionKind.Method
+            ) {
               return i.name + ': ' + functionString(i)
             } else {
               return i.name + ': ' + typeString(i.type)
@@ -303,7 +302,7 @@ function typeHtml(nodes, type) {
     .replace(/<>/g, '')
     .replace(
       'DeclarationProps | Declaration | AtRule | Rule | Comment | AtRuleProps' +
-      ' | RuleProps | CommentProps',
+        ' | RuleProps | CommentProps',
       'ChildProps | ChildNode'
     )
     .replace(
@@ -458,9 +457,13 @@ function generateBody(nodes) {
       let children = type.children || []
       if (name === 'postcss' && node.kind === ReflectionKind.Namespace) {
         children = node.children
-      } else if (!node.signatures?.length && !node.comment && !node.children?.length) {
-        type = node.tryGetTargetReflection();
-        children = type.children || [];
+      } else if (
+        !node.signatures?.length &&
+        !node.comment &&
+        !node.children?.length
+      ) {
+        type = node.tryGetTargetReflection()
+        children = type.children || []
         if (!children.length) return ''
       } else if (name !== 'postcss' && node.kind === ReflectionKind.Namespace) {
         return ''
