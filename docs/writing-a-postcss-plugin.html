@@ -1,0 +1,239 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta property="og:type" content="article"><meta property="og:url" content="http://postcss.org/"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@postcss"><meta name="twitter:creator" content="@postcss"><meta name="description" content="Transform CSS with the power of JavaScript. Auto-prefixing, future CSS syntaxes, modules, linting and more are possible with hundreds of PostCSS plugins."><link rel="icon" type="image/x-icon" sizes="any" href="/docs/assets/favicon-DbGqNhKa.ico"><link rel="icon" href="/docs/assets/logo-C2ryQugb.svg" type="image/svg+xml"><meta property="og:image" content="./base/og.jpg"><title>Writing a PostCSS Plugin</title>  <script type="module" crossorigin src="/docs/assets/docs-dwWlJbYc.js"></script>
+  <link rel="stylesheet" crossorigin href="/docs/assets/docs-hQTQJUj-.css">
+</head><body><main><div class="hero is-small"><a class="hero_home" rel="home" href="/"><img class="hero_logo" src="/docs/assets/postcss-CsElRNOW.svg" alt="PostCSS logo"></a></div><nav class="nav"><ul class="nav_items"><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/postcss#usage">Setup</a></li><li class="nav_item"><a class="nav_link" href="/docs/">Docs</a></li><li class="nav_item"><a class="nav_link" href="/docs/postcss-plugins">Plugins</a></li><li class="nav_item"><a class="nav_link" href="/api/">API</a></li><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/brand">Logo</a></li></ul></nav><nav class="sidemenu"><ul><a href="writing-a-postcss-plugin#links" class="sidemenu_section">Links</a><a href="writing-a-postcss-plugin#step-create-an-idea" class="sidemenu_section">Step 1: Create an idea</a><a href="writing-a-postcss-plugin#step-create-a-project" class="sidemenu_section">Step 2: Create a project</a><a href="writing-a-postcss-plugin#step-find-nodes" class="sidemenu_section">Step 3: Find nodes</a><a href="writing-a-postcss-plugin#step-change-nodes" class="sidemenu_section">Step 4: Change nodes</a><a href="writing-a-postcss-plugin#step-fight-with-frustration" class="sidemenu_section">Step 5: Fight with frustration</a><a href="writing-a-postcss-plugin#step-make-it-public" class="sidemenu_section">Step 6: Make it public</a></ul></nav><article class="doc"><h1 class="doc_title">Writing a PostCSS Plugin</h1><h2 class="doc_subtitle" id="links">Links</h2><p>Documentation:</p><ul>
+<li><a href="https://github.com/postcss/postcss-plugin-boilerplate">Plugin Boilerplate</a></li>
+<li><a href="https://github.com/postcss/postcss/blob/main/docs/guidelines/plugin.md">Plugin Guidelines</a></li>
+<li><a href="https://postcss.org/api/">PostCSS API</a></li>
+<li><a href="https://astexplorer.net/#/2uBU1BLuJ1">AST playground</a></li>
+</ul><p>Support:</p><ul>
+<li><a href="https://github.com/orgs/postcss/discussions">Ask questions</a></li>
+<li><a href="https://twitter.com/postcss">PostCSS twitter</a> with latest updates.</li>
+</ul><h2 class="doc_subtitle" id="step-create-an-idea">Step 1: Create an idea</h2><p>There are many fields where writing new PostCSS plugin will help your work:</p><ul>
+<li><strong>Compatibility fixes:</strong> if you always forget to add hack
+for browser compatibility, you can create PostCSS plugin to automatically
+insert this hack for you. <a href="https://github.com/luisrudge/postcss-flexbugs-fixes"><code>postcss-flexbugs-fixes</code></a> and <a href="https://github.com/postcss/postcss-100vh-fix"><code>postcss-100vh-fix</code></a>
+are good examples.</li>
+<li><strong>Automate routine operations:</strong> let’s computer do routine operations, free
+yourself for creative tasks. For instance, PostCSS with <a href="https://rtlcss.com/">RTLCSS</a> can
+automatically convert a design to right-to-left languages (like Arabic
+or Hebrew) or with <a href="https://github.com/postcss/postcss-dark-theme-class">postcss-dark-theme-class`</a> can insert media
+queries for dark/light theme switcher.</li>
+<li><strong>Preventing popular mistakes:</strong> “if an error happened twice,
+it will happen again.” PostCSS plugin can check your source code for popular
+mistakes and save your time for unnecessary debugging. The best way to do it
+is to <a href="https://stylelint.io/developer-guide/plugins">write new Stylelint plugin</a> (Stylelint uses PostCSS inside).</li>
+<li><strong>Increasing code maintainability:</strong> <a href="https://github.com/css-modules/css-modules">CSS Modules</a> or <a href="https://github.com/maximkoretskiy/postcss-autoreset"><code>postcss-autoreset</code></a>
+are great example how PostCSS can increase code maintainability by isolation.</li>
+<li><strong>Polyfills:</strong> we already have a lot polyfills for CSS drafts
+in <a href="https://github.com/csstools/postcss-preset-env"><code>postcss-preset-env</code></a>. If you find a new draft, you can add a new plugin
+and send it to this preset.</li>
+<li><strong>New CSS syntax:</strong> we recommend avoiding adding new syntax to CSS.
+If you want to add a new feature, it is always better to write a CSS draft
+proposal, send it to <a href="https://github.com/w3c/csswg-drafts">CSSWG</a> and then implement polyfill.
+<a href="https://github.com/larsenwork/postcss-easing-gradients"><code>postcss-easing-gradients</code></a> with <a href="https://github.com/w3c/csswg-drafts/issues/1332">this proposal</a> is a good example.
+However, there are a lot of cases when you can’t send a proposal.
+For instance, browser’s parser performance limited CSSWG nested syntax a lot
+and you may want to have non-official Sass-like syntax from <a href="https://github.com/postcss/postcss-nested">`postcss-nested</a>.</li>
+</ul><h2 class="doc_subtitle" id="step-create-a-project">Step 2: Create a project</h2><p>There are two ways to write a plugin:</p><ul>
+<li>Create a <strong>private</strong> plugin. Use this way only if the plugin is related
+to specific things of projects. For instance, you want to automate a specific
+task for your unique UI library.</li>
+<li>Publish a <strong>public</strong> plugin. It is always the recommended way. Remember that
+private front-end systems, even in Google, often became unmaintained.
+On the other hand, many popular plugins were created during the work
+on a closed source project.</li>
+</ul><p>For private plugin:</p><ol>
+<li>Create a new file in <code>postcss/</code> folder with the name of your plugin.</li>
+<li>Copy <a href="https://github.com/postcss/postcss-plugin-boilerplate/blob/main/template/index.t.js">plugin template</a> from our boilerplate.</li>
+</ol><p>For public plugins:</p><ol>
+<li>Use the guide in <a href="https://github.com/postcss/postcss-plugin-boilerplate/">PostCSS plugin boilerplate</a> to create a plugin directory.</li>
+<li>Create a repository on GitHub or GitLab.</li>
+<li>Publish your code there.</li>
+</ol><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
+  <span class="code-comment">// Plugin creator to check options or prepare shared state</span>
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'PLUGIN NAME'</span>
+    <span class="code-comment">// Plugin listeners</span>
+  }
+}
+<span class="code-variable language_">module</span>.<span class="code-property">exports</span>.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+</code></pre><h2 class="doc_subtitle" id="step-find-nodes">Step 3: Find nodes</h2><p>Most of the PostCSS plugins do two things:</p><ol>
+<li>Find something in CSS (for instance, <code>will-change</code> property).</li>
+<li>Change found elements (for instance, insert <code>transform: translateZ(0)</code> before
+<code>will-change</code> as a polyfill for old browsers).</li>
+</ol><p>PostCSS parses CSS to the tree of nodes (we call it AST). This tree may content:</p><ul>
+<li><a href="https://postcss.org/api/#root"><code>Root</code></a>: node of the top of the tree, which represent CSS file.</li>
+<li><a href="https://postcss.org/api/#atrule"><code>AtRule</code></a>: statements begin with <code>@</code> like <code>@charset "UTF-8"</code>
+or <code>@media (screen) {}</code>.</li>
+<li><a href="https://postcss.org/api/#rule"><code>Rule</code></a>: selector with declaration inside. For instance <code>input, button {}</code>.</li>
+<li><a href="https://postcss.org/api/#declaration"><code>Declaration</code></a>: key-value pair like <code>color: black</code>;</li>
+<li><a href="https://postcss.org/api/#comment"><code>Comment</code></a>: stand-alone comment. Comments inside selectors, at-rule
+parameters and values are stored in node’s <code>raws</code> property.</li>
+</ul><p>You can use <a href="https://astexplorer.net/#/2uBU1BLuJ1">AST Explorer</a> to learn
+how PostCSS convert different CSS to AST.</p><p>You can find all nodes with specific types by adding method to plugin object:</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'PLUGIN NAME'</span>,
+    <span class="code-title class_">Once</span> (root) {
+      <span class="code-comment">// Calls once per file, since every file has single Root</span>
+    },
+    <span class="code-title class_">Declaration</span> (decl) {
+      <span class="code-comment">// All declaration nodes</span>
+    }
+  }
+}
+<span class="code-variable language_">module</span>.<span class="code-property">exports</span>.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+</code></pre><p>Here is the full list of <a href="https://postcss.org/api/#plugin">plugin’s events</a>.</p><p>If you need declaration or at-rule with specific names,
+you can use quick search:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span>: {
+      <span class="code-attr">color</span>: <span class="code-function"><span class="code-params">decl</span> =></span> {
+        <span class="code-comment">// All `color` declarations</span>
+      }
+      <span class="code-string">'*'</span>: <span class="code-function"><span class="code-params">decl</span> =></span> {
+        <span class="code-comment">// All declarations</span>
+      }
+    },
+    <span class="code-title class_">AtRule</span>: {
+      <span class="code-attr">media</span>: <span class="code-function"><span class="code-params">atRule</span> =></span> {
+        <span class="code-comment">// All @media at-rules</span>
+      }
+    }
+</code></pre><p>For other cases, you can use regular expressions or specific parsers:</p><ul>
+<li><a href="https://github.com/postcss/postcss-selector-parser">Selector parser</a></li>
+<li><a href="https://github.com/TrySound/postcss-value-parser">Value parser</a></li>
+<li><a href="https://github.com/jedmao/parse-css-dimension">Dimension parser</a>
+for <code>number</code>, <code>length</code> and <code>percentage</code>.</li>
+<li><a href="https://github.com/dryoma/postcss-media-query-parser">Media query parser</a></li>
+<li><a href="https://github.com/jedmao/parse-css-font">Font parser</a></li>
+<li><a href="https://github.com/jedmao/parse-css-sides">Sides parser</a>
+for <code>margin</code>, <code>padding</code> and <code>border</code> properties.</li>
+</ul><p>Other tools to analyze AST:</p><ul>
+<li><a href="https://github.com/jedmao/postcss-resolve-prop">Property resolver</a></li>
+<li><a href="https://github.com/andyjansson/postcss-functions">Function resolver</a></li>
+<li><a href="https://github.com/jedmao/postcss-font-helpers">Font helpers</a></li>
+<li><a href="https://github.com/jedmao/postcss-margin-helpers">Margin helpers</a></li>
+</ul><p>Don’t forget that regular expression and parsers are heavy tasks. You can use
+<code>String#includes()</code> quick test before check node with heavy tool:</p><pre><code class="code language-js"><span class="code-keyword">if</span> (decl.<span class="code-property">value</span>.<span class="code-title function_">includes</span>(<span class="code-params"><span class="code-string">'gradient('</span></span>)) {
+  <span class="code-keyword">let</span> value = <span class="code-title function_">valueParser</span>(decl.<span class="code-property">value</span>)
+  …
+}
+</code></pre><p>There two types or listeners: enter and exit. <code>Once</code>, <code>Root</code>, <code>AtRule</code>,
+and <code>Rule</code> will be called before processing children. <code>OnceExit</code>, <code>RootExit</code>,
+<code>AtRuleExit</code>, and <code>RuleExit</code> after processing all children inside node.</p><p>You may want to re-use some data between listeners. You can do with
+runtime-defined listeners:</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'vars-collector'</span>,
+    prepare (result) {
+      <span class="code-keyword">const</span> variables = {}
+      <span class="code-keyword">return</span> {
+        <span class="code-title class_">Declaration</span> (node) {
+          <span class="code-keyword">if</span> (node.<span class="code-property">variable</span>) {
+            variables[node.<span class="code-property">prop</span>] = node.<span class="code-property">value</span>
+          }
+        },
+        <span class="code-title class_">OnceExit</span> () {
+          <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(variables)
+        }
+      }
+    }
+  }
+}
+</code></pre><p>You can use <code>prepare()</code> to generate listeners dynamically. For instance,
+to use <a href="https://github.com/browserslist/browserslist">Browserslist</a> to get declaration properties.</p><h2 class="doc_subtitle" id="step-change-nodes">Step 4: Change nodes</h2><p>When you find the right nodes, you will need to change them or to insert/delete
+other nodes around.</p><p>PostCSS node has a DOM-like API to transform AST. Check out our <a href="https://postcss.org/api/">API docs</a>.
+Nodes has methods to travel around (like <a href="https://postcss.org/api/#node-next"><code>Node#next</code></a> or <a href="https://postcss.org/api/#node-parent"><code>Node#parent</code></a>),
+look to children (like <a href="https://postcss.org/api/#container-some"><code>Container#some</code></a>), remove a node
+or add a new node inside.</p><p>Plugin’s methods will receive node creators in second argument:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span> (node, { <span class="code-title class_">Rule</span> }) {
+      <span class="code-keyword">let</span> newRule = <span class="code-keyword">new</span> <span class="code-title class_">Rule</span>({ <span class="code-attr">selector</span>: <span class="code-string">'a'</span>, <span class="code-attr">source</span>: node.<span class="code-property">source</span> })
+      node.<span class="code-title function_">root</span>().<span class="code-title function_">append</span>(newRule)
+      newRule.<span class="code-title function_">append</span>(node)
+    }
+</code></pre><p>If you added new nodes, it is important to copy <a href="https://postcss.org/api/#node-source"><code>Node#source</code></a> to generate
+correct source maps.</p><p>Plugins will re-visit all nodes, which you changed or added. If you will change
+any children, plugin will re-visit parent as well. Only <code>Once</code> and
+<code>OnceExit</code> will not be called again.</p><pre><code class="code language-js"><span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = (<span class="code-params"></span>) => {
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'to-red'</span>,
+    <span class="code-title class_">Rule</span> (rule) {
+      <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(rule.<span class="code-title function_">toString</span>())
+    },
+    <span class="code-title class_">Declaration</span> (decl) {
+      <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(decl.<span class="code-title function_">toString</span>())
+      decl.<span class="code-property">value</span> = <span class="code-string">'red'</span>
+    }
+  }
+}
+plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+
+<span class="code-keyword">await</span> <span class="code-title function_">postcss</span>([plugin]).<span class="code-title function_">process</span>(<span class="code-string">'a { color: black }'</span>, { <span class="code-keyword">from</span> })
+<span class="code-comment">// => a { color: black }</span>
+<span class="code-comment">// => color: black</span>
+<span class="code-comment">// => a { color: red }</span>
+<span class="code-comment">// => color: red</span>
+</code></pre><p>Since visitors will re-visit node on any changes, just adding children will
+cause an infinite loop. To prevent it, you need to check
+that you already processed this node:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span>: {
+      <span class="code-string">'will-change'</span>: <span class="code-function"><span class="code-params">decl</span> =></span> {
+        <span class="code-keyword">if</span> (decl.<span class="code-property">parent</span>.<span class="code-title function_">some</span>(<span class="code-function"><span class="code-params">decl</span> =></span> decl.<span class="code-property">prop</span> === <span class="code-string">'transform'</span>)) {
+          decl.<span class="code-title function_">cloneBefore</span>({ <span class="code-attr">prop</span>: <span class="code-string">'transform'</span>, <span class="code-attr">value</span>: <span class="code-string">'translate3d(0, 0, 0)'</span> })
+        }
+      }
+    }
+</code></pre><p>You can also use <code>Symbol</code> to mark processed nodes:</p><pre><code class="code language-js"><span class="code-keyword">const</span> processed = <span class="code-title class_">Symbol</span>(<span class="code-string">'processed'</span>)
+
+<span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = (<span class="code-params"></span>) => {
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'example'</span>,
+    <span class="code-title class_">Rule</span> (rule) {
+      <span class="code-keyword">if</span> (!rule[processed]) {
+        <span class="code-title function_">process</span>(rule)
+        rule[processed] = <span class="code-literal">true</span>
+      }
+    }
+  }
+}
+plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+</code></pre><p>Second argument also have <code>result</code> object to add warnings:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span>: {
+      <span class="code-attr">bad</span>: (decl, { result }) {
+        decl.<span class="code-title function_">warn</span>(result, <span class="code-string">'Deprecated property bad'</span>)
+      }
+    }
+</code></pre><p>If your plugin depends on another file, you can attach a message to <code>result</code>
+to signify to runners (webpack, Gulp etc.) that they should rebuild the CSS
+when this file changes:</p><pre><code class="code language-js">    <span class="code-title class_">AtRule</span>: {
+      <span class="code-attr">import</span>: (atRule, { result }) {
+        <span class="code-keyword">const</span> importedFile = <span class="code-title function_">parseImport</span>(atRule)
+        result.<span class="code-property">messages</span>.<span class="code-title function_">push</span>({
+          <span class="code-attr">type</span>: <span class="code-string">'dependency'</span>,
+          <span class="code-attr">plugin</span>: <span class="code-string">'postcss-import'</span>,
+          <span class="code-attr">file</span>: importedFile,
+          <span class="code-attr">parent</span>: result.<span class="code-property">opts</span>.<span class="code-property">from</span>
+        })
+      }
+    }
+</code></pre><p>If the dependency is a directory you should use the <code>dir-dependency</code>
+message type instead:</p><pre><code class="code language-js">result.<span class="code-property">messages</span>.<span class="code-title function_">push</span>({
+  <span class="code-attr">type</span>: <span class="code-string">'dir-dependency'</span>,
+  <span class="code-attr">plugin</span>: <span class="code-string">'postcss-import'</span>,
+  <span class="code-attr">dir</span>: importedDir,
+  <span class="code-attr">parent</span>: result.<span class="code-property">opts</span>.<span class="code-property">from</span>
+})
+</code></pre><p>If you find an syntax error (for instance, undefined custom property),
+you can throw a special error:</p><pre><code class="code language-js"><span class="code-keyword">if</span> (!variables[name]) {
+  <span class="code-keyword">throw</span> decl.<span class="code-title function_">error</span>(<span class="code-string">`Unknown variable <span class="code-subst">${name}</span>`</span>, { <span class="code-attr">word</span>: name })
+}
+</code></pre><h2 class="doc_subtitle" id="step-fight-with-frustration">Step 5: Fight with frustration</h2><blockquote>
+<p>I hate programming<br>
+I hate programming<br>
+I hate programming<br>
+It works!<br>
+I love programming</p>
+</blockquote><p>You will have bugs and a minimum of 10 minutes in debugging even a simple plugin.
+You may found that simple origin idea will not work in real-world and you need
+to change everything.</p><p>Don’t worry. Every bug is findable, and finding another solution may make your
+plugin even better.</p><p>Start from writing tests. Plugin boilerplate has a test template
+in <code>index.test.js</code>. Call <code>npx jest</code> to test your plugin.</p><p>Use Node.js debugger in your text editor or just <code>console.log</code>
+to debug the code.</p><p>PostCSS community can help you since we are all experiencing the same problems.
+Don’t afraid to ask in <a href="https://github.com/orgs/postcss/discussions">special channel</a>.</p><h2 class="doc_subtitle" id="step-make-it-public">Step 6: Make it public</h2><p>When your plugin is ready, call <code>npx clean-publish</code> in your repository.
+<a href="https://github.com/shashkovdanil/clean-publish/"><code>clean-publish</code></a> is a tool to remove development configs from the npm package.
+We added this tool to our plugin boilerplate.</p><p>Write a tweet about your new plugin (even if it is a small one) with
+<a href="https://twitter.com/postcss"><code>@postcss</code></a> mention. Or tell about your plugin in [our chat].
+We will help you with marketing.</p><p><a href="https://github.com/himynameisdave/postcss-plugins#submitting-a-new-plugin">Add your new plugin</a> to PostCSS plugin catalog.</p></article><aside class="socials"><ul class="socials_items"><li class="socials_item"><a class="socials_link is-open-collective" href="https://opencollective.com/postcss/" rel="me">Open Collective</a></li><li class="socials_item"><a class="socials_link is-twitter" href="https://twitter.com/postcss" rel="me">Twitter</a></li><li class="socials_item"><a class="socials_link is-github" href="https://github.com/postcss/postcss" rel="me">GitHub</a></li></ul></aside><footer class="footer"><div class="footer_inner"><div class="footer_info"><p class="footer_license">Distributed under the MIT License.</p><p class="footer_issue">Found an issue?<a class="footer_report" href="https://github.com/postcss/postcss.org/issues">Report it!</a></p></div><div><a href="https://evilmartians.com/?utm_source=postcss&amp;utm_campaign=homepage"><img alt="Evil Martians" src="/docs/assets/evilmartians-bzYkprTm.svg"></a></div></div></footer></main></body></html>

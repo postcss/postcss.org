@@ -1,0 +1,510 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta property="og:type" content="article"><meta property="og:url" content="http://postcss.org/"><meta name="twitter:card" content="summary"><meta name="twitter:site" content="@postcss"><meta name="twitter:creator" content="@postcss"><meta name="description" content="Transform CSS with the power of JavaScript. Auto-prefixing, future CSS syntaxes, modules, linting and more are possible with hundreds of PostCSS plugins."><link rel="icon" type="image/x-icon" sizes="any" href="/docs/assets/favicon-DbGqNhKa.ico"><link rel="icon" href="/docs/assets/logo-C2ryQugb.svg" type="image/svg+xml"><meta property="og:image" content="./base/og.jpg"><title>PostCSS Plugins</title>  <script type="module" crossorigin src="/docs/assets/docs-dwWlJbYc.js"></script>
+  <link rel="stylesheet" crossorigin href="/docs/assets/docs-hQTQJUj-.css">
+</head><body><main><div class="hero is-small"><a class="hero_home" rel="home" href="/"><img class="hero_logo" src="/docs/assets/postcss-CsElRNOW.svg" alt="PostCSS logo"></a></div><nav class="nav"><ul class="nav_items"><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/postcss#usage">Setup</a></li><li class="nav_item"><a class="nav_link" href="/docs/">Docs</a></li><li class="nav_item"><a class="nav_link" href="/docs/postcss-plugins">Plugins</a></li><li class="nav_item"><a class="nav_link" href="/api/">API</a></li><li class="nav_item"><a class="nav_link" href="https://github.com/postcss/brand">Logo</a></li></ul></nav><nav class="sidemenu"><ul><a href="postcss-plugins#control" class="sidemenu_section">Control</a><a href="postcss-plugins#packs" class="sidemenu_section">Packs</a><a href="postcss-plugins#future-css-syntax" class="sidemenu_section">Future CSS Syntax</a><a href="postcss-plugins#fallbacks" class="sidemenu_section">Fallbacks</a><a href="postcss-plugins#language-extensions" class="sidemenu_section">Language Extensions</a><a href="postcss-plugins#colors" class="sidemenu_section">Colors</a><a href="postcss-plugins#images-and-fonts" class="sidemenu_section">Images and Fonts</a><a href="postcss-plugins#grids" class="sidemenu_section">Grids</a><a href="postcss-plugins#optimizations" class="sidemenu_section">Optimizations</a><a href="postcss-plugins#shortcuts" class="sidemenu_section">Shortcuts</a><a href="postcss-plugins#others" class="sidemenu_section">Others</a><a href="postcss-plugins#analysis" class="sidemenu_section">Analysis</a><a href="postcss-plugins#reporters" class="sidemenu_section">Reporters</a><a href="postcss-plugins#fun" class="sidemenu_section">Fun</a></ul></nav><article class="doc"><h1 class="doc_title">PostCSS Plugins</h1><h2 class="doc_subtitle" id="control">Control</h2><p>There are two ways to make PostCSS magic more explicit.</p><p>Limit a plugin's local stylesheet context using <a href="https://github.com/postcss/postcss-plugin-context"><code>postcss-plugin-context</code></a>:</p><pre><code class="code language-pcss"><span class="code-selector-class">.css-example</span><span class="code-selector-class">.is-test-for-css4-browsers</span> {
+  <span class="code-attribute">color</span>: <span class="code-built_in">gray</span>(<span class="code-number">255</span>, <span class="code-number">50%</span>);
+}
+<span class="code-keyword">@context</span> postcss-preset-env {
+  <span class="code-selector-class">.css-example</span><span class="code-selector-class">.is-fallback-for-all-browsers</span> {
+    <span class="code-attribute">color</span>: <span class="code-built_in">gray</span>(<span class="code-number">255</span>, <span class="code-number">50%</span>);
+  }
+}
+</code></pre><p>Or enable plugins directly in CSS using <a href="https://github.com/postcss/postcss-use"><code>postcss-use</code></a>:</p><pre><code class="code language-pcss"><span class="code-keyword">@use</span> autoprefixer(<span class="code-attribute">browsers</span>: [<span class="code-string">'last 2 versions'</span>]);
+
+<span class="code-selector-pseudo">:fullscreen</span> <span class="code-selector-tag">a</span> {
+  <span class="code-attribute">display</span>: flex;
+}
+</code></pre><h2 class="doc_subtitle" id="packs">Packs</h2><ul>
+<li><a href="https://github.com/ismamz/postcss-utilities"><code>postcss-utilities</code></a> includes the most commonly used mixins, shortcuts
+and helpers to use as <code>@util</code> rules.</li>
+<li><a href="https://github.com/morishitter/atcss"><code>atcss</code></a> contains plugins that transform your CSS according
+to special annotation comments.</li>
+<li><a href="https://cssnano.github.io/cssnano/"><code>cssnano</code></a> contains plugins that optimize CSS size for use in production.</li>
+<li><a href="https://github.com/csstools/oldie"><code>oldie</code></a> contains plugins that transform your CSS
+for older Internet Explorer compatibility.</li>
+<li><a href="https://github.com/seaneking/rucksack"><code>rucksack</code></a> contains plugins to speed up CSS development
+with new features and shortcuts.</li>
+<li><a href="https://github.com/stephenway/level4"><code>level4</code></a> contains only plugins that let you write CSS4 without
+the IE9 fallbacks.</li>
+<li><a href="https://github.com/csstools/postcss-short"><code>short</code></a> adds and extends numerous shorthand properties.</li>
+<li><a href="https://github.com/stylelint/stylelint"><code>stylelint</code></a> contains plugins that lint your stylesheets.</li>
+<li><a href="https://github.com/h0tc0d3/postcss-hamster"><code>postcss-hamster</code></a> for vertical rhythm, typography, modular scale functions.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env"><code>postcss-preset-env</code></a> lets you convert modern CSS into something most
+browsers can understand, determining the polyfills you need based
+on your targeted browsers or runtime environments.</li>
+<li><a href="https://github.com/cleverboy32/postcss-ui-theme"><code>postcss-ui-theme</code></a> gives you syntax sugar and allows you to change theme.</li>
+</ul><h2 class="doc_subtitle" id="future-css-syntax">Future CSS Syntax</h2><ul>
+<li><a href="https://github.com/pascalduez/postcss-apply"><code>postcss-apply</code></a> supports custom properties sets references.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-attribute-case-insensitive"><code>postcss-attribute-case-insensitive</code></a> supports case insensitive attributes.</li>
+<li><a href="https://github.com/gasolin/postcss-bidirection"><code>postcss-bidirection</code></a> generate left-to-right and right-to-left styles
+with single syntax.</li>
+<li><a href="https://github.com/postcss/postcss-color-function"><code>postcss-color-function</code></a> supports functions to transform colors.</li>
+<li><a href="https://github.com/postcss/postcss-color-gray"><code>postcss-color-gray</code></a> supports the <code>gray()</code> function.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-color-hex-alpha"><code>postcss-color-hex-alpha</code></a> supports <code>#rrggbbaa</code> and <code>#rgba</code> notation.</li>
+<li><a href="https://github.com/dmarchena/postcss-color-hsl"><code>postcss-color-hsl</code></a>: transforms CSS Colors 4 <code>hsl()</code> to more compatible
+<code>hsl()</code> or <code>hsla()</code>.</li>
+<li><a href="https://github.com/postcss/postcss-color-hwb"><code>postcss-color-hwb</code></a> transforms <code>hwb()</code> to widely compatible <code>rgb()</code>.</li>
+<li><a href="https://github.com/valtlai/postcss-color-image"><code>postcss-color-image</code></a> supports <code>image(&#x3C;color>)</code> syntax
+allowing to use a solid color as an image.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-color-rebeccapurple"><code>postcss-color-rebeccapurple</code></a> supports the <code>rebeccapurple</code> color.</li>
+<li><a href="https://github.com/dmarchena/postcss-color-rgb"><code>postcss-color-rgb</code></a>: transforms CSS Colors 4 <code>rgb()</code> to more compatible
+<code>rgb()</code> or <code>rgba()</code>.</li>
+<li><a href="https://github.com/csstools/postcss-conic-gradient"><code>postcss-conic-gradient</code></a> supports the <code>conic-gradient</code> background.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-media"><code>postcss-custom-media</code></a> supports custom aliases for media queries.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-properties"><code>postcss-custom-properties</code></a> supports variables, using syntax from
+the W3C Custom Properties.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-custom-selectors"><code>postcss-custom-selectors</code></a> adds custom aliases for selectors.</li>
+<li><a href="https://github.com/travco/postcss-extend"><code>postcss-extend</code></a> supports spec-approximate <code>@extend</code> for rules
+and placeholders, recursively.</li>
+<li><a href="https://github.com/valtlai/postcss-font-format-keywords"><code>postcss-font-format-keywords</code></a> transforms keywords in <code>@font-face</code> rule’s
+<code>format()</code> function to widely supported strings.</li>
+<li><a href="https://github.com/iahu/postcss-font-normalize"><code>postcss-font-normalize</code></a> to normalize font, especially <code>font-family</code>.</li>
+<li><a href="https://github.com/postcss/postcss-font-variant"><code>postcss-font-variant</code></a> transpiles human-readable <code>font-variant</code>
+to more widely supported CSS.</li>
+<li><a href="https://github.com/JLHwung/postcss-font-family-system-ui"><code>postcss-font-family-system-ui</code></a> transforms W3C CSS <code>font-family: system-ui</code>
+to a practical font list.</li>
+<li><a href="https://github.com/dkrnl/postcss-font-display"><code>postcss-font-display</code></a> add <code>font-display</code> css rule.</li>
+<li><a href="https://github.com/vitkarpov/postcss-host"><code>postcss-host</code></a> makes the Shadow DOM’s <code>:host</code> selector work properly
+with pseudo-classes.</li>
+<li><a href="https://github.com/maximkoretskiy/postcss-initial"><code>postcss-initial</code></a> supports <code>initial</code> keyword and <code>all: initial</code>
+to clean inherit styles.</li>
+<li><a href="https://github.com/ahmadalfy/postcss-logical-properties"><code>postcss-logical-properties</code></a> transforms <code>start</code> and <code>end</code> properties
+to <code>left</code> and <code>right</code> depending on the writing direction of the document.</li>
+<li><a href="https://github.com/postcss/postcss-media-minmax"><code>postcss-media-minmax</code></a> adds <code>&#x3C;=</code> and <code>=></code> statements to media queries.</li>
+<li><a href="https://github.com/jake-low/postcss-multi-value-display"><code>postcss-multi-value-display</code></a> transforms <code>inline flex</code> and <code>block flow</code>
+to <code>inline-flex</code> and <code>block</code></li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-pseudo-class-any-link"><code>postcss-pseudo-class-any-link</code></a> adds <code>:any-link</code> pseudo-class.</li>
+<li><a href="https://github.com/IlyaUpyackovich/postcss-pseudo-is"><code>postcss-pseudo-is</code></a> transforms <code>:is()</code> to more compatible CSS.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-selector-not"><code>postcss-selector-not</code></a> transforms CSS4 <code>:not()</code> to CSS3 <code>:not()</code>.</li>
+<li><a href="https://github.com/postcss/postcss-selector-matches"><code>postcss-selector-matches</code></a> transforms CSS4 <code>:matches()</code>
+to more compatible CSS.</li>
+<li><a href="https://github.com/sandrina-p/postcss-start-to-end"><code>postcss-start-to-end</code></a> lets you control your layout (LTR or RTL)
+through logical rather than direction / physical rules.</li>
+<li><a href="https://github.com/seaneking/postcss-subgrid"><code>postcss-subgrid</code></a> provides a basic shim for the CSS <code>display: subgrid</code> spec.</li>
+<li><a href="https://github.com/twbs/mq4-hover-shim"><code>mq4-hover-shim</code></a> supports the <code>@media (hover)</code> feature.</li>
+</ul><p>See also <a href="https://github.com/csstools/postcss-plugins/tree/main/plugin-packs/postcss-preset-env"><code>postcss-preset-env</code></a> plugins pack to add future CSS syntax
+by one line of code.</p><h2 class="doc_subtitle" id="fallbacks">Fallbacks</h2><ul>
+<li><a href="https://github.com/postcss/postcss-color-rgba-fallback"><code>postcss-color-rgba-fallback</code></a> transforms <code>rgba()</code> to hexadecimal.</li>
+<li><a href="https://github.com/cocco3/postcss-disabled"><code>postcss-disabled</code></a> adds a <code>[disabled]</code> attribute and/or a <code>.disabled</code> class
+when the <code>:disabled</code> pseudo class is present.</li>
+<li><a href="https://github.com/Rycochet/postcss-epub"><code>postcss-epub</code></a> adds the <code>-epub-</code> prefix to relevant properties.</li>
+<li><a href="https://github.com/vitaliyr/postcss-esplit"><code>postcss-esplit</code></a> splits your CSS exceeding 4095 selectors for IE.</li>
+<li><a href="https://github.com/MadLittleMods/postcss-fallback"><code>postcss-fallback</code></a> adds <code>fallback</code> function to avoid duplicate declarations.</li>
+<li><a href="https://github.com/yuezk/postcss-filter-gradient"><code>postcss-filter-gradient</code></a> adds gradient filter for the old IE.</li>
+<li><a href="https://github.com/7rulnik/postcss-flexibility"><code>postcss-flexibility</code></a> adds <code>-js-</code> prefix for <a href="https://github.com/10up/flexibility"><code>Flexibility polyfill</code></a>.</li>
+<li><a href="https://github.com/gilmoreorless/postcss-gradient-transparency-fix"><code>postcss-gradient-transparency-fix</code></a> transforms <code>transparent</code> values
+in gradients to support Safari's different color interpolation.</li>
+<li><a href="https://github.com/ctxhou/postcss-hash-classname"><code>postcss-hash-classname</code></a> append hash string to your css class name.</li>
+<li><a href="https://github.com/notacouch/postcss-mqwidth-to-class"><code>postcss-mqwidth-to-class</code></a> converts min/max-width media queries to classes.</li>
+<li><a href="https://github.com/iamvdo/postcss-opacity"><code>postcss-opacity</code></a> adds opacity filter for IE8.</li>
+<li><a href="https://github.com/Dreamseer/postcss-opacity-percentage"><code>postcss-opacity-percentage</code></a> transforms CSS4 percentage-based <code>opacity</code>
+values to float values.</li>
+<li><a href="https://github.com/shrpne/postcss-page-break"><code>postcss-page-break</code></a> adds <code>page-break-</code> fallback to <code>break-</code> properties.</li>
+<li><a href="https://github.com/axa-ch/postcss-pseudoelements"><code>postcss-pseudoelements</code></a> Convert <code>::</code> selectors into <code>:</code> selectors
+for IE 8 compatibility.</li>
+<li><a href="https://github.com/caseyjacobson/postcss-redundant-color-vars"><code>postcss-redundant-color-vars</code></a> adds custom property for certain border and
+box-shadow declarations to fix a known Safari bug</li>
+<li><a href="https://github.com/MattDiMu/postcss-replace-overflow-wrap"><code>postcss-replace-overflow-wrap</code></a> replace <code>overflow-wrap</code> with <code>word-wrap</code>.</li>
+<li><a href="https://github.com/himynameisdave/postcss-round-subpixels"><code>postcss-round-subpixels</code></a> plugin that rounds sub-pixel values
+to the nearest
+full pixel.</li>
+<li><a href="https://github.com/csstools/postcss-unmq"><code>postcss-unmq</code></a> removes media queries while preserving desktop rules
+for IE≤8.</li>
+<li><a href="https://github.com/iamvdo/postcss-vmin"><code>postcss-vmin</code></a> generates <code>vm</code> fallback for <code>vmin</code> unit in IE9.</li>
+<li><a href="https://github.com/postcss/postcss-will-change"><code>postcss-will-change</code></a> inserts 3D hack before <code>will-change</code> property.</li>
+<li><a href="https://github.com/postcss/autoprefixer"><code>autoprefixer</code></a> adds vendor prefixes for you, using data from Can I Use.</li>
+<li><a href="https://github.com/gucong3000/postcss-pie"><code>postcss-pie</code></a> makes IE several of the most useful CSS3 decoration features.</li>
+<li><a href="https://github.com/cssdream/cssgrace"><code>cssgrace</code></a> provides various helpers and transpiles CSS 3 for IE
+and other old browsers.</li>
+<li><a href="https://github.com/robwierzbowski/node-pixrem"><code>pixrem</code></a> generates pixel fallbacks for <code>rem</code> units.</li>
+<li><a href="https://github.com/tivac/fixie"><code>postcss-fixie</code></a> adds easy and painless IE hacks</li>
+<li><a href="https://github.com/plegner/postcss-safe-area"><code>postcss-safe-area</code></a> adds browser fallbacks for <code>safe-area-inset</code> <code>env</code>
+variables.</li>
+<li><a href="https://github.com/ai/webp-in-css"><code>webp-in-css</code></a> to use WebP background images in CSS.</li>
+<li><a href="https://github.com/polemius/postcss-clamp"><code>postcss-clamp</code></a> transform <code>clamp()</code> to combination of <code>min/max</code></li>
+<li><a href="https://github.com/okikio/postcss-spring-easing"><code>postcss-spring-easing</code></a> replaces <code>spring()</code> with a resulting <code>linear()</code>
+function and add a <code>--spring-duration</code> css variable.</li>
+</ul><p>See also <a href="https://github.com/csstools/oldie"><code>oldie</code></a> plugins pack.</p><h2 class="doc_subtitle" id="language-extensions">Language Extensions</h2><ul>
+<li><a href="https://github.com/arccoza/postcss-aspect-ratio"><code>postcss-aspect-ratio</code></a> fix an element's dimensions to an aspect ratio.</li>
+<li><a href="https://github.com/OEvgeny/postcss-atroot"><code>postcss-atroot</code></a> place rules directly at the root node.</li>
+<li><a href="https://github.com/supermonkeyz/postcss-bem-fix"><code>postcss-bem-fix</code></a> adds at-rules for BEM and SUIT style classes.</li>
+<li><a href="https://github.com/ismamz/postcss-click"><code>postcss-click</code></a> allows to use the <code>:click</code> pseudo class and implement
+it in JavaScript.</li>
+<li><a href="https://github.com/rominmx/postcss-compact-mq"><code>postcss-compact-mq</code></a> provides compact syntax for media queries based
+on viewport width.</li>
+<li><a href="https://github.com/andyjansson/postcss-conditionals"><code>postcss-conditionals</code></a> adds <code>@if</code> statements.</li>
+<li><a href="https://github.com/MadLittleMods/postcss-css-variables"><code>postcss-css-variables</code></a> supports variables for selectors, and at-rules
+using W3C similar syntax.</li>
+<li><a href="https://github.com/komlev/postcss-current-selector"><code>postcss-current-selector</code></a> to get current selector in declaration.</li>
+<li><a href="https://github.com/daleeidd/postcss-define-property"><code>postcss-define-property</code></a> to define properties shortcut.</li>
+<li><a href="https://github.com/titancat/postcss-define-function"><code>postcss-define-function</code></a> to implement Sass <code>@function</code> directive.</li>
+<li><a href="https://github.com/outpunk/postcss-each"><code>postcss-each</code></a> adds <code>@each</code> statement.</li>
+<li><a href="https://github.com/antyakushev/postcss-for"><code>postcss-for</code></a> adds <code>@for</code> loops.</li>
+<li><a href="https://github.com/GitScrum/postcss-at-rules-variables"><code>postcss-at-rules-variables</code></a> adds support for custom properties in
+<code>@for</code>, <code>@each</code>, <code>@if</code>, etc.</li>
+<li><a href="https://github.com/andyjansson/postcss-functions"><code>postcss-functions</code></a> enables exposure of JavaScript functions.</li>
+<li><a href="https://github.com/arccoza/postcss-if-media"><code>postcss-if-media</code></a> inline or nest media queries within
+CSS rules &#x26; properties.</li>
+<li><a href="https://github.com/dimitrinicolas/postcss-inline-media"><code>postcss-inline-media</code></a> inline multiple media queries into CSS property
+values.</li>
+<li><a href="https://github.com/macropodhq/postcss-constants"><code>postcss-local-constants</code></a> adds support for localized constants.</li>
+<li><a href="https://github.com/pascalduez/postcss-map"><code>postcss-map</code></a> enables configuration maps.</li>
+<li><a href="https://github.com/rtsao/postcss-match"><code>postcss-match</code></a> adds <code>@match</code> for <a href="https://doc.rust-lang.org/book/match.html">Rust-style pattern matching</a>.</li>
+<li><a href="https://github.com/postcss/postcss-mixins"><code>postcss-mixins</code></a> enables mixins more powerful than Sass’,
+defined within stylesheets or in JS.</li>
+<li><a href="https://github.com/WolfgangKluge/postcss-media-variables"><code>postcss-media-variables</code></a> adds support for <code>var()</code> and <code>calc()</code>
+in <code>@media</code> rules</li>
+<li><a href="https://github.com/kristoferjoseph/postcss-modular-scale"><code>postcss-modular-scale</code></a> adds a modular scale <code>ms()</code> function.</li>
+<li><a href="https://github.com/totora0155/postcss-namespace"><code>postcss-namespace</code></a> prefix a namespace to a selector.</li>
+<li><a href="https://github.com/postcss/postcss-nested"><code>postcss-nested</code></a> unwraps nested rules.</li>
+<li><a href="https://github.com/jedmao/postcss-nested-props"><code>postcss-nested-props</code></a> unwraps nested properties.</li>
+<li><a href="https://github.com/jedmao/postcss-nested-vars"><code>postcss-nested-vars</code></a> supports nested Sass-style variables.</li>
+<li><a href="https://github.com/andrepolischuk/postcss-pseudo-class-any-button"><code>postcss-pseudo-class-any-button</code></a> adds <code>:any-button</code> pseudo-class
+for targeting all button elements.</li>
+<li><a href="https://github.com/csstools/postcss-pseudo-class-enter"><code>postcss-pseudo-class-enter</code></a> transforms <code>:enter</code> into <code>:hover</code> and <code>:focus</code>.</li>
+<li><a href="https://github.com/pascalduez/postcss-quantity-queries"><code>postcss-quantity-queries</code></a> enables quantity queries.</li>
+<li><a href="https://github.com/morishitter/postcss-ref"><code>postcss-ref</code></a> refers properties from another rule.</li>
+<li><a href="https://github.com/MadLittleMods/postcss-reverse-media"><code>postcss-reverse-media</code></a> reverse/Invert media query parameters.</li>
+<li><a href="https://github.com/andyjansson/postcss-sassy-mixins"><code>postcss-sassy-mixins</code></a> enables mixins with Sass keywords.</li>
+<li><a href="https://github.com/GitScrum/postcss-map-get"><code>postcss-map-get</code></a> adds the ability to use Sass like map function <code>map-get</code>.</li>
+<li><a href="https://github.com/davidtheclark/postcss-simple-extend"><code>postcss-simple-extend</code></a> lightweight extending of silent classes,
+like Sass’ <code>@extend</code>.</li>
+<li><a href="https://github.com/postcss/postcss-simple-vars"><code>postcss-simple-vars</code></a> supports for Sass-style variables.</li>
+<li><a href="https://github.com/whitneyit/postcss-strip-units"><code>postcss-strip-units</code></a> strips units off of property values.</li>
+<li><a href="https://github.com/markgoodyear/postcss-vertical-rhythm"><code>postcss-vertical-rhythm</code></a> adds a vertical rhythm unit
+based on <code>font-size</code> and <code>line-height</code>.</li>
+<li><a href="https://github.com/F21/postcss-vertical-rhythm-function"><code>postcss-vertical-rhythm-function</code></a> adds a vertical rhythm <code>vr()</code> function
+that is unit agnostic and works in situations where the font-size cannot
+be calculated during build time.</li>
+<li><a href="https://github.com/alexandr-solovyov/postcss-responsive-properties"><code>postcss-responsive-properties</code></a> allows you to write responsive
+property values.</li>
+<li><a href="https://github.com/m18ru/postcss-text-remove-gap"><code>postcss-text-remove-gap</code></a> remove space before and after text strings, added
+by line-height and extra space in glyph itself.</li>
+<li><a href="https://github.com/m18ru/postcss-closest"><code>postcss-closest</code></a> plugin to modify closest matching part of current
+selector.</li>
+<li><a href="https://github.com/geddski/csstyle"><code>csstyle</code></a> adds components workflow to your styles.</li>
+<li><a href="https://github.com/creeperyang/postcss-percentage"><code>postcss-percentage</code></a> support Sass-like <code>percentage()</code> function.</li>
+<li><a href="https://github.com/joe223/postcss-custom-css-units"><code>postcss-custom-css-units</code></a> Define custom css units and convert them
+to CSS variables.</li>
+<li><a href="https://github.com/CSSSR/postcss-easy-z"><code>postcss-easy-z</code></a> lets you organize z-indices by declaring relations
+between them.</li>
+<li><a href="https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-design-tokens"><code>@csstools/postcss-design-tokens</code></a> lets you import and use design tokens
+from CSS.</li>
+</ul><h2 class="doc_subtitle" id="colors">Colors</h2><ul>
+<li><a href="https://github.com/dfernandez79/postcss-ase-colors"><code>postcss-ase-colors</code></a> replaces color names with values read
+from an ASE palette file.</li>
+<li><a href="https://github.com/postcss/postcss-brand-colors"><code>postcss-brand-colors</code></a> inserts company brand colors
+in the <code>brand-colors</code> module.</li>
+<li><a href="https://github.com/avanes/postcss-color-alpha"><code>postcss-color-alpha</code></a> transforms <code>#hex.a</code>, <code>black(alpha)</code> and <code>white(alpha)</code>
+to <code>rgba()</code>.</li>
+<li><a href="https://github.com/devgru/postcss-color-hcl"><code>postcss-color-hcl</code></a> transforms <code>hcl(H, C, L)</code> and <code>hcl(H, C, L, alpha)</code>
+to <code>#rgb</code> and <code>rgba()</code>.</li>
+<li><a href="https://github.com/nicksheffield/postcss-color-hexa"><code>postcss-color-hexa</code></a> transforms <code>hexa(hex, alpha)</code> into <code>rgba</code> format.</li>
+<li><a href="https://github.com/iamstarkov/postcss-color-mix"><code>postcss-color-mix</code></a> mixes two colors together.</li>
+<li><a href="https://github.com/zaim/postcss-color-palette"><code>postcss-color-palette</code></a> transforms CSS 2 color keywords to a custom palette.</li>
+<li><a href="https://github.com/longdog/postcss-color-pantone"><code>postcss-color-pantone</code></a> transforms pantone color to RGB.</li>
+<li><a href="https://github.com/kristoferjoseph/postcss-color-scale"><code>postcss-color-scale</code></a> adds a color scale <code>cs()</code> function.</li>
+<li><a href="https://github.com/andrepolischuk/postcss-color-short"><code>postcss-color-short</code></a> adds shorthand color declarations.</li>
+<li><a href="https://github.com/ben-eb/postcss-color-yiq"><code>postcss-color-yiq</code></a> sets foreground colors using the YIQ color space.</li>
+<li><a href="https://github.com/btholt/postcss-colorblind"><code>postcss-colorblind</code></a> transforms colors using filters to simulate
+colorblindness.</li>
+<li><a href="https://github.com/stephenway/postcss-contrast"><code>postcss-contrast</code></a> checks background-color and gives either white or black.</li>
+<li><a href="https://github.com/postcss/postcss-dark-theme-class"><code>postcss-dark-theme-class</code></a> to force dark or light theme by custom switcher.</li>
+<li><a href="https://github.com/ambar/postcss-theme-colors"><code>postcss-theme-colors</code></a> add dark and light theme with color groups.</li>
+<li><a href="https://github.com/seaneking/postcss-hexrgba"><code>postcss-hexrgba</code></a> adds shorthand hex <code>rgba(hex, alpha)</code> method.</li>
+<li><a href="https://github.com/himynameisdave/postcss-rgb-plz"><code>postcss-rgb-plz</code></a> converts 3 or 6 digit hex values to <code>rgb</code>.</li>
+<li><a href="https://github.com/XOP/postcss-rgba-hex"><code>postcss-rgba-hex</code></a> converts <code>rgba</code> values to <code>hex</code> analogues.</li>
+<li><a href="https://github.com/laureanoarcanio/postcss-shades-of-gray"><code>postcss-shades-of-gray</code></a> helps keeping grayscale colors consistent
+to a gray palette.</li>
+<li><a href="https://github.com/SlexAxton/css-colorguard"><code>colorguard</code></a> helps maintain a consistent color palette.</li>
+<li><a href="https://github.com/ismamz/postcss-get-color"><code>postcss-get-color</code></a> get the prominent colors from an image.</li>
+<li><a href="https://github.com/alanev/postcss-randomcolor"><code>postcss-randomcolor</code></a> supports function to use random color.</li>
+</ul><h2 class="doc_subtitle" id="images-and-fonts">Images and Fonts</h2><ul>
+<li><a href="https://github.com/nucliweb/avif-in-css"><code>avif-in-css</code></a> to use AVIF image format in CSS background.</li>
+<li><a href="https://github.com/borodean/postcss-assets"><code>postcss-assets</code></a> allows you to simplify URLs, insert image dimensions,
+and inline files.</li>
+<li><a href="https://github.com/devex-web-frontend/postcss-assets-rebase"><code>postcss-assets-rebase</code></a> rebases assets from <code>url()</code>.</li>
+<li><a href="https://github.com/simonsmith/postcss-at2x"><code>postcss-at2x</code></a> handles retina background images via use of <code>at-2x</code> keyword.</li>
+<li><a href="https://github.com/JustClear/postcss-background-image-auto-size"><code>postcss-background-image-auto-size</code></a> generates CSS rules <code>width</code>
+and <code>height</code> for <code>background-image</code> automatically.</li>
+<li><a href="https://github.com/teaualune/postcss-border-9-patch"><code>postcss-border-9-patch</code></a> generates 9-patch like border styles
+via a custom rule.</li>
+<li><a href="https://github.com/glebmachine/postcss-cachebuster"><code>postcss-cachebuster</code></a> adds version parameter to images and fonts</li>
+<li><a href="https://github.com/shutterstock/postcss-copy-assets"><code>postcss-copy-assets</code></a> copies assets referenced by relative <code>url()</code>s
+into a build directory.</li>
+<li><a href="https://github.com/Ser-Gen/postcss-data-packer"><code>postcss-data-packer</code></a> moves embedded Base64 data to a separate file.</li>
+<li><a href="https://github.com/glebmachine/postcss-easysprites"><code>postcss-easysprites</code></a> combine images to sprites, based on their
+image.png<code>#hash</code> and aspect ratio (<code>@2x</code>).</li>
+<li><a href="https://github.com/icon-blender/postcss-icon-blender"><code>postcss-icon-blender</code></a> create custom SVG icon sets from over 80,000 free
+and open-source icons</li>
+<li><a href="https://github.com/alex499/postcss-image-set"><code>postcss-image-set</code></a> adds <code>background-image</code> with first image
+for <code>image-set()</code>.</li>
+<li><a href="https://github.com/bezoerb/postcss-image-inliner"><code>postcss-image-inliner</code></a> inlines local and remote images.</li>
+<li><a href="https://github.com/azat-io/postcss-instagram"><code>postcss-instagram</code></a> adds Instagram filters to <code>filter</code>.</li>
+<li><a href="https://github.com/alexlibby/postcss-filter-tint"><code>postcss-filter-tint</code></a> adds tint filter to elements such as images.</li>
+<li><a href="https://github.com/zachleat/postcss-foft-classes"><code>postcss-foft-classes</code></a> adds guarding classes to blocks using web fonts
+for better font loading strategies.</li>
+<li><a href="https://github.com/dan-gamble/postcss-font-awesome"><code>postcss-font-awesome</code></a> adds an easy shortcut to font-awesome unicode codes</li>
+<li><a href="https://github.com/jedmao/postcss-font-pack"><code>postcss-font-pack</code></a> simplifies font declarations and validates they match
+configured font packs.</li>
+<li><a href="https://github.com/richbachman/postcss-fontsize"><code>postcss-fontsize</code></a> generates <code>rem</code> unit <code>font-size</code> and <code>line-height</code>
+with <code>px</code> fallbacks.</li>
+<li><a href="https://github.com/seaneking/postcss-fontpath"><code>postcss-fontpath</code></a> adds font links for different browsers.</li>
+<li><a href="https://github.com/AaronJan/postcss-font-grabber"><code>postcss-font-grabber</code></a> it grabs remote fonts in <code>@font-face</code>,
+download them and update your CSS.</li>
+<li><a href="https://github.com/Jeff2Ma/postcss-lazyimagecss"><code>postcss-lazyimagecss</code></a> adds image width and height automatically.</li>
+<li><a href="https://github.com/Jeff2Ma/postcss-lazysprite"><code>postcss-lazysprite</code></a> generates sprites from the directory of images.</li>
+<li><a href="https://github.com/awayken/postcss-placehold"><code>postcss-placehold</code></a> makes it easy to drop in placeholder images.</li>
+<li><a href="https://github.com/ben-eb/postcss-resemble-image"><code>postcss-resemble-image</code></a> provides a gradient fallback for an image that
+loosely resembles the original.</li>
+<li><a href="https://github.com/bognarlaszlo/postcss-resolve-urls"><code>postcss-resolve-urls</code></a> resolves relative urls referenced in <code>url()</code>s</li>
+<li><a href="https://www.npmjs.com/package/postcss-responsive-images"><code>postcss-responsive-images</code></a> adds stylesheets for making
+your images responsive.</li>
+<li><a href="https://github.com/2createStudio/postcss-sprites"><code>postcss-sprites</code></a> generates CSS sprites from stylesheets.</li>
+<li><a href="https://github.com/Pavliko/postcss-svg"><code>postcss-svg</code></a> insert inline SVG to CSS and allows to manage it colors.</li>
+<li><a href="https://github.com/justim/postcss-svg-fallback"><code>postcss-svg-fallback</code></a> converts SVG in your CSS to PNG files for IE 8.</li>
+<li><a href="https://www.npmjs.com/package/postcss-svgo"><code>postcss-svgo</code></a> processes inline SVG through <a href="https://github.com/svg/svgo">SVGO</a>.</li>
+<li><a href="https://github.com/ben-eb/postcss-unicode-characters"><code>postcss-unicode-characters</code></a> makes it easier to write <code>unicode-range</code>
+descriptors.</li>
+<li><a href="https://github.com/postcss/postcss-url"><code>postcss-url</code></a> rebases or inlines <code>url()</code>s.</li>
+<li><a href="https://github.com/strarsis/postcss-urlrebase"><code>postcss-urlrebase</code></a> rebases <code>url()</code>s to a given root URL.</li>
+<li><a href="https://github.com/yuezk/postcss-urlrev"><code>postcss-urlrev</code></a> adds MD5 hash strings to <code>url()</code>s.</li>
+<li><a href="https://github.com/csstools/postcss-write-svg"><code>postcss-write-svg</code></a> write inline SVGs in CSS.</li>
+<li><a href="https://github.com/TrySound/postcss-inline-svg"><code>postcss-inline-svg</code></a> inline SVG images and customize their styles.</li>
+<li><a href="https://github.com/lexich/webpcss"><code>webpcss</code></a> adds URLs for WebP images for browsers that support WebP.</li>
+<li><a href="https://github.com/ai/webp-in-css"><code>webp-in-css</code></a> to use WebP image format in CSS background.</li>
+</ul><h2 class="doc_subtitle" id="grids">Grids</h2><ul>
+<li><a href="https://github.com/andyjansson/postcss-grid"><code>postcss-grid</code></a> adds a semantic grid system.</li>
+<li><a href="https://github.com/sylvainpolletvillard/postcss-grid-kiss"><code>postcss-grid-kiss</code></a> transforms ASCII-art grids into CSS Grid layout.</li>
+<li><a href="https://github.com/francoisromain/postcss-grid-system"><code>postcss-grid-system</code></a> creates grids based on a fixed column width.</li>
+<li><a href="https://github.com/francoisromain/postcss-grid-fluid"><code>postcss-grid-fluid</code></a> creates fluid grids.</li>
+<li><a href="https://github.com/arccoza/postcss-layout"><code>postcss-layout</code></a> a plugin for some common CSS layout patterns
+and a Grid system.</li>
+<li><a href="https://github.com/cathydutton/postcss-maze"><code>postcss-maze</code></a> is a mobile first, semantic responsive grid
+to suit any design pattern.</li>
+<li><a href="https://github.com/jo-asakura/postcss-neat"><code>postcss-neat</code></a> is a semantic and fluid grid framework.</li>
+<li><a href="https://github.com/lordgiotto/postcss-oldschool-grid"><code>postcss-oldschool-grid</code></a> is a grid system with wrapping columns
+and padding gutters.</li>
+<li><a href="https://github.com/admdh/postcss-simple-grid"><code>postcss-simple-grid</code></a> create grid with one line.</li>
+<li><a href="https://github.com/corysimmons/lost"><code>lost</code></a> feature-rich <code>calc()</code> grid system by Jeet author.</li>
+</ul><h2 class="doc_subtitle" id="optimizations">Optimizations</h2><ul>
+<li><a href="https://github.com/postcss/postcss-calc"><code>postcss-calc</code></a> reduces <code>calc()</code> to values
+(when expressions involve the same units).</li>
+<li><a href="https://github.com/nico-jacobs/postcss-remove-nested-calc"><code>postcss-remove-nested-calc</code></a> <code>calc(100vw - calc(20% - 10px))</code> to
+<code>calc(100vw - (20% - 10px))</code> for IE 11 compatibility.</li>
+<li><a href="https://github.com/mbrandau/postcss-class-name-shortener"><code>postcss-class-name-shortener</code></a> shortens CSS class names to optimize
+website performance.</li>
+<li><a href="https://github.com/ChristianMurphy/postcss-combine-duplicated-selectors"><code>postcss-combine-duplicated-selectors</code></a> automatically join identical
+selectors.</li>
+<li><a href="https://github.com/simeydotme/postcss-filter-mq"><code>postcss-filter-mq</code></a> Filter all matching or non-matching media queries.</li>
+<li><a href="https://github.com/postcss/postcss-import"><code>postcss-import</code></a> inlines the stylesheets referred to by <code>@import</code> rules.</li>
+<li><a href="https://github.com/eriklharper/postcss-nested-import"><code>postcss-nested-import</code></a> inlines stylesheets referred to by <code>@import</code> rules
+inside nested rule blocks.</li>
+<li><a href="https://github.com/csstools/postcss-partial-import"><code>postcss-partial-import</code></a> inlines standard imports and Sass-like partials.</li>
+<li><a href="https://github.com/dehuszar/postcss-reference"><code>postcss-reference</code></a> emulates Less’s <code>@import</code>.</li>
+<li><a href="https://github.com/cbracco/postcss-remove-root"><code>postcss-remove-root</code></a> removes all instances of <code>:root</code> from a stylesheet.</li>
+<li><a href="https://github.com/hail2u/postcss-single-charset"><code>postcss-single-charset</code></a> ensures that there is one and only one
+<code>@charset</code> rule at the top of file.</li>
+<li><a href="https://www.npmjs.com/package/postcss-zindex"><code>postcss-zindex</code></a> rebases positive <code>z-index</code> values.</li>
+<li><a href="https://github.com/gucong3000/postcss-unprefix"><code>postcss-unprefix</code></a> Unprefixes vendor prefixes in legacy CSS.</li>
+<li><a href="https://github.com/AoDev/css-byebye"><code>css-byebye</code></a> removes the CSS rules that you don’t want.</li>
+<li><a href="https://github.com/hail2u/node-css-mqpacker"><code>css-mqpacker</code></a> joins matching CSS media queries into a single statement.</li>
+<li><a href="https://www.npmjs.com/package/stylehacks"><code>stylehacks</code></a> removes CSS hacks based on browser support.</li>
+<li><a href="https://github.com/panec/postcss-mq-optimize"><code>postcss-mq-optimize</code></a> removes invalid media queries or its expressions.</li>
+<li><a href="https://github.com/RyanZim/postcss-uncss"><code>postcss-uncss</code></a> removes unused CSS from your stylesheets.</li>
+<li><a href="https://github.com/mapbox/postcss-html-filter"><code>postcss-html-filter</code></a> filters out CSS that does not apply to the HTML
+you provide.</li>
+<li><a href="https://github.com/DUBANGARCIA/postcss-no-important"><code>postcss-no-important</code></a> delete declarations !important.</li>
+<li><a href="https://github.com/litt1e-p/postcss-deep-scopable"><code>postcss-deep-scopable</code></a> unified deep scoped style for Vue.js.</li>
+<li><a href="https://github.com/DenyVeyten/postcss-deadcss"><code>postcss-deadcss</code></a> helps to find dead CSS in stylesheets.</li>
+<li><a href="https://github.com/navanshu/postcss-variable-compress"><code>postcss-variable-compress</code></a> minifies css variables and saves you space.</li>
+</ul><p>See also plugins in modular minifier <a href="https://cssnano.github.io/cssnano/"><code>cssnano</code></a>.</p><h2 class="doc_subtitle" id="shortcuts">Shortcuts</h2><ul>
+<li><a href="https://github.com/seaneking/postcss-alias"><code>postcss-alias</code></a> creates shorter aliases for properties.</li>
+<li><a href="https://github.com/maximkoretskiy/postcss-alias-atrules"><code>postcss-alias-atrules</code></a> creates shorter aliases for at-rules.</li>
+<li><a href="https://github.com/jedmao/postcss-all-link-colors"><code>postcss-all-link-colors</code></a> insert colors for link-related pseudo-classes.</li>
+<li><a href="https://github.com/andrepolischuk/postcss-border"><code>postcss-border</code></a> adds shorthand for width and color of all borders
+in <code>border</code> property.</li>
+<li><a href="https://github.com/michelemazzucco/postcss-border-shortcut"><code>postcss-border-shortcut</code></a> PostCSS plugin for assign default <code>border</code> type
+if not expressed.</li>
+<li><a href="https://github.com/francoisromain/postcss-button"><code>postcss-button</code></a> creates buttons.</li>
+<li><a href="https://github.com/jedmao/postcss-center"><code>postcss-center</code></a> centers elements.</li>
+<li><a href="https://github.com/jedmao/postcss-circle"><code>postcss-circle</code></a> inserts a circle with color.</li>
+<li><a href="https://github.com/seaneking/postcss-clearfix"><code>postcss-clearfix</code></a> adds <code>fix</code> and <code>fix-legacy</code> properties to the <code>clear</code>
+declaration.</li>
+<li><a href="https://github.com/johnie/postcss-crip"><code>postcss-crip</code></a> shorthand properties for Crips that are too lazy to write.</li>
+<li><a href="https://github.com/antyakushev/postcss-default-unit"><code>postcss-default-unit</code></a> adds default unit to numeric CSS properties.</li>
+<li><a href="https://github.com/postcss/postcss-easings"><code>postcss-easings</code></a> replaces easing names from easings.net
+with <code>cubic-bezier()</code> functions.</li>
+<li><a href="https://github.com/alanev/postcss-filter"><code>postcss-filter</code></a> adds shorthand for black and white filter.</li>
+<li><a href="https://github.com/postcss/postcss-focus"><code>postcss-focus</code></a> adds <code>:focus</code> selector to every <code>:hover</code>.</li>
+<li><a href="https://github.com/simonsmith/postcss-generate-preset"><code>postcss-generate-preset</code></a> allows quick generation of rules.
+Useful for creating repetitive utilities.</li>
+<li><a href="https://github.com/lukelarsen/postcss-hidden"><code>postcss-hidden</code></a> allows for easy ways to hide elements.</li>
+<li><a href="https://github.com/seaneking/postcss-input-style"><code>postcss-input-style</code></a> adds new pseudo-elements for cross-browser styling
+of inputs.</li>
+<li><a href="https://github.com/toomuchdesign/postcss-nested-ancestors"><code>postcss-nested-ancestors</code></a> reference any parent/ancestor selector
+in nested CSS.</li>
+<li><a href="https://github.com/domwashburn/postcss-parent-selector"><code>postcss-parent-selector</code></a> adds a parent selector to the beginning
+of all rules.</li>
+<li><a href="https://github.com/seaneking/postcss-position"><code>postcss-position</code></a> adds shorthand declarations for position attributes.</li>
+<li><a href="https://github.com/simonsmith/postcss-property-lookup"><code>postcss-property-lookup</code></a> allows referencing property values without
+a variable.</li>
+<li><a href="https://github.com/soberwp/postcss-range-value"><code>postcss-range-value</code></a> range value with a max and min value between
+two screen sizes.</li>
+<li><a href="https://github.com/seaneking/postcss-responsive-type"><code>postcss-responsive-type</code></a> changes <code>font-size</code> depends on screen size.</li>
+<li><a href="https://github.com/sneakertack/postcss-scrib"><code>postcss-scrib</code></a> define your own aliases/shortcuts for properties or values.</li>
+<li><a href="https://github.com/csstools/postcss-short-font-size"><code>postcss-short-font-size</code></a> extends <code>font-size</code> to define line-height
+s a second value.</li>
+<li><a href="https://github.com/csstools/postcss-short-position"><code>postcss-short-position</code></a> extends <code>position</code> to define edges
+as additional values.</li>
+<li><a href="https://github.com/csstools/postcss-short-spacing"><code>postcss-short-spacing</code></a> extends <code>margin</code> and <code>padding</code> to allow
+or omitted edges.</li>
+<li><a href="https://github.com/csstools/postcss-short-text"><code>postcss-short-text</code></a> adds a <code>text</code> shortcut property for several
+text-related properties.</li>
+<li><a href="https://github.com/postcss/postcss-size"><code>postcss-size</code></a> adds a <code>size</code> shortcut that sets width and height
+with one declaration.</li>
+<li><a href="https://github.com/archana-s/postcss-speech-bubble"><code>postcss-speech-bubble</code></a> adds speech bubbles of different kinds
+with just a couple of lines of CSS.</li>
+<li><a href="https://github.com/csstools/postcss-transform-shortcut"><code>postcss-transform-shortcut</code></a> allows shorthand transform properties in CSS.</li>
+<li><a href="https://github.com/jedmao/postcss-triangle"><code>postcss-triangle</code></a> creates a triangle.</li>
+<li><a href="https://github.com/francoisromain/postcss-typescale"><code>postcss-typescale</code></a> sets type based on a typographic scale.</li>
+<li><a href="https://github.com/davidhemphill/postcss-verthorz"><code>postcss-verthorz</code></a> adds vertical and horizontal spacing declarations.</li>
+<li><a href="https://github.com/csstools/postcss-font-magician"><code>font-magician</code></a> generates all the <code>@font-face</code> rules needed in CSS.</li>
+<li><a href="https://github.com/zhouwenbin/postcss-animation"><code>postcss-animation</code></a> PostCSS plugin that adds <code>@keyframes</code> from animate.css.</li>
+<li><a href="https://github.com/nucliweb/postcss-magic-animations/"><code>postcss-magic-animations</code></a> PostCSS plugin that adds <code>@keyframes</code>
+from Magic Animations.</li>
+</ul><h2 class="doc_subtitle" id="others">Others</h2><ul>
+<li>[<code>postcss-add-root-selector</code>] intelligently wraps all rules
+in a custom selector.</li>
+<li><a href="https://github.com/kunukn/postcss-alter-property-value"><code>postcss-alter-property-value</code></a> alters your CSS declarations
+from a rule based configuration.</li>
+<li><a href="https://github.com/GitScrum/postcss-attribute-selector-prefix"><code>postcss-attribute-selector-prefix</code></a> adds a prefix to attribute selectors</li>
+<li>[<code>postcss-auto-rem</code>] compiles pixel units to <code>rem</code> without configuration.</li>
+<li><a href="https://github.com/maximkoretskiy/postcss-autoreset"><code>postcss-autoreset</code></a>  automatically adds reset styles.</li>
+<li><a href="https://github.com/WebSeed/postcss-bem-to-js"><code>postcss-bem-to-js</code></a> creates a JavaScript definition file for BEM-style CSS.</li>
+<li><a href="https://github.com/dichuvichkin/postcss-bom"><code>postcss-bom</code></a> adds a UTF-8 BOM to files.</li>
+<li><a href="https://github.com/strarsis/postcss-blurry-gradient-workaround"><code>postcss-blurry-gradient-workaround</code></a> fixes blurry CSS gradients
+with too many explicit end-stops.</li>
+<li><a href="https://github.com/GMchris/postcss-camelcaser"><code>postcss-camelcaser</code></a> transforms selectors to CamelCase.</li>
+<li><a href="https://github.com/thompsongl/postcss-class-prefix"><code>postcss-class-prefix</code></a> adds a prefix/namespace to class selectors.</li>
+<li><a href="https://github.com/nrkno/postcss-classes-to-mixins"><code>postcss-classes-to-mixins</code></a> converts classes to Sass, Less and Stylus mixins</li>
+<li><a href="https://github.com/talgautb/postcss-currency"><code>postcss-currency</code></a> replaces name of currency with symbols.</li>
+<li><a href="https://github.com/askirmas/postcss-d-ts"><code>postcss-d-ts</code></a> generates <code>.d.ts</code> declaration for TypeScript <code>import</code>
+from used CSS classes and ids</li>
+<li><a href="https://github.com/dichuvichkin/postcss-eol"><code>postcss-eol</code></a> replaces EOL of files.</li>
+<li><a href="https://github.com/lutien/postcss-extract-value"><code>postcss-extract-value</code></a> extracts values from css properties and puts them
+into variables.</li>
+<li><a href="https://github.com/pathsofdesign/postcss-fakeid"><code>postcss-fakeid</code></a> transforms <code>#foo</code> IDs to attribute selectors <code>[id="foo"]</code>.</li>
+<li><a href="https://www.npmjs.com/package/postcss-filter-stream"><code>postcss-filter-stream</code></a> blacklist files / folders that you don’t want
+to process with a PostCSS plugin.</li>
+<li><a href="https://github.com/archana-s/postcss-flexbox"><code>postcss-flexbox</code></a> easy way to understand and start using CSS3 Flexbox.</li>
+<li><a href="https://github.com/AndrejGajdos/postcss-flexbox-reset"><code>postcss-flexbox-reset</code></a> resets Flexbox to avoid issues in responsive layouts.</li>
+<li><a href="https://github.com/hallvors/postcss-flexboxfixer"><code>postcss-flexboxfixer</code></a> unprefixes <code>-webkit-</code> only flexbox in legacy CSS.</li>
+<li><a href="https://github.com/luisrudge/postcss-flexbugs-fixes"><code>postcss-flexbugs-fixes</code></a> fixes some of known <a href="https://github.com/philipwalton/flexbugs">flexbox bugs</a>.</li>
+<li><a href="https://github.com/hallvors/postcss-gradientfixer"><code>postcss-gradientfixer</code></a> unprefixes <code>-webkit-</code> only gradients in legacy CSS.</li>
+<li><a href="https://github.com/AndrejGajdos/postcss-grid-reset"><code>postcss-grid-reset</code></a> resets CSS Grid to avoid issues in responsive layouts.</li>
+<li><a href="https://github.com/dacodekid/postcss-hash"><code>postcss-hash</code></a> replaces output file names with hash algorithms
+for cache busting.</li>
+<li><a href="https://github.com/4wdmedia/postcss-ie8"><code>postcss-ie8</code></a> strips out unsupported properties and media queries for IE8.</li>
+<li><a href="https://github.com/MadLittleMods/postcss-increase-specificity"><code>postcss-increase-specificity</code></a> increases the specificity of your selectors.</li>
+<li><a href="https://github.com/jakob101/postcss-inline-rtl"><code>postcss-inline-rtl</code></a> converts your CSS to right-to-left,
+but inline (adding just what you need).</li>
+<li><a href="https://github.com/JGJP/postcss-join-transitions"><code>postcss-join-transitions</code></a> joins conflicting transition declarations.</li>
+<li><a href="https://github.com/letsjaam/postcss-letter-tracking"><code>postcss-letter-tracking</code></a> generates relative, Photoshop-compatible
+letter tracking for improved letter spacing.</li>
+<li><a href="https://github.com/jdsteinbach/postcss-light-text"><code>postcss-light-text</code></a>  adds <code>-webkit-</code> antialiasing for light text.</li>
+<li><a href="https://github.com/outpunk/postcss-modules"><code>postcss-modules</code></a>  allows to use CSS Modules everywhere.</li>
+<li><a href="https://github.com/solversgroup/postcss-momentum-scrolling"><code>postcss-momentum-scrolling</code></a> adding momentum style scrolling behavior
+(<code>-webkit-overflow-scrolling:touch</code>) for elements with overflow on iOS.</li>
+<li><a href="https://github.com/TCotton/postcss-mq-keyframes"><code>postcss-mq-keyframes</code></a> moves any animation keyframes in media queries
+to the end of the file.</li>
+<li><a href="https://github.com/JGJP/postcss-mq-last"><code>postcss-mq-last</code></a> gives media query rules precedence by moving them
+to the end of the file.</li>
+<li><a href="https://github.com/dichuvichkin/postcss-node-modules-replacer"><code>postcss-node-modules-replacer</code></a> replaces path than includes <code>node_modules</code>
+to <code>~</code>.</li>
+<li><a href="https://github.com/ymrdf/postcss-plugin-namespace"><code>postcss-plugin-namespace</code></a> add a css selector to all rules,
+so that CSS file don’t affect other element.</li>
+<li><a href="https://github.com/larsmunkholm/postcss-prefix-hover"><code>postcss-prefix-hover</code></a> adds a prefixed to any selector containing <code>:hover</code>.</li>
+<li><a href="https://github.com/liquidlight/postcss-pseudo-content-insert"><code>postcss-pseudo-content-insert</code></a> adds <code>content: ''</code> to <code>:before</code> and <code>:after</code>
+if it is missing.</li>
+<li><a href="https://github.com/timelsass/postcss-pseudo-element-cases"><code>postcss-pseudo-element-cases</code></a> converts <code>.style::BEFORE</code>
+into <code>.style::before</code> and vice versa.</li>
+<li><a href="https://github.com/timelsass/postcss-pseudo-element-colons"><code>postcss-pseudo-element-colons</code></a> converts <code>.style:before</code>
+into <code>.style::before</code> and vice versa.</li>
+<li><a href="https://github.com/omgovich/postcss-pseudo-elements-content"><code>postcss-pseudo-elements-content</code></a> adds <code>content: ''</code> to <code>:before-c</code>
+and <code>:after-c</code>.</li>
+<li><a href="https://github.com/cuth/postcss-pxtorem"><code>postcss-pxtorem</code></a> converts pixel units to <code>rem</code>.</li>
+<li><a href="https://github.com/MadLittleMods/postcss-raw"><code>postcss-raw</code></a> protects nodes inside <code>@raw</code> at-rules from being touched
+by other plugins.</li>
+<li><a href="https://github.com/johnotander/postcss-remove-prefixes"><code>postcss-remove-prefixes</code></a> removes vendor prefixes.</li>
+<li><a href="https://github.com/elchininet/postcss-rtlcss"><code>postcss-rtlcss</code></a> creates left-to-right and right-to-left rules
+in a single CSS file.</li>
+<li><a href="https://github.com/Crimx/postcss-safe-important"><code>postcss-safe-important</code></a> adds <code>!important</code> to style declarations safely.</li>
+<li><a href="https://github.com/eramdam/postcss-sanitize"><code>postcss-sanitize</code></a> remove properties and values using rules.</li>
+<li><a href="https://github.com/pazams/postcss-scopify"><code>postcss-scopify</code></a> adds a user input scope to each selector.</li>
+<li><a href="https://github.com/johnotander/postcss-select"><code>postcss-select</code></a> select rules based off a selector list.</li>
+<li><a href="https://github.com/amaranter/postcss-selector-prefixer"><code>postcss-selector-prefixer</code></a> adds a prefix to css selectors.</li>
+<li><a href="https://github.com/johnotander/postcss-shorthand-expand"><code>postcss-shorthand-expand</code></a> expands shorthand properties.</li>
+<li><a href="https://github.com/Rplus/postcss-simple-trig"><code>postcss-simple-trig</code></a> calculate trigonometric functions: sin/cos/tan.</li>
+<li><a href="https://github.com/hudochenkov/postcss-sorting"><code>postcss-sorting</code></a> sort rules content with specified order.</li>
+<li><a href="https://github.com/solversgroup/postcss-sort-media-queries"><code>postcss-sort-media-queries</code></a> combine and sort CSS media queries
+with mobile first or desktop first methods.</li>
+<li><a href="https://github.com/morishitter/postcss-style-guide"><code>postcss-style-guide</code></a> generates a style guide automatically.</li>
+<li><a href="https://github.com/Siilwyn/css-declaration-sorter"><code>css-declaration-sorter</code></a> sorts CSS declarations fast and automatically
+in a certain order.</li>
+<li><a href="https://github.com/ben-eb/perfectionist"><code>perfectionist</code></a> formats poorly written CSS and renders a “pretty” result.</li>
+<li><a href="https://github.com/MohammadYounes/rtlcss"><code>rtlcss</code></a> mirrors styles for right-to-left locales.</li>
+<li><a href="https://github.com/morishitter/stylefmt"><code>stylefmt</code></a> modern CSS formatter that works well with <code>stylelint</code>.</li>
+<li><a href="https://github.com/DimitrisNL/postcss-autocorrect"><code>postcss-autocorrect</code></a> corrects typos and notifies in the console.</li>
+<li><a href="https://github.com/evrone/postcss-px-to-viewport"><code>postcss-px-to-viewport</code></a> generates viewport units
+(<code>vw</code>, <code>vh</code>, <code>vmin</code>, <code>vmax</code>) from <code>px</code> units.</li>
+<li><a href="https://github.com/Faisal-Manzer/postcss-viewport-height-correction"><code>postcss-viewport-height-correction</code></a> solves the popular problem when <code>100vh</code>
+doesn’t fit the mobile browser screen.</li>
+<li><a href="https://github.com/hex-ci/postcss-unit-processor"><code>postcss-unit-processor</code></a> flexible processing of CSS units.</li>
+<li><a href="https://github.com/TheDutchCoder/postcss-rem-to-px"><code>postcss-rem-to-px</code></a> converts <code>rem</code> values to <code>px</code> values.</li>
+<li><a href="https://github.com/jptaranto/postcss-design-tokens"><code>postcss-design-tokens</code></a> provides a function to retrieve design tokens
+expressed in JS or JSON, within CSS.</li>
+<li><a href="https://github.com/ben-lau/postcss-pixel-to-remvw"><code>postcss-pixel-to-remvw</code></a> converting px to both of rem and vw, also one of them</li>
+<li><a href="https://github.com/TrySound/postcss-easy-import"><code>postcss-easy-import</code></a> inline <code>@import</code> rules content with extra features.</li>
+<li><a href="https://github.com/RiadhAdrani/postcss-plugin-ignore-file"><code>postcss-plugin-ignore-file</code></a> ignore file with a top-comment <code>/* @ignore */</code>.</li>
+</ul><h2 class="doc_subtitle" id="analysis">Analysis</h2><ul>
+<li><a href="https://github.com/postcss/postcss-bem-linter"><code>postcss-bem-linter</code></a> lints CSS for conformance to SUIT CSS methodology.</li>
+<li><a href="https://github.com/cssstats/postcss-cssstats"><code>postcss-cssstats</code></a> returns an object with CSS statistics.</li>
+<li><a href="https://github.com/devex-web-frontend/postcss-regexp-detect"><code>postcss-regexp-detect</code></a> search for regexp in CSS declarations.</li>
+<li><a href="https://github.com/vovanbo/css2modernizr"><code>css2modernizr</code></a> creates a Modernizr config file
+that requires only the tests that your CSS uses.</li>
+<li><a href="https://github.com/anandthakker/doiuse"><code>doiuse</code></a> lints CSS for browser support, using data from Can I Use.</li>
+<li><a href="https://github.com/johno/immutable-css"><code>immutable-css</code></a> lints CSS for class mutations.</li>
+<li><a href="https://github.com/davidtheclark/list-selectors"><code>list-selectors</code></a> lists and categorizes the selectors used in your CSS,
+for code review.</li>
+</ul><h2 class="doc_subtitle" id="reporters">Reporters</h2><ul>
+<li><a href="https://github.com/postcss/postcss-browser-reporter"><code>postcss-browser-reporter</code></a> displays warning messages from other plugins
+right in your browser.</li>
+<li><a href="https://github.com/alekhrycaiko/postcss-forced-variables"><code>postcss-forced-variables</code></a> provides warnings and errors when specified
+properties don’t use variables.</li>
+<li><a href="https://github.com/postcss/postcss-reporter"><code>postcss-reporter</code></a> logs warnings and other messages from other plugins
+in the console.</li>
+</ul><h2 class="doc_subtitle" id="fun">Fun</h2><ul>
+<li><a href="https://github.com/dp-lewis/postcss-australian-stylesheets"><code>postcss-australian-stylesheets</code></a> Australian Style Sheets.</li>
+<li><a href="https://github.com/bameda/postcss-andalusian-stylesheets"><code>postcss-andalusian-stylesheets</code></a> Andalusian Style Sheets.</li>
+<li><a href="https://github.com/iskandarovBakshi/postcss-aze-stylesheets"><code>postcss-aze-stylesheets</code></a> Azerbaijanian Style Sheets.</li>
+<li><a href="https://github.com/chancancode/postcss-canadian-stylesheets"><code>postcss-canadian-stylesheets</code></a> Canadian Style Sheets.</li>
+<li><a href="https://github.com/zhouwenbin/postcss-chinese-stylesheets"><code>postcss-chinese-stylesheets</code></a> Chinese Style Sheets.</li>
+<li><a href="https://github.com/HoBi/postcss-czech-stylesheets"><code>postcss-czech-stylesheets</code></a> Czech Style Sheets.</li>
+<li><a href="https://github.com/timche/postcss-german-stylesheets"><code>postcss-german-stylesheets</code></a> German Style Sheets.</li>
+<li><a href="https://github.com/Pustur/postcss-italian-stylesheets"><code>postcss-italian-stylesheets</code></a> Italian Style Sheets.</li>
+<li><a href="https://github.com/Semigradsky/postcss-russian-stylesheets"><code>postcss-russian-stylesheets</code></a> Russian Style Sheets.</li>
+<li><a href="https://github.com/johnie/postcss-swedish-stylesheets"><code>postcss-swedish-stylesheets</code></a> Swedish Style Sheets.</li>
+<li><a href="https://github.com/azat-io/postcss-tatar-stylesheets"><code>postcss-tatar-stylesheets</code></a> Tatar Style Sheets</li>
+<li><a href="https://github.com/juanfran/postcss-trolling"><code>postcss-trolling</code></a> Trolling Style Sheets.</li>
+<li><a href="https://github.com/sandralundgren/postcss-lolcat-stylesheets"><code>postcss-lolcat-stylesheets</code></a> Lolspeak Style Sheets.</li>
+<li><a href="https://github.com/cbas/postcss-imperial"><code>postcss-imperial</code></a> adds CSS support for Imperial and US customary units
+of length.</li>
+<li><a href="https://github.com/Semigradsky/postcss-russian-units"><code>postcss-russian-units</code></a> adds CSS support for russian units of length.</li>
+<li><a href="https://github.com/markgoodyear/postcss-pointer"><code>postcss-pointer</code></a> Replaces <code>pointer: cursor</code> with <code>cursor: pointer</code>.</li>
+<li><a href="https://github.com/HashanP/postcss-spiffing"><code>postcss-spiffing</code></a> lets you use British English in your CSS.</li>
+<li><a href="https://github.com/ismamz/postcss-spanish-stylesheets"><code>postcss-spanish-stylesheets</code></a> Spanish Style Sheets.</li>
+<li><a href="https://github.com/dariopog/postcss-nope"><code>postcss-nope</code></a> lets you write <code>nope</code> instead of <code>none</code>.</li>
+<li><a href="https://github.com/crftd/postcss-glitch"><code>postcss-glitch</code></a> add glitch effect to your text.</li>
+<li><a href="https://github.com/Hugoer/postcss-khaleesi"><code>postcss-khaleesi</code></a> translate CSS values and properties to
+<code>khaleesi meme</code> language.</li>
+</ul></article><aside class="socials"><ul class="socials_items"><li class="socials_item"><a class="socials_link is-open-collective" href="https://opencollective.com/postcss/" rel="me">Open Collective</a></li><li class="socials_item"><a class="socials_link is-twitter" href="https://twitter.com/postcss" rel="me">Twitter</a></li><li class="socials_item"><a class="socials_link is-github" href="https://github.com/postcss/postcss" rel="me">GitHub</a></li></ul></aside><footer class="footer"><div class="footer_inner"><div class="footer_info"><p class="footer_license">Distributed under the MIT License.</p><p class="footer_issue">Found an issue?<a class="footer_report" href="https://github.com/postcss/postcss.org/issues">Report it!</a></p></div><div><a href="https://evilmartians.com/?utm_source=postcss&amp;utm_campaign=homepage"><img alt="Evil Martians" src="/docs/assets/evilmartians-bzYkprTm.svg"></a></div></div></footer></main></body></html>
