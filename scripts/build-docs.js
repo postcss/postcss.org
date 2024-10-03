@@ -88,15 +88,16 @@ function prepareTree() {
   }
 }
 
+const IGNORE_FILES = [
+  join(PROJECTS, 'postcss/docs/README-cn.md'),
+  join(PROJECTS, 'postcss/docs/source-maps.md')
+]
+
 async function readDocs() {
-  let ignore = [
-    '../postcss/docs/README-cn.md',
-    '../postcss/docs/source-maps.md'
-  ]
-  let files = await globby('../postcss/docs/**/*.md')
+  let files = await globby(join(PROJECTS, 'postcss/docs/**/*.md'))
   let docs = await Promise.all(
     files
-      .filter(file => !ignore.includes(file))
+      .filter(file => !IGNORE_FILES.includes(file))
       .map(async file => {
         let md = await readFile(join(ROOT, file))
         let tree = await unified()().use(remarkParse).parse(md)
