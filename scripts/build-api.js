@@ -74,7 +74,8 @@ async function readTypedoc() {
     tsconfig: join(PROJECTS, 'postcss', 'tsconfig.json')
   })
   app.options.setCompilerOptions(files, {
-    esModuleInterop: true
+    esModuleInterop: true,
+    skipLibCheck: true
   })
 
   app.converter.on(
