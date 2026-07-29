@@ -3,9 +3,9 @@ const URL =
 
 const SIZE = window.devicePixelRatio > 1 ? 96 : 48
 
-function load () {
+function load() {
   window.removeEventListener('scroll', load)
-  fetch(URL)
+  void fetch(URL)
     .then(res => res.json())
     .then(users => {
       let buffer = document.createDocumentFragment()

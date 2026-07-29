@@ -7,7 +7,7 @@
   "type": "module",
   "scripts": {
     "start": "vite --host 0.0.0.0",
-    "test:js": "eslint .",
+    "test:js": "oxlint",
     "test:css": "stylelint src/**/*.pcss",
     "test:build": "node --run build && size-limit",
     "test": "pnpm run /^test:/",
@@ -35,22 +35,24 @@
     "remark-rehype": "^11.1.1",
     "source-map-js": "^1.2.1",
     "typedoc": "^0.24.8",
-    "typescript": "~5.0.4",
     "unified": "^11.0.5",
     "unist-util-visit": "^5.0.0",
     "vite": "^5.4.21",
     "vite-plugin-pug-transformer": "^1.0.5"
   },
   "devDependencies": {
-    "@logux/eslint-config": "^53.4.0",
+    "@logux/oxc-configs": "^1.0.0",
     "@logux/stylelint-config": "^0.20.0",
     "@size-limit/file": "^11.1.6",
-    "eslint": "^9.11.1",
+    "eslint-plugin-prefer-let": "^4.2.2",
     "nano-staged": "^0.8.0",
+    "oxlint": "^1.76.0",
+    "oxlint-tsgolint": "^7.0.2001",
     "serve": "^14.2.3",
     "simple-git-hooks": "^2.11.1",
     "size-limit": "^11.1.6",
     "stylelint": "^16.9.0",
-    "svgo": "^3.3.3"
+    "svgo": "^3.3.3",
+    "typescript": "~5.0.4"
   }
 }

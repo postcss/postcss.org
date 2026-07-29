@@ -15,7 +15,7 @@ import { build } from 'vite'
 
 import { DIST, PROJECTS, SRC } from './lib/dir.js'
 
-let SIDEMENU_IGNORE = ['LazyResult', 'Processor', 'Container', 'Node']
+const SIDEMENU_IGNORE = ['LazyResult', 'Processor', 'Container', 'Node']
 
 let exec = promisify(childProcess.exec)
 
@@ -146,7 +146,7 @@ function generateSidemenu(nodes) {
           !SIDEMENU_IGNORE.includes(i.name)) ||
         (i.name === 'postcss' && i.kind === ReflectionKind.Namespace)
     )
-    .sort((a, b) => {
+    .toSorted((a, b) => {
       if (getName(a) === 'postcss') {
         return -1
       } else if (getName(b) === 'postcss') {
@@ -422,7 +422,7 @@ function generateBody(nodes) {
       let name = getName(node)
       return !(name === 'list' && !node._target)
     })
-    .sort(signatureComparator)
+    .toSorted(signatureComparator)
     .map(node => {
       let id = getName(node).toLowerCase()
       let type = node
@@ -474,7 +474,7 @@ function generateBody(nodes) {
         signaturesHtml(nodes, type),
         ...children
           .filter(member => member.name !== 'constructor')
-          .sort(signatureComparator)
+          .toSorted(signatureComparator)
           .map(member => {
             let memberId = id + '-' + member.name.toLowerCase()
             let prefix = name
