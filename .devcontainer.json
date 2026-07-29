@@ -1,3 +1,4 @@
 {
-  "image": "ghcr.io/ai/devcontainer:latest"
+  "image": "ghcr.io/ai/devcontainer:latest",
+  "runArgs": ["-p=5173:5173", "-p=3000:3000"]
 }
