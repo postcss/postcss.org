@@ -26,22 +26,24 @@ Different plugins could use a different node creators (like <code>postcss.decl()
     }
   }
   module.exports.postcss = true
-</code></pre><h3 class="doc_subtitle" id="set-pluginpostcssplugin-with-plugin-name">1.5. Set <code>plugin.postcssPlugin</code> with plugin name</h3><p>Plugin name will be used in error messages and warnings.</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function"><span class="code-params">opts</span> =></span> {
+</code></pre><h3 class="doc_subtitle" id="set-pluginpostcssplugin-with-plugin-name">1.5. Set <code>plugin.postcssPlugin</code> with plugin name</h3><p>Plugin name will be used in error messages and warnings.</p><pre><code class="code language-js"><span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = opts => {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'postcss-name'</span>,
-    <span class="code-title class_">Once</span> (root) {
+    <span class="code-title class_">Once</span>(root) {
       <span class="code-comment">// Plugin code</span>
     }
   }
 }
-<span class="code-variable language_">module</span>.<span class="code-property">exports</span>.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+
+<span class="code-keyword">export</span> <span class="code-keyword">default</span> plugin
 </code></pre><h2 class="doc_subtitle" id="processing">2. Processing</h2><h3 class="doc_subtitle" id="plugin-must-be-tested">2.1. Plugin must be tested</h3><p>A CI service like <a href="https://travis-ci.org/">Travis</a> is also recommended for testing code in
 different environments. You should test in (at least) Node.js <a href="https://github.com/nodejs/LTS">active LTS</a> and current stable version.</p><h3 class="doc_subtitle" id="use-asynchronous-methods-whenever-possible">2.2. Use asynchronous methods whenever possible</h3><p>For example, use <code>fs.writeFile</code> instead of <code>fs.writeFileSync</code>:</p><pre><code class="code language-js"><span class="code-keyword">let</span> { readFile } = <span class="code-built_in">require</span>(<span class="code-string">'fs'</span>).<span class="code-property">promises</span>
 
 <span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function"><span class="code-params">opts</span> =></span> {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'plugin-inline'</span>,
-    <span class="code-keyword">async</span> <span class="code-title class_">Decl</span> (decl) {
+    <span class="code-keyword">async</span> <span class="code-title class_">Decl</span>(decl) {
       <span class="code-keyword">const</span> imagePath = <span class="code-title function_">findImage</span>(decl)
       <span class="code-keyword">if</span> (imagePath) {
         <span class="code-keyword">let</span> imageFile = <span class="code-keyword">await</span> <span class="code-title function_">readFile</span>(imagePath)

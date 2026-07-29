@@ -8,7 +8,7 @@
     <span class="code-attribute">color</span>: <span class="code-built_in">gray</span>(<span class="code-number">255</span>, <span class="code-number">50%</span>);
   }
 }
-</code></pre><p>Or enable plugins directly in CSS using <a href="https://github.com/postcss/postcss-use"><code>postcss-use</code></a>:</p><pre><code class="code language-pcss"><span class="code-keyword">@use</span> autoprefixer(<span class="code-attribute">browsers</span>: [<span class="code-string">'last 2 versions'</span>]);
+</code></pre><p>Or enable plugins directly in CSS using <a href="https://github.com/postcss/postcss-use"><code>postcss-use</code></a>:</p><pre><code class="code language-pcss"><span class="code-keyword">@use</span> autoprefixer(<span class="code-attribute">browsers</span>: [ <span class="code-string">'last 2 versions'</span>]);
 
 <span class="code-selector-pseudo">:fullscreen</span> <span class="code-selector-tag">a</span> {
   <span class="code-attribute">display</span>: flex;
@@ -162,6 +162,8 @@ in <code>@media</code> rules</li>
 <li><a href="https://github.com/postcss/postcss-nested"><code>postcss-nested</code></a> unwraps nested rules.</li>
 <li><a href="https://github.com/jedmao/postcss-nested-props"><code>postcss-nested-props</code></a> unwraps nested properties.</li>
 <li><a href="https://github.com/jedmao/postcss-nested-vars"><code>postcss-nested-vars</code></a> supports nested Sass-style variables.</li>
+<li><a href="https://github.com/georgeadamson/postcss-nth-nested"><code>postcss-nth-nested</code></a> adds a <code>:nth-nested()</code> pseudo-class for selecting
+elements by nesting depth.</li>
 <li><a href="https://github.com/andrepolischuk/postcss-pseudo-class-any-button"><code>postcss-pseudo-class-any-button</code></a> adds <code>:any-button</code> pseudo-class
 for targeting all button elements.</li>
 <li><a href="https://github.com/csstools/postcss-pseudo-class-enter"><code>postcss-pseudo-class-enter</code></a> transforms <code>:enter</code> into <code>:hover</code> and <code>:focus</code>.</li>
@@ -385,7 +387,7 @@ in a custom selector.</li>
 from a rule based configuration.</li>
 <li><a href="https://github.com/GitScrum/postcss-attribute-selector-prefix"><code>postcss-attribute-selector-prefix</code></a> adds a prefix to attribute selectors</li>
 <li>[<code>postcss-auto-rem</code>] compiles pixel units to <code>rem</code> without configuration.</li>
-<li><a href="https://github.com/maximkoretskiy/postcss-autoreset"><code>postcss-autoreset</code></a>  automatically adds reset styles.</li>
+<li><a href="https://github.com/maximkoretskiy/postcss-autoreset"><code>postcss-autoreset</code></a> automatically adds reset styles.</li>
 <li><a href="https://github.com/WebSeed/postcss-bem-to-js"><code>postcss-bem-to-js</code></a> creates a JavaScript definition file for BEM-style CSS.</li>
 <li><a href="https://github.com/dichuvichkin/postcss-bom"><code>postcss-bom</code></a> adds a UTF-8 BOM to files.</li>
 <li><a href="https://github.com/strarsis/postcss-blurry-gradient-workaround"><code>postcss-blurry-gradient-workaround</code></a> fixes blurry CSS gradients
@@ -417,8 +419,8 @@ but inline (adding just what you need).</li>
 <li><a href="https://github.com/JGJP/postcss-join-transitions"><code>postcss-join-transitions</code></a> joins conflicting transition declarations.</li>
 <li><a href="https://github.com/letsjaam/postcss-letter-tracking"><code>postcss-letter-tracking</code></a> generates relative, Photoshop-compatible
 letter tracking for improved letter spacing.</li>
-<li><a href="https://github.com/jdsteinbach/postcss-light-text"><code>postcss-light-text</code></a>  adds <code>-webkit-</code> antialiasing for light text.</li>
-<li><a href="https://github.com/outpunk/postcss-modules"><code>postcss-modules</code></a>  allows to use CSS Modules everywhere.</li>
+<li><a href="https://github.com/jdsteinbach/postcss-light-text"><code>postcss-light-text</code></a> adds <code>-webkit-</code> antialiasing for light text.</li>
+<li><a href="https://github.com/outpunk/postcss-modules"><code>postcss-modules</code></a> allows to use CSS Modules everywhere.</li>
 <li><a href="https://github.com/solversgroup/postcss-momentum-scrolling"><code>postcss-momentum-scrolling</code></a> adding momentum style scrolling behavior
 (<code>-webkit-overflow-scrolling:touch</code>) for elements with overflow on iOS.</li>
 <li><a href="https://github.com/TCotton/postcss-mq-keyframes"><code>postcss-mq-keyframes</code></a> moves any animation keyframes in media queries

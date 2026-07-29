@@ -19,7 +19,7 @@ to point to the same file:</p><pre><code class="code language-js">processor.<sp
 The synchronous API is provided only for debugging, is slower,
 and can’t work with asynchronous plugins.</p><pre><code class="code language-js">processor.<span class="code-title function_">process</span>(opts).<span class="code-title function_">then</span>(<span class="code-function"><span class="code-params">result</span> =></span> {
   <span class="code-comment">// processing is finished</span>
-});
+})
 </code></pre><h3 class="doc_subtitle" id="use-only-the-public-postcss-api">2.3. Use only the public PostCSS API</h3><p>PostCSS runners must not rely on undocumented properties or methods,
 which may be subject to change in any minor release. The public API
 is described in <a href="https://postcss.org/api/">API docs</a>.</p><h2 class="doc_subtitle" id="dependencies">3. Dependencies</h2><h3 class="doc_subtitle" id="rebuild-when-dependencies-change">3.1. Rebuild when dependencies change</h3><p>PostCSS plugins may declare file or directory dependencies by attaching

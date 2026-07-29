@@ -49,14 +49,31 @@ on a closed source project.</li>
 <li>Use the guide in <a href="https://github.com/postcss/postcss-plugin-boilerplate/">PostCSS plugin boilerplate</a> to create a plugin directory.</li>
 <li>Create a repository on GitHub or GitLab.</li>
 <li>Publish your code there.</li>
-</ol><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
+</ol><pre><code class="code language-js"><span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = (<span class="code-params">opts = {}</span>) => {
   <span class="code-comment">// Plugin creator to check options or prepare shared state</span>
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'PLUGIN NAME'</span>
     <span class="code-comment">// Plugin listeners</span>
   }
 }
-<span class="code-variable language_">module</span>.<span class="code-property">exports</span>.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+
+<span class="code-keyword">export</span> <span class="code-keyword">default</span> plugin
+</code></pre><p>In TypeScript, type the creator as <code>PluginCreator</code> so <code>postcss = true</code> is valid:</p><pre><code class="code language-ts"><span class="code-keyword">import</span> <span class="code-keyword">type</span> { <span class="code-title class_">PluginCreator</span> } <span class="code-keyword">from</span> <span class="code-string">'postcss'</span>
+
+<span class="code-keyword">export</span> <span class="code-keyword">interface</span> <span class="code-title class_">PluginNameOptions</span> {
+  <span class="code-comment">// Types for plugin options</span>
+}
+
+<span class="code-keyword">const</span> <span class="code-attr">plugin</span>: <span class="code-title class_">PluginCreator</span>&#x3C;<span class="code-title class_">PluginNameOptions</span>> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
+  <span class="code-keyword">return</span> {
+    <span class="code-attr">postcssPlugin</span>: <span class="code-string">'PLUGIN NAME'</span>
+    <span class="code-comment">// Plugin listeners</span>
+  }
+}
+plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
+
+<span class="code-keyword">export</span> <span class="code-keyword">default</span> plugin
 </code></pre><h2 class="doc_subtitle" id="step-find-nodes">Step 3: Find nodes</h2><p>Most of the PostCSS plugins do two things:</p><ol>
 <li>Find something in CSS (for instance, <code>will-change</code> property).</li>
 <li>Change found elements (for instance, insert <code>transform: translateZ(0)</code> before
@@ -73,10 +90,10 @@ parameters and values are stored in node’s <code>raws</code> property.</li>
 how PostCSS convert different CSS to AST.</p><p>You can find all nodes with specific types by adding method to plugin object:</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'PLUGIN NAME'</span>,
-    <span class="code-title class_">Once</span> (root) {
+    <span class="code-title class_">Once</span>(root) {
       <span class="code-comment">// Calls once per file, since every file has single Root</span>
     },
-    <span class="code-title class_">Declaration</span> (decl) {
+    <span class="code-title class_">Declaration</span>(decl) {
       <span class="code-comment">// All declaration nodes</span>
     }
   }
@@ -86,7 +103,7 @@ how PostCSS convert different CSS to AST.</p><p>You can find all nodes with spec
 you can use quick search:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span>: {
       <span class="code-attr">color</span>: <span class="code-function"><span class="code-params">decl</span> =></span> {
         <span class="code-comment">// All `color` declarations</span>
-      }
+      },
       <span class="code-string">'*'</span>: <span class="code-function"><span class="code-params">decl</span> =></span> {
         <span class="code-comment">// All declarations</span>
       }
@@ -121,15 +138,15 @@ and <code>Rule</code> will be called before processing children. <code>OnceExit<
 runtime-defined listeners:</p><pre><code class="code language-js"><span class="code-variable language_">module</span>.<span class="code-property">exports</span> = <span class="code-function">(<span class="code-params">opts = {}</span>) =></span> {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'vars-collector'</span>,
-    prepare (result) {
+    <span class="code-title function_">prepare</span>(<span class="code-params">result</span>) {
       <span class="code-keyword">const</span> variables = {}
       <span class="code-keyword">return</span> {
-        <span class="code-title class_">Declaration</span> (node) {
+        <span class="code-title class_">Declaration</span>(node) {
           <span class="code-keyword">if</span> (node.<span class="code-property">variable</span>) {
             variables[node.<span class="code-property">prop</span>] = node.<span class="code-property">value</span>
           }
         },
-        <span class="code-title class_">OnceExit</span> () {
+        <span class="code-title class_">OnceExit</span>() {
           <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(variables)
         }
       }
@@ -152,10 +169,10 @@ any children, plugin will re-visit parent as well. Only <code>Once</code> and
 <code>OnceExit</code> will not be called again.</p><pre><code class="code language-js"><span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = (<span class="code-params"></span>) => {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'to-red'</span>,
-    <span class="code-title class_">Rule</span> (rule) {
+    <span class="code-title class_">Rule</span>(rule) {
       <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(rule.<span class="code-title function_">toString</span>())
     },
-    <span class="code-title class_">Declaration</span> (decl) {
+    <span class="code-title class_">Declaration</span>(decl) {
       <span class="code-variable language_">console</span>.<span class="code-title function_">log</span>(decl.<span class="code-title function_">toString</span>())
       decl.<span class="code-property">value</span> = <span class="code-string">'red'</span>
     }
@@ -182,7 +199,7 @@ that you already processed this node:</p><pre><code class="code language-js">   
 <span class="code-keyword">const</span> <span class="code-title function_">plugin</span> = (<span class="code-params"></span>) => {
   <span class="code-keyword">return</span> {
     <span class="code-attr">postcssPlugin</span>: <span class="code-string">'example'</span>,
-    <span class="code-title class_">Rule</span> (rule) {
+    <span class="code-title class_">Rule</span>(rule) {
       <span class="code-keyword">if</span> (!rule[processed]) {
         <span class="code-title function_">process</span>(rule)
         rule[processed] = <span class="code-literal">true</span>
@@ -191,15 +208,15 @@ that you already processed this node:</p><pre><code class="code language-js">   
   }
 }
 plugin.<span class="code-property">postcss</span> = <span class="code-literal">true</span>
-</code></pre><p>Second argument also have <code>result</code> object to add warnings:</p><pre><code class="code language-js">    <span class="code-title class_">Declaration</span>: {
-      <span class="code-attr">bad</span>: (decl, { result }) {
-        decl.<span class="code-title function_">warn</span>(result, <span class="code-string">'Deprecated property bad'</span>)
-      }
-    }
+</code></pre><p>Second argument also have <code>result</code> object to add warnings:</p><pre><code class="code language-js"><span class="code-title class_">Declaration</span>: {
+  <span class="code-attr">bad</span>: <span class="code-function">(<span class="code-params">decl, { result }</span>) =></span> {
+    decl.<span class="code-title function_">warn</span>(result, <span class="code-string">'Deprecated property bad'</span>)
+  }
+}
 </code></pre><p>If your plugin depends on another file, you can attach a message to <code>result</code>
 to signify to runners (webpack, Gulp etc.) that they should rebuild the CSS
 when this file changes:</p><pre><code class="code language-js">    <span class="code-title class_">AtRule</span>: {
-      <span class="code-attr">import</span>: (atRule, { result }) {
+      <span class="code-attr">import</span>: <span class="code-function">(<span class="code-params">atRule, { result }</span>) =></span> {
         <span class="code-keyword">const</span> importedFile = <span class="code-title function_">parseImport</span>(atRule)
         result.<span class="code-property">messages</span>.<span class="code-title function_">push</span>({
           <span class="code-attr">type</span>: <span class="code-string">'dependency'</span>,
@@ -232,8 +249,6 @@ to change everything.</p><p>Don’t worry. Every bug is findable, and finding an
 plugin even better.</p><p>Start from writing tests. Plugin boilerplate has a test template
 in <code>index.test.js</code>. Call <code>npx jest</code> to test your plugin.</p><p>Use Node.js debugger in your text editor or just <code>console.log</code>
 to debug the code.</p><p>PostCSS community can help you since we are all experiencing the same problems.
-Don’t afraid to ask in <a href="https://github.com/orgs/postcss/discussions">special channel</a>.</p><h2 class="doc_subtitle" id="step-make-it-public">Step 6: Make it public</h2><p>When your plugin is ready, call <code>npx clean-publish</code> in your repository.
-<a href="https://github.com/shashkovdanil/clean-publish/"><code>clean-publish</code></a> is a tool to remove development configs from the npm package.
-We added this tool to our plugin boilerplate.</p><p>Write a tweet about your new plugin (even if it is a small one) with
+Don’t afraid to ask in <a href="https://github.com/orgs/postcss/discussions">special channel</a>.</p><h2 class="doc_subtitle" id="step-make-it-public">Step 6: Make it public</h2><p>Publish npm package with your new PostCSS plugin using <a href="https://evilmartians.com/chronicles/the-secure-way-to-release-an-npm-package">our guide</a> with techniques to protect against supply chain attacks.</p><p>Write a tweet about your new plugin (even if it is a small one) with
 <a href="https://twitter.com/postcss"><code>@postcss</code></a> mention. Or tell about your plugin in [our chat].
 We will help you with marketing.</p><p><a href="https://github.com/himynameisdave/postcss-plugins#submitting-a-new-plugin">Add your new plugin</a> to PostCSS plugin catalog.</p></article><aside class="socials"><ul class="socials_items"><li class="socials_item"><a class="socials_link is-open-collective" href="https://opencollective.com/postcss/" rel="me">Open Collective</a></li><li class="socials_item"><a class="socials_link is-twitter" href="https://twitter.com/postcss" rel="me">Twitter</a></li><li class="socials_item"><a class="socials_link is-github" href="https://github.com/postcss/postcss" rel="me">GitHub</a></li></ul></aside><footer class="footer"><div class="footer_inner"><div class="footer_info"><p class="footer_license">Distributed under the MIT License.</p><p class="footer_issue">Found an issue?<a class="footer_report" href="https://github.com/postcss/postcss.org/issues">Report it!</a></p></div><div><a href="https://evilmartians.com/?utm_source=postcss&amp;utm_campaign=homepage"><img alt="Evil Martians" src="/docs/assets/evilmartians-bzYkprTm.svg"></a></div></div></footer></main></body></html>
