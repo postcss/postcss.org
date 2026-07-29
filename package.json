@@ -2,8 +2,8 @@
   "name": "postcss-homepage",
   "private": true,
   "homepage": "https://postcss.org/",
-  "repository": "postcss/postcss.org",
   "license": "MIT",
+  "repository": "postcss/postcss.org",
   "type": "module",
   "scripts": {
     "start": "vite --open",
@@ -53,8 +53,5 @@
     "size-limit": "^11.1.6",
     "stylelint": "^16.9.0",
     "svgo": "^3.3.3"
-  },
-  "engines": {
-    "node": "^22.0.0"
   }
 }
