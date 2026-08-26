@@ -19,7 +19,7 @@ jobs:
         uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
         with:
           version: 11
-          runtime: node@26
+          runtime: node@26.7.0
       - name: Install dependencies
         run: pnpm ci
       - name: Run tests
@@ -42,7 +42,7 @@ jobs:
         uses: pnpm/setup@84cb39b217b10273981911c288cd62326dc7c6d2 # v2.0.2
         with:
           version: 11
-          runtime: node@26
+          runtime: node@26.7.0
       - name: Install dependencies
         run: pnpm ci --production
       - name: Build
